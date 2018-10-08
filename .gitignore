@@ -1,0 +1,14 @@
+
+db.sqlite3
+
+manage.py
+
+*.pyc
+
+project/wsgi.py
+
+style/migrations/__init__.py
+
+style/migrations/0001_initial.py
+
+user/migrations/__init__.py
