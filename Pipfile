@@ -9,6 +9,7 @@ name = "pypi"
 gunicorn = "*"
 django = "*"
 djangorestframework = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "2.7"
