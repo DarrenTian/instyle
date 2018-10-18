@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ style.id }}
+<img src='{{ style.style_image_url }}' style="height: 500px"></img>
+{% for annotation in style.style_image_annotations.all %}
+	<div>
+		{{ annotation.coor_x }}</br>
+		{{ annotation.coor_y }}</br>
+		<img src='annotation.image_url' style="height:100px"></img>	
+		<a href="{{ annotation.url}}">Annotation Link</a>
+	</div>
+{% endfor %}
+	<div>Like</div>
+	<div>Share</div>
 {% endblock %}
