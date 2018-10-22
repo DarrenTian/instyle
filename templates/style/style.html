@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<img src='{{ style.style_image_url }}' style="height: 500px"></img>
+<div style="width:50%; margin:auto;">
+
+<div style="width:300px; margin:auto; position:relative;">
+<img src='{{ style.style_image_url }}' style="display:inline-block; width:100%; border-radius:10px;"></img>
 {% for annotation in style.style_image_annotations.all %}
-	<div>
-		{{ annotation.coor_x }}</br>
-		{{ annotation.coor_y }}</br>
-		<img src='annotation.image_url' style="height:100px"></img>	
-		<a href="{{ annotation.url}}">Annotation Link</a>
+	<div style="display:inline-block; position:absolute; top:{{ annotation.coor_x }}%; left:{{ annotation.coor_y }}%; background:white; opacity:0.2; border-radius: 20px" >
+		<a href='{{ annotation.url }}'><img src='/static/tag.png' style="height:30px"></img></a>
 	</div>
 {% endfor %}
-	<div>Like</div>
-	<div>Share</div>
+</div>
+
+</div>
 {% endblock %}

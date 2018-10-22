@@ -1,0 +1,89 @@
+[
+  {
+    "model": "style.style",
+    "pk": 1,
+    "fields": {
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCgy1fwbf1ra0kwj31111jk1kx.jpg"
+    }
+  },
+  {
+    "model": "style.style",
+    "pk": 2,
+    "fields": {
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw8npagewbj31171jk4kn.jpg"
+    }
+  },
+  {
+    "model": "style.style",
+    "pk": 3,
+    "fields": {
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw0o6wdluej314y1jk7si.jpg"
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 1,
+    "fields": {
+      "style": 1,
+      "url": "https://www.ssense.com/en-cn/women/product/jacquemus/black-le-minho-bag/3063668",
+      "image_url": "",
+      "coor_x": 85.0,
+      "coor_y": 85.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 2,
+    "fields": {
+      "style": 1,
+      "url": "https://www.lescoyotesdeparis.com/default/shop-women/coats-jackets/irina-jacket-black-women",
+      "image_url": "",
+      "coor_x": 50.0,
+      "coor_y": 70.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 3,
+    "fields": {
+      "style": 2,
+      "url": "https://www.urbanoutfitters.com/shop/bdg-girlfriend-high-rise-jean---light-wash",
+      "image_url": "",
+      "coor_x": 30.0,
+      "coor_y": 30.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 4,
+    "fields": {
+      "style": 2,
+      "url": "https://www.net-a-porter.com/us/en/product/1083201/aeyde/leandra-patent-leather-ankle-boots",
+      "image_url": "",
+      "coor_x": 40.0,
+      "coor_y": 40.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 5,
+    "fields": {
+      "style": 3,
+      "url": "https://www.thisisveda.com/collections/v/products/veda-roy-jacket",
+      "image_url": "",
+      "coor_x": 10.0,
+      "coor_y": 10.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
+    "pk": 6,
+    "fields": {
+      "style": 3,
+      "url": "https://www.farfetch.com/shopping/women/sergio-rossi-pointed-pumps-item-12091380.aspx",
+      "image_url": "",
+      "coor_x": 10.0,
+      "coor_y": 10.0
+    }
+  }
+]
