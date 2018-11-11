@@ -3,7 +3,12 @@
     "model": "style.style",
     "pk": 1,
     "fields": {
-      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCgy1fwbf1ra0kwj31111jk1kx.jpg"
+      "title": "Mid autumn style",
+      "credit": "@savislook",
+      "credit_link": "https://www.instagram.com/savislook/",
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCgy1fwbf1ra0kwj31111jk1kx.jpg",
+      "description": "Mid autumn style from @savislook. Classic black coat that's fishion and cozy. Newly released handbag that you can carry daily.",
+      "publish_date": "Aug 7th, 2018"
     }
   },
   {
@@ -26,7 +31,7 @@
     "fields": {
       "style": 1,
       "url": "https://www.ssense.com/en-cn/women/product/jacquemus/black-le-minho-bag/3063668",
-      "image_url": "",
+      "image_url": "https://res-3.cloudinary.com/ssenseweb/image/upload/b_white/c_scale,h_820/f_auto,dpr_1.0/182553F046006_1.jpg",
       "coor_x": 85.0,
       "coor_y": 85.0
     }
@@ -37,7 +42,7 @@
     "fields": {
       "style": 1,
       "url": "https://www.lescoyotesdeparis.com/default/shop-women/coats-jackets/irina-jacket-black-women",
-      "image_url": "",
+      "image_url": "https://res-3.cloudinary.com/ssenseweb/image/upload/b_white/c_scale,h_820/f_auto,dpr_1.0/182553F046006_1.jpg",
       "coor_x": 50.0,
       "coor_y": 70.0
     }

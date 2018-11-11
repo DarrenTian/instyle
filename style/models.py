@@ -20,7 +20,16 @@ style {
 }
 """
 class Style(models.Model):
-	style_image_url = models.URLField(max_length=200)
+	title = models.CharField(max_length=200, default='')
+
+	credit = models.CharField(max_length=200, default='')
+	credit_link = models.URLField(max_length=200, default='')
+
+	style_image_url = models.URLField(max_length=200, default='')
+
+	description = models.CharField(max_length=1000, default='')
+
+	publish_date = models.CharField(max_length=200, default='')
 
 	def __str__(self):
 		return "%s" % self.style_image_url
