@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style type="text/css">
+	@media only screen and (min-width: 600px) {
+		img {
+			border-radius:10px;
+		}
+
+	    .desktop-container {
+	        padding-top: 20px;
+	    }
+	}
+
+	.style-label {
+		display:inline-block; 
+		position:absolute;
+		background:white; 
+		opacity:0.2; 
+		line-height: 1; 
+		border-radius:10px;
+	}
+
+	* {
+		border: solid;
+		border-color: black;
+		border-width: .1px;
+	}
+</style>
+
+<div class="desktop-container">
+	<div class="container">
+		<div class="columns">
+		  <div class="column">
+			<div class="style-container" style="margin:auto; position:relative;">
+			  	<img class="style-image" src='{{ style.style_image_url }}' onclick="addAnnotation(event)"></img>
+			</div>
+		  </div>
+
+		  <div class="column" style="padding-left:20px; padding-right:20px;">
+		  	Title: <input type="text" name="title" value="{{ style.title }}"></br>
+		  	Description: <input type="" name=""></br>
+		  	<div class='annotation-list-container'>
+		  	</div>
+		  	<button onclick="saveStyle()">Save</button>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+const styleContainer = document.querySelector(".style-container");
+const annotationListContainer = document.querySelector(".annotation-list-container");
+
+class StyleAnnotation {
+	//static get styleContainer() {
+	//	return styleContainer;
+	//}
+};
+
+
+
+function addAnnotation(event) {
+	// Figure out annotation position.
+	var targetRec = event.target.getBoundingClientRect();
+	var coorX = event.offsetX/targetRec.width;
+	var coorY = event.offsetY/targetRec.height;
+
+	var annotation = {
+		'coorX': coorX,
+		'coorY':coorY,
+	}
+
+	console.log(StyleAnnotation.styleContainer);
+
+	// Add style label.
+	var styleLabelDom = "<a href='{{ annotation.url }}'><img src='/static/tag.png' style='height:30px;'></img></a>";
+	const styleLabel = new DOMParser().parseFromString(styleLabelDom , 'text/html').body.firstChild;
+	styleLabel.classList.add("style-label");
+	styleLabel.style.left = annotation.coorX*100 + "%";
+	styleLabel.style.top = annotation.coorY*100 + "%";
+	styleContainer.appendChild(styleLabel);
+
+	// Add style annotation
+	var annotationDom = "<div>Link: <input type='text' name='annotationUrl'><button>Remove</button></div>";
+	const styleAnnotation = new DOMParser().parseFromString(annotationDom , 'text/html').body.firstChild;
+	annotationListContainer.appendChild(styleAnnotation);
+}
+
+function saveStyle() {
+	console.log("//TODO: Save style");
+}	
+
+</script>
+
+
+
+{% endblock %}
