@@ -58,33 +58,56 @@ class StyleAnnotation {
 	//}
 };
 
-
-
-function addAnnotation(event) {
+function getCoor(event) {
 	// Figure out annotation position.
 	var targetRec = event.target.getBoundingClientRect();
 	var coorX = event.offsetX/targetRec.width;
 	var coorY = event.offsetY/targetRec.height;
-
-	var annotation = {
+	return {
 		'coorX': coorX,
 		'coorY':coorY,
-	}
+	};
+}
 
-	console.log(StyleAnnotation.styleContainer);
-
-	// Add style label.
+function createStyleLabel(annotation) {
 	var styleLabelDom = "<a href='{{ annotation.url }}'><img src='/static/tag.png' style='height:30px;'></img></a>";
 	const styleLabel = new DOMParser().parseFromString(styleLabelDom , 'text/html').body.firstChild;
 	styleLabel.classList.add("style-label");
 	styleLabel.style.left = annotation.coorX*100 + "%";
 	styleLabel.style.top = annotation.coorY*100 + "%";
+	return styleLabel;
+}
+
+function createStyleAnnotation(styleLabel) {
+
+	var annotationDom = "<div>Link: <input type='text' name='annotationUrl'></div>";
+	var styleAnnotation = new DOMParser().parseFromString(annotationDom , 'text/html').body.firstChild;
+	var removeButtonDom = "<button>Remove</button>";
+	var removeButton = new DOMParser().parseFromString(removeButtonDom , 'text/html').body.firstChild;
+	removeButton.addEventListener('click', removeStyleAnnotation);
+
+	var styleAnnotationItem = document.createElement('div');
+	styleAnnotationItem.appendChild(styleAnnotation);
+	styleAnnotationItem.appendChild(removeButton);
+	function removeStyleAnnotation() {
+		styleLabel.style.display = "none";
+		removeButton.parentNode.style.display = "none";
+	}
+	return styleAnnotationItem;
+}
+
+
+function addAnnotation(event) {
+	var annotation = getCoor(event);
+
+	// console.log(StyleAnnotation.styleContainer);
+	// Add style label.
+	var styleLabel = createStyleLabel(annotation);
 	styleContainer.appendChild(styleLabel);
 
 	// Add style annotation
-	var annotationDom = "<div>Link: <input type='text' name='annotationUrl'><button>Remove</button></div>";
-	const styleAnnotation = new DOMParser().parseFromString(annotationDom , 'text/html').body.firstChild;
-	annotationListContainer.appendChild(styleAnnotation);
+	var styleAnnotationItem = createStyleAnnotation(styleLabel);
+	annotationListContainer.appendChild(styleAnnotationItem);
 }
 
 function saveStyle() {
