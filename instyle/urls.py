@@ -28,10 +28,12 @@ router.register(r'styles', style.views.StyleViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    url(r'^welcome', style.views.welcome),
     url(r'^style/new', style.views.new_style),
 	url(r'^style/(?P<style_id>[0-9]+)$', style.views.style),
     url(r'^style/(?P<style_id>[0-9]+)/edit', style.views.edit_style),
     url(r'^api/', include(router.urls)),
+    url(r'.*', style.views.welcome),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

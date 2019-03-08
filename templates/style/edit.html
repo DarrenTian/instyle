@@ -8,7 +8,11 @@
 		}
 
 	    .desktop-container {
-	        padding-top: 20px;
+	    	margin-top: 10px;
+	    	margin-bottom: 10px;
+	        padding-left: 200px;
+	        padding-right: 200px;
+	        display: flex;
 	    }
 	}
 
@@ -21,6 +25,24 @@
 		border-radius:10px;
 	}
 
+	.image-container {
+		width: 50%;
+	}
+
+	.edit-container {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.title-container {
+		margin: 0;
+	}	
+
+	.operation-container {
+		margin-top: auto;
+	}
+
 	* {
 		border: solid;
 		border-color: black;
@@ -28,25 +50,28 @@
 	}
 </style>
 
-<div class="desktop-container">
 	<div class="container">
-		<div class="columns">
-		  <div class="column">
+		<div class="desktop-container">	
+		  <div class="image-container">
 			<div class="style-container" style="margin:auto; position:relative;">
 			  	<img class="style-image" src='{{ style.style_image_url }}' onclick="addAnnotation(event)"></img>
 			</div>
 		  </div>
 
-		  <div class="column" style="padding-left:20px; padding-right:20px;">
-		  	Title: <input type="text" name="title" value="{{ style.title }}"></br>
-		  	Description: <input type="" name=""></br>
-		  	<div class='annotation-list-container'>
+		  <div class="edit-container" style="padding-left:20px; padding-right:20px;">
+		  	<div class="title-container">
+			  	Title: <input type="text" name="title" value="{{ style.title }}"></br>
+			  	Description: <input type="" name=""></br>
 		  	</div>
-		  	<button onclick="saveStyle()">Save</button>
+		  	<div class="annotation-list-container"></div>
+		  	<div class="operation-container">
+		  		<button onclick="saveStyle()">Save</button>
+		  		<button><a href="http://127.0.0.1:8000/style/1"">Go To Style</a></button>
+		  	</div>
 		  </div>
 		</div>
 	</div>
-</div>
+
 
 <script type="text/javascript">
 const styleContainer = document.querySelector(".style-container");
@@ -79,27 +104,29 @@ function createStyleLabel(annotation) {
 }
 
 function createStyleAnnotation(styleLabel) {
-
+	// Link url input box.
 	var annotationDom = "<div>Link: <input type='text' name='annotationUrl'></div>";
 	var styleAnnotation = new DOMParser().parseFromString(annotationDom , 'text/html').body.firstChild;
+	// Remove button.
 	var removeButtonDom = "<button>Remove</button>";
 	var removeButton = new DOMParser().parseFromString(removeButtonDom , 'text/html').body.firstChild;
 	removeButton.addEventListener('click', removeStyleAnnotation);
-
-	var styleAnnotationItem = document.createElement('div');
-	styleAnnotationItem.appendChild(styleAnnotation);
-	styleAnnotationItem.appendChild(removeButton);
 	function removeStyleAnnotation() {
 		styleLabel.style.display = "none";
 		removeButton.parentNode.style.display = "none";
 	}
+
+	// Create Item.
+	var styleAnnotationItem = document.createElement('div');
+	styleAnnotationItem.appendChild(styleAnnotation);
+	styleAnnotationItem.appendChild(removeButton);
+
 	return styleAnnotationItem;
 }
 
 
 function addAnnotation(event) {
 	var annotation = getCoor(event);
-
 	// console.log(StyleAnnotation.styleContainer);
 	// Add style label.
 	var styleLabel = createStyleLabel(annotation);
@@ -111,6 +138,7 @@ function addAnnotation(event) {
 }
 
 function saveStyle() {
+
 	console.log("//TODO: Save style");
 }	
 

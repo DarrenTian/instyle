@@ -12,6 +12,9 @@ class StyleViewSet(viewsets.ModelViewSet):
     queryset = Style.objects.all().order_by('id')
     serializer_class = StyleSerializer
 
+def welcome(request):
+	return render(request, 'style/welcome.html', {})
+
 def style(request, style_id):
 	style = Style.objects.get(id=style_id)
 	context = { 'style': style }
@@ -19,15 +22,17 @@ def style(request, style_id):
 
 def new_style(request):
 	if request.method == 'POST' and request.FILES['style_image']:
-		style_image = request.FILES['style_image']
-		fs = FileSystemStorage()
-		filename = fs.save(style_image.name, style_image)
-		uploaded_file_url = fs.url(filename)
+		# style_image = request.FILES['style_image']
+		# fs = FileSystemStorage()
+		# filename = fs.save(style_image.name, style_image)
+		# uploaded_file_url = fs.url(filename)
 
-		new_style = Style()
-		new_style.style_image_url = uploaded_file_url
-		new_style.save()
-		return redirect('/style/'+str(new_style.pk)+'/edit')
+		# new_style = Style()
+		# new_style.style_image_url = uploaded_file_url
+		# new_style.save()
+		# image_id = str(new_style.pk)
+		image_id = '13'
+		return redirect('/style/'+image_id+'/edit')
 	return render(request, 'style/new.html')
 
 def edit_style(request, style_id):
