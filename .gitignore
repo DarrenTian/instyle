@@ -1,8 +1,9 @@
 
 db.sqlite3
-
+Include/
 *.pyc
-
+Lib/
+Scripts/
+tcl/
 staticfiles/*
-
 .env
