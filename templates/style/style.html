@@ -47,18 +47,12 @@
 	.operation-container {
 		margin-top: auto;
 	}
-
-	* {
-		border: solid;
-		border-color: black;
-		border-width: .1px;
-	}
 </style>
 	<div class="container">
 		<div class="desktop-container">
 		  <div class="image-container">
 			<div style="margin:auto; position:relative;">
-			  	<img src='{{ style.style_image_url }}'"></img>
+			  	<img src='{{ style.style_image_url }}'></img>
 				{% for annotation in style.style_image_annotations.all %}
 				<div style="display:inline-block; position:absolute; top:{{ annotation.coor_x }}%; left:{{ annotation.coor_y }}%; background:white; opacity:0.2; line-height: 1; border-radius:10px;" >
 					<a href='{{ annotation.url }}'><img src='/static/tag.png' style="height:30px;"></img></a>
@@ -66,7 +60,7 @@
 				{% endfor %}
 			</div>
 		  </div>
-		  <div class="info-container"">
+		  <div class="info-container">
 		  	<h1 style="font-weight:700">{{ style.title 	}}</h1>
 		  	<p><a href="{{ style.credit_link }}">{{ style.credit }}</a></p>
 			<p style="font-family:Helvetica;">{{ style.publish_date }}</p>

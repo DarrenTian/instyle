@@ -7,3 +7,4 @@ Scripts/
 tcl/
 staticfiles/*
 .env
+.vscode
