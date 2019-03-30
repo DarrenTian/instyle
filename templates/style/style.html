@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style type="text/css">
+<!-- <style type="text/css">
 	@media only screen and (min-width: 600px) {
 	    .desktop-container {
 	    	margin-top: 10px;
@@ -48,24 +48,26 @@
 		margin-top: auto;
 	}
 </style>
-	<div class="container">
-		<div class="desktop-container">
-		  <div class="image-container">
-			<div style="margin:auto; position:relative;">
-			  	<img src='{{ style.style_image_url }}'></img>
-				{% for annotation in style.style_image_annotations.all %}
-				<div style="display:inline-block; position:absolute; top:{{ annotation.coor_x }}%; left:{{ annotation.coor_y }}%; background:white; opacity:0.2; line-height: 1; border-radius:10px;" >
-					<a href='{{ annotation.url }}'><img src='/static/tag.png' style="height:30px;"></img></a>
-				</div>
-				{% endfor %}
+<div class="container">
+	<div class="desktop-container">
+		<div class="image-container">
+		<div style="margin:auto; position:relative;">
+				<img src='{{ style.style_image_url }}'></img>
+			{% for annotation in style.style_image_annotations.all %}
+			<div style="display:inline-block; position:absolute; top:{{ annotation.coor_x }}%; left:{{ annotation.coor_y }}%; background:white; opacity:0.2; line-height: 1; border-radius:10px;" >
+				<a href='{{ annotation.url }}'><img src='/static/tag.png' style="height:30px;"></img></a>
 			</div>
-		  </div>
-		  <div class="info-container">
-		  	<h1 style="font-weight:700">{{ style.title 	}}</h1>
-		  	<p><a href="{{ style.credit_link }}">{{ style.credit }}</a></p>
-			<p style="font-family:Helvetica;">{{ style.publish_date }}</p>
-			<p style="padding-top:20px;">{{ style.description }}</p>
-		  </div>
+			{% endfor %}
+		</div>
+		</div>
+		<div class="info-container">
+			<h1 style="font-weight:700">{{ style.title 	}}</h1>
+			<p><a href="{{ style.credit_link }}">{{ style.credit }}</a></p>
+		<p style="font-family:Helvetica;">{{ style.publish_date }}</p>
+		<p style="padding-top:20px;">{{ style.description }}</p>
 		</div>
 	</div>
+</div> -->
+<div id="instyle-spa"></div>
+<script src="frontend/main.js"></script>
 {% endblock %}
