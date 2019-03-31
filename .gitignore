@@ -8,3 +8,5 @@ tcl/
 staticfiles/*
 .env
 .vscode
+node_modules/
+static/

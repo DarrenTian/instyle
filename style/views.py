@@ -1,9 +1,11 @@
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from style.models import Style
 from style.serializers import StyleSerializer
+from json import loads
 
 class StyleViewSet(viewsets.ModelViewSet):
     """
@@ -15,10 +17,10 @@ class StyleViewSet(viewsets.ModelViewSet):
 def welcome(request):
 	return render(request, 'style/welcome.html', {})
 
-def style(request, style_id):
+def style_rest_api(request, style_id):
 	style = Style.objects.get(id=style_id)
-	context = { 'style': style }
-	return render(request, 'style/style.html', context)
+	style_json = loads(serializers.serialize("json", [style,]))[0]['fields']
+	return JsonResponse(style_json)
 
 def new_style(request):
 	if request.method == 'POST' and request.FILES['style_image']:
