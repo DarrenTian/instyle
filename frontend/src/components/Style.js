@@ -1,32 +1,47 @@
 import React from "react";
 import PropTypes from "prop-types";
-import key from "weak-key";
+import tag from "../../assets/tag.png"
 
-const Table = ({ data }) =>
-  !data.length ? (
-    <p>Nothing to show</p>
-  ) : (
-    <div className="column">
-      <h2 className="subtitle">
-        Showing <strong>{data.length} items</strong>
-      </h2>
-      <table className="table is-striped">
-        <thead>
-          <tr>
-            {Object.entries(data[0]).map(el => <th key={key(el)}>{el[0]}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(el => (
-            <tr key={el.id}>
-              {Object.entries(el).map(el => <td key={key(el)}>{el[1]}</td>)}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+const Style = ({style}) => (
+    <div className="columns">
+        <div className="column is-hidden-mobile"></div>
+        <div className="column">
+            <img src={style.style_image_url}></img>
+            {style.style_image_annotations && style.style_image_annotations.map(annotations => {
+                const tagStyle = {
+                    display: "inline-block",
+                    position: "absolute",
+                    background: "white",
+                    opacity: 0.2,
+                    lineHeight: 1,
+                    borderRadius: "10px",
+                    top: annotation.coor_x,
+                    left: annotation.coor_y
+                };
+                return (
+                    <div style={tagStyle} >
+                        <a href='{{ annotation.url }}'><img src={tag} height={30}></img></a>
+                    </div>
+                );
+            })}
+        </div>
+        <div className="card-content column">
+            <div className="media">
+                <div className="media-content">
+                    <p className="title">{style.title}</p>
+                    <p className="subtitle"><a href={style.credit_link}>{style.credit}</a></p>
+                </div>
+            </div>
+            <div className="content">
+                {style.description}
+                <br></br>
+                <time>{style.publish_date}</time>
+            </div>
+        </div>
+        <div className="column is-hidden-mobile"></div>
     </div>
-  );
+);
 Style.propTypes = {
-  data: PropTypes.array.isRequired
+  style: PropTypes.object.isRequired
 };
 export default Style;

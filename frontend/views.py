@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def style(request, style_id):
+    return render(request, 'style/style.html')

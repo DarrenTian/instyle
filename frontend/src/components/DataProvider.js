@@ -7,7 +7,7 @@ class DataProvider extends Component {
     render: PropTypes.func.isRequired
   };
   state = {
-      data: [],
+      style: [],
       loaded: false,
       placeholder: "Loading..."
     };
@@ -19,11 +19,11 @@ class DataProvider extends Component {
         }
         return response.json();
       })
-      .then(data => this.setState({ data: data, loaded: true }));
+      .then(style => this.setState({ style: style, loaded: true }));
   }
   render() {
-    const { data, loaded, placeholder } = this.state;
-    return loaded ? this.props.render(data) : <p>{placeholder}</p>;
+    const { style, loaded, placeholder } = this.state;
+    return loaded ? this.props.render(style) : <p>{placeholder}</p>;
   }
 }
 export default DataProvider;
