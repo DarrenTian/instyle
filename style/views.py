@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from style.models import Style
 from style.serializers import StyleSerializer
-from json import loads
 
 class StyleViewSet(viewsets.ModelViewSet):
     """
@@ -16,11 +15,6 @@ class StyleViewSet(viewsets.ModelViewSet):
 
 def welcome(request):
 	return render(request, 'style/welcome.html', {})
-
-def style_rest_api(request, style_id):
-	style = Style.objects.get(id=style_id)
-	style_json = loads(serializers.serialize("json", [style,]))[0]['fields']
-	return JsonResponse(style_json)
 
 def new_style(request):
 	if request.method == 'POST' and request.FILES['style_image']:

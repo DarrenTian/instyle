@@ -31,7 +31,6 @@ urlpatterns = [
     url(r'^welcome', style.views.welcome),
     url(r'^style/new', style.views.new_style),
 	url(r'^style/(?P<style_id>[0-9]+)$', frontend.views.style),
-	url(r'^api/style/(?P<style_id>[0-9]+)$', style.views.style_rest_api),
     url(r'^style/(?P<style_id>[0-9]+)/edit', style.views.edit_style),
     url(r'^api/', include(router.urls)),
     url(r'.*', style.views.welcome),
