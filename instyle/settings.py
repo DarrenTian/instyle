@@ -34,18 +34,27 @@ ALLOWED_HOSTS = ['127.0.0.1', 'in-style.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third Party
     'rest_framework',
+    'rest_framework.authtoken',  
+
+    # Style
     'style',
     'frontend',
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 
     #'DEFAULT_RENDERER_CLASSES': (
     #    'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
