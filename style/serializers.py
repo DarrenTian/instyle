@@ -11,4 +11,13 @@ class StyleSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Style
-		fields = ['url', 'style_image_url', 'style_image_annotations']
+		fields = [
+			'url', 
+			'title',
+			'credit',
+			'credit_link',
+			'description',
+			'publish_date',
+			'style_image_url', 
+			'style_image_annotations',
+		]

@@ -17,13 +17,12 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 import user.views, style.views, frontend.views
 
-
 router = routers.DefaultRouter()
-router.register(r'users', user.views.UserViewSet)
-router.register(r'groups', user.views.GroupViewSet)
 router.register(r'styles', style.views.StyleViewSet)
+router.register(r'users', user.views.UserViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -31,11 +30,13 @@ urlpatterns = [
     url(r'^welcome', style.views.welcome),
     url(r'^style/new', style.views.new_style),
 	url(r'^style/(?P<style_id>[0-9]+)$', frontend.views.style),
-	url(r'^api/style/(?P<style_id>[0-9]+)$', style.views.style_rest_api),
     url(r'^style/(?P<style_id>[0-9]+)/edit', style.views.edit_style),
     url(r'^api/', include(router.urls)),
+    # Log in
+    url(r'^api/auth-token$', obtain_auth_token),
+    # Sign Up
+    url(r'^api/users$', user.views.UserCreate.as_view(), name='create-account'),
     url(r'.*', style.views.welcome),
-    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

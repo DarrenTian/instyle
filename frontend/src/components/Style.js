@@ -7,7 +7,7 @@ const Style = ({style}) => (
         <div className="column is-hidden-mobile"></div>
         <div className="column">
             <img src={style.style_image_url}></img>
-            {style.style_image_annotations && style.style_image_annotations.map(annotations => {
+            {style.style_image_annotations && style.style_image_annotations.map(annotation => {
                 const tagStyle = {
                     display: "inline-block",
                     position: "absolute",
