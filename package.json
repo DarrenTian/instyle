@@ -32,7 +32,7 @@
     "url-loader": "^1.1.2",
     "weak-key": "^1.0.1",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
-  },
-  "description": ""
+    "webpack-cli": "^3.3.0",
+    "react-router-dom": "^5.0.0"
+  }
 }
