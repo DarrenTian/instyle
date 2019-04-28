@@ -12,3 +12,4 @@ node_modules/
 static/
 statics/
 media/
+.DS_Store
