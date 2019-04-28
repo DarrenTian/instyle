@@ -6,6 +6,8 @@ Lib/
 Scripts/
 tcl/
 staticfiles/*
+statics/
 .env
 .vscode
 node_modules
+.DS_Store
