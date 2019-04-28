@@ -8,8 +8,4 @@ tcl/
 staticfiles/*
 .env
 .vscode
-node_modules/
-static/
-statics/
-media/
-.DS_Store
+node_modules
