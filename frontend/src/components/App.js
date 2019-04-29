@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DataProvider from "./DataProvider";
+import StyleDataProvider from "./StyleDataProvider";
 import Style from "./Style";
 import Welcome from "./Welcome"
 import {
@@ -20,7 +20,9 @@ const App = () => (
 );
 
 const StylePage = ({match}) => (
-  <DataProvider endpoint={"/api/styles/" + match.params.id +"/?format=json"} render={style => <Style style={style} />} />
+  // TODO: <UserInfoDataProvider>, this is for rendering the data of the poster.
+  <StyleDataProvider endpoint={"/api/styles/" + match.params.id +"/?format=json"} render={style => <Style style={style} />} />
+  // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
 );
 
 const wrapper = document.getElementById("instyle-spa");

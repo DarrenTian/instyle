@@ -32,8 +32,11 @@ urlpatterns = [
     url(r'^api/auth-token$', obtain_auth_token),
     # Sign Up
     url(r'^api/users$', user.views.UserCreate.as_view(), name='create-account'),
-    url(r'.*', frontend.views.spa),
+    #url(r'.*', style.views.welcome),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Append this later, otherwise all urls will hijacked by this first before resolving to static files.
+urlpatterns.append(url(r'.*', frontend.views.spa))

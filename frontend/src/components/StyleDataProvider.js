@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class DataProvider extends Component {
+class StyleDataProvider extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired
@@ -26,4 +26,4 @@ class DataProvider extends Component {
     return loaded ? this.props.render(style) : <p>{placeholder}</p>;
   }
 }
-export default DataProvider;
+export default StyleDataProvider;

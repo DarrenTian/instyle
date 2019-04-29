@@ -1,29 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
-import tag from "../../assets/tag.png"
 
 const Style = ({style}) => (
     <div className="columns">
-        <div className="column is-hidden-mobile"></div>
         <div className="column">
-            <img src={style.style_image_url}></img>
-            {style.style_image_annotations && style.style_image_annotations.map(annotation => {
-                const tagStyle = {
-                    display: "inline-block",
-                    position: "absolute",
-                    background: "white",
-                    opacity: 0.2,
-                    lineHeight: 1,
-                    borderRadius: "10px",
-                    top: annotation.coor_x,
-                    left: annotation.coor_y
-                };
-                return (
-                    <div style={tagStyle} >
-                        <a href='{{ annotation.url }}'><img src={tag} height={30}></img></a>
-                    </div>
-                );
-            })}
+            <div className="style-section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
+                <div className="style-container" style={{position:"relative"}}>
+                    <img src={style.style_image_url} style={{borderRadius:"10px"}}></img>
+                    {style.style_image_annotations && style.style_image_annotations.map(annotation => {
+                        const tagStyle = {
+                            display: "inline-block",
+                            position: "absolute",
+                            background: "white",
+                            opacity: 0.2,
+                            lineHeight: 1,
+                            borderRadius: "10px",
+                            top: annotation.coor_x + "%",
+                            left: annotation.coor_y + "%",
+                        };
+                        return (
+                            <div style={tagStyle} >
+                                <a href={annotation.url}>
+                                    <img src={"/static/tag.png"} style={{height:"30px"}}></img>
+                                </a>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
         <div className="card-content column">
             <div className="media">
@@ -38,7 +42,6 @@ const Style = ({style}) => (
                 <time>{style.publish_date}</time>
             </div>
         </div>
-        <div className="column is-hidden-mobile"></div>
     </div>
 );
 Style.propTypes = {
