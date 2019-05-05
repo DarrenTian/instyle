@@ -20,7 +20,6 @@ const App = () => (
 );
 
 const StylePage = ({match}) => (
-  // TODO: <UserInfoDataProvider>, this is for rendering the data of the poster.
   <StyleDataProvider endpoint={"/api/styles/" + match.params.id +"/?format=json"} render={style => <Style style={style} />} />
   // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
 );
