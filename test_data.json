@@ -1,5 +1,12 @@
 [
   {
+    "model": "auth.user",
+    "pk":1,
+    "fields": {
+      "username": "Elisa Tian"
+    }
+  },
+  {
     "model": "style.style",
     "pk": 1,
     "fields": {
@@ -8,6 +15,7 @@
       "credit_link": "https://www.instagram.com/savislook/",
       "style_image_url": "http://127.0.0.1:8000/media/test0.jpg",
       "description": "Mid autumn style from @savislook. Classic black coat that's fishion and cozy. Newly released handbag that you can carry daily.",
+      "publisher": 1,
       "publish_date": "Aug 7th, 2018"
     }
   },
@@ -15,14 +23,16 @@
     "model": "style.style",
     "pk": 2,
     "fields": {
-      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw8npagewbj31171jk4kn.jpg"
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw8npagewbj31171jk4kn.jpg",
+      "publisher": 1
     }
   },
   {
     "model": "style.style",
     "pk": 3,
     "fields": {
-      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw0o6wdluej314y1jk7si.jpg"
+      "style_image_url": "https://wx2.sinaimg.cn/mw690/0062MEuCly1fw0o6wdluej314y1jk7si.jpg",
+      "publisher": 1
     }
   },
   {

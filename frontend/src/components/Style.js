@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 const Style = ({style}) => (
     <div className="columns">
         <div className="column">
+            {style.publisher}
+        </div>
+        <div className="column">
             <div className="style-section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
                 <div className="style-container" style={{position:"relative"}}>
                     <img src={style.style_image_url} style={{borderRadius:"10px"}}></img>
@@ -30,17 +33,21 @@ const Style = ({style}) => (
             </div>
         </div>
         <div className="card-content column">
-            <div className="media">
-                <div className="media-content">
-                    <p className="title">{style.title}</p>
-                    <p className="subtitle"><a href={style.credit_link}>{style.credit}</a></p>
+            <div style={{paddingLeft:"15px", paddingRight:"15px"}}>
+                <time >{style.publish_date}</time>
+                <div className="media">
+                    <div className="media-content">
+                        <p className="title">{style.title}</p>
+                        <p className="subtitle"><a href={style.credit_link}>{style.credit}</a></p>
+                    </div>
+                </div>
+                <div className="content">
+                    {style.description}
+                    <br></br>
                 </div>
             </div>
-            <div className="content">
-                {style.description}
-                <br></br>
-                <time>{style.publish_date}</time>
-            </div>
+        </div>
+        <div>
         </div>
     </div>
 );

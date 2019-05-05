@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 """
 style {
@@ -29,6 +30,7 @@ class Style(models.Model):
 
 	description = models.CharField(max_length=1000, default='')
 
+	publisher = models.ForeignKey(User, related_name='styles', on_delete=models.CASCADE)
 	publish_date = models.CharField(max_length=200, default='')
 
 	def __str__(self):
