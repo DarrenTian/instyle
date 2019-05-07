@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
-import user.views, style.views, frontend.views
+import user.views, style.views, frontend.views, invitation.views
 
 router = routers.DefaultRouter()
 router.register(r'styles', style.views.StyleViewSet)
@@ -27,11 +27,13 @@ router.register(r'users', user.views.UserViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    # Register endpoint: api/users/create_user/
+    # TODO: also refactor others into UserViewSet
     url(r'^api/', include(router.urls)),
     # Log in
     url(r'^api/auth-token$', obtain_auth_token),
-    # Sign Up
-    url(r'^api/users$', user.views.UserCreate.as_view(), name='create-account'),
+    # Invite Self
+    url(r'^api/invitation$', invitation.views.InvitationCreate.as_view(), name='create-invitation'),
     #url(r'.*', style.views.welcome),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

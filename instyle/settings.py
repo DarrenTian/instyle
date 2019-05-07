@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Style
     'style',
     'frontend',
+    'invitation',
 ]
 
 REST_FRAMEWORK = {
