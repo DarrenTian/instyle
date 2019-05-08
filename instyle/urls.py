@@ -21,19 +21,20 @@ from rest_framework.authtoken.views import obtain_auth_token
 import user.views, style.views, frontend.views, invitation.views
 
 router = routers.DefaultRouter()
+# Retrieve Style:       GET  /api/styles/$id/?format=json                   
 router.register(r'styles', style.views.StyleViewSet)
+# Register User:        POST /api/users/create_user/?format=json 
+# Login User:           POST /api/users/obtain_auth_token/?format=json
 router.register(r'users', user.views.UserViewSet)
+# Invite Self:          POST /api/invitation/
+router.register(r'invitation', invitation.views.InvitationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    # Register endpoint: api/users/create_user/
-    # TODO: also refactor others into UserViewSet
     url(r'^api/', include(router.urls)),
-    # Log in
-    url(r'^api/auth-token$', obtain_auth_token),
-    # Invite Self
-    url(r'^api/invitation$', invitation.views.InvitationCreate.as_view(), name='create-invitation'),
+    # Log in API is registered here since we are using built-in API View.
+    url(r'^api/users/obtain_auth_token/$', obtain_auth_token),
     #url(r'.*', style.views.welcome),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
