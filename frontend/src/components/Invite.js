@@ -25,7 +25,27 @@ class Invite extends React.Component {
     }
 
     inviteMe = () => {
-        console.log("TODO: Implement invite me api: " +this.state.email);
+        fetch('/api/invitation/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: this.state.email,
+            })
+        })
+        .then(response => {
+            if (response.status == 201) {
+                document
+                    .getElementsByClassName("invite-me-button")[0]
+                    .style
+                    .backgroundColor = "gray";
+
+            } else {
+                console.log("Something went wrong");
+            }
+        });
     }
 
     render() {
@@ -46,7 +66,7 @@ class Invite extends React.Component {
                                 </span>
                             </div>
                             <div className="control">
-                                <button className="button is-link" onClick={this.inviteMe}>Invite me</button>
+                                <button className="button is-link invite-me-button" onClick={this.inviteMe}>Invite me</button>
                             </div>
                         </div>
                     </div>
