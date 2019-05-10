@@ -28,7 +28,11 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'in-style.herokuapp.com']
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'instyle-staging.herokuapp.com',
+    'in-style.herokuapp.com'
+]
 
 
 # Application definition
@@ -100,6 +104,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'instyle.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
