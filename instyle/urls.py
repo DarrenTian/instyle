@@ -31,12 +31,14 @@ router.register(r'invitation', invitation.views.InvitationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
-urlpatterns = [
-    url(r'^api/', include(router.urls)),
+urlpatterns = []    
+
+# Put all To-Be-Developed API under DEV
+if settings.PROD_ENV == "DEV":
     # Log in API is registered here since we are using built-in API View.
-    url(r'^api/users/obtain_auth_token/$', obtain_auth_token),
-    #url(r'.*', style.views.welcome),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns.append(url(r'^api/', include(router.urls)))
+    urlpatterns.append(url(r'^api/users/obtain_auth_token/$', obtain_auth_token))
+    urlpatterns += (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

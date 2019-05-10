@@ -22,6 +22,5 @@ const Welcome = () => {
     )
 };
 Welcome.propTypes = {
-    Welcome: PropTypes.object.isRequired
 };
 export default Welcome;

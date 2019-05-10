@@ -9,11 +9,12 @@ import {
   BrowserRouter,
   Redirect
 } from "react-router-dom";
+
 const App = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/welcome" exact component={Welcome} />
-      <Route path="/style/:id" component={StylePage} />
+      { process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} /> }
       <Redirect to="/welcome" />
     </Switch>
   </BrowserRouter>
