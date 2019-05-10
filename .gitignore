@@ -5,7 +5,6 @@ Include/
 Lib/
 Scripts/
 tcl/
-staticfiles/*
 statics/
 .env
 .vscode
