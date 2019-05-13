@@ -33,6 +33,7 @@ PROD_ENV = config('PROD_ENV', default='DEV')
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
+    'localhost',
     'instyle-staging.herokuapp.com',
     'in-style.herokuapp.com'
 ]
