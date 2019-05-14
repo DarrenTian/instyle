@@ -27,9 +27,9 @@ if settings.PROD_ENV == "DEV":
     # Register User:        POST /api/users/create_user/?format=json 
     # Login User:           POST /api/users/obtain_auth_token/?format=json
     router.register(r'users', user.views.UserViewSet)
-else: 
-    # Invite Self:          POST /api/invitation/
-    router.register(r'invitation', invitation.views.InvitationViewSet)
+
+# Invite Self:          POST /api/invitation/
+router.register(r'invitation', invitation.views.InvitationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
