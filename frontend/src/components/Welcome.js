@@ -15,7 +15,7 @@ const Welcome = () => {
     return (
         <div>
             <div style={introStyle} className="introduction column is-full-desktop">
-                Styler is the ultimate destination for Stylers.
+                Eastyler is the ultimate destination for Stylers.
         </div>
             <Invite />
         </div>

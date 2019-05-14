@@ -21,22 +21,24 @@ from rest_framework.authtoken.views import obtain_auth_token
 import user.views, style.views, frontend.views, invitation.views
 
 router = routers.DefaultRouter()
-# Retrieve Style:       GET  /api/styles/$id/?format=json                   
-router.register(r'styles', style.views.StyleViewSet)
-# Register User:        POST /api/users/create_user/?format=json 
-# Login User:           POST /api/users/obtain_auth_token/?format=json
-router.register(r'users', user.views.UserViewSet)
-# Invite Self:          POST /api/invitation/
-router.register(r'invitation', invitation.views.InvitationViewSet)
+if settings.PROD_ENV == "DEV":
+    # Retrieve Style:       GET  /api/styles/$id/?format=json                   
+    router.register(r'styles', style.views.StyleViewSet)
+    # Register User:        POST /api/users/create_user/?format=json 
+    # Login User:           POST /api/users/obtain_auth_token/?format=json
+    router.register(r'users', user.views.UserViewSet)
+else: 
+    # Invite Self:          POST /api/invitation/
+    router.register(r'invitation', invitation.views.InvitationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = []    
+urlpatterns.append(url(r'^api/', include(router.urls)))
 
 # Put all To-Be-Developed API under DEV
 if settings.PROD_ENV == "DEV":
     # Log in API is registered here since we are using built-in API View.
-    urlpatterns.append(url(r'^api/', include(router.urls)))
     urlpatterns.append(url(r'^api/users/obtain_auth_token/$', obtain_auth_token))
     urlpatterns += (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
 
