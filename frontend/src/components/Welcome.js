@@ -1,3 +1,5 @@
+import Footer from "./Footer";
+import Header from "./Header";
 import Invite from "./Invite";
 import React from "react";
 import PropTypes from "prop-types";
@@ -14,10 +16,14 @@ const Welcome = () => {
     };
     return (
         <div>
-            <div style={introStyle} className="introduction column is-full-desktop">
-                Eastyler is the ultimate destination for Stylers.
-        </div>
-            <Invite />
+            <Header/ >
+            <div>
+                <div style={introStyle} className="introduction column is-full-desktop">
+                    Eastyler is the ultimate destination for Stylers.
+            </div>
+                <Invite />
+            </div>
+            <Footer/ >
         </div>
     )
 };

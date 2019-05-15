@@ -1,8 +1,9 @@
+import Header from "./Header";
 import React from "react";
 import ReactDOM from "react-dom";
 import StyleDataProvider from "./StyleDataProvider";
 import Style from "./Style";
-import Welcome from "./Welcome"
+import Welcome from "./Welcome";
 import {
   Route,
   Switch,
@@ -11,13 +12,15 @@ import {
 } from "react-router-dom";
 
 const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/welcome" exact component={Welcome} />
-      { process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} /> }
-      <Redirect to="/welcome" />
-    </Switch>
-  </BrowserRouter>
+  <div>
+	  <BrowserRouter>
+	    <Switch>
+	      <Route path="/welcome" exact component={Welcome} />
+	      { process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} /> }
+	      <Redirect to="/welcome" />
+	    </Switch>
+	  </BrowserRouter>
+  </div>
 );
 
 const StylePage = ({match}) => (
