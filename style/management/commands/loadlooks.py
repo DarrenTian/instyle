@@ -63,7 +63,7 @@ class Command(BaseCommand):
         publisher = self.get_user(row[self.indicies['publisher']])
 
         style = Style()
-        style.style_image_url = row[self.indicies['image_url']]
+        style.style_image_url = '/static/looks/' + row[self.indicies['image_url']]
         style.title = row[self.indicies['title']]
         style.description = row[self.indicies['description']]
         style.publish_date = row[self.indicies['date']]
