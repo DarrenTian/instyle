@@ -6,7 +6,7 @@ from django.db import models
 class Invitation(models.Model):
 	INVITATION_TYPE = (
 		('S', 'Self'),
-		('F', 'Fridends'),
+		('F', 'Friend'),
 	)
 
 	email = models.CharField(max_length=200, default='')
