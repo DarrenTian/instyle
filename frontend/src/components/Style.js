@@ -1,57 +1,97 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Style = ({style}) => (
-    <div className="columns">
-        <div className="column">
-            {style.publisher}
-        </div>
-        <div className="column">
-            <div className="style-section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
-                <div className="style-container" style={{position:"relative"}}>
-                    <img src={style.style_image_url} style={{borderRadius:"10px"}}></img>
-                    {style.style_image_annotations && style.style_image_annotations.map(annotation => {
-                        const tagStyle = {
-                            display: "inline-block",
-                            position: "absolute",
-                            background: "white",
-                            opacity: 0.2,
-                            lineHeight: 1,
+const Style = ({ style }) => {
+    const imageStyle = {
+        width: "100%",
+        borderRadius: "10px"
+    };
+    const timeStyle = {
+        fontWeight: "normal",
+        color: "#A9A9A9"
+    };
+    const carouselStyle = {
+        overflowY: "hidden",
+        width: "100%",
+        position: "relative",
+        whiteSpace: "nowrap",
+        overflowX: "auto",
+        paddingBottom: "20px"
+    };
+
+    return (
+        <div className="columns box">
+            <div className="column is-hidden-mobile"></div>
+            <div className="column">
+                <div className="media">
+                    <div className="media-left">
+                        <figure className="image is-48x48">
+                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
+                        </figure>
+                    </div>
+                    <div className="media-content">
+                        <p className="title is-5">{style.title}</p>
+                        <p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>
+                    </div>
+                    <a className="button is-pulled-right">+ Follow</a>
+                </div>
+                <br></br>
+                <img className="is-block container" style={imageStyle} src={style.style_image_url}></img>
+                <div className="container" style={carouselStyle}>
+                    {style.style_image_annotations && style.style_image_annotations.map((annotation, key) => {
+                        const itemStyle = {
+                            width: "150px",
                             borderRadius: "10px",
-                            top: annotation.coor_x + "%",
-                            left: annotation.coor_y + "%",
+                            backgroundColor: "#F8F8F8",
+                            display: "inline-block",
+                            margin: "20px 8px 0 0",
+                            padding: "8px"
                         };
+                        const titleStyle = {
+                            width: "66px",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden"
+                        }
                         return (
-                            <div style={tagStyle} >
-                                <a href={annotation.url}>
-                                    <img src={"/static/tag.png"} style={{height:"30px"}}></img>
-                                </a>
-                            </div>
+                            <a key={key} style={itemStyle} href='{{ annotation.url }}'>
+                                <div className="media" >
+                                    <div className="media-left">
+                                        <figure className="image is-48x48">
+                                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
+                                        </figure>
+                                    </div>
+                                    <div className="media-content">
+                                        <p className="title is-6" style={titleStyle}>item title longlonglong</p>
+                                        <p className="subtitle is-6">$100</p>
+                                    </div>
+                                </div>
+                            </a>
                         );
                     })}
                 </div>
-            </div>
-        </div>
-        <div className="card-content column">
-            <div style={{paddingLeft:"15px", paddingRight:"15px"}}>
-                <time >{style.publish_date}</time>
-                <div className="media">
-                    <div className="media-content">
-                        <p className="title">{style.title}</p>
-                        <p className="subtitle"><a href={style.credit_link}>{style.credit}</a></p>
+                <div className="container" style={timeStyle}>
+                    <time>{style.publish_date}</time>
+                    <div className="is-pulled-right">
+                        <span className="icon ">
+                            <i className="fas fa-heart"></i>
+                        </span>
+                        <span className="icon">
+                            <i className="fas fa-share"></i>
+                        </span>
                     </div>
                 </div>
+            </div>
+            <div className="card-content column">
                 <div className="content">
                     {style.description}
-                    <br></br>
                 </div>
             </div>
+            <div className="column is-hidden-mobile"></div>
         </div>
-        <div>
-        </div>
-    </div>
-);
+    );
+};
 Style.propTypes = {
-  style: PropTypes.object.isRequired
+    style: PropTypes.object.isRequired
 };
 export default Style;
