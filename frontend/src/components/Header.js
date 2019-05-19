@@ -9,7 +9,7 @@ class Header extends React.Component {
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         <div className="navbar-logo">
-                            <img src="./static/logo_transparent.png"/>
+                            <img src="/static/logo_transparent.png"/>
                         </div>
                         <h1><strong>Eastyler</strong></h1>
                     </a>
