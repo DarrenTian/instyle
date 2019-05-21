@@ -13,6 +13,13 @@ class Invite extends React.Component {
             color: "white",
             marginBottom: "20px",
         };
+        this.inviteMeButtonStyle = {
+            width: "100%",
+            marginTop: ".5rem",
+        }
+        this.inviteMeSectionStyle = {
+            maxWidth: "480px",
+        }
         this.state = {
             email: '',
         };
@@ -50,27 +57,27 @@ class Invite extends React.Component {
 
     render() {
         return (
-            <div className="columns is-centered">
-                <nav className="panel is-half column">
-                    <p className="panel-heading">
-                        Build your own style!
-                    </p>
-                    <div className="panel-block">
-                        <div className="field is-grouped column is-full">
-                            <div className="control has-icons-left is-expanded">
-                                <input className="input" type="email" placeholder="Email input" 
-                                       value={this.state.email}
-                                       onChange={this.changeEmail}></input>
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-envelope"></i>
-                                </span>
-                            </div>
-                            <div className="control">
-                                <button className="button is-link invite-me-button" onClick={this.inviteMe}>Invite me</button>
-                            </div>
-                        </div>
+            <div>
+              <section className="section" >
+                <div className="container" style={this.inviteMeSectionStyle}>
+                    <h1 className="title">Eastyler</h1>
+                    <h2 className="subtitle">
+                        Build your look;<br/>
+                        Share your style.
+                    </h2>
+                    <div className="control has-icons-left">
+                        <input className="input" type="email" placeholder="Your email address" 
+                               value={this.state.email}
+                               onChange={this.changeEmail}></input>
+                        <span className="icon is-small is-left">
+                            <i className="fas fa-envelope"></i>
+                        </span>
                     </div>
-                </nav>
+                    <div className="control">
+                        <button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle} onClick={this.inviteMe}>Invite me</button>
+                    </div>
+                </div>
+              </section>
             </div>
         )
     }

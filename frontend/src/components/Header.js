@@ -11,9 +11,7 @@ class Header extends React.Component {
                         <div className="navbar-logo">
                             <img src="/static/logo_transparent.png"/>
                         </div>
-                        <h1><strong>Eastyler</strong></h1>
                     </a>
-                    <p className="navbar-item">Find your style.</p>
                 </div>
             </nav>
         )
