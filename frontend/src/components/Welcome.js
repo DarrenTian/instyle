@@ -1,23 +1,25 @@
+import ImageTile from "./ImageTile";
 import Invite from "./Invite";
 import React from "react";
 import PropTypes from "prop-types";
 
 const Welcome = () => {
-    const introStyle = {
-        textAlign: "center",
-        height: "400px",
-        paddingTop: "150px",
-        backgroundColor: "#00d1b2",
-        fontSize: "35px",
-        color: "white",
-        marginBottom: "20px",
-    };
     return (
         <div>
-            <div>
-                <div style={introStyle} className="introduction column is-full-desktop">
-                    Eastyler is the ultimate destination for Stylers.
+            <div className="tiles-section-wrapper">
+                <div className="overlay"></div>
+                <section className="section tiles-section">
+                        <div className="tiles-vertical-columns">
+                            <ImageTile source={"./static/looks/addict.attitude/1.jpg"}/>
+                            <ImageTile source={"./static/looks/addict.attitude/4.jpg"}/>
+                            <ImageTile source={"./static/looks/addict.attitude/2.jpg"}/>    
+                            <ImageTile source={"./static/looks/addict.attitude/5.jpg"}/>
+                            <ImageTile source={"./static/looks/addict.attitude/7.jpg"}/>
+                            <ImageTile source={"./static/looks/addict.attitude/8.jpg"}/>
+                        </div>
+                </section>
             </div>
+            <div>
                 <Invite />
             </div>
         </div>
