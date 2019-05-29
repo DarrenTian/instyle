@@ -1,3 +1,8 @@
+.navbar {
+	max-width: 960px;
+	margin: auto;
+}
+
 .navbar-logo {
 	height: 2.75rem;
     width: 2.75rem; 
@@ -5,6 +10,18 @@
     margin-bottom: -0.25rem;
     position: relative;
     overflow: hidden;
+}
+
+.vertical-line {
+	background-color: black;
+	margin-left: 5px;
+	width: 1.25px;
+	height: 90%;
+}
+
+.navbar-name {
+	margin-left: 6px;
+	font-size: 1.25rem;
 }
 
 .navbar-item img {

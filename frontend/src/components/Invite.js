@@ -73,7 +73,7 @@ class Invite extends React.Component {
                             <i className="fas fa-envelope"></i>
                         </span>
                     </div>
-                    <div className="control">
+                    <div id="inviteMe" className="control">
                         <button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle} onClick={this.inviteMe}>Invite me</button>
                     </div>
                 </div>

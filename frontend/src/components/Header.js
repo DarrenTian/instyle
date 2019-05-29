@@ -3,6 +3,16 @@ import PropTypes from "prop-types";
 import "./styles.scss";
 
 class Header extends React.Component {
+    state = {
+        activeMenu: false,
+    };
+
+    toggleMenu = () => {
+        this.setState({
+            activeMenu: !this.state.activeMenu,
+        });
+    };
+
     render() {
         const navBarStyle = {
             boxShadow:"0px 1px 1px lightgray",
@@ -15,7 +25,36 @@ class Header extends React.Component {
                             <div className="navbar-logo">
                                 <img src="/static/logo_transparent.png"/>
                             </div>
+                            <div className="vertical-line"></div>
+                            <h1 className="navbar-name">eastyler</h1>
                         </a>
+                        <a role="button" className={`navbar-burger burger ${this.state.activeMenu ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarMenu" onClick={this.toggleMenu}>
+                          <span aria-hidden="true"></span>
+                          <span aria-hidden="true"></span>
+                          <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                    <div id="navbarMenu" className={`navbar-menu ${this.state.activeMenu ? 'is-active' : ''}`}>
+                        <div class="navbar-start">
+                        </div>
+
+                        <div class="navbar-end">
+                          <a class="navbar-item">
+                            About
+                          </a>
+                          <a class="navbar-item">
+                            Terms
+                          </a>
+                          <a class="navbar-item">
+                            Contact
+                          </a>
+                          <div class="navbar-item">
+                              <a class="button is-light" href="#inviteMe">
+                                Sign up
+                              </a>
+                          </div>
+                        </div>
                     </div>
                 </nav>
             </div>
