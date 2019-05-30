@@ -31,6 +31,9 @@
   bottom: -9999px;
   height: 4.75rem; }
 
+.doc-container {
+  max-width: 960px; }
+
 .tiles-section-wrapper {
   position: relative; }
 

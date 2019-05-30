@@ -40,17 +40,17 @@ class Header extends React.Component {
                         </div>
 
                         <div class="navbar-end">
-                          <a class="navbar-item">
+                          <a class="navbar-item" href="/doc/about">
                             About
                           </a>
-                          <a class="navbar-item">
+                          <a class="navbar-item" href="/doc/terms">
                             Terms
                           </a>
-                          <a class="navbar-item">
+                          <a class="navbar-item" href="/doc/contact">
                             Contact
                           </a>
                           <div class="navbar-item">
-                              <a class="button is-light" href="#inviteMe">
+                              <a class="button is-light" href="/welcome#inviteMe">
                                 Sign up
                               </a>
                           </div>
