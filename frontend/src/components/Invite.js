@@ -60,7 +60,6 @@ class Invite extends React.Component {
             <div>
               <section className="section" >
                 <div className="container" style={this.inviteMeSectionStyle}>
-                    <h1 className="title">Eastyler</h1>
                     <h2 className="subtitle">
                         Build your look;<br/>
                         Share your style.

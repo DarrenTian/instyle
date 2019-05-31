@@ -40,6 +40,9 @@ class Header extends React.Component {
                         </div>
 
                         <div class="navbar-end">
+                          <a class="navbar-item" href="/welcome">
+                            Home
+                          </a>
                           <a class="navbar-item" href="/doc/about">
                             About
                           </a>
