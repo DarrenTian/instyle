@@ -26,14 +26,14 @@ const Style = ({ style }) => {
                 <div className="media">
                     <div className="media-left">
                         <figure className="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
+                            <img src="/static/looks/addict.attitude/avatar.png" alt="Placeholder image"></img>
                         </figure>
                     </div>
                     <div className="media-content">
-                        <p className="title is-5">{style.title}</p>
-                        <p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>
+                        <p className="title is-5">{style.publisher}</p>
+                        {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
                     </div>
-                    <a className="button is-pulled-right">+ Follow</a>
+                    {/*<a className="button is-pulled-right">+ Follow</a>*/}
                 </div>
                 <br></br>
                 <img className="is-block container" style={imageStyle} src={style.style_image_url}></img>
@@ -54,16 +54,18 @@ const Style = ({ style }) => {
                             overflow: "hidden"
                         }
                         return (
-                            <a key={key} style={itemStyle} href='{{ annotation.url }}'>
+                            <a key={key} style={itemStyle} href={annotation.url}>
                                 <div className="media" >
+                                    {/*
                                     <div className="media-left">
                                         <figure className="image is-48x48">
                                             <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
                                         </figure>
                                     </div>
+                                    */}
                                     <div className="media-content">
-                                        <p className="title is-6" style={titleStyle}>item title longlonglong</p>
-                                        <p className="subtitle is-6">$100</p>
+                                        <p className="title is-6" style={titleStyle}>{annotation.title}</p>
+                                        <p className="subtitle is-6">{annotation.price}</p>
                                     </div>
                                 </div>
                             </a>
@@ -73,9 +75,11 @@ const Style = ({ style }) => {
                 <div className="container" style={timeStyle}>
                     <time>{style.publish_date}</time>
                     <div className="is-pulled-right">
+                        {/*
                         <span className="icon ">
                             <i className="fas fa-heart"></i>
                         </span>
+                        */}
                         <span className="icon">
                             <i className="fas fa-share"></i>
                         </span>
