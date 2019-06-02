@@ -1,3 +1,4 @@
+import Console from "./Console";
 import Doc from "./Doc";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="/welcome" exact component={Welcome} />
         <Route path="/doc/:topic" component={Doc} />
         {process.env.PROD_ENV == "DEV" && <Route path="/login" component={Login} />}
+        {process.env.PROD_ENV == "DEV" && <Route path="/console" component={Console} />}
         {process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} />}
         <Redirect to="/welcome" />
       </Switch>
