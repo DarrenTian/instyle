@@ -1,4 +1,7 @@
+import Doc from "./Doc";
+import Footer from "./Footer";
 import Header from "./Header";
+import Login from "./Login";
 import React from "react";
 import ReactDOM from "react-dom";
 import StyleDataProvider from "./StyleDataProvider";
@@ -13,18 +16,22 @@ import {
 
 const App = () => (
   <div>
-	  <BrowserRouter>
-	    <Switch>
-	      <Route path="/welcome" exact component={Welcome} />
-	      { process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} /> }
-	      <Redirect to="/welcome" />
-	    </Switch>
-	  </BrowserRouter>
+    <Header />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/welcome" exact component={Welcome} />
+        <Route path="/doc/:topic" component={Doc} />
+        {process.env.PROD_ENV == "DEV" && <Route path="/login" component={Login} />}
+        {process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} />}
+        <Redirect to="/welcome" />
+      </Switch>
+    </BrowserRouter>
+    <Footer />
   </div>
 );
 
-const StylePage = ({match}) => (
-  <StyleDataProvider endpoint={"/api/styles/" + match.params.id +"/?format=json"} render={style => <Style style={style} />} />
+const StylePage = ({ match }) => (
+  <StyleDataProvider endpoint={"/api/styles/" + match.params.id + "/?format=json"} render={style => <Style style={style} />} />
   // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
 );
 
