@@ -8,10 +8,6 @@ class Style(models.Model):
 	description = models.CharField(max_length=1000, default='')
 	publisher = models.ForeignKey(User, related_name='style', on_delete=models.CASCADE)
 	publish_date = models.CharField(max_length=200, default='')
-
-	@property
-	def style_images(self):
-		return self.style_image_set.all()
 	
 	def __str__(self):
 		return "%s" % self.title
@@ -19,10 +15,6 @@ class Style(models.Model):
 class StyleImage(models.Model):
 	style = models.ForeignKey(Style, related_name='style_image', on_delete=models.CASCADE)
 	image = models.ImageField()
-
-	@property
-	def annotation(self):
-		return self.style_image_annotations_set.all()
 	
 	def __str__(self):
 		return "%s" % self.id
