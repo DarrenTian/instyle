@@ -4,7 +4,7 @@ from rest_framework import serializers
 class StyleImageAnnotationSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = StyleImageAnnotation
-		fields = ['url', 'image_url', 'coor_x', 'coor_y']
+		fields = ['url', 'image_url', 'coor_x', 'coor_y', 'title', 'price']
 
 class StyleSerializer(serializers.ModelSerializer):
 	publisher = serializers.CharField(source='publisher.username')

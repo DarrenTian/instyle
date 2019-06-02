@@ -59,6 +59,17 @@
   },
   {
     "model": "style.styleimageannotation",
+    "pk": 7,
+    "fields": {
+      "style": 1,
+      "url": "https://www.lescoyotesdeparis.com/default/shop-women/coats-jackets/irina-jacket-black-women",
+      "image_url": "https://res-3.cloudinary.com/ssenseweb/image/upload/b_white/c_scale,h_820/f_auto,dpr_1.0/182553F046006_1.jpg",
+      "coor_x": 50.0,
+      "coor_y": 70.0
+    }
+  },
+  {
+    "model": "style.styleimageannotation",
     "pk": 3,
     "fields": {
       "style": 2,
