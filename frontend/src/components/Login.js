@@ -39,6 +39,10 @@ class Login extends React.Component {
 	}
 
 	render() {
+		const signUpStyle = {
+			display: "flex",
+			justifyContent: "center",
+		}
 		return (
 			<div>
 				<section class="hero is-halfheight">
@@ -65,7 +69,14 @@ class Login extends React.Component {
 				                </span>
 				              </div>
 				            </div>
-				            <input type="submit" class="button is-outlined is-fullwidth" />
+				            <div class="field">
+				            	<input type="submit" value="Login" class="button is-outlined is-fullwidth" />
+				            </div>
+				            <div class="field is-fullwidth" style={signUpStyle}>
+				            	<div>
+				    				<p>No account yet? <a href="/signUp">Sign up to be an eastyler.</a></p>
+				    			</div>
+				            </div>
 				          </form>
 				        </div>
 				      </div>
