@@ -24,6 +24,8 @@ router = routers.DefaultRouter()
 if settings.PROD_ENV == "DEV":
     # Retrieve Style:       GET  /api/styles/$id/?format=json                   
     router.register(r'styles', style.views.StyleViewSet)
+    router.register(r'style_images', style.views.StyleImageViewSet)
+    router.register(r'styles_image_annotations', style.views.StyleImageAnnotationViewSet)
     # Register User:        POST /api/users/create_user/?format=json 
     # Login User:           POST /api/users/obtain_auth_token/?format=json
     router.register(r'users', user.views.UserViewSet)
