@@ -6,6 +6,7 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import React from "react";
 import ReactDOM from "react-dom";
+import Signup from "./Signup";
 import StyleDataProvider from "./StyleDataProvider";
 import Style from "./Style";
 import Welcome from "./Welcome";
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/welcome" exact component={Welcome} />
         <Route path="/doc/:topic" component={Doc} />
         {process.env.PROD_ENV == "DEV" && <Route path="/login" component={Login} />}
+        {process.env.PROD_ENV == "DEV" && <Route path="/signup" component={Signup} />}
         {process.env.PROD_ENV == "DEV" && <PrivateRoute path="/console" component={Console} />}
         {process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} />}
         <Redirect to="/welcome" />

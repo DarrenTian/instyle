@@ -1,13 +1,14 @@
 import React from "react";
 import { withRouter } from 'react-router';
 
-class Login extends React.Component {
+class Signup extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			username : 'b@b.com',
-			password : 'hello',
+			username : '',
+			displayName : '',
+			password : '',
 		};
 	}
 
@@ -19,7 +20,7 @@ class Login extends React.Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const { username, password} = this.state;
-		fetch('/api/obtain_auth_token/', {
+		fetch('/api/users/create_user/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -27,7 +28,9 @@ class Login extends React.Component {
             },
             body: JSON.stringify({
                 username: username,
+                email: username,
                 password: password,
+                // TODO: make display name work.
             })
         })
         .then(response => response.json())
@@ -50,28 +53,40 @@ class Login extends React.Component {
 				            <div class="field">
 				              <label class="label">Email</label>
 				              <div class="control has-icons-left">
-				                <input type="email" placeholder="Your email address" class="input" name="username" defaultValue="b@b.com" onChange={this.handleChange} required />
+				                <input type="email" placeholder="Your email address" class="input" name="username" onChange={this.handleChange} required />
 				                <span class="icon is-small is-left">
 				                  <i class="fa fa-envelope"></i>
 				                </span>
 				              </div>
 				            </div>
 				            <div class="field">
+				              <label class="label">Username</label>
+				              <div class="control has-icons-left">
+				                <input type="text" placeholder="Pick a display name" class="input" name="displayName" onChange={this.handleChange} required />
+				                <span class="icon is-small is-left">
+				                  <i class="fa fa-user"></i>
+				                </span>
+				              </div>
+				            </div>
+				            <div class="field">
 				              <label class="label">Password</label>
 				              <div class="control has-icons-left">
-				                <input type="password" placeholder="*******" class="input" name="password" defaultValue="hello" onChange={this.handleChange} required />
+				                <input type="password" placeholder="*******" class="input" name="password" onChange={this.handleChange} required />
 				                <span class="icon is-small is-left">
 				                  <i class="fa fa-lock"></i>
 				                </span>
 				              </div>
 				            </div>
 				            <div class="field">
-				            	<input type="submit" value="Login" class="button is-outlined is-fullwidth" />
+				            	<input type="submit" value="Sign Up" class="button is-outlined is-fullwidth" />
 				            </div>
 				            <div class="field is-fullwidth">
-				            	<div class="is-flex-centered">
-				    				<p class="is-size-7">No account yet? <a href="/signup">Sign up</a></p>
-				    			</div>
+			            		<div class="is-flex-centered">				            		
+			            			<p class="is-size-7">By continuing, you agree Eastyler's <a href="/doc/terms">Terms of Service</a></p>
+								</div>
+			    				<div class="is-flex-centered">
+			    					<b><p class="is-size-7">Already an Eastyler? <a href="/login">Log in</a></p></b>
+			    				</div>
 				            </div>
 				          </form>
 				        </div>
@@ -84,4 +99,4 @@ class Login extends React.Component {
 	}
 }
 
-export default withRouter(Login);
+export default withRouter(Signup);

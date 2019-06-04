@@ -40,6 +40,11 @@
 	max-width: 960px;
 }
 
+.is-flex-centered {
+  display: flex;
+  justify-content: center;
+}
+
 .tiles-section-wrapper {
 	position: relative;
 }
