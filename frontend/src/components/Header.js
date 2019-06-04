@@ -40,6 +40,9 @@ class Header extends React.Component {
                         </div>
 
                         <div class="navbar-end">
+                          <a class="navbar-item" href="/welcome">
+                            Home
+                          </a>
                           <a class="navbar-item" href="/doc/about">
                             About
                           </a>
@@ -49,11 +52,12 @@ class Header extends React.Component {
                           <a class="navbar-item" href="/doc/contact">
                             Contact
                           </a>
-                          <div class="navbar-item">
-                              <a class="button is-light" href="/welcome#inviteMe">
-                                Sign up
+                          {process.env.PROD_ENV == "DEV" &&
+                           <div class="navbar-item">
+                              <a class="button is-light" href="/login">
+                                Log in
                               </a>
-                          </div>
+                          </div>}
                         </div>
                     </div>
                 </nav>
