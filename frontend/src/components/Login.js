@@ -33,8 +33,8 @@ class Login extends React.Component {
         .then(response => response.json())
         .then(data => {
         	localStorage.setItem("userAuthToken", data.token);
+        	this.props.loginHandler();
         	this.props.history.push('/console');
-        	console.log(data.token);
         });
 	}
 
