@@ -1,4 +1,5 @@
 import React from "react";
+import { userService } from "../services";
 import { withRouter } from 'react-router';
 
 class Login extends React.Component {
@@ -8,6 +9,7 @@ class Login extends React.Component {
 		this.state = {
 			username : 'b@b.com',
 			password : 'hello',
+			errorMsg : '',
 		};
 	}
 
@@ -19,23 +21,18 @@ class Login extends React.Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const { username, password} = this.state;
-		fetch('/api/obtain_auth_token/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-        	localStorage.setItem("userAuthToken", data.token);
-        	this.props.history.push('/console');
-        	console.log(data.token);
-        });
+	 	userService
+	 		.login(username, password)
+	        .then(data => {
+				localStorage.setItem("userAuthToken", data.token);
+	        	this.props.loginHandler();
+	        	this.props.history.push('/console');
+	        })
+	        .catch(error => {
+		        this.setState({
+		        	errorMsg : error,
+		        });
+		    });
 	}
 
 	render() {
@@ -65,7 +62,17 @@ class Login extends React.Component {
 				                </span>
 				              </div>
 				            </div>
-				            <input type="submit" class="button is-outlined is-fullwidth" />
+				            <div class="field">
+				            	<input type="submit" value="Login" class="button is-outlined is-fullwidth" />
+				            </div>
+				            <div class="field is-flex-centered">
+				            	<p class="is-size-7">{this.state.errorMsg}</p>
+				            </div>
+				            <div class="field is-fullwidth">
+				            	<div class="is-flex-centered">
+				    				<p class="is-size-7">No account yet? <a href="/signup">Sign up</a></p>
+				    			</div>
+				            </div>
 				          </form>
 				        </div>
 				      </div>

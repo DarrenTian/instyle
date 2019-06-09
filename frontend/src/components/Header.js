@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { userService } from "../services";
 import "./styles.scss";
 
 class Header extends React.Component {
@@ -13,10 +14,22 @@ class Header extends React.Component {
         });
     };
 
-    render() {
+    logout = () => {
+        event.preventDefault();
+        userService.logout();
+        window.location.reload();
+    }
+
+    render() {   
         const navBarStyle = {
             boxShadow:"0px 1px 1px lightgray",
         };
+        let loginButton;
+        if (!this.props.isLoggedIn) {
+            loginButton = <a class="button is-light" href="/login">Log in</a>
+        } else {
+            loginButton = <a class="button is-light" href="/welcome" onClick={this.logout}>Log out</a>
+        }
         return (
             <div style={navBarStyle}>
                 <nav className="navbar" role="navigation" aria-label="main navigation" >
@@ -53,10 +66,8 @@ class Header extends React.Component {
                             Contact
                           </a>
                           {process.env.PROD_ENV == "DEV" &&
-                           <div class="navbar-item">
-                              <a class="button is-light" href="/login">
-                                Log in
-                              </a>
+                          <div class="navbar-item">
+                            { loginButton }  
                           </div>}
                         </div>
                     </div>

@@ -6,7 +6,7 @@ class Footer extends React.Component {
         return (
             <footer className="footer">
               <div className="content has-text-centered">
-                <p>
+                <p class="is-size-7">
                     © Copyright 2019 www.eastyler.com - All Rights Reserved
                 </p>
               </div>
