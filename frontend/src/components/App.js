@@ -32,19 +32,21 @@ class App extends React.Component {
 
 	render() {
 		return (
-		  <div>
+		  <div class="main-canvas">
 		    <Header isLoggedIn={ this.state.isLoggedIn }/>
-		    <BrowserRouter>
-		      <Switch>
-		        <Route path="/welcome" exact component={Welcome} />
-		        <Route path="/doc/:topic" component={Doc} />
-		        {process.env.PROD_ENV == "DEV" && <Route path="/login" render={()=><Login loginHandler={this.login} />} />}
-		        {process.env.PROD_ENV == "DEV" && <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />}
-		        {process.env.PROD_ENV == "DEV" && <PrivateRoute path="/console" component={Console} />}
-		        {process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} />}
-		        <Redirect to="/welcome" />
-		      </Switch>
-		    </BrowserRouter>
+		    <div class="canvas-component">
+			    <BrowserRouter>
+			      <Switch>
+			        <Route path="/welcome" exact component={Welcome} />
+			        <Route path="/doc/:topic" component={Doc} />
+			        {process.env.PROD_ENV == "DEV" && <Route path="/login" render={()=><Login loginHandler={this.login} />} />}
+			        {process.env.PROD_ENV == "DEV" && <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />}
+			        {process.env.PROD_ENV == "DEV" && <PrivateRoute path="/console" component={Console} />}
+			        {process.env.PROD_ENV == "DEV" && <Route path="/style/:id" component={StylePage} />}
+			        <Redirect to="/welcome" />
+			      </Switch>
+			    </BrowserRouter>
+		    </div>
 		    <Footer />
 		  </div>
 		)
