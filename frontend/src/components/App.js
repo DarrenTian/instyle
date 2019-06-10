@@ -32,9 +32,9 @@ class App extends React.Component {
 
 	render() {
 		return (
-		  <div class="main-canvas">
+		  <div className="main-canvas">
 		    <Header isLoggedIn={ this.state.isLoggedIn }/>
-		    <div class="canvas-component">
+		    <div className="canvas-component">
 			    <BrowserRouter>
 			      <Switch>
 			        <Route path="/welcome" exact component={Welcome} />

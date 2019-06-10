@@ -8,7 +8,7 @@ class Console extends React.Component {
 
 	render() {
 		return (
-			<div class="console">
+			<div className="console">
 				This is console
 			</div>
 		)

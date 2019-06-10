@@ -26,9 +26,9 @@ class Header extends React.Component {
         };
         let loginButton;
         if (!this.props.isLoggedIn) {
-            loginButton = <a class="button is-light" href="/login">Log in</a>
+            loginButton = <a className="button is-light" href="/login">Log in</a>
         } else {
-            loginButton = <a class="button is-light" href="/welcome" onClick={this.logout}>Log out</a>
+            loginButton = <a className="button is-light" href="/welcome" onClick={this.logout}>Log out</a>
         }
         return (
             <div style={navBarStyle}>
@@ -49,24 +49,24 @@ class Header extends React.Component {
                     </div>
 
                     <div id="navbarMenu" className={`navbar-menu ${this.state.activeMenu ? 'is-active' : ''}`}>
-                        <div class="navbar-start">
+                        <div className="navbar-start">
                         </div>
 
-                        <div class="navbar-end">
-                          <a class="navbar-item" href="/welcome">
+                        <div className="navbar-end">
+                          <a className="navbar-item" href="/welcome">
                             Home
                           </a>
-                          <a class="navbar-item" href="/doc/about">
+                          <a className="navbar-item" href="/doc/about">
                             About
                           </a>
-                          <a class="navbar-item" href="/doc/terms">
+                          <a className="navbar-item" href="/doc/terms">
                             Terms
                           </a>
-                          <a class="navbar-item" href="/doc/contact">
+                          <a className="navbar-item" href="/doc/contact">
                             Contact
                           </a>
                           {process.env.PROD_ENV == "DEV" &&
-                          <div class="navbar-item">
+                          <div className="navbar-item">
                             { loginButton }  
                           </div>}
                         </div>
