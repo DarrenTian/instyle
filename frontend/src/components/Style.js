@@ -8,7 +8,8 @@ const Style = ({ style }) => {
     };
     const timeStyle = {
         fontWeight: "normal",
-        color: "#A9A9A9"
+        color: "#A9A9A9",
+        margin: "0 24px"
     };
     const carouselStyle = {
         overflowY: "hidden",
@@ -21,10 +22,14 @@ const Style = ({ style }) => {
     const titleStyle = {
         overflowX: "initial"
     };
+    const mainStyle = {
+        paddingTop: "20px",
+        backgroundColor: "#F6F6F6"
+    };
 
     return (
-        <div className="columns box">
-            <div className="column is-4">
+        <div className="columns container is-centered is-widescreen" style={mainStyle}>
+            <div className="column is-hidden-tablet is-hidden-desktop">
                 <div className="media">
                     <div className="media-left">
                         <figure className="image is-48x48">
@@ -38,7 +43,7 @@ const Style = ({ style }) => {
                     {/*<a className="button is-pulled-right">+ Follow</a>*/}
                 </div>
             </div>
-            <div className="column is-4">
+            <div className="column is-4 is-offset-1">
                 <img className="is-block container" style={imageStyle} src={style.style_image_url}></img>
                 <div className="container" style={carouselStyle}>
                     {style.style_image_annotations && style.style_image_annotations.map((annotation, key) => {
@@ -76,7 +81,21 @@ const Style = ({ style }) => {
                     })}
                 </div>
             </div>
-            <div className="column">
+            <div className="column is-4">
+                <div className="column is-hidden-mobile">
+                    <div className="media">
+                        <div className="media-left">
+                            <figure className="image is-48x48">
+                                <img src="/static/looks/addict.attitude/avatar.png" alt="Placeholder image"></img>
+                            </figure>
+                        </div>
+                        <div className="media-content" style={titleStyle}>
+                            <p className="title is-5">{style.publisher}</p>
+                            {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+                        </div>
+                        {/*<a className="button is-pulled-right">+ Follow</a>*/}
+                    </div>
+                </div>
                 <div className="container" style={timeStyle}>
                     <time>{style.publish_date}</time>
                     <div className="is-pulled-right">
