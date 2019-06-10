@@ -1,47 +1,75 @@
+@charset "utf-8";
+
+$footer-padding: 1rem 1rem;
+
+@import "./node_modules/bulma/bulma.sass";
+
+.main-canvas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.canvas-component {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.console {
+  background-color: #fafafa;
+  flex: 1;
+}
+
 .navbar {
-	max-width: 960px;
-	margin: auto;
+  max-width: 960px;
+  margin: auto;
 }
 
 .navbar-logo {
-	height: 2.75rem;
-    width: 2.75rem; 
-    margin-top: -0.25rem;
-    margin-bottom: -0.25rem;
-    position: relative;
-    overflow: hidden;
+  height: 2.75rem;
+  width: 2.75rem; 
+  margin-top: -0.25rem;
+  margin-bottom: -0.25rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .vertical-line {
-	background-color: black;
-	margin-left: 5px;
-	width: 1.25px;
-	height: 90%;
+  background-color: black;
+  margin-left: 5px;
+  width: 1.25px;
+  height: 90%;
 }
 
 .navbar-name {
-	margin-left: 6px;
-	font-size: 1.25rem;
+  margin-left: 6px;
+  font-size: 1.25rem;
 }
 
 .navbar-item img {
-	max-height: unset;
-	max-width: unset;
-    margin: auto;
-    position: absolute; 
-    top: -9999px;
-	left: -9999px;
-	right: -9999px;
-	bottom: -9999px;
-	height: 4.75rem;
+  max-height: unset;
+  max-width: unset;
+  margin: auto;
+  position: absolute; 
+  top: -9999px;
+  left: -9999px;
+  right: -9999px;
+  bottom: -9999px;
+  height: 4.50rem;
 }
 
 .doc-container {
-	max-width: 960px;
+  max-width: 960px;
+}
+
+.is-flex-centered {
+  display: flex;
+  justify-content: center;
 }
 
 .tiles-section-wrapper {
-	position: relative;
+  position: relative;
 }
 
 .tiles-section {
