@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 
     # Style
     'style',
-    'account',
+    'user',
     'frontend',
     'invitation',
 ]
@@ -151,7 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Substitute with custom user model
 # https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'user.User'
 
 LOGGING = {
     'version': 1,

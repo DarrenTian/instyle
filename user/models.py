@@ -38,15 +38,15 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
-	# Override the inherited user fields
-	username = None
-	email = models.EmailField(_('email address'), unique=True,
+    # Override the inherited user fields
+    username = None
+    email = models.EmailField('email address', unique=True,
         error_messages={
-            'unique': _("This email address has already been registered."),
+            'unique': "This email address has already been registered.",
         })
-	# Additional fields
-	nickname = models.CharField(max_length=30)
-    biography = models.TextField(max_length=500, blank=True)
+    # Additional fields
+    nickname = models.CharField(max_length=30)
+    biography = models.TextField(max_length=500, default='')
     location = models.CharField(max_length=30, blank=True)
     profile_image_url = models.URLField(max_length=200, default='')
 

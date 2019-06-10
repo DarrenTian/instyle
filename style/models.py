@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.conf import settings
 """
 style {
 	style_image_url: 'instyle.com/1.png'
@@ -32,7 +31,7 @@ class Style(models.Model):
 
 	tags = models.CharField(max_length=200, default='')
 
-	publisher = models.ForeignKey(User, related_name='styles', on_delete=models.CASCADE)
+	publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='styles', on_delete=models.CASCADE)
 	publish_date = models.CharField(max_length=200, default='')
 
 	def __str__(self):
