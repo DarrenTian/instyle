@@ -26,6 +26,7 @@ if settings.PROD_ENV == "DEV":
     router.register(r'styles', style.views.StyleViewSet)
     router.register(r'style_images', style.views.StyleImageViewSet)
     router.register(r'styles_image_annotations', style.views.StyleImageAnnotationViewSet)
+    #router.register(r'styles/user/<str:name>/', style.views.LookupStyleByUserViewSet)
     # Register User:        POST /api/users/create_user/?format=json 
     # Login User:           POST /api/users/obtain_auth_token/?format=json
     router.register(r'users', user.views.UserViewSet)
@@ -37,6 +38,7 @@ router.register(r'invitation', invitation.views.InvitationViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = []    
 urlpatterns.append(url(r'^api/', include(router.urls)))
+urlpatterns.append(url(r'^api/styles/user/<str:name>/', style.views.LookupStyleByUserViewSet))
 
 # Put all To-Be-Developed API under DEV
 if settings.PROD_ENV == "DEV":

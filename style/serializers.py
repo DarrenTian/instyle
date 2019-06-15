@@ -28,3 +28,4 @@ class StyleSerializer(serializers.ModelSerializer):
 			'publish_date',
 			'style_images',
 		]
+		depth = 2
