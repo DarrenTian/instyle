@@ -26,6 +26,7 @@ const Style = ({ style }) => {
     }
 
     return (
+        <div>
         <div className="section columns is-centered">
             <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
                 <div className="column is-hidden-tablet is-hidden-desktop">
@@ -123,6 +124,8 @@ const Style = ({ style }) => {
                     </div>
                 </div>
             </div>
+        </div>
+        <div><pre>{JSON.stringify(style, null, 2)}</pre></div>
         </div>
     );
 };
