@@ -33,7 +33,7 @@ const Style = ({ style }) => {
                 <div className="media">
                     <div className="media-left">
                         <figure className="image is-48x48">
-                            <img src="/static/looks/addict.attitude/avatar.png" alt="Placeholder image"></img>
+                            <img src="/static/avatar.png" alt="Placeholder image"></img>
                         </figure>
                     </div>
                     <div className="media-content" style={titleStyle}>
@@ -44,9 +44,9 @@ const Style = ({ style }) => {
                 </div>
             </div>
             <div className="column is-4 is-offset-1">
-                <img className="is-block container" style={imageStyle} src={style.style_image_url}></img>
+                <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
                 <div className="container" style={carouselStyle}>
-                    {style.style_image_annotations && style.style_image_annotations.map((annotation, key) => {
+                    {style.style_images && style.style_images[0].style_image_annotations.map((annotation, key) => {
                         const itemStyle = {
                             width: "150px",
                             borderRadius: "10px",
@@ -86,7 +86,7 @@ const Style = ({ style }) => {
                     <div className="media">
                         <div className="media-left">
                             <figure className="image is-48x48">
-                                <img src="/static/looks/addict.attitude/avatar.png" alt="Placeholder image"></img>
+                                <img src="/static/avatar.png" alt="Placeholder image"></img>
                             </figure>
                         </div>
                         <div className="media-content" style={titleStyle}>

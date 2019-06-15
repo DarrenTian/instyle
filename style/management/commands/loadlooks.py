@@ -88,7 +88,7 @@ class Command(BaseCommand):
 
         style_image = StyleImage()
         style_image.style = style
-        style_image.image.save(row[self.indicies['image_file_name']], File(open('/tmp/' + row[self.indicies['image_file_name']], 'rb')))
+        style_image.image.save(row[self.indicies['image_file_name']], File(open('./looks/' + row[self.indicies['image_file_name']], 'rb')))
         style_image.save()
         print style_image
 
