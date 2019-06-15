@@ -10,12 +10,12 @@ const Welcome = () => {
                 <div className="overlay"></div>
                 <section className="section tiles-section">
                         <div className="tiles-vertical-columns">
-                            <ImageTile source={"./static/looks/fangzheng/1.jpg"}/>
-                            <ImageTile source={"./static/looks/addict.attitude/1.jpg"}/>
-                            <ImageTile source={"./static/looks/addict.attitude/2.jpg"}/>    
-                            <ImageTile source={"./static/looks/fangzheng/2.jpg"}/>
-                            <ImageTile source={"./static/looks/addict.attitude/7.jpg"}/>
-                            <ImageTile source={"./static/looks/addict.attitude/8.jpg"}/>
+                            <ImageTile source={"./media/fangzheng/1.jpg"}/>
+                            <ImageTile source={"./media/addict.attitude/1.jpg"}/>
+                            <ImageTile source={"./media/addict.attitude/2.jpg"}/>    
+                            <ImageTile source={"./media/fangzheng/2.jpg"}/>
+                            <ImageTile source={"./media/addict.attitude/7.jpg"}/>
+                            <ImageTile source={"./media/addict.attitude/8.jpg"}/>
                         </div>
                 </section>
             </div>

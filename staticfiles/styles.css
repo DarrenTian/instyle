@@ -6923,7 +6923,7 @@ label.panel-block {
       padding: 18rem 1.5rem; } }
 
 .footer {
-  background-color: #fafafa;
+  background-color: white;
   padding: 1rem 1rem; }
 
 .main-canvas {
@@ -6937,7 +6937,6 @@ label.panel-block {
   flex-direction: column; }
 
 .console {
-  background-color: #fafafa;
   flex: 1; }
 
 .navbar {
@@ -6952,6 +6951,15 @@ label.panel-block {
   position: relative;
   overflow: hidden; }
 
+.header-figure {
+  display: flex; }
+
+.header-figure img {
+  max-height: unset;
+  height: 2.25rem;
+  border-radius: 50%;
+  margin-right: 10px; }
+
 .vertical-line {
   background-color: black;
   margin-left: 5px;
@@ -6962,7 +6970,7 @@ label.panel-block {
   margin-left: 6px;
   font-size: 1.25rem; }
 
-.navbar-item img {
+.navbar-logo img {
   max-height: unset;
   max-width: unset;
   margin: auto;
@@ -6972,6 +6980,9 @@ label.panel-block {
   right: -9999px;
   bottom: -9999px;
   height: 4.50rem; }
+
+.navbar-dropdown {
+  z-index: 9999; }
 
 .doc-container {
   max-width: 960px; }
@@ -6999,7 +7010,7 @@ label.panel-block {
   display: block;
   width: 100%;
   height: 100%;
-  z-index: 999;
+  z-index: 1;
   cursor: pointer;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), white); }
 

@@ -55,7 +55,7 @@ class App extends React.Component {
 
 const StylePage = ({ match }) => (
   <StyleDataProvider endpoint={"/api/styles/" + match.params.id + "/?format=json"} render={style => <Style style={style} />} />
-  // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
+   // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
 );
 
 const wrapper = document.getElementById("instyle-spa");

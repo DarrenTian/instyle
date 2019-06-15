@@ -22,14 +22,51 @@ class Header extends React.Component {
 
     render() {   
         const navBarStyle = {
-            boxShadow:"0px 1px 1px lightgray",
+            boxShadow:"0px 1px 1px #e6e6e6",
         };
-        let loginButton;
+        let navEnd;
         if (!this.props.isLoggedIn) {
-            loginButton = <a className="button is-light" href="/login">Log in</a>
+            navEnd = <div class="navbar-end">
+              <a class="navbar-item" href="/welcome">
+                Home
+              </a>
+              <a class="navbar-item" href="/doc/about">
+                About
+              </a>
+              <a class="navbar-item" href="/doc/terms">
+                Terms
+              </a>
+              <a class="navbar-item" href="/doc/contact">
+                Contact
+              </a>
+              {process.env.PROD_ENV == "DEV" &&
+              <div class="navbar-item">
+                <a class="button is-light" href="/login">Log in</a>
+              </div>}
+            </div>
         } else {
-            loginButton = <a className="button is-light" href="/welcome" onClick={this.logout}>Log out</a>
+            navEnd = <div class="navbar-end">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link header-figure is-arrowless">
+                  <img src="/static/avatar.png" />
+                  <p>addict.attitude</p>
+                </a>
+                <div class="navbar-dropdown">
+                 <a class="navbar-item" href="/welcome">
+                    Home
+                  </a>
+                  <a class="navbar-item" href="/console">
+                    Console
+                  </a>
+                  <hr class="navbar-divider"/>
+                  <a class="navbar-item" href="/welcome" onClick={this.logout}>
+                    Log out
+                  </a>
+                </div>
+              </div>
+            </div>
         }
+
         return (
             <div style={navBarStyle}>
                 <nav className="navbar" role="navigation" aria-label="main navigation" >
@@ -49,27 +86,7 @@ class Header extends React.Component {
                     </div>
 
                     <div id="navbarMenu" className={`navbar-menu ${this.state.activeMenu ? 'is-active' : ''}`}>
-                        <div className="navbar-start">
-                        </div>
-
-                        <div className="navbar-end">
-                          <a className="navbar-item" href="/welcome">
-                            Home
-                          </a>
-                          <a className="navbar-item" href="/doc/about">
-                            About
-                          </a>
-                          <a className="navbar-item" href="/doc/terms">
-                            Terms
-                          </a>
-                          <a className="navbar-item" href="/doc/contact">
-                            Contact
-                          </a>
-                          {process.env.PROD_ENV == "DEV" &&
-                          <div className="navbar-item">
-                            { loginButton }  
-                          </div>}
-                        </div>
+                        {navEnd}
                     </div>
                 </nav>
             </div>
