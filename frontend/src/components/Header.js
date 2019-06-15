@@ -86,8 +86,6 @@ class Header extends React.Component {
                     </div>
 
                     <div id="navbarMenu" className={`navbar-menu ${this.state.activeMenu ? 'is-active' : ''}`}>
-                        <div class="navbar-start">
-                        </div>
                         {navEnd}
                     </div>
                 </nav>
