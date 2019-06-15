@@ -37,7 +37,7 @@ const Style = ({ style }) => {
                             </figure>
                         </div>
                         <div className="media-content" style={titleStyle}>
-                            <p className="title is-5">{style.publisher}</p>
+                            <p className="title is-5">{style.publisher.username}</p>
                             {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
                         </div>
                         {/*<a className="button is-pulled-right">+ Follow</a>*/}
@@ -97,7 +97,7 @@ const Style = ({ style }) => {
                                     </figure>
                                 </div>
                                 <div className="media-content" style={titleStyle}>
-                                    <p className="title is-5">{style.publisher}</p>
+                                    <p className="title is-5">{style.publisher.username}</p>
                                     {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
                                 </div>
                                 {/*<a className="button is-pulled-right">+ Follow</a>*/}
