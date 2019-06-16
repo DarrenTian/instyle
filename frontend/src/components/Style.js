@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import SocialPlugin from "./SocialPlugin";
 
 const Style = ({ style }) => {
     const imageStyle = {
@@ -22,9 +23,13 @@ const Style = ({ style }) => {
         overflowX: "initial"
     };
     const lookContainerStyle = {
-        maxWidth: "960px"
+        maxWidth: "960px",
     }
-
+    const socialPluginStyle = {
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "10px 10px 10px 10px",
+    }
     return (
         <div>
         <div className="section columns is-centered">
@@ -81,10 +86,9 @@ const Style = ({ style }) => {
                                 );
                             })}
                         </div>
-                        <div><a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a> </div>
-                        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-                        <div><a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
-                        <button class="btn" data-clipboard-text="copied link">Copy to clipboard</button>
+                        <div className="" style={socialPluginStyle}>
+                            <SocialPlugin />
+                        </div>
                     </div>
                 </div>
                 <div className="column is-4">
