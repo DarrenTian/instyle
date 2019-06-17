@@ -1,4 +1,5 @@
 import React from "react";
+import ProductCarousel from "./ProductCarousel"
 import PropTypes from "prop-types";
 import SocialPlugin from "./SocialPlugin";
 
@@ -52,39 +53,7 @@ const Style = ({ style }) => {
                     <div className="card">
                         <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
                         <div className="container" style={carouselStyle}>
-                            {style.style_images && style.style_images[0].style_image_annotations.map((annotation, key) => {
-                                const itemStyle = {
-                                    width: "150px",
-                                    borderRadius: "10px",
-                                    backgroundColor: "#F8F8F8",
-                                    display: "inline-block",
-                                    margin: "20px 8px 0 0",
-                                    padding: "8px"
-                                };
-                                const titleStyle = {
-                                    width: "66px",
-                                    textOverflow: "ellipsis",
-                                    whiteSpace: "nowrap",
-                                    overflow: "hidden"
-                                }
-                                return (
-                                    <a key={key} style={itemStyle} href={annotation.url}>
-                                        <div className="media" >
-                                            {/*
-                                            <div className="media-left">
-                                                <figure className="image is-48x48">
-                                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
-                                                </figure>
-                                            </div>
-                                            */}
-                                            <div className="media-content">
-                                                <p className="title is-6" style={titleStyle}>{annotation.title}</p>
-                                                <p className="subtitle is-6">{annotation.price}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                );
-                            })}
+                            <ProductCarousel style={style}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
                             <SocialPlugin />
