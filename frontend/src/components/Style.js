@@ -6,22 +6,15 @@ import SocialPlugin from "./SocialPlugin";
 const Style = ({ style }) => {
     const imageStyle = {
         width: "100%",
-        borderRadius: "5px"
+        borderRadius: "5px",
     };
     const timeStyle = {
         fontWeight: "normal",
         color: "#A9A9A9",
-        margin: "0 24px"
-    };
-    const carouselStyle = {
-        overflowY: "hidden",
-        width: "100%",
-        position: "relative",
-        whiteSpace: "nowrap",
-        overflowX: "auto",
+        margin: "0 24px",
     };
     const titleStyle = {
-        overflowX: "initial"
+        overflowX: "initial",
     };
     const lookContainerStyle = {
         maxWidth: "960px",
@@ -30,6 +23,12 @@ const Style = ({ style }) => {
         display: "flex",
         justifyContent: "flex-end",
         padding: "10px 10px 10px 10px",
+    }
+    const productCarouselStyle = {
+        padding: "10px 10px 10px 10px",
+    }
+    const lookCardStyle = {
+        borderRadius: "5px",
     }
     return (
         <div>
@@ -50,9 +49,9 @@ const Style = ({ style }) => {
                     </div>
                 </div>
                 <div className="column is-6">
-                    <div className="card">
+                    <div className="card" style={lookCardStyle}>
                         <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
-                        <div className="container" style={carouselStyle}>
+                        <div style={productCarouselStyle}>
                             <ProductCarousel style={style}/>
                         </div>
                         <div className="" style={socialPluginStyle}>

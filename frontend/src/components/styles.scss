@@ -4,6 +4,8 @@ $footer-padding: 1rem 1rem;
 $footer-background-color: white;
 
 @import "./node_modules/bulma/bulma.sass";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 .main-canvas {
   display: flex;
