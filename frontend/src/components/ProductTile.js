@@ -19,6 +19,12 @@ class ProductTile extends React.Component {
             overflow: "hidden",
             width: "120px",
         }
+        const priceStyle = {
+        	textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            width: "120px",
+        }
         const imageStyle = {
         	height: "70px",
         	borderRadius: "5px",
@@ -40,7 +46,7 @@ class ProductTile extends React.Component {
                         </div>
                         <div className="media-content" style={contentStyle}>
                             <p className="title is-6" style={titleStyle}>{product.title}</p>
-                            <p className="subtitle is-6">{product.price}</p>
+                            <p className="subtitle is-6" style={priceStyle}>{product.price}</p>
                         </div>
                     </div>
                 </a>
