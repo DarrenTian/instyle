@@ -11,10 +11,13 @@ const Style = ({ style }) => {
     const timeStyle = {
         fontWeight: "normal",
         color: "#A9A9A9",
-        margin: "0 24px",
+        display: "flex",
+        justifyContent: "flex-end",
+
     };
     const titleStyle = {
         overflowX: "initial",
+        alignSelf: "center",
     };
     const lookContainerStyle = {
         maxWidth: "960px",
@@ -29,6 +32,10 @@ const Style = ({ style }) => {
     }
     const lookCardStyle = {
         borderRadius: "5px",
+    }
+    const publisherCardStyle = {
+        borderRadius: "5px",
+        padding: "15px 15px 15px 15px",
     }
     return (
         <div>
@@ -60,12 +67,12 @@ const Style = ({ style }) => {
                     </div>
                 </div>
                 <div className="column is-4">
-                    <div className="card">
-                        <div className="column is-hidden-mobile">
+                    <div className="card" style={publisherCardStyle}>
+                        <div className="is-hidden-mobile">
                             <div className="media">
                                 <div className="media-left">
                                     <figure className="image is-48x48">
-                                        <img src="/static/avatar.png" alt="Placeholder image"></img>
+                                        <img className="is-rounded" src="/static/avatar.png" alt="Placeholder image"></img>
                                     </figure>
                                 </div>
                                 <div className="media-content" style={titleStyle}>
@@ -75,23 +82,14 @@ const Style = ({ style }) => {
                                 {/*<a className="button is-pulled-right">+ Follow</a>*/}
                             </div>
                         </div>
-                        <div className="container" style={timeStyle}>
-                            <time>{style.publish_date}</time>
-                            <div className="is-pulled-right">
-                                {/*
-                                <span className="icon ">
-                                    <i className="fas fa-heart"></i>
-                                </span>
-                                */}
-                                <span className="icon">
-                                    <i className="fas fa-share"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div className="card-content">
-                            <div className="content">
+                        <hr></hr>
+                        <div>
+                            <div>
                                 {style.description}
                             </div>
+                        </div>
+                         <div style={timeStyle}>
+                            <div>{style.publish_date}</div>
                         </div>
                     </div>
                 </div>

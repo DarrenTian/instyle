@@ -13,11 +13,14 @@ class ProductTile extends React.Component {
             height: "70px",
             marginRight: "10px",
         };
+        const mediaBoxStyle = {
+        	width: "100%",
+        }
         const titleStyle = {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             overflow: "hidden",
-            width: "120px",
+            width: "100%",
         }
         const priceStyle = {
         	textOverflow: "ellipsis",
@@ -34,16 +37,20 @@ class ProductTile extends React.Component {
         	display: "flex",
         	flexDirection: "column",
         	justifyContent: "space-between",
-        	padding: "10px 0 10px 0",
+        	padding: "10px 10px 10px 10px",
+        	width:"100%"
         }
-        const product = this.props.product
+        const product = this.props.product;
+        const hasImage = this.props.product.image_url == "";
 		return (
 			<div style={itemStyle}>
                 <a href={product.url}>
-                    <div className="media" >
-                        <div className="media-left" >
+                    <div className="media" style={mediaBoxStyle}>
+                    	{// TODO: Dynamic render when we have image
+                    	/*                        <div className="media-left" >
                             <img style={imageStyle} src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
-                        </div>
+                        </div>*/}
+
                         <div className="media-content" style={contentStyle}>
                             <p className="title is-6" style={titleStyle}>{product.title}</p>
                             <p className="subtitle is-6" style={priceStyle}>{product.price}</p>
