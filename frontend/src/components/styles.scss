@@ -102,6 +102,13 @@ $footer-background-color: white;
     column-gap: 1em;
 }
 
+@media only screen and (min-width: 600px) {
+  .tiles-vertical-columns {
+    column-count: 3;
+    column-gap: 1em;
+  }
+}
+
 .overlay {
   position: absolute;
   display: block;
@@ -112,9 +119,4 @@ $footer-background-color: white;
   background-image:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0), rgba(255,255,255,1));
 }
 
-@media only screen and (min-width: 600px) {
-  .tiles-vertical-columns {
-    column-count: 3;
-    column-gap: 1em;
-  }
-}
+

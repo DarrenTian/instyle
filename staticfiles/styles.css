@@ -7328,6 +7328,11 @@ label.panel-block {
   column-count: 2;
   column-gap: 1em; }
 
+@media only screen and (min-width: 600px) {
+  .tiles-vertical-columns {
+    column-count: 3;
+    column-gap: 1em; } }
+
 .overlay {
   position: absolute;
   display: block;
@@ -7336,8 +7341,3 @@ label.panel-block {
   z-index: 1;
   cursor: pointer;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), white); }
-
-@media only screen and (min-width: 600px) {
-  .tiles-vertical-columns {
-    column-count: 3;
-    column-gap: 1em; } }
