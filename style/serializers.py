@@ -26,7 +26,7 @@ class StyleSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Style
 		fields = [
-			'url', 
+			# 'url', Cause issue without request context 
 			'title',
 			'credit',
 			'credit_link',

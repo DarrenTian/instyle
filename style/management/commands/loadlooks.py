@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from style.models import Style, StyleImage, StyleImageAnnotation
 import csv
 from django.core.files import File
+from django.contrib.auth.hashers import make_password
 
 class Command(BaseCommand):
     help = '''A command line tool to load looks from spreadsheets to database: "python manage.py loadlooks".
@@ -47,7 +48,7 @@ class Command(BaseCommand):
         try:
             user = User.objects.get(username=name)
         except ObjectDoesNotExist:
-            user = User(username=name)
+            user = User(username=name, password=make_password('test'))
             user.save()
         return user
 

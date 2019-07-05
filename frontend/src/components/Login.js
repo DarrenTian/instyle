@@ -47,7 +47,7 @@ class Login extends React.Component {
 				            <div class="field">
 				              <label class="label">Email</label>
 				              <div class="control has-icons-left">
-				                <input type="email" placeholder="Your email address" class="input" name="username" defaultValue="b@b.com" onChange={this.handleChange} required />
+				                <input type="text" placeholder="Your email address" class="input" name="username" defaultValue="b@b.com" onChange={this.handleChange} required />
 				                <span class="icon is-small is-left">
 				                  <i class="fa fa-envelope"></i>
 				                </span>
