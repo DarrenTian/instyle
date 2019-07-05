@@ -1,7 +1,8 @@
 import { userService } from './userService'
 
 export const styleService = {
-	getMyStyles
+	getMyStyles,
+	createMyStyle,
 };
 
 function getMyStyles() {
@@ -14,4 +15,12 @@ function getMyStyles() {
                 'Authorization': 'Token '+ userService.getToken(),
             },
         })
+		.then(response => {
+			return response.json();
+		});
+}
+
+function createMyStyle() {
+	// Create a new style with empty content
+	return Promise.resolve('42');
 }

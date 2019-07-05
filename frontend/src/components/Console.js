@@ -12,16 +12,24 @@ class Console extends React.Component {
 		};
 	}
 
+	createLook = () =>  {
+		styleService.createMyStyle()
+			.then(lookId => {
+				this.props.history.push('/style/'+lookId);
+			})
+			.catch((e) => {
+				console.log("cannot create new style:" + e);
+			})
+		console.log("create look");
+	}
+
 	componentDidMount() {
 	    styleService.getMyStyles()
-	      .then(response => {
-	      	return response.json();
-	      })
 	      .then(looks => {
 	      	this.setState({looks:looks});
 	      })
 	      .catch((e)=>{
-	      	console.log("error retrieving my looks" + e);
+	      	console.log("error retrieving my looks:" + e);
 	      })
 	  }
 
@@ -58,7 +66,7 @@ class Console extends React.Component {
 		return (
 				<div className="console" style={consoleStyle} >
 				    <MediaQuery query="(min-width: 769px)">
-				    	<button className="button is-hidden-mobile" style={newLookStyle}>
+				    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
 							Create New Look
 						</button>
 						<div className="columns is-mobile" style={looksStyle}>

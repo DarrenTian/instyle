@@ -24,8 +24,9 @@ class Login extends React.Component {
 	 	userService
 	 		.login(username, password)
 	        .then(data => {
-				localStorage.setItem("userAuthToken", data.token);
+	        	// When success, loginHandler updates the whole app's state
 	        	this.props.loginHandler();
+	        	// And redirect to console page
 	        	this.props.history.push('/console');
 	        })
 	        .catch(error => {

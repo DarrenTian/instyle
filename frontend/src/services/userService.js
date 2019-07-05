@@ -17,6 +17,7 @@ function handleResponse(response) {
 	return response.json().then(
 		data => {
 			if (response.ok) {
+				localStorage.setItem("userAuthToken", data.token);
 				return data;
 			} else {
 				const error = Object.values(data)[0][0] || response.statusText;
