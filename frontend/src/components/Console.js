@@ -15,7 +15,7 @@ class Console extends React.Component {
 	createLook = () =>  {
 		styleService.createMyStyle()
 			.then(lookId => {
-				this.props.history.push('/style/'+lookId);
+				this.props.history.push('/style/'+lookId + '/edit');
 			})
 			.catch((e) => {
 				console.log("cannot create new style:" + e);

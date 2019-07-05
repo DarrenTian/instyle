@@ -20,10 +20,10 @@ class SocialPlugin extends React.Component {
 
 		return (
 			<div className="is-flex" style={socialPluginStyle}>
-				<div style={shareStyle}><button style={linkStyle} class="btn button" data-clipboard-text="copied link"><i class="fas fa-link"></i>Share</button></div>
+				<div style={shareStyle}><button style={linkStyle} className="btn button" data-clipboard-text="copied link"><i className="fas fa-link"></i>Share</button></div>
 		        <div style={shareStyle}><a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a></div>
-		        <div style={shareStyle} class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-		        <div><a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
+		        <div style={shareStyle} className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
+		        <div><a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
             </div>
 		)
 	}

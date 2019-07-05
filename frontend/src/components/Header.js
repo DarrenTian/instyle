@@ -26,40 +26,40 @@ class Header extends React.Component {
         };
         let navEnd;
         if (!this.props.isLoggedIn) {
-            navEnd = <div class="navbar-end">
-              <a class="navbar-item" href="/welcome">
+            navEnd = <div className="navbar-end">
+              <a className="navbar-item" href="/welcome">
                 Home
               </a>
-              <a class="navbar-item" href="/doc/about">
+              <a className="navbar-item" href="/doc/about">
                 About
               </a>
-              <a class="navbar-item" href="/doc/terms">
+              <a className="navbar-item" href="/doc/terms">
                 Terms
               </a>
-              <a class="navbar-item" href="/doc/contact">
+              <a className="navbar-item" href="/doc/contact">
                 Contact
               </a>
               {process.env.PROD_ENV == "DEV" &&
-              <div class="navbar-item">
-                <a class="button is-light" href="/login">Log in</a>
+              <div className="navbar-item">
+                <a className="button is-light" href="/login">Log in</a>
               </div>}
             </div>
         } else {
-            navEnd = <div class="navbar-end">
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link header-figure is-arrowless">
+            navEnd = <div className="navbar-end">
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link header-figure is-arrowless">
                   <img src="/static/avatar.png" />
                   <p>addict.attitude</p>
                 </a>
-                <div class="navbar-dropdown">
-                 <a class="navbar-item" href="/welcome">
+                <div className="navbar-dropdown">
+                 <a className="navbar-item" href="/welcome">
                     Home
                   </a>
-                  <a class="navbar-item" href="/console">
+                  <a className="navbar-item" href="/console">
                     Console
                   </a>
-                  <hr class="navbar-divider"/>
-                  <a class="navbar-item" href="/welcome" onClick={this.logout}>
+                  <hr className="navbar-divider"/>
+                  <a className="navbar-item" href="/welcome" onClick={this.logout}>
                     Log out
                   </a>
                 </div>

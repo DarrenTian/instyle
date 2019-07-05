@@ -3,7 +3,15 @@ import { userService } from './userService'
 export const styleService = {
 	getMyStyles,
 	createMyStyle,
+	getStyle,
 };
+
+function getStyle(styleId) {
+	return fetch("/api/styles/" + styleId + "/?format=json")
+      .then(response => {
+        return response.json();
+      })
+}
 
 function getMyStyles() {
 	return fetch(
