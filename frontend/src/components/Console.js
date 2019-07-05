@@ -1,4 +1,5 @@
 import React from "react";
+import { styleService } from "../services";
 import { withRouter } from 'react-router';
 
 import MediaQuery from 'react-responsive';
@@ -6,7 +7,23 @@ import MediaQuery from 'react-responsive';
 class Console extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			looks : []
+		};
 	}
+
+	componentDidMount() {
+	    styleService.getMyStyles()
+	      .then(response => {
+	      	return response.json();
+	      })
+	      .then(looks => {
+	      	this.setState({looks:looks});
+	      })
+	      .catch((e)=>{
+	      	console.log("error retrieving my looks" + e);
+	      })
+	  }
 
 	render() {
 		const consoleWrapperStyle = {
@@ -38,7 +55,6 @@ class Console extends React.Component {
 		const previewImageStyle = {
 			borderRadius: "5px",
 		}
-		const looks = [1,1,1,1,1,1]
 		return (
 				<div className="console" style={consoleStyle} >
 				    <MediaQuery query="(min-width: 769px)">
@@ -46,10 +62,10 @@ class Console extends React.Component {
 							Create New Look
 						</button>
 						<div className="columns is-mobile" style={looksStyle}>
-							{looks.map((value, index)=>{
+							{this.state.looks.map((look, index)=>{
 								return (
 									<div className="column is-one-quarter" style={lookStyle} key={index}>
-										<img style={previewImageStyle} src="./media/addict.attitude/1.jpg"></img>
+										<a href={'/style/'+look.style_images[0].style}><img style={previewImageStyle} src={look.style_images[0].image}></img></a>
 									</div>
 								)
 							})}
@@ -57,10 +73,10 @@ class Console extends React.Component {
                     </MediaQuery>
                     <MediaQuery query="(max-width: 769px)">
                     	<div className="columns is-mobile is-shadowless" style={looksStyle}>
-							{looks.map((value, index)=>{
+							{this.state.looks.map((look, index)=>{
 								return (
 									<div className="column is-half" style={lookStyle} key={index}>
-										<img style={previewImageStyle} src="./media/addict.attitude/1.jpg"></img>
+										<a href={'/style/'+look.style_images[0].style}><img style={previewImageStyle} src={look.style_images[0].image}></img></a>
 									</div>
 								)
 							})}

@@ -1,4 +1,5 @@
 export const userService = {
+	getToken,
 	isLoggedIn,
 	login,
 	logout,
