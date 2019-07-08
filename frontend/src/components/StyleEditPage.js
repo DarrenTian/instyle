@@ -30,15 +30,41 @@ class StyleEditPage extends Component {
       }
     })
     this.setState(state);
+    this.saveStyle();
+    this.selectTag(state.look.tags.length-1);
+  }
+
+  selectTag = (index) => {
+    const state = { ...this.state };
+    if (index < 0 ) {
+      state.look.selectedTag.hasSelected = false;
+      state.look.selectedTag.index = -1;
+    } else {
+      state.look.selectedTag.hasSelected = true;
+      state.look.selectedTag.index = index;
+    }
+    this.setState(state);
+    console.log("selected tag: " + index);
+  }
+
+  changeDescription = (e) => {
+    const { name, value } = e.target;
+    const state = { ...this.state };
+    state.look.description = value;
+    this.setState(state);
   }
 
   saveStyle = () => {
-    console.log("saving look" + this.state.look);
-  };
+    console.log("saving look")
+    console.log(this.state.look);
+    this.selectTag(-1);
+  }
 
   publishStyle = () => {
-    console.log("publish look" + this.state.look);
-  };
+    console.log("publish look");
+    console.log(this.state.look);
+    this.selectTag(-1);
+  }
 
   componentDidMount() {
     const styleId = this.props.match.params.id;
@@ -104,14 +130,18 @@ class StyleEditPage extends Component {
             </div>
             <div className="column is-7">
               <div>Tag your look:</div> 
+              <div>
               {this.state.look.tags.map((tag, index)=>{
                 return (
-                  <ProductTile product={tag.product} index={index} />
+                  <div key={index} onClick={()=>{this.selectTag(index)}}>
+                    <ProductTile product={tag.product} index={index} islinked={false}/>
+                  </div>
                 )
               })}
+              </div>
               <div className="button" onClick={this.addTag}>Add New Tag</div>
               <div>Describe your look:</div>
-              <input type="text" placeholder="Your email address" className="input" name="username" defaultValue={this.state.look.description} required />
+              <input type="text" placeholder="Your email address" className="input" name="username" defaultValue={this.state.look.description} onChange={this.changeDescription} required />
               <button className="button" onClick={this.saveStyle}>Save as Draft</button>
               <button className="button" onClick={this.publishStyle}>Publish</button>
             </div>

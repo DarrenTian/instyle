@@ -21,7 +21,7 @@ class ProductCarousel extends React.Component {
                  {products && products.map((product, index) => {
                     return (
                     	<div key={index}>
-                    		<ProductTile product={product} index={index} />
+                    		<ProductTile product={product} index={index} isLinked={true} />
                     	</div>
                     );
                 })}

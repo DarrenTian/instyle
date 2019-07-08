@@ -41,10 +41,12 @@ class ProductTile extends React.Component {
         	width:"100%"
         }
         const product = this.props.product;
+        const islinked = this.props.isLinked ? true : false;
+        const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
 		return (
 			<div style={itemStyle}>
-                <a href={product.url}>
+                <a href={linkUrl}>
                     <div className="media" style={mediaBoxStyle}>
                     	{// TODO: Dynamic render when we have image
                     	/*                        <div className="media-left" >

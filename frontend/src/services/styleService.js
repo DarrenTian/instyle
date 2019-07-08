@@ -58,8 +58,13 @@ function createMyStyle() {
 // }
 function styleModelToData(style) {
 	let look = {};
+	look.isPublished = false;
 	look.description = style.description;
 	look.image = style.style_images[0].image;
+	look.selectedTag = {
+		hasSelected: false,
+		index: -1,
+	};
 	look.tags = [];
 	style.style_images[0].style_image_annotations.map(annotation => {
 		let tag = {}
