@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import ProductCarousel from "./ProductCarousel";
+import ProductEditPanel from "./ProductEditPanel";
 import ProductTile from "./ProductTile";
 import { styleService } from "../services";
 
@@ -46,6 +47,26 @@ class StyleEditPage extends Component {
     this.setState(state);
     console.log("selected tag: " + index);
   }
+
+  removeTag = (index) => {
+    const state = { ...this.state };
+    if (state.look.tags[index]) {
+      state.look.tags.splice(index, 1);
+    }
+    this.setState(state);
+
+    this.selectTag(-1);
+  }
+
+  saveTag = (index, product) => {
+    console.log(product);
+    const state = { ...this.state };
+    state.look.tags[index].product = product;
+    this.setState(state);
+
+    this.selectTag(-1);
+  }
+
 
   changeDescription = (e) => {
     const { name, value } = e.target;
@@ -132,6 +153,13 @@ class StyleEditPage extends Component {
               <div>Tag your look:</div> 
               <div>
               {this.state.look.tags.map((tag, index)=>{
+                if (index == this.state.look.selectedTag.index) {
+                return (
+                  <div key={index}>
+                    <ProductEditPanel product={tag.product} remove={()=>{this.removeTag(index)}} save={(product)=>{this.saveTag(index, product)}} cancel={()=>{this.selectTag(-1)}} />
+                  </div>
+                )
+                }
                 return (
                   <div key={index} onClick={()=>{this.selectTag(index)}}>
                     <ProductTile product={tag.product} index={index} islinked={false}/>
