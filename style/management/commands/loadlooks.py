@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth.models import User
 from style.models import Style, StyleImage, StyleImageAnnotation
+from user.models import User
 import csv
 from django.core.files import File
 from django.contrib.auth.hashers import make_password
@@ -18,7 +18,7 @@ class Command(BaseCommand):
               Any number of annotations can be added to an image when added to the same line as image
               A subsequent line with a non-empty-publisher (line 3 in this case) creates new style'''
 
-    file_path = '/Users/yayunt/Downloads/sample_looks.csv'
+    file_path = '/Users/Kenji/Downloads/sample_looks.csv'
 
     # https://docs.google.com/spreadsheets/d/1ScImDJLRqSbd3AjYeK-xqE75mX9oCMOwwUmALjNhal0/edit#gid=0
     indicies = {
@@ -45,10 +45,12 @@ class Command(BaseCommand):
         #parser.add_argument('poll_id', nargs='+', type=int)
 
     def get_user(self, name):
+        # fake email adrress using the username
+        email = name + "@gmail.com"
         try:
-            user = User.objects.get(username=name)
+            user = User.objects.get(email=email)
         except ObjectDoesNotExist:
-            user = User(username=name, password=make_password('test'))
+            user = User(email=email, password=make_password('test'), nickname=name)
             user.save()
         return user
 
