@@ -2,9 +2,25 @@ from django.core.files.storage import FileSystemStorage
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from rest_framework import viewsets
-from style.models import Style
-from style.serializers import StyleSerializer
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from style.models import Style, StyleImage, StyleImageAnnotation
+from style.serializers import StyleSerializer, StyleImageSerializer, StyleImageAnnotationSerializer
+
+class StyleImageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = StyleImage.objects.all().order_by('id')
+    serializer_class = StyleImageSerializer
+
+class StyleImageAnnotationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = StyleImageAnnotation.objects.all().order_by('id')
+    serializer_class = StyleImageAnnotationSerializer
 
 class StyleViewSet(viewsets.ModelViewSet):
     """
@@ -12,6 +28,12 @@ class StyleViewSet(viewsets.ModelViewSet):
     """
     queryset = Style.objects.all().order_by('id')
     serializer_class = StyleSerializer
+
+    @action(detail=False, methods=['post'])
+    def from_user(self, request):
+        user = request.user
+        styles = StyleSerializer(Style.objects.all().filter(publisher=user), many=True)
+        return Response(styles.data, status=status.HTTP_200_OK)
 
 def welcome(request):
 	return render(request, 'style/welcome.html', {})

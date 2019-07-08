@@ -1,99 +1,175 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Style = ({ style }) => {
+import MediaQuery from 'react-responsive';
+import ProductCarousel from "./ProductCarousel"
+import SocialPlugin from "./SocialPlugin";
+
+const UserPreview = ({ user }) => {
+    const titleStyle = {
+        overflowX: "initial",
+        alignSelf: "center",
+    };
+    return (
+        <div className="media">
+            <div className="media-left">
+                <figure className="image is-48x48">
+                    <img className="is-rounded" src="/static/avatar.png" alt="Placeholder image"></img>
+                </figure>
+            </div>
+            <div className="media-content" style={titleStyle}>
+                <p className="title is-5">{user.username}</p>
+                {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+            </div>
+            {/*<a className="button is-pulled-right">+ Follow</a>*/}
+        </div>
+    )
+}
+
+const StyleDesktop = ({style}) => {
     const imageStyle = {
         width: "100%",
-        borderRadius: "10px"
+        borderRadius: "5px",
     };
     const timeStyle = {
         fontWeight: "normal",
-        color: "#A9A9A9"
+        color: "#A9A9A9",
+        display: "flex",
+        justifyContent: "flex-end",
+
     };
-    const carouselStyle = {
-        overflowY: "hidden",
+    const socialPluginStyle = {
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "10px 10px 10px 10px",
+    }
+    const productCarouselStyle = {
+        padding: "10px 10px 10px 10px",
+    }
+    const lookCardStyle = {
+        borderRadius: "5px",
+    }
+    const publisherCardStyle = {
+        borderRadius: "5px",
+        padding: "15px 15px 15px 15px",
+    }
+    return (
+        <React.Fragment>
+            <div className="column is-6">
+                <div className="card" style={lookCardStyle}>
+                    <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
+                    <div style={productCarouselStyle}>
+                        <ProductCarousel style={style}/>
+                    </div>
+                    <div className="" style={socialPluginStyle}>
+                        <SocialPlugin />
+                    </div>
+                </div>
+            </div>
+            <div className="column is-4">
+                <div className="card" style={publisherCardStyle}>
+                    <div>
+                        <UserPreview user={style.publisher}/>
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <div>
+                            {style.description}
+                        </div>
+                    </div>
+                     <div style={timeStyle}>
+                        <div>{style.publish_date}</div>
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+} 
+
+const StyleMobile = ({ style }) => {
+    const imageStyle = {
         width: "100%",
-        position: "relative",
-        whiteSpace: "nowrap",
-        overflowX: "auto",
-        paddingBottom: "20px"
+        borderRadius: "5px",
+    };
+    const timeStyle = {
+        fontWeight: "normal",
+        color: "#A9A9A9",
+        display: "flex",
+        justifyContent: "flex-end",
+
     };
 
+    const socialPluginStyle = {
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "10px 10px 10px 10px",
+    }
+    const productCarouselStyle = {
+        padding: "10px 10px 10px 10px",
+        overflow: "scroll",
+    }
+    const lookCardStyle = {
+        borderRadius: "5px",
+    }
+    const publisherCardStyle = {
+        borderRadius: "5px",
+        padding: "15px 15px 15px 15px",
+    }
     return (
-        <div className="columns box">
-            <div className="column is-hidden-mobile"></div>
-            <div className="column">
-                <div className="media">
-                    <div className="media-left">
-                        <figure className="image is-48x48">
-                            <img src="/static/looks/addict.attitude/avatar.png" alt="Placeholder image"></img>
-                        </figure>
+        <React.Fragment>
+            <div className="column is-6">
+                <div className="card is-shadowless" style={lookCardStyle}>
+                    <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
+                    <div style={productCarouselStyle}>
+                        <ProductCarousel style={style}/>
                     </div>
-                    <div className="media-content">
-                        <p className="title is-5">{style.publisher}</p>
-                        {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
-                    </div>
-                    {/*<a className="button is-pulled-right">+ Follow</a>*/}
-                </div>
-                <br></br>
-                <img className="is-block container" style={imageStyle} src={style.style_image_url}></img>
-                <div className="container" style={carouselStyle}>
-                    {style.style_image_annotations && style.style_image_annotations.map((annotation, key) => {
-                        const itemStyle = {
-                            width: "150px",
-                            borderRadius: "10px",
-                            backgroundColor: "#F8F8F8",
-                            display: "inline-block",
-                            margin: "20px 8px 0 0",
-                            padding: "8px"
-                        };
-                        const titleStyle = {
-                            width: "66px",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden"
-                        }
-                        return (
-                            <a key={key} style={itemStyle} href={annotation.url}>
-                                <div className="media" >
-                                    {/*
-                                    <div className="media-left">
-                                        <figure className="image is-48x48">
-                                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></img>
-                                        </figure>
-                                    </div>
-                                    */}
-                                    <div className="media-content">
-                                        <p className="title is-6" style={titleStyle}>{annotation.title}</p>
-                                        <p className="subtitle is-6">{annotation.price}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        );
-                    })}
-                </div>
-                <div className="container" style={timeStyle}>
-                    <time>{style.publish_date}</time>
-                    <div className="is-pulled-right">
-                        {/*
-                        <span className="icon ">
-                            <i className="fas fa-heart"></i>
-                        </span>
-                        */}
-                        <span className="icon">
-                            <i className="fas fa-share"></i>
-                        </span>
+                    <div className="" style={socialPluginStyle}>
+                        <SocialPlugin />
                     </div>
                 </div>
             </div>
-            <div className="card-content column">
-                <div className="content">
-                    {style.description}
+            <div className="column is-4">
+                <div className="card is-shadowless" style={publisherCardStyle}>
+                    <div className="is-hidden-mobile">
+                        <UserPreview user={style.publisher}/>
+                    </div>
+                    <hr className="is-hidden-mobile"></hr>
+                    <div>
+                        <div>
+                            {style.description}
+                        </div>
+                    </div>
+                     <div style={timeStyle}>
+                        <div>{style.publish_date}</div>
+                    </div>
                 </div>
             </div>
-            <div className="column is-hidden-mobile"></div>
-        </div>
+        </React.Fragment>
     );
+}
+
+const Style = ({ style }) => {
+    const sectionStyle = {
+        padding: "1rem 1rem"
+    }
+    const lookContainerStyle = {
+        maxWidth: "960px",
+    }
+    return (
+        <div>
+            <div className="section columns is-centered is-marginless" style={sectionStyle}>
+                <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
+                    <MediaQuery query="(min-width: 769px)">
+                        <StyleDesktop style={style} />
+                    </MediaQuery>
+                    <MediaQuery query="(max-width: 769px)">
+                        <StyleMobile style={style} />
+                    </MediaQuery>
+                </div>
+            </div>
+            <div><pre>{JSON.stringify(style, null, 2)}</pre></div>
+        </div>
+    )
 };
 Style.propTypes = {
     style: PropTypes.object.isRequired

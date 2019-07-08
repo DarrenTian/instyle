@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { styleService } from "../services";
+
 class StyleDataProvider extends Component {
   static propTypes = {
-    endpoint: PropTypes.string.isRequired,
+    styleId: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired
   };
   state = {
@@ -12,14 +14,12 @@ class StyleDataProvider extends Component {
       placeholder: "Loading..."
     };
   componentDidMount() {
-    fetch(this.props.endpoint)
-      .then(response => {
-        if (response.status !== 200) {
-          return this.setState({ placeholder: "Something went wrong" });
-        }
-        return response.json();
-      })
-      .then(style => this.setState({ style: style, loaded: true }));
+    styleService.getStyle(this.props.styleId)
+      .then(style => this.setState({ style: style, loaded: true }))
+      .catch(e => {
+        console.log(e);
+        this.setState({ placeholder: "Something went wrong" });
+      });
   }
   render() {
     const { style, loaded, placeholder } = this.state;
