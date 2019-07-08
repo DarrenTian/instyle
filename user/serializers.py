@@ -8,7 +8,6 @@ from user.models import User
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 	#{
 	#	"email":"abc@abc.com",
-	#	"username":"abc",
 	#	"password":"test1234"
 	#}
 	def validate_password(self, value):
@@ -17,11 +16,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User
 		fields = [
-		  'username',
 		  'email',
 		  'password',
 		  'date_joined',
 		  'last_login',
+		  # Custom attributes
+		  'nickname',
 		  'biography',
 		  'location',
 		  'profile_image_url',
