@@ -59,13 +59,18 @@ class ProductEditPanel extends React.Component {
         	padding: "10px 10px 10px 10px",
         	width:"100%"
         }
+        const editPanelStyle = {
+            boxShadow: "0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)",
+            padding: "10px",
+            borderRadius: "5px",
+        }
         const product = this.props.product;
         const islinked = this.props.isLinked ? true : false;
         const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
 		return (
 			<div>
-                <div>
+                <div style={editPanelStyle}>
                     <div className="field">
                       <label className="label">Product Title</label>
                       <div className="control">
@@ -84,9 +89,13 @@ class ProductEditPanel extends React.Component {
                         <input type="text" placeholder="" className="input" name="url" defaultValue={this.props.product.url} onChange={this.handleChange} required />
                       </div>
                     </div>
-                    <button className="button" onClick={this.props.remove}>Remove</button>
-                    <button className="button" onClick={this.save}>Save</button>
-                    <button className="button" onClick={this.props.cancel}>Cancel</button>
+                    <div className="level">
+                        <button className="button level-left is-danger is-outlined" onClick={this.props.remove}>Remove</button>
+                        <div className="level-right buttons">
+                            <button className="button is-success is-outlined" onClick={this.save}>Save</button>
+                            <button className="button" onClick={this.props.cancel}>Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 		)

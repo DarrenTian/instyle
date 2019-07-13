@@ -9,7 +9,6 @@ class ProductTile extends React.Component {
             width: "210px",
             borderRadius: "5px",
             backgroundColor: "#F8F8F8",
-            display: "inline-block",
             height: "70px",
             marginRight: "10px",
         };
@@ -39,13 +38,13 @@ class ProductTile extends React.Component {
         	justifyContent: "space-between",
         	padding: "10px 10px 10px 10px",
         	width:"100%"
-        }
+        }	
         const product = this.props.product;
         const islinked = this.props.isLinked ? true : false;
         const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
 		return (
-			<div style={itemStyle}>
+			<div style={itemStyle} onClick={this.props.clickHandler}>
                 <a href={linkUrl}>
                     <div className="media" style={mediaBoxStyle}>
                     	{// TODO: Dynamic render when we have image
@@ -54,8 +53,8 @@ class ProductTile extends React.Component {
                         </div>*/}
 
                         <div className="media-content" style={contentStyle}>
-                            <p className="title is-6" style={titleStyle}>{product.title}</p>
-                            <p className="subtitle is-6" style={priceStyle}>{product.price}</p>
+                            <div className="title is-6" style={titleStyle}>{product.title}</div>
+                            <div className="subtitle is-6" style={priceStyle}>{product.price}</div>
                         </div>
                     </div>
                 </a>

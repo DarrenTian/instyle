@@ -13,6 +13,9 @@ class StyleEditPage extends Component {
     this.state = {
       style: {},
       look: {
+        selectedTag: {
+          index: -1,
+        },
         tags : [],
       },
     };
@@ -118,27 +121,14 @@ class StyleEditPage extends Component {
         width: "100%",
         borderRadius: "5px",
     };
-    const timeStyle = {
-        fontWeight: "normal",
-        color: "#A9A9A9",
-        display: "flex",
-        justifyContent: "flex-end",
-
-    };
-    const socialPluginStyle = {
-        display: "flex",
-        justifyContent: "flex-end",
-        padding: "10px 10px 10px 10px",
-    }
-    const productCarouselStyle = {
-        padding: "10px 10px 10px 10px",
-    }
     const lookCardStyle = {
         borderRadius: "5px",
     }
-    const publisherCardStyle = {
-        borderRadius: "5px",
-        padding: "15px 15px 15px 15px",
+    const editComponentStyle = {
+      padding: "5px",
+    }
+    const inputBoxStyle = {
+      height: "150px",
     }
     return (
       <div>
@@ -150,28 +140,39 @@ class StyleEditPage extends Component {
                 </div>
             </div>
             <div className="column is-7">
-              <div>Tag your look:</div> 
+              <div className="has-text-weight-bold">Tag your look:</div> 
               <div>
-              {this.state.look.tags.map((tag, index)=>{
-                if (index == this.state.look.selectedTag.index) {
-                return (
-                  <div key={index}>
-                    <ProductEditPanel product={tag.product} remove={()=>{this.removeTag(index)}} save={(product)=>{this.saveTag(index, product)}} cancel={()=>{this.selectTag(-1)}} />
-                  </div>
-                )
+                {this.state.look.tags.map((tag, index)=>{
+                  if (index == this.state.look.selectedTag.index) {
+                  return (
+                    <div key={index} style={editComponentStyle}>
+                      <ProductEditPanel product={tag.product} remove={()=>{this.removeTag(index)}} save={(product)=>{this.saveTag(index, product)}} cancel={()=>{this.selectTag(-1)}} />
+                    </div>
+                  )
+                  }
+                  return (
+                    <div key={index} style={editComponentStyle}>
+                      <ProductTile product={tag.product} index={index} islinked={false} clickHandler={()=>{this.selectTag(index)}}/>
+                    </div>
+                  )
+                })}
+                {this.state.look.selectedTag.index < 0 &&
+                    <div style={editComponentStyle}>
+                      <div className="button is-link is-outlined"  onClick={this.addTag}>Add New Tag</div>
+                    </div>
                 }
-                return (
-                  <div key={index} onClick={()=>{this.selectTag(index)}}>
-                    <ProductTile product={tag.product} index={index} islinked={false}/>
-                  </div>
-                )
-              })}
               </div>
-              <div className="button" onClick={this.addTag}>Add New Tag</div>
-              <div>Describe your look:</div>
-              <input type="text" placeholder="Your email address" className="input" name="username" defaultValue={this.state.look.description} onChange={this.changeDescription} required />
-              <button className="button" onClick={this.saveStyle}>Save as Draft</button>
-              <button className="button" onClick={this.publishStyle}>Publish</button>
+
+              <div className="has-text-weight-bold">Describe your look:</div>
+              <div style={editComponentStyle}>
+                <textarea style={inputBoxStyle} className="input" value={this.state.look.description} onChange={this.changeDescription} required />
+              </div>
+              <div style={editComponentStyle}>
+                <div className="level-right buttons">
+                  <button className="button" onClick={this.saveStyle}>Save as Draft</button>
+                  <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
