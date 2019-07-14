@@ -58,10 +58,27 @@ class Console extends React.Component {
 		const lookStyle = {
 			padding: "10px",
 			borderRadius: "5px",
+			position: "relative",
 			//flex: "0 0 25%",
 		}
 		const previewImageStyle = {
+			objectFit: "cover",
+			height: "200px",
+			width: "100%",
+			maxWidth: "200px",
 			borderRadius: "5px",
+		}
+		// TODO: change mobile to waterfall
+		const previewImageMobileStyle = {
+			objectFit: "cover",
+			height: "200px",
+			width: "100%",
+			borderRadius: "5px",
+		}
+		const overlayStyle = {
+			position: "absolute",
+			left: "10px",
+			opacity: "0.7",
 		}
 		return (
 				<div className="console" style={consoleStyle} >
@@ -73,7 +90,11 @@ class Console extends React.Component {
 							{this.state.looks.map((look, index)=>{
 								return (
 									<div className="column is-one-quarter" style={lookStyle} key={index}>
-										<a href={'/style/'+look.style_images[0].style}><img style={previewImageStyle} src={look.style_images[0].image}></img></a>
+										<a href={'/style/'+look.style_images[0].style}>
+											<img style={previewImageStyle} src={look.style_images[0].image}></img>
+										</a>
+										<span style={overlayStyle} className="tag ">Published</span>
+										<a href={'/style/'+look.style_images[0].style + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
 									</div>
 								)
 							})}
@@ -84,7 +105,7 @@ class Console extends React.Component {
 							{this.state.looks.map((look, index)=>{
 								return (
 									<div className="column is-half" style={lookStyle} key={index}>
-										<a href={'/style/'+look.style_images[0].style}><img style={previewImageStyle} src={look.style_images[0].image}></img></a>
+										<a href={'/style/'+look.style_images[0].style}><img style={previewImageMobileStyle} src={look.style_images[0].image}></img></a>
 									</div>
 								)
 							})}
