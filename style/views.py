@@ -38,6 +38,15 @@ class StyleViewSet(viewsets.ModelViewSet):
         style.save()
     	return Response({"id":style.id}, status=status.HTTP_200_OK)
 
+    def update(self, request, pk=None):
+    	print request.body
+    	style = self.get_object()
+    	self._update(request.body, style)
+    	return Response({}, status=status.HTTP_200_OK)
+
+    def _update(self, request, look):
+    	print "updating"
+
     def destroy(self, request, pk=None):
     	user = request.user
     	if not isinstance(user, User):
@@ -45,7 +54,7 @@ class StyleViewSet(viewsets.ModelViewSet):
     	style = self.get_object()
     	if not style.publisher == user:
     		return Response({}, status=status.HTTP_400_BAD_REQUEST)
-    		
+
     	style.delete()
     	return Response(status=status.HTTP_204_NO_CONTENT)
 

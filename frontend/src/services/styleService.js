@@ -4,6 +4,7 @@ export const styleService = {
 	getMyStyles,
 	createMyStyle,
 	removeMyStyle,
+	updateMyStyle,
 	getStyle,
 	styleModelToData,
 };
@@ -19,10 +20,24 @@ function getStyle(styleId) {
       })
 }
 
-function updateStyle(style) {
-	// TODO, here is the main function to update style based on frontend operation.
-	// As of now, log the modifed style for frontend development.
-	console.log(style);
+function updateMyStyle(lookId, look) {
+	return fetch(
+		'/api/styles/'+ lookId + '/', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Token '+ userService.getToken(),
+            },
+            body: JSON.stringify(look),
+        })
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("cannot update style");
+			}
+		})
 }
 
 function getMyStyles() {
@@ -121,8 +136,9 @@ function styleModelToData(style) {
 		hasSelected: false,
 		index: -1,
 	};
-	look.tags = [];
+	look.isChanged = false;
 
+	look.tags = [];
 	let image = getCoverImage(style);
 	if (image) {
 		image.style_image_annotations.map(annotation => {
