@@ -78,6 +78,10 @@ class StyleEditPage extends Component {
     this.setState(state);
   }
 
+  removeStyle = () => {
+    console.log("removing look");
+  }
+
   saveStyle = () => {
     console.log("saving look")
     console.log(this.state.look);
@@ -116,6 +120,7 @@ class StyleEditPage extends Component {
     }
     const lookContainerStyle = {
         maxWidth: "960px",
+        width: "100%",
     }
     const lookImageStyle = {
         width: "100%",
@@ -130,13 +135,27 @@ class StyleEditPage extends Component {
     const inputBoxStyle = {
       height: "150px",
     }
+    const imageTemplateStyle = {
+      minHeight: "500px",
+      border: "4px dotted rgb(240 240 240)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }
     return (
       <div>
         <div className="section columns is-centered is-marginless" style={sectionStyle}>
-          <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
+          <div className="columns container is-centered is-widescreen is-marginless" style={lookContainerStyle}>
             <div className="column is-5">
                 <div className="card" style={lookCardStyle}>
-                    <img className="is-block container" style={lookImageStyle} src={this.state.look.image}></img>
+                  {this.state.look.image ?
+                    <img className="is-block container" style={lookImageStyle} src={this.state.look.image}></img> :
+                    <div style={imageTemplateStyle}>
+                      <div className="button">
+                        Add Your New Look
+                      </div>
+                    </div>
+                  }
                 </div>
             </div>
             <div className="column is-7">
@@ -167,7 +186,10 @@ class StyleEditPage extends Component {
               <div style={editComponentStyle}>
                 <textarea style={inputBoxStyle} className="input" value={this.state.look.description} onChange={this.changeDescription} required />
               </div>
-              <div style={editComponentStyle}>
+              <div style={editComponentStyle} className="level">
+                <div className="level-left">
+                  <button className="button is-danger is-outlined" onClick={this.removeStyle}>Remove</button>
+                </div>
                 <div className="level-right buttons">
                   <button className="button" onClick={this.saveStyle}>Save as Draft</button>
                   <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button>

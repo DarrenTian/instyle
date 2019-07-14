@@ -81,37 +81,37 @@ class Console extends React.Component {
 			opacity: "0.7",
 		}
 		return (
-				<div className="console" style={consoleStyle} >
-				    <MediaQuery query="(min-width: 769px)">
-				    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
-							Create New Look
-						</button>
-						<div className="columns is-mobile" style={looksStyle}>
-							{this.state.looks.map((look, index)=>{
-								return (
-									<div className="column is-one-quarter" style={lookStyle} key={index}>
-										<a href={'/style/'+look.style_images[0].style}>
-											<img style={previewImageStyle} src={look.style_images[0].image}></img>
-										</a>
-										<span style={overlayStyle} className="tag ">Published</span>
-										<a href={'/style/'+look.style_images[0].style + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
-									</div>
-								)
-							})}
-						</div>
-                    </MediaQuery>
-                    <MediaQuery query="(max-width: 769px)">
-                    	<div className="columns is-mobile is-shadowless" style={looksStyle}>
-							{this.state.looks.map((look, index)=>{
-								return (
-									<div className="column is-half" style={lookStyle} key={index}>
-										<a href={'/style/'+look.style_images[0].style}><img style={previewImageMobileStyle} src={look.style_images[0].image}></img></a>
-									</div>
-								)
-							})}
-						</div>
-                    </MediaQuery>
-				</div>
+			<div className="console" style={consoleStyle} >
+			    <MediaQuery query="(min-width: 769px)">
+			    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
+						Create New Look
+					</button>
+					<div className="columns is-mobile" style={looksStyle}>
+						{this.state.looks.map((look, index)=>{
+							return (
+								<div className="column is-one-quarter" style={lookStyle} key={index}>
+									<a href={'/style/'+look.id}>
+										<img style={previewImageStyle} src={look.image}></img>
+									</a>
+									<span style={overlayStyle} className="tag ">Published</span>
+									<a href={'/style/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
+								</div>
+							)
+						})}
+					</div>
+                </MediaQuery>
+                <MediaQuery query="(max-width: 769px)">
+                	<div className="columns is-mobile is-shadowless" style={looksStyle}>
+						{this.state.looks.map((look, index)=>{
+							return (
+								<div className="column is-half" style={lookStyle} key={index}>
+									<a href={'/style/'+look.id}><img style={previewImageMobileStyle} src={look.image}></img></a>
+								</div>
+							)
+						})}
+					</div>
+                </MediaQuery>
+			</div>
 		)
 	}
 }

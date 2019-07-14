@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from style.models import Style, StyleImage, StyleImageAnnotation
 from style.serializers import StyleSerializer, StyleImageSerializer, StyleImageAnnotationSerializer
+from user.models import User
 
 class StyleImageViewSet(viewsets.ModelViewSet):
     """
@@ -28,6 +29,14 @@ class StyleViewSet(viewsets.ModelViewSet):
     """
     queryset = Style.objects.all().order_by('id')
     serializer_class = StyleSerializer
+   
+    def create(self, request):
+    	user = request.user
+    	if not isinstance(user, User):
+    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        style = Style(publisher=user)
+        style.save()
+    	return Response({}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['post'])
     def from_user(self, request):

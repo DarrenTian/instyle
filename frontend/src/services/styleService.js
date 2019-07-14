@@ -32,12 +32,39 @@ function getMyStyles() {
         })
 		.then(response => {
 			return response.json();
+		})
+		.then(styles => {
+			let looks = [];
+			styles.map(style => {
+				looks.push(styleModelToPreviewData(style))
+			})
+			console.log(looks);
+			return looks;
 		});
 }
 
 function createMyStyle() {
 	// Create a new style with empty content
 	return Promise.resolve('42');
+}
+
+function getCoverImage(style) {
+	if(style.style_images.length == 0) {
+		return null;
+	}
+	return style.style_images[0];
+}
+
+function styleModelToPreviewData(style) {
+	let look = {};
+	look.id = style.id;
+	look.isPublished = false;
+	look.description = style.description;
+	let image = getCoverImage(style)
+	if (image) {
+		look.image = image.image;
+	}
+	return look;
 }
 
 // Temporarily translate style model to presentation data before data model is finalized.
@@ -57,26 +84,27 @@ function createMyStyle() {
 //   ]
 // }
 function styleModelToData(style) {
-	let look = {};
-	look.isPublished = false;
-	look.description = style.description;
-	look.image = style.style_images[0].image;
+	let look = styleModelToPreviewData(style);
 	look.selectedTag = {
 		hasSelected: false,
 		index: -1,
 	};
 	look.tags = [];
-	style.style_images[0].style_image_annotations.map(annotation => {
-		let tag = {}
-		tag.coor_x = annotation.coor_x;
-		tag.coor_y = annotation.coor_y;
-		let product = {};
-		product.url = annotation.url;
-		product.title = annotation.title;
-		product.price = annotation.price;
-		tag.product = product;
-		look.tags.push(tag);
-	})
-	console.log(look);
+
+	let image = getCoverImage(style);
+	if (image) {
+		image.style_image_annotations.map(annotation => {
+			let tag = {}
+			tag.coor_x = annotation.coor_x;
+			tag.coor_y = annotation.coor_y;
+			let product = {};
+			product.url = annotation.url;
+			product.title = annotation.title;
+			product.price = annotation.price;
+			tag.product = product;
+			look.tags.push(tag);
+		})
+	}
+
 	return look;
 }
