@@ -18,7 +18,7 @@ const UserPreview = ({ user }) => {
                 </figure>
             </div>
             <div className="media-content" style={titleStyle}>
-                <p className="title is-5">{user.username}</p>
+                <p className="title is-5">{user.nickname}</p>
                 {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
             </div>
             {/*<a className="button is-pulled-right">+ Follow</a>*/}
