@@ -1,6 +1,6 @@
-from style.models import Style, StyleImage, StyleImageAnnotation
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from style.models import Style, StyleImage, StyleImageAnnotation
+from user.models import User
 
 class StyleImageAnnotationSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -16,7 +16,7 @@ class StyleImageSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ['username', 'first_name', 'last_name', 'email']
+		fields = ['email', 'nickname']
 
 class StyleSerializer(serializers.ModelSerializer):
 	#publisher = serializers.CharField(source='publisher.username')

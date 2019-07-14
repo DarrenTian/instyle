@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.conf import settings
 """
 style {
 	style_image: [
@@ -30,7 +29,7 @@ class Style(models.Model):
 	credit_link = models.URLField(max_length=200, default='')
 	description = models.CharField(max_length=1000, default='')
 	tags = models.CharField(max_length=200, default='')
-	publisher = models.ForeignKey(User, related_name='styles', on_delete=models.CASCADE)
+	publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='styles', on_delete=models.CASCADE)
 	publish_date = models.CharField(max_length=200, default='')
 
 	def __str__(self):

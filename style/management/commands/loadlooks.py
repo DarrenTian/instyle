@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth.models import User
 from style.models import Style, StyleImage, StyleImageAnnotation
+from user.models import User
 import csv
 from django.core.files import File
 from django.contrib.auth.hashers import make_password
@@ -45,10 +45,12 @@ class Command(BaseCommand):
         #parser.add_argument('poll_id', nargs='+', type=int)
 
     def get_user(self, name):
+        # fake email adrress using the username
+        email = name + "@gmail.com"
         try:
-            user = User.objects.get(username=name)
+            user = User.objects.get(email=email)
         except ObjectDoesNotExist:
-            user = User(username=name, password=make_password('test'))
+            user = User(email=email, password=make_password('test'), nickname=name)
             user.save()
         return user
 
