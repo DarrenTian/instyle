@@ -36,7 +36,18 @@ class StyleViewSet(viewsets.ModelViewSet):
     		return Response({}, status=status.HTTP_400_BAD_REQUEST)
         style = Style(publisher=user)
         style.save()
-    	return Response({}, status=status.HTTP_200_OK)
+    	return Response({"id":style.id}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, pk=None):
+    	user = request.user
+    	if not isinstance(user, User):
+    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
+    	style = self.get_object()
+    	if not style.publisher == user:
+    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
+    		
+    	style.delete()
+    	return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=False, methods=['post'])
     def from_user(self, request):

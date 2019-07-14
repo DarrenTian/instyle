@@ -14,8 +14,8 @@ class Console extends React.Component {
 
 	createLook = () =>  {
 		styleService.createMyStyle()
-			.then(lookId => {
-				this.props.history.push('/style/'+lookId + '/edit');
+			.then(response => {
+				this.props.history.push('/style/'+response.id + '/edit');
 			})
 			.catch((e) => {
 				console.log("cannot create new style:" + e);
@@ -30,6 +30,7 @@ class Console extends React.Component {
 	      })
 	      .catch((e)=>{
 	      	console.log("error retrieving my looks:" + e);
+	      	
 	      })
 	  }
 
@@ -46,6 +47,7 @@ class Console extends React.Component {
 			margin: "0.5rem",
 		}
 		const looksStyle = {
+			margin:"5px auto",
 			padding: "0rem 0.5rem",
 			display: "flex",
 			flexDirection: "row",

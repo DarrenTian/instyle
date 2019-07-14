@@ -79,7 +79,14 @@ class StyleEditPage extends Component {
   }
 
   removeStyle = () => {
-    console.log("removing look");
+    const lookId = this.state.look.id;
+    styleService.removeMyStyle(lookId)
+      .then(() => {
+        this.props.history.push('/console');
+      })
+      .catch(e => {
+        console.log("cannot remove look:" + e);
+      })
   }
 
   saveStyle = () => {
@@ -101,13 +108,13 @@ class StyleEditPage extends Component {
       .then(
         style => {
           this.setState({ style: style, look: styleService.styleModelToData(style)})
-          console.log("after mount" 
-            + this.state.look);
-                    console.log(this.state.look);
+          console.log("after mount: ");
+          console.log(this.state.look);
         }
       )
       .catch(e => {
-        console.log(e);
+        console.log("error" + e);
+        this.props.history.push('/welcome');
       });
   }
 

@@ -3,6 +3,7 @@ import { userService } from './userService'
 export const styleService = {
 	getMyStyles,
 	createMyStyle,
+	removeMyStyle,
 	getStyle,
 	styleModelToData,
 };
@@ -10,7 +11,11 @@ export const styleService = {
 function getStyle(styleId) {
 	return fetch("/api/styles/" + styleId + "/?format=json")
       .then(response => {
-        return response.json();
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		return Promise.reject("cannot get style");
+      	}
       })
 }
 
@@ -44,8 +49,35 @@ function getMyStyles() {
 }
 
 function createMyStyle() {
-	// Create a new style with empty content
-	return Promise.resolve('42');
+	return fetch(
+		'/api/styles/', {
+	        method: 'POST',
+	        headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': 'application/json',
+	            'Authorization': 'Token '+ userService.getToken(),
+	        },
+    })
+	.then(response => {
+		return response.json();
+	});
+}
+
+function removeMyStyle(lookId) {
+	return fetch(
+		'/api/styles/' + lookId + '/', {
+	        method: 'DELETE',
+	        headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': 'application/json',
+	            'Authorization': 'Token '+ userService.getToken(),
+	        },
+    })
+	.then(response => {
+		if (response.status != 204) {
+			return Promise.reject("cannot remove style");
+		}
+	});
 }
 
 function getCoverImage(style) {
