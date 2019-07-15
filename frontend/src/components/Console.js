@@ -30,9 +30,9 @@ class Console extends React.Component {
 	      })
 	      .catch((e)=>{
 	      	console.log("error retrieving my looks:" + e);
-	      	
+
 	      })
-	  }
+	 }
 
 	render() {
 		const consoleWrapperStyle = {
@@ -95,7 +95,9 @@ class Console extends React.Component {
 									<a href={'/style/'+look.id}>
 										<img style={previewImageStyle} src={look.image}></img>
 									</a>
-									<span style={overlayStyle} className="tag ">Published</span>
+									<span style={overlayStyle} className="tag ">
+										{look.isPublished ? <span>Published</span> : <span>Draft</span>}
+									</span>
 									<a href={'/style/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
 								</div>
 							)

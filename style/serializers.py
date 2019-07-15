@@ -34,5 +34,6 @@ class StyleSerializer(serializers.ModelSerializer):
 			'description',
 			'publisher',
 			'publish_date',
+			'publish_status',
 			'style_images',
 		]

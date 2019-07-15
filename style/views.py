@@ -63,26 +63,3 @@ class StyleViewSet(viewsets.ModelViewSet):
         user = request.user
         styles = StyleSerializer(Style.objects.all().filter(publisher=user), many=True)
         return Response(styles.data, status=status.HTTP_200_OK)
-
-def welcome(request):
-	return render(request, 'style/welcome.html', {})
-
-def new_style(request):
-	if request.method == 'POST' and request.FILES['style_image']:
-		# style_image = request.FILES['style_image']
-		# fs = FileSystemStorage()
-		# filename = fs.save(style_image.name, style_image)
-		# uploaded_file_url = fs.url(filename)
-
-		# new_style = Style()
-		# new_style.style_image_url = uploaded_file_url
-		# new_style.save()
-		# image_id = str(new_style.pk)
-		image_id = '13'
-		return redirect('/style/'+image_id+'/edit')
-	return render(request, 'style/new.html')
-
-def edit_style(request, style_id):
-	style = Style.objects.get(id=style_id)
-	context = { 'style': style }
-	return render(request, 'style/edit.html', context)

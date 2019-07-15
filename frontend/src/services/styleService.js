@@ -105,7 +105,7 @@ function getCoverImage(style) {
 function styleModelToPreviewData(style) {
 	let look = {};
 	look.id = style.id;
-	look.isPublished = false;
+	look.isPublished = (style.publish_status == "P");
 	look.description = style.description;
 	let image = getCoverImage(style)
 	if (image) {

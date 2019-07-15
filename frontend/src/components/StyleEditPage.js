@@ -39,8 +39,8 @@ class StyleEditPage extends Component {
         "price": "",
       }
     })
+    state.look.isChanged = true;
     this.setState(state);
-    this.saveStyle();
     this.selectTag(state.look.tags.length-1);
   }
 
@@ -62,7 +62,7 @@ class StyleEditPage extends Component {
     if (state.look.tags[index]) {
       state.look.tags.splice(index, 1);
     }
-    state.look.isChanged |= true;
+    state.look.isChanged = true;
     this.setState(state);
 
     this.selectTag(-1);
@@ -72,7 +72,7 @@ class StyleEditPage extends Component {
     console.log(product);
     const state = { ...this.state };
     state.look.tags[index].product = product;
-    state.look.isChanged |= true;
+    state.look.isChanged = true;
     this.setState(state);
 
     this.selectTag(-1);
@@ -83,7 +83,7 @@ class StyleEditPage extends Component {
     const { name, value } = e.target;
     const state = { ...this.state };
     state.look.description = value;
-    state.look.isChanged |= true;
+    state.look.isChanged = true;
     this.setState(state);
   }
 

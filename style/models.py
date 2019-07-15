@@ -31,6 +31,12 @@ class Style(models.Model):
 	tags = models.CharField(max_length=200, default='')
 	publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='styles', on_delete=models.CASCADE)
 	publish_date = models.CharField(max_length=200, default='')
+	
+	PUBLISH_STATUS = (
+		('D', 'Draft'),
+		('P', 'Published'),
+	)
+	publish_status = models.CharField(max_length=1, choices=PUBLISH_STATUS, default='D')
 
 	def __str__(self):
 		return "Look from (publisher): %s" % self.title
