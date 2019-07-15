@@ -100,16 +100,24 @@ class StyleEditPage extends Component {
 
   saveStyle = () => {
     const lookId = this.state.look.id;
-    styleService.updateMyStyle(lookId, this.state.look);
-    console.log("saving look")
+    styleService.updateMyStyle(lookId, this.state.look)
+      .catch((e) => {
+        console.log("saving style failed" + e);
+      });
     this.selectTag(-1);
     this.reset();
   }
 
   publishStyle = () => {
-    console.log("publish look");
-    console.log(this.state.look);
+    const lookId = this.state.look.id;
+    const state = { ...this.state };
+    state.look.isPublished = true;
+    styleService.updateMyStyle(lookId, this.state.look)
+      .catch((e) => {
+        console.log("publishing style failed" + e);
+      });
     this.selectTag(-1);
+    this.reset();
   }
 
   componentDidMount() {

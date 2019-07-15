@@ -110,6 +110,7 @@ function styleModelToPreviewData(style) {
 	let image = getCoverImage(style)
 	if (image) {
 		look.image = image.image;
+		look.imageId = image.id;
 	}
 	return look;
 }
@@ -143,6 +144,7 @@ function styleModelToData(style) {
 	if (image) {
 		image.style_image_annotations.map(annotation => {
 			let tag = {}
+			tag.id = annotation.id;
 			tag.coor_x = annotation.coor_x;
 			tag.coor_y = annotation.coor_y;
 			let product = {};

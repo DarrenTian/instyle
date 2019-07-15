@@ -92,7 +92,7 @@ class ProductEditPanel extends React.Component {
                     <div className="level">
                         <button className="button level-left is-danger is-outlined" onClick={this.props.remove}>Remove</button>
                         <div className="level-right buttons">
-                            <button className="button is-success is-outlined" onClick={this.save}>Save</button>
+                            <button className="button is-success is-outlined" onClick={this.save}>Confirm</button>
                             <button className="button" onClick={this.props.cancel}>Cancel</button>
                         </div>
                     </div>

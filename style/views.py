@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from style.models import Style, StyleImage, StyleImageAnnotation
 from style.serializers import StyleSerializer, StyleImageSerializer, StyleImageAnnotationSerializer
 from user.models import User
+import pprint
+import json
 
 class StyleImageViewSet(viewsets.ModelViewSet):
     """
@@ -38,14 +40,14 @@ class StyleViewSet(viewsets.ModelViewSet):
         style.save()
     	return Response({"id":style.id}, status=status.HTTP_200_OK)
 
+    # TODO: this approach is not very restful, but can consoliate all update into one single API and leave frontend logic simple.
+    # TODO: right now only assumes we have a single image.
     def update(self, request, pk=None):
-    	print request.body
+    	look_data = json.loads(request.body)
+    	pprint.pprint(look_data)
     	style = self.get_object()
-    	self._update(request.body, style)
+    	self._update(look_data)
     	return Response({}, status=status.HTTP_200_OK)
-
-    def _update(self, request, look):
-    	print "updating"
 
     def destroy(self, request, pk=None):
     	user = request.user
@@ -63,3 +65,16 @@ class StyleViewSet(viewsets.ModelViewSet):
         user = request.user
         styles = StyleSerializer(Style.objects.all().filter(publisher=user), many=True)
         return Response(styles.data, status=status.HTTP_200_OK)
+
+    def _update_products(self, look_data):
+    	# TODO: update products by look_data
+    	print "updating products"
+
+    def _update(self, look_data):
+    	# Create/Update product
+    	self._update_products(look_data)
+    	#self._update_tags()
+    	#self._update_images()
+    	#self._update_look()
+
+    	print "updating"

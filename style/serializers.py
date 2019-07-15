@@ -5,13 +5,13 @@ from user.models import User
 class StyleImageAnnotationSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = StyleImageAnnotation
-		fields = ['style_image', 'url', 'image_url', 'coor_x', 'coor_y', 'title', 'price']
+		fields = ['id', 'style_image', 'url', 'image_url', 'coor_x', 'coor_y', 'title', 'price']
 
 class StyleImageSerializer(serializers.ModelSerializer):
 	style_image_annotations = StyleImageAnnotationSerializer(many=True, read_only=True)
 	class Meta:
 		model = StyleImage
-		fields = ['style', 'image', 'style_image_annotations']
+		fields = ['id', 'style', 'image', 'style_image_annotations']
 
 class CustomUserSerializer(serializers.ModelSerializer):
 	class Meta:
