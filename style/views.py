@@ -33,32 +33,32 @@ class StyleViewSet(viewsets.ModelViewSet):
     serializer_class = StyleSerializer
    
     def create(self, request):
-    	user = request.user
-    	if not isinstance(user, User):
-    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
+      user = request.user
+      if not isinstance(user, User):
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
         style = Style(publisher=user)
         style.save()
-    	return Response({"id":style.id}, status=status.HTTP_200_OK)
+      return Response({"id":style.id}, status=status.HTTP_200_OK)
 
     # TODO: this approach is not very restful, but can consoliate all update into one single API and leave frontend logic simple.
     # TODO: right now only assumes we have a single image.
     def update(self, request, pk=None):
-    	look_data = json.loads(request.body)
-    	pprint.pprint(look_data)
-    	style = self.get_object()
-    	self._update(look_data)
-    	return Response({}, status=status.HTTP_200_OK)
+      look_data = json.loads(request.body)
+      pprint.pprint(look_data)
+      style = self.get_object()
+      self._update(look_data)
+      return Response({}, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
-    	user = request.user
-    	if not isinstance(user, User):
-    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
-    	style = self.get_object()
-    	if not style.publisher == user:
-    		return Response({}, status=status.HTTP_400_BAD_REQUEST)
+      user = request.user
+      if not isinstance(user, User):
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
+      style = self.get_object()
+      if not style.publisher == user:
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
-    	style.delete()
-    	return Response(status=status.HTTP_204_NO_CONTENT)
+      style.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=False, methods=['post'])
     def from_user(self, request):
@@ -66,15 +66,39 @@ class StyleViewSet(viewsets.ModelViewSet):
         styles = StyleSerializer(Style.objects.all().filter(publisher=user), many=True)
         return Response(styles.data, status=status.HTTP_200_OK)
 
-    def _update_products(self, look_data):
-    	# TODO: update products by look_data
-    	print "updating products"
+    # def _update_products(self, look_data):
+    #   style = StyleSerializer(instance=self.get_object()).data
+    #   pprint.pprint(json.dumps(style))
+    #   # TODO: update products by look_data
+    #   print "updating products"
+
+    def _update_tags(self, look_data):
+      for tag in look_data["tags"]:
+        # update existing tag
+        annotation = None
+        if "id" in tag:
+          print "here 1"
+          tag_id = tag["id"]
+          annotation = StyleImageAnnotation.objects.get(id=tag_id)
+        # creating new tag
+        else :
+          image_id = look_data["imageId"]
+          style_image = StyleImage.objects.get(id=image_id)
+          annotation = StyleImageAnnotation()
+          annotation.style_image = style_image   
+
+        annotation.title = tag["product"]["title"]
+        annotation.price = tag["product"]["price"]
+        annotation.url = tag["product"]["url"]
+        annotation.coor_x = tag["coor_x"]
+        annotation.coor_y = tag["coor_y"]
+        annotation.save()
 
     def _update(self, look_data):
-    	# Create/Update product
-    	self._update_products(look_data)
-    	#self._update_tags()
-    	#self._update_images()
-    	#self._update_look()
+      # TODO: Create/Update product, current model doesn't have product model yet
+      # self._update_products(look_data)
+      self._update_tags(look_data)
+      #self._update_images()
+      #self._update_look()
 
-    	print "updating"
+      print "updating"

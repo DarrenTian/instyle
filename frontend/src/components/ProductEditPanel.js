@@ -13,7 +13,9 @@ class ProductEditPanel extends React.Component {
 
     handleChange = (e) => {
         const { name, value } = e.target;
-        this.setState({"product": { [name]: value}});
+        const state = { ...this.state };
+        state.product[name] = value
+        this.setState(state);
         console.log(this.state);
     }
 
