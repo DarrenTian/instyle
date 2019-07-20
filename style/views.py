@@ -1,15 +1,18 @@
 from django.core.files.storage import FileSystemStorage
 from django.core import serializers
+from django.core.files import File
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, parser_classes
+from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from style.models import Style, StyleImage, StyleImageAnnotation
 from style.serializers import StyleSerializer, StyleImageSerializer, StyleImageAnnotationSerializer
 from user.models import User
 import pprint
 import json
+
 
 class StyleImageViewSet(viewsets.ModelViewSet):
     """
@@ -25,6 +28,8 @@ class StyleImageAnnotationViewSet(viewsets.ModelViewSet):
     queryset = StyleImageAnnotation.objects.all().order_by('id')
     serializer_class = StyleImageAnnotationSerializer
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# TODO: Restrict acess for editing requests
 class StyleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -66,6 +71,21 @@ class StyleViewSet(viewsets.ModelViewSet):
         styles = StyleSerializer(Style.objects.all().filter(publisher=user), many=True)
         return Response(styles.data, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=['post'])
+    @parser_classes([FileUploadParser])
+    def set_image(self, request, pk=None):
+      file = request.data['file']
+      style = self.get_object()
+
+      styleImage = StyleImage()
+      styleImage.style = style
+      styleImage.image.save(file.name, file)
+
+      styleImage.save()
+      
+      print style
+      return Response({}, status=status.HTTP_200_OK)
+
     # def _update_products(self, look_data):
     #   style = StyleSerializer(instance=self.get_object()).data
     #   pprint.pprint(json.dumps(style))
@@ -94,11 +114,16 @@ class StyleViewSet(viewsets.ModelViewSet):
         annotation.coor_y = tag["coor_y"]
         annotation.save()
 
+    def _update_look(self, look_data):
+      style = self.get_object()
+      style.description = look_data["description"]
+      style.save()
+
     def _update(self, look_data):
       # TODO: Create/Update product, current model doesn't have product model yet
       # self._update_products(look_data)
       self._update_tags(look_data)
       #self._update_images()
-      #self._update_look()
+      self._update_look(look_data)
 
       print "updating"

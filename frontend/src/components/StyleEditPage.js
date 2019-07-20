@@ -27,6 +27,14 @@ class StyleEditPage extends Component {
     this.setState(state);
   }
 
+  setImage = (e) => {
+    const data = new FormData() ;
+    data.append('file', e.target.files[0]);
+    console.log(data);
+    styleService.uploadMyStyleImage(this.state.look.id, data);
+    console.log("set image");
+  }
+
   addTag = () => {
     console.log("adding tag");
     const state = { ...this.state };
@@ -177,8 +185,18 @@ class StyleEditPage extends Component {
                   {this.state.look.image ?
                     <img className="is-block container" style={lookImageStyle} src={this.state.look.image}></img> :
                     <div style={imageTemplateStyle}>
-                      <div className="button">
-                        Add Your New Look
+                      <div className="file has-name is-boxed">
+                        <label className="file-label">
+                          <input className="file-input" type="file" name="resume" onChange={this.setImage} />
+                          <span className="file-cta">
+                            <span className="file-icon">
+                              <i className="fas fa-upload"></i>
+                            </span>
+                            <span className="file-label">
+                              Choose a look image file
+                            </span>
+                          </span>
+                        </label>
                       </div>
                     </div>
                   }

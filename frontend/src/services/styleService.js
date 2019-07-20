@@ -5,40 +5,11 @@ export const styleService = {
 	createMyStyle,
 	removeMyStyle,
 	updateMyStyle,
+	uploadMyStyleImage,
+
 	getStyle,
 	styleModelToData,
 };
-
-function getStyle(styleId) {
-	return fetch("/api/styles/" + styleId + "/?format=json")
-      .then(response => {
-      	if (response.ok) {
-      		return response.json();
-      	} else {
-      		return Promise.reject("cannot get style");
-      	}
-      })
-}
-
-function updateMyStyle(lookId, look) {
-	return fetch(
-		'/api/styles/'+ lookId + '/', {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Token '+ userService.getToken(),
-            },
-            body: JSON.stringify(look),
-        })
-		.then(response => {
-			if (response.ok) {
-				return response.json();
-			} else {
-				return Promise.reject("cannot update style");
-			}
-		})
-}
 
 function getMyStyles() {
 	return fetch(
@@ -93,6 +64,53 @@ function removeMyStyle(lookId) {
 			return Promise.reject("cannot remove style");
 		}
 	});
+}
+
+function updateMyStyle(lookId, look) {
+	return fetch(
+		'/api/styles/'+ lookId + '/', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Token '+ userService.getToken(),
+            },
+            body: JSON.stringify(look),
+        })
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("cannot update style");
+			}
+		})
+}
+
+function uploadMyStyleImage(lookId, file) {
+	console.log('lookId' + lookId + 'with file' + file);
+	return fetch(
+		'/api/styles/' + lookId + '/set_image/', {
+			method: 'POST',
+			headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Token '+ userService.getToken(),
+            },
+            body: file,
+		})
+	.then(response => {
+		console.log(response);
+	})
+}
+
+function getStyle(styleId) {
+	return fetch("/api/styles/" + styleId + "/?format=json")
+      .then(response => {
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		return Promise.reject("cannot get style");
+      	}
+      })
 }
 
 function getCoverImage(style) {
