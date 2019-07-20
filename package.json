@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development --env.PROD_ENV=DEV ./frontend/src/index.js --output ./staticfiles/main.js",
     "build": "webpack --mode production --env.PROD_ENV=PROD ./frontend/src/index.js --output ./staticfiles/main.js"
