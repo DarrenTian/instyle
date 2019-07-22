@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand, CommandError
 from style.models import Style, StyleImage, StyleImageAnnotation
 from user.models import User
 import csv
+import os
 from django.core.files import File
 from django.contrib.auth.hashers import make_password
 
@@ -18,7 +19,8 @@ class Command(BaseCommand):
               Any number of annotations can be added to an image when added to the same line as image
               A subsequent line with a non-empty-publisher (line 3 in this case) creates new style'''
 
-    file_path = '/Users/yayunt/Downloads/sample_looks.csv'
+    dirname = os.path.dirname(__file__)
+    file_path = os.path.join(dirname, '../../../sample_looks.csv')
 
     # https://docs.google.com/spreadsheets/d/1ScImDJLRqSbd3AjYeK-xqE75mX9oCMOwwUmALjNhal0/edit#gid=0
     indicies = {
