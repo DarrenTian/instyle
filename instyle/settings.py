@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',  
 
+    # Storages
+    'storages',
+
     # Style
     'style',
     'user',
@@ -230,6 +233,18 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# AWS Settings
+AWS_ACCESS_KEY_ID = config(AWS_ACCESS_KEY_ID)
+AWS_SECRET_ACCESS_KEY = config(AWS_SECRET_ACCESS_KEY)
+AWS_STORAGE_BUCKET_NAME = config(AWS_STORAGE_BUCKET_NAME)
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_DEFAULT_ACL = None
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+PUBLIC_MEDIA_LOCATION = 'media'
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_LOCATION)
+DEFAULT_FILE_STORAGE = 'instyle.storage_backends.MediaStorage'
 
