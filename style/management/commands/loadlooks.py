@@ -21,6 +21,7 @@ class Command(BaseCommand):
 
     dirname = os.path.dirname(__file__)
     file_path = os.path.join(dirname, '../../../sample_looks.csv')
+    look_path = os.path.join(dirname, '../../../looks/')
 
     # https://docs.google.com/spreadsheets/d/1ScImDJLRqSbd3AjYeK-xqE75mX9oCMOwwUmALjNhal0/edit#gid=0
     indicies = {
@@ -93,7 +94,7 @@ class Command(BaseCommand):
 
         style_image = StyleImage()
         style_image.style = style
-        style_image.image.save(row[self.indicies['image_file_name']], File(open('./looks/' + row[self.indicies['image_file_name']], 'rb')))
+        style_image.image.save(row[self.indicies['image_file_name']], File(open(self.look_path + row[self.indicies['image_file_name']], 'rb')))
         style_image.save()
         print style_image
 
