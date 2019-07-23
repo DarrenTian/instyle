@@ -15,6 +15,7 @@ dj-database-url = "*"
 python-decouple = "*"
 "psycopg2-binary" = "*"
 pillow = "*"
+django-storages = "*"
 
 [requires]
 python_version = "2.7"
