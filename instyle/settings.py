@@ -233,7 +233,8 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-if config('USE_S3_STORAGE') == True:
+USE_S3_STORAGE = config('USE_S3_STORAGE', default=False, cast=bool)
+if USE_S3_STORAGE:
     # AWS Settings
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
