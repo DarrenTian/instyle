@@ -40,11 +40,11 @@ class App extends React.Component {
 			      <Switch>
 			        <Route path="/welcome" exact component={Welcome} />
 			        <Route path="/doc/:topic" component={Doc} />
-			        {process.env.PROD_ENV == "DEV" && <Route path="/login" render={()=><Login loginHandler={this.login} />} />}
-			        {process.env.PROD_ENV == "DEV" && <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />}
-			        {process.env.PROD_ENV == "DEV" && <PrivateRoute path="/console" component={Console} />}
-			        {process.env.PROD_ENV == "DEV" && <Route exact path="/style/:id" component={StylePage} />}
-			        {process.env.PROD_ENV == "DEV" && <PrivateRoute exact path="/style/:id/edit" component={StyleEditPage} />}
+			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
+			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
+			        <PrivateRoute path="/console" component={Console} />
+			        <Route exact path="/style/:id" component={StylePage} />
+			        <PrivateRoute exact path="/style/:id/edit" component={StyleEditPage} />
 			        <Redirect to="/welcome" />
 			      </Switch>
 			    </BrowserRouter>

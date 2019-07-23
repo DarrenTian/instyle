@@ -39,10 +39,9 @@ class Header extends React.Component {
               <a className="navbar-item" href="/doc/contact">
                 Contact
               </a>
-              {process.env.PROD_ENV == "DEV" &&
               <div className="navbar-item">
                 <a className="button is-light" href="/login">Log in</a>
-              </div>}
+              </div>
             </div>
         } else {
             navEnd = <div className="navbar-end">
