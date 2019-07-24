@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 
 class SocialPlugin extends React.Component {
 	// TODO: Get data into the share link so the shared info become rich.
+
+	componentDidMount () {
+	    const script = document.createElement("script");
+	    script.src = "//assets.pinterest.com/js/pinit.js";
+	    script.async = true;
+	    script.defer = true;
+	    document.body.appendChild(script);
+	}
 	render() {
 		const socialPluginStyle = {
 			height: "20px",
