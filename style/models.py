@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 """
@@ -24,6 +26,7 @@ style {
 }
 """
 class Style(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	title = models.CharField(max_length=200, default='')
 	credit = models.CharField(max_length=200, default='')
 	credit_link = models.URLField(max_length=200, default='')

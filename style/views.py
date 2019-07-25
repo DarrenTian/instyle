@@ -41,8 +41,8 @@ class StyleViewSet(viewsets.ModelViewSet):
       user = request.user
       if not isinstance(user, User):
         return Response({}, status=status.HTTP_400_BAD_REQUEST)
-        style = Style(publisher=user)
-        style.save()
+      style = Style(publisher=user)
+      style.save()
       return Response({"id":style.id}, status=status.HTTP_200_OK)
 
     # TODO: this approach is not very restful, but can consoliate all update into one single API and leave frontend logic simple.
