@@ -13,7 +13,7 @@ from look.serializers import LookSerializer, LookImageSerializer, TagSerializer
 from user.models import User
 import pprint
 import json
-
+import datetime
 
 class LookImageViewSet(viewsets.ModelViewSet):
     """
@@ -29,9 +29,19 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all().order_by('id')
     serializer_class = TagSerializer
 
-class LookViewSet(viewsets.ModelViewSet):
+class LookViewSet(mixins.RetrieveModelMixin,
+                  viewsets.GenericViewSet):
     queryset = Look.objects.all().order_by('id')
     serializer_class = LookSerializer
+
+    def retrieve(self, request, pk=None):
+      look = self.get_object()
+      if not look.publish_status == 'P':
+        return Response({}, status=status.HTTP_404_NOT_FOUND)
+      else:
+        return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
+
+
 
 # Look API restricted per user access.
 class UserLookViewSet(viewsets.ModelViewSet):
@@ -58,9 +68,8 @@ class UserLookViewSet(viewsets.ModelViewSet):
     # TODO: right now only assumes we have a single image.
     def update(self, request, pk=None):
       look_data = json.loads(request.body)
-      pprint.pprint(look_data)
-      look = self.get_object()
       self._update(look_data)
+      look = self.get_object()
       return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
@@ -128,6 +137,8 @@ class UserLookViewSet(viewsets.ModelViewSet):
 
     def _update_look(self, look_data):
       look = self.get_object()
+      look.publish_status = look_data["publish_status"]
+      look.publish_date = datetime.datetime.now().strftime("%Y-%m-%d")
       look.description = look_data["description"]
       look.save()
 
@@ -137,5 +148,3 @@ class UserLookViewSet(viewsets.ModelViewSet):
       self._update_tags(look_data)
       #self._update_images()
       self._update_look(look_data)
-
-      print "updating"

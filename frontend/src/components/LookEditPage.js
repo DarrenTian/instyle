@@ -115,6 +115,8 @@ class LookEditPage extends Component {
 
   saveStyle = () => {
     const lookId = this.state.look.id;
+    const state = { ...this.state };
+    state.look.publish_status = 'D';
     userLookService.updateUserLook(lookId, this.state.look)
       .then((updatedLook) => {
         this.updateLook(updatedLook);
@@ -129,13 +131,20 @@ class LookEditPage extends Component {
   publishStyle = () => {
     const lookId = this.state.look.id;
     const state = { ...this.state };
-    state.look.isPublished = true;
-    userLookService.updateUserLook(lookId, this.state.look)
+    state.look.publish_status = 'P';
+    userLookService.updateUserLook(lookId, state.look)
+      .then((updatedLook) => {
+        this.updateLook(updatedLook);
+      })
       .catch((e) => {
         console.log("publishing style failed" + e);
       });
     this.selectTag(-1);
     this.reset();
+  }
+
+  goToLook = () => {
+    this.props.history.push('./');
   }
 
   componentDidMount() {
@@ -253,8 +262,14 @@ class LookEditPage extends Component {
                 <div className="level-right buttons">
                   {this.state.view.isChanged ? 
                     <button className="button" onClick={this.saveStyle}>Save as Draft</button> :
-                    <button className="button" onClick={this.saveStyle} disabled>Saved</button>}
-                  <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button>
+                    <button className="button" disabled>Saved</button>}
+                  {this.state.look.publish_status=='D' ?
+                    <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button> :
+                    <button className="button is-success is-outlined" disabled>Published</button>
+                  }
+                  {this.state.look.publish_status=='P' &&
+                    <button className="button is-success is-outlined" onClick={this.goToLook}>Go to Look</button>
+                  }
                 </div>
               </div>
             </div>

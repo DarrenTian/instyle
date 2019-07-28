@@ -98,7 +98,7 @@ class Console extends React.Component {
 										<img style={previewImageStyle} src={lookImage}></img>
 									</a>
 									<span style={overlayStyle} className="tag ">
-										{look.isPublished ? <span>Published</span> : <span>Draft</span>}
+										{look.publish_status=='P' ? <span style={{fontWeight:"800"}}>Published</span> : <span>Draft</span>}
 									</span>
 									<a href={'/looks/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
 								</div>

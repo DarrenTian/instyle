@@ -25,7 +25,8 @@ function retrieveLook(lookId) {
       	if (response.ok) {
       		return response.json();
       	} else {
-      		return Promise.reject("cannot get style");
+      		const error = response.statusText;
+			return Promise.reject(error);
       	}
      })
 }

@@ -12,6 +12,7 @@ import LookEditPage from "./LookEditPage";
 import Look from "./Look";
 import { userService } from "../services";
 import Welcome from "./Welcome";
+import ErrorPage from "./ErrorPage";
 import {
   Route,
   Switch,
@@ -46,10 +47,8 @@ class App extends React.Component {
 			        <PrivateRoute path="/console" component={Console} />
 			        <Route exact path="/looks/:id" component={LookPage} />
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
-			    {/*
-			        <Redirect to="/abc" />
-			    */}
-
+			        <Route path="/error" exact component={ErrorPage} />
+			        <Redirect to="/error" />
 			      </Switch>
 			    </BrowserRouter>
 		    </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { lookService } from "../services";
+import ErrorPage from "./ErrorPage";
 
 class LookDataProvider extends Component {
   static propTypes = {
@@ -15,14 +16,17 @@ class LookDataProvider extends Component {
     };
   componentDidMount() {
     lookService.retrieveLook(this.props.lookId)
-      .then(look => this.setState({ look: look, loaded: true }))
+      .then(
+        look => this.setState({ look: look, loaded: true })
+      )
       .catch(e => {
-        this.setState({ placeholder: "Something went wrong" });
+        this.setState({ placeholder: e });
       });
   }
   render() {
     const { look, loaded, placeholder } = this.state;
-    return loaded ? this.props.render(look) : <p>{placeholder}</p>;
+    return loaded ? this.props.render(look) : 
+      <ErrorPage error={placeholder} />
   }
 }
 export default LookDataProvider;
