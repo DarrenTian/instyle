@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'storages',
 
     # Style
-    'style',
+    'look',
     'user',
     'frontend',
     'invitation',

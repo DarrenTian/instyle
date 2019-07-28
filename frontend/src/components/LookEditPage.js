@@ -4,41 +4,48 @@ import PropTypes from "prop-types";
 import ProductCarousel from "./ProductCarousel";
 import ProductEditPanel from "./ProductEditPanel";
 import ProductTile from "./ProductTile";
-import { styleService } from "../services";
+import { userLookService } from "../services";
+import { lookUtil } from "../services";
 
-class StyleEditPage extends Component {
+class LookEditPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      style: {},
-      look: {
-        selectedTag: {
-          index: -1,
-        },
-        tags : [],
-      },
+      look: {},
+      view : {
+        selectedTag : {
+          index : -1,
+        }
+      }
     };
   }
 
   reset = () => {
     const state = { ...this.state };
-    state.look.isChanged = false;
+    state.view.isChanged = false;
+    this.setState(state);
+  }
+
+  updateLook = (updatedLook) => {
+    const state = { ...this.state };
+    state.look = updatedLook;
     this.setState(state);
   }
 
   setImage = (e) => {
     const data = new FormData() ;
     data.append('file', e.target.files[0]);
-    console.log(data);
-    styleService.uploadMyStyleImage(this.state.look.id, data);
-    console.log("set image");
+    userLookService.setUserLookImage(this.state.look.id, data)
+      .then((updatedLook) => {
+        this.updateLook(updatedLook);
+      });
   }
 
   addTag = () => {
-    console.log("adding tag");
     const state = { ...this.state };
-    state.look.tags.push({
+    const coverLookImage = lookUtil.getCoverLookImage(state.look);
+    coverLookImage.tags.push({
       "coor_x" : 0,
       "coor_y" : 0,
       "product" : {
@@ -47,40 +54,40 @@ class StyleEditPage extends Component {
         "price": "",
       }
     })
-    state.look.isChanged = true;
+    state.view.isChanged = true;
     this.setState(state);
-    this.selectTag(state.look.tags.length-1);
+    this.selectTag(coverLookImage.tags.length-1);
   }
 
   selectTag = (index) => {
     const state = { ...this.state };
     if (index < 0 ) {
-      state.look.selectedTag.hasSelected = false;
-      state.look.selectedTag.index = -1;
+      state.view.selectedTag.hasSelected = false;
+      state.view.selectedTag.index = -1;
     } else {
-      state.look.selectedTag.hasSelected = true;
-      state.look.selectedTag.index = index;
+      state.view.selectedTag.hasSelected = true;
+      state.view.selectedTag.index = index;
     }
     this.setState(state);
-    console.log("selected tag: " + index);
   }
 
   removeTag = (index) => {
     const state = { ...this.state };
-    if (state.look.tags[index]) {
-      state.look.tags.splice(index, 1);
+    const coverLookImage = lookUtil.getCoverLookImage(state.look);
+    if (coverLookImage.tags[index]) {
+      coverLookImage.tags.splice(index, 1);
     }
-    state.look.isChanged = true;
+    state.view.isChanged = true;
     this.setState(state);
 
     this.selectTag(-1);
   }
 
   saveTag = (index, product) => {
-    console.log(product);
     const state = { ...this.state };
-    state.look.tags[index].product = product;
-    state.look.isChanged = true;
+    const coverLookImage = lookUtil.getCoverLookImage(state.look);
+    coverLookImage.tags[index].product = product;
+    state.view.isChanged = true;
     this.setState(state);
 
     this.selectTag(-1);
@@ -91,13 +98,13 @@ class StyleEditPage extends Component {
     const { name, value } = e.target;
     const state = { ...this.state };
     state.look.description = value;
-    state.look.isChanged = true;
+    state.view.isChanged = true;
     this.setState(state);
   }
 
   removeStyle = () => {
     const lookId = this.state.look.id;
-    styleService.removeMyStyle(lookId)
+    userLookService.destroyUserLook(lookId)
       .then(() => {
         this.props.history.push('/console');
       })
@@ -108,7 +115,10 @@ class StyleEditPage extends Component {
 
   saveStyle = () => {
     const lookId = this.state.look.id;
-    styleService.updateMyStyle(lookId, this.state.look)
+    userLookService.updateUserLook(lookId, this.state.look)
+      .then((updatedLook) => {
+        this.updateLook(updatedLook);
+      })
       .catch((e) => {
         console.log("saving style failed" + e);
       });
@@ -120,7 +130,7 @@ class StyleEditPage extends Component {
     const lookId = this.state.look.id;
     const state = { ...this.state };
     state.look.isPublished = true;
-    styleService.updateMyStyle(lookId, this.state.look)
+    userLookService.updateUserLook(lookId, this.state.look)
       .catch((e) => {
         console.log("publishing style failed" + e);
       });
@@ -129,19 +139,25 @@ class StyleEditPage extends Component {
   }
 
   componentDidMount() {
-    const styleId = this.props.match.params.id;
-    console.log(styleId);
-    styleService.getStyle(styleId)
+    const lookId = this.props.match.params.id;
+    userLookService.retrieveUserLook(lookId)
       .then(
-        style => {
-          this.setState({ style: style, look: styleService.styleModelToData(style)})
-          console.log("after mount: ");
-          console.log(this.state.look);
+        look => {
+          const view = {
+            view : {
+              selectedTag : {
+                index : -1,
+              },
+              isChanged: false
+            }
+          }
+          const lookView = { ...look, ...view }
+          this.setState({look: lookView})
         }
       )
       .catch(e => {
         console.log("error" + e);
-        this.props.history.push('/welcome');
+        //this.props.history.push('/welcome');
       });
   }
 
@@ -176,14 +192,16 @@ class StyleEditPage extends Component {
       alignItems: "center",
       justifyContent: "center",
     }
+    const image = lookUtil.getCoverImage(this.state.look);
+    const tags = lookUtil.getTags(this.state.look);
     return (
       <div>
         <div className="section columns is-centered is-marginless" style={sectionStyle}>
           <div className="columns container is-centered is-widescreen is-marginless" style={lookContainerStyle}>
             <div className="column is-5">
                 <div className="card" style={lookCardStyle}>
-                  {this.state.look.image ?
-                    <img className="is-block container" style={lookImageStyle} src={this.state.look.image}></img> :
+                  {image ?
+                    <img className="is-block container" style={lookImageStyle} src={image}></img> :
                     <div style={imageTemplateStyle}>
                       <div className="file has-name is-boxed">
                         <label className="file-label">
@@ -205,8 +223,8 @@ class StyleEditPage extends Component {
             <div className="column is-7">
               <div className="has-text-weight-bold">Tag your look:</div> 
               <div>
-                {this.state.look.tags.map((tag, index)=>{
-                  if (index == this.state.look.selectedTag.index) {
+                {tags && tags.map((tag, index)=>{
+                  if (index == this.state.view.selectedTag.index) {
                   return (
                     <div key={index} style={editComponentStyle}>
                       <ProductEditPanel product={tag.product} remove={()=>{this.removeTag(index)}} save={(product)=>{this.saveTag(index, product)}} cancel={()=>{this.selectTag(-1)}} />
@@ -219,11 +237,9 @@ class StyleEditPage extends Component {
                     </div>
                   )
                 })}
-                {this.state.look.selectedTag.index < 0 &&
-                    <div style={editComponentStyle}>
-                      <div className="button is-link is-outlined"  onClick={this.addTag}>Add New Tag</div>
-                    </div>
-                }
+                <div style={editComponentStyle}>
+                  <div className="button is-link is-outlined"  onClick={this.addTag}>Add New Tag</div>
+                </div>
               </div>
 
               <div className="has-text-weight-bold">Describe your look:</div>
@@ -235,7 +251,7 @@ class StyleEditPage extends Component {
                   <button className="button is-danger is-outlined" onClick={this.removeStyle}>Remove</button>
                 </div>
                 <div className="level-right buttons">
-                  {this.state.look.isChanged ? 
+                  {this.state.view.isChanged ? 
                     <button className="button" onClick={this.saveStyle}>Save as Draft</button> :
                     <button className="button" onClick={this.saveStyle} disabled>Saved</button>}
                   <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button>
@@ -247,10 +263,8 @@ class StyleEditPage extends Component {
         <br></br>
         <div>Presentation Data</div>
         <div><pre>{JSON.stringify(this.state.look, null, 2)}</pre></div>
-        <div>Raw Data</div>
-        <div><pre>{JSON.stringify(this.state.style, null, 2)}</pre></div>
       </div>
     )
   }
 }
-export default StyleEditPage;
+export default LookEditPage;

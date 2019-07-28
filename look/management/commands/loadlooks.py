@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
-from style.models import Style, StyleImage, StyleImageAnnotation
+from look.models import Look, LookImage, Tag, Product
 from user.models import User
 import csv
 import os
@@ -30,7 +30,7 @@ class Command(BaseCommand):
         'title':2,
         'description':3,
         'date':4,
-        'tags':5,
+        'hash_tags':5,
         'annotation':6,
         'annotation_length':5,
     }
@@ -57,61 +57,63 @@ class Command(BaseCommand):
             user.save()
         return user
 
-    def style_break(self, txt):
+    def look_break(self, txt):
         return not txt == ""
 
-    def row_to_style_annotations(self, row):
-        annotations = []
+    def row_to_tags(self, row):
+        tags = []
         annotation_cursor = self.indicies['annotation']
         annotation_length = self.indicies['annotation_length']
         while annotation_cursor < len(row):
             annotation_row = row[annotation_cursor:annotation_cursor+self.indicies['annotation_length']]
             if annotation_row[1] != '':
-                annotation = StyleImageAnnotation()
+                annotation = Tag()
                 annotation.coor_x = annotation_row[self.annotation_indicies['coor_x']]
-                annotation.coor_y = annotation_row[self.annotation_indicies['coor_y']] 
-                annotation.title = annotation_row[self.annotation_indicies['title']]
-                annotation.price = annotation_row[self.annotation_indicies['price']]
-                annotation.url = annotation_row[self.annotation_indicies['url']]
+                annotation.coor_y = annotation_row[self.annotation_indicies['coor_y']]
 
-                print annotation
+                product = Product()
+                product.title = annotation_row[self.annotation_indicies['title']]
+                product.price = annotation_row[self.annotation_indicies['price']]
+                product.url = annotation_row[self.annotation_indicies['url']]
+                product.save()
 
-                annotations.append(annotation)
+                annotation.product = product
+
+                tags.append(annotation)
             annotation_cursor += annotation_length
-        return annotations
+        return tags
 
-    def row_to_style(self, row, style):
-        if (style is None) or (self.style_break(row[self.indicies['publisher']])):
+    def row_to_look(self, row, look):
+        if (look is None) or (self.look_break(row[self.indicies['publisher']])):
             publisher = self.get_user(row[self.indicies['publisher']])
-            style = Style()
-            style.title = row[self.indicies['title']]
-            style.description = row[self.indicies['description']]
-            style.publish_date = row[self.indicies['date']]
-            style.tags = row[self.indicies['tags']]
-            style.publisher = publisher
-            style.save()
-            print style
+            look = Look()
+            look.title = row[self.indicies['title']]
+            look.description = row[self.indicies['description']]
+            look.publish_date = row[self.indicies['date']]
+            look.publisher = publisher
+            look.save()
+            print look
 
-        style_image = StyleImage()
-        style_image.style = style
-        style_image.image.save(row[self.indicies['image_file_name']], File(open(self.look_path + row[self.indicies['image_file_name']], 'rb')))
-        style_image.save()
-        print style_image
+        look_image = LookImage()
+        look_image.look = look
+        look_image.image.save(row[self.indicies['image_file_name']], File(open(self.look_path + row[self.indicies['image_file_name']], 'rb')))
+        look_image.save()
+        print look_image
 
-        style_annotations = self.row_to_style_annotations(row)
-        for style_annotation in style_annotations:
-            style_annotation.style_image = style_image
-            style_annotation.save()
+        tags = self.row_to_tags(row)
+        for tag in tags:
+            tag.look_image = look_image
+            tag.save()
 
-        return style
+        return look
 
     def handle(self, *args, **options):
         sample_looks_file = self.file_path
         with open(sample_looks_file) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             next(csv_reader)
-            style = None
+            look = None
             for row in csv_reader:
                 print'Parsing row:', row
-                style = self.row_to_style(row, style)
+                look = self.row_to_look(row, look)
                 

@@ -1,5 +1,5 @@
 import React from "react";
-import { styleService } from "../services";
+import { userLookService } from "../services";
 import { withRouter } from 'react-router';
 
 import MediaQuery from 'react-responsive';
@@ -13,24 +13,24 @@ class Console extends React.Component {
 	}
 
 	createLook = () =>  {
-		styleService.createMyStyle()
+		userLookService.createUserLook()
 			.then(response => {
-				this.props.history.push('/style/'+response.id + '/edit');
+				this.props.history.push('/looks/'+response.id + '/edit');
 			})
 			.catch((e) => {
-				console.log("cannot create new style:" + e);
+				// TODO: replace with alert
+				console.log("Something went wrong when creating a new look...");
 			})
-		console.log("create look");
 	}
 
 	componentDidMount() {
-	    styleService.getMyStyles()
+	    userLookService.listUserLook()
 	      .then(looks => {
 	      	this.setState({looks:looks});
 	      })
 	      .catch((e)=>{
-	      	console.log("error retrieving my looks:" + e);
-
+	      	// TODO: replace with alert
+	      	console.log("Something went wrong when looking for your looks...");
 	      })
 	 }
 
@@ -90,15 +90,16 @@ class Console extends React.Component {
 					</button>
 					<div className="columns is-mobile" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
+							const lookImage = userLookService.getCoverImage(look);
 							return (
 								<div className="column is-one-quarter" style={lookStyle} key={index}>
-									<a href={'/style/'+look.id}>
-										<img style={previewImageStyle} src={look.image}></img>
+									<a href={'/looks/'+look.id}>
+										<img style={previewImageStyle} src={lookImage}></img>
 									</a>
 									<span style={overlayStyle} className="tag ">
 										{look.isPublished ? <span>Published</span> : <span>Draft</span>}
 									</span>
-									<a href={'/style/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
+									<a href={'/looks/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
 								</div>
 							)
 						})}
@@ -107,9 +108,10 @@ class Console extends React.Component {
                 <MediaQuery query="(max-width: 769px)">
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
+							const lookImage = userLookService.getCoverImage(look);
 							return (
 								<div className="column is-half" style={lookStyle} key={index}>
-									<a href={'/style/'+look.id}><img style={previewImageMobileStyle} src={look.image}></img></a>
+									<a href={'/looks/'+look.id}><img style={previewImageMobileStyle} src={lookImage}></img></a>
 								</div>
 							)
 						})}

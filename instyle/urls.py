@@ -17,14 +17,15 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework import routers
-import user.views, style.views, frontend.views, invitation.views
+import user.views, look.views, frontend.views, invitation.views
 
 router = routers.DefaultRouter()
 if settings.PROD_ENV == "DEV":
-    # Retrieve Style:       GET  /api/styles/$id/?format=json                   
-    router.register(r'styles', style.views.StyleViewSet)
-    router.register(r'style_images', style.views.StyleImageViewSet)
-    router.register(r'styles_image_annotations', style.views.StyleImageAnnotationViewSet)
+    # Retrieve Style:       GET  /api/user_looks/$id/?format=json                   
+    router.register(r'user_looks', look.views.UserLookViewSet)
+    router.register(r'looks', look.views.LookViewSet)
+    router.register(r'look_images', look.views.LookImageViewSet)
+    router.register(r'tags', look.views.TagViewSet)
     # Register User:        POST /api/users/create_user/?format=json 
     # Login User:           POST /api/obtain_auth_token/?format=json
     router.register(r'users', user.views.UserViewSet)

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import MediaQuery from 'react-responsive';
 import ProductCarousel from "./ProductCarousel"
 import SocialPlugin from "./SocialPlugin";
+import { lookUtil } from "../services";
 
 const UserPreview = ({ user }) => {
     const titleStyle = {
@@ -26,7 +27,7 @@ const UserPreview = ({ user }) => {
     )
 }
 
-const StyleDesktop = ({style}) => {
+const LookDesktop = ({look}) => {
     const imageStyle = {
         width: "100%",
         borderRadius: "5px",
@@ -53,13 +54,14 @@ const StyleDesktop = ({style}) => {
         borderRadius: "5px",
         padding: "15px 15px 15px 15px",
     }
+    const coverImage = lookUtil.getCoverImage(look);
     return (
         <React.Fragment>
             <div className="column is-6">
                 <div className="card" style={lookCardStyle}>
-                    <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
+                    <img className="is-block container" style={imageStyle} src={coverImage}></img>
                     <div style={productCarouselStyle}>
-                        <ProductCarousel style={style}/>
+                        <ProductCarousel look={look}/>
                     </div>
                     <div className="" style={socialPluginStyle}>
                         <SocialPlugin />
@@ -69,16 +71,16 @@ const StyleDesktop = ({style}) => {
             <div className="column is-4">
                 <div className="card" style={publisherCardStyle}>
                     <div>
-                        <UserPreview user={style.publisher}/>
+                        <UserPreview user={look.publisher}/>
                     </div>
                     <hr></hr>
                     <div>
                         <div>
-                            {style.description}
+                            {look.description}
                         </div>
                     </div>
                      <div style={timeStyle}>
-                        <div>{style.publish_date}</div>
+                        <div>{look.publish_date}</div>
                     </div>
                 </div>
             </div>
@@ -86,7 +88,7 @@ const StyleDesktop = ({style}) => {
     );
 } 
 
-const StyleMobile = ({ style }) => {
+const LookMobile = ({ look }) => {
     const imageStyle = {
         width: "100%",
         borderRadius: "5px",
@@ -115,13 +117,14 @@ const StyleMobile = ({ style }) => {
         borderRadius: "5px",
         padding: "15px 15px 15px 15px",
     }
+    const coverImage = lookUtil.getCoverImage(look);
     return (
         <React.Fragment>
             <div className="column is-6">
                 <div className="card is-shadowless" style={lookCardStyle}>
-                    <img className="is-block container" style={imageStyle} src={style.style_images && style.style_images[0].image}></img>
+                    <img className="is-block container" style={imageStyle} src={coverImage}></img>
                     <div style={productCarouselStyle}>
-                        <ProductCarousel style={style}/>
+                        <ProductCarousel look={look}/>
                     </div>
                     <div className="" style={socialPluginStyle}>
                         <SocialPlugin />
@@ -131,16 +134,16 @@ const StyleMobile = ({ style }) => {
             <div className="column is-4">
                 <div className="card is-shadowless" style={publisherCardStyle}>
                     <div className="is-hidden-mobile">
-                        <UserPreview user={style.publisher}/>
+                        <UserPreview user={look.publisher}/>
                     </div>
                     <hr className="is-hidden-mobile"></hr>
                     <div>
                         <div>
-                            {style.description}
+                            {look.description}
                         </div>
                     </div>
                      <div style={timeStyle}>
-                        <div>{style.publish_date}</div>
+                        <div>{look.publish_date}</div>
                     </div>
                 </div>
             </div>
@@ -148,26 +151,27 @@ const StyleMobile = ({ style }) => {
     );
 }
 
-const Style = ({ style }) => {
+const Style = ({ look }) => {
     const sectionStyle = {
         padding: "1rem 1rem"
     }
     const lookContainerStyle = {
         maxWidth: "960px",
-    }
+    }       
     return (
+
         <div>
             <div className="section columns is-centered is-marginless" style={sectionStyle}>
                 <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
                     <MediaQuery query="(min-width: 769px)">
-                        <StyleDesktop style={style} />
+                        <LookDesktop look={look} />
                     </MediaQuery>
                     <MediaQuery query="(max-width: 769px)">
-                        <StyleMobile style={style} />
+                        <LookMobile look={look} />
                     </MediaQuery>
                 </div>
             </div>
-            <div><pre>{JSON.stringify(style, null, 2)}</pre></div>
+            <div><pre>{JSON.stringify(look, null, 2)}</pre></div>
         </div>
     )
 };

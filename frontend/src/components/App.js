@@ -7,9 +7,9 @@ import PrivateRoute from "./PrivateRoute";
 import React from "react";
 import ReactDOM from "react-dom";
 import Signup from "./Signup";
-import StyleDataProvider from "./StyleDataProvider";
-import StyleEditPage from "./StyleEditPage";
-import Style from "./Style";
+import LookDataProvider from "./LookDataProvider";
+import LookEditPage from "./LookEditPage";
+import Look from "./Look";
 import { userService } from "../services";
 import Welcome from "./Welcome";
 import {
@@ -38,14 +38,18 @@ class App extends React.Component {
 		    <div className="canvas-component">
 			    <BrowserRouter>
 			      <Switch>
+			      	<Route path="/" exact component={Welcome} />
 			        <Route path="/welcome" exact component={Welcome} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
 			        <PrivateRoute path="/console" component={Console} />
-			        <Route exact path="/style/:id" component={StylePage} />
-			        <PrivateRoute exact path="/style/:id/edit" component={StyleEditPage} />
-			        <Redirect to="/welcome" />
+			        <Route exact path="/looks/:id" component={LookPage} />
+			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
+			    {/*
+			        <Redirect to="/abc" />
+			    */}
+
 			      </Switch>
 			    </BrowserRouter>
 		    </div>
@@ -55,8 +59,8 @@ class App extends React.Component {
 	}
 }
 
-const StylePage = ({ match }) => (
-  <StyleDataProvider styleId={match.params.id} render={style => <Style style={style} />} />
+const LookPage = ({ match }) => (
+  <LookDataProvider lookId={match.params.id} render={look => <Look look={look} />} />
    // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
 );
 

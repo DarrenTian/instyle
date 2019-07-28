@@ -3,10 +3,12 @@ import ProductTile from "./ProductTile";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 
+import { lookUtil } from "../services";
+
 class ProductCarousel extends React.Component {
 	render() {
 		// TODO: Extend this to support mutiple images.
-		const products = this.props.style.style_images[0].style_image_annotations;
+		const tags = lookUtil.getTags(this.props.look);
 		const sliderSettings = {
 	      infinite: true,
 	      speed: 500,
@@ -18,10 +20,10 @@ class ProductCarousel extends React.Component {
 	    }
 		return (
 			<div style={staticCarouselStyle}>
-                 {products && products.map((product, index) => {
+                 {tags && tags.map((tag, index) => {
                     return (
                     	<div key={index}>
-                    		<ProductTile product={product} index={index} isLinked={true} />
+                    		<ProductTile product={tag.product} index={index} isLinked={true} />
                     	</div>
                     );
                 })}
