@@ -90,8 +90,11 @@ class UserLookViewSet(viewsets.ModelViewSet):
       lookImage = LookImage()
       lookImage.look = look
       lookImage.image.save(file.name, file)
-
       lookImage.save()
+
+      look.publish_status = 'D'
+      look.publish_date = datetime.datetime.now().strftime("%Y-%m-%d")
+      look.save()
       
       return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
 
