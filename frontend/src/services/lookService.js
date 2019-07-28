@@ -27,5 +27,5 @@ function retrieveLook(lookId) {
       	} else {
       		return Promise.reject("cannot get style");
       	}
-      })
+     })
 }

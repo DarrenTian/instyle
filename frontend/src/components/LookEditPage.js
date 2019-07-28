@@ -260,9 +260,7 @@ class LookEditPage extends Component {
             </div>
           </div>
         </div>
-        <br></br>
-        <div>Presentation Data</div>
-        <div><pre>{JSON.stringify(this.state.look, null, 2)}</pre></div>
+        { process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(this.state.look, null, 2)}</pre></div> }
       </div>
     )
   }

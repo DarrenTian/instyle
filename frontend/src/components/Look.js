@@ -151,7 +151,7 @@ const LookMobile = ({ look }) => {
     );
 }
 
-const Style = ({ look }) => {
+const Look = ({ look }) => {
     const sectionStyle = {
         padding: "1rem 1rem"
     }
@@ -159,7 +159,6 @@ const Style = ({ look }) => {
         maxWidth: "960px",
     }       
     return (
-
         <div>
             <div className="section columns is-centered is-marginless" style={sectionStyle}>
                 <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
@@ -171,11 +170,11 @@ const Style = ({ look }) => {
                     </MediaQuery>
                 </div>
             </div>
-            <div><pre>{JSON.stringify(look, null, 2)}</pre></div>
+            { process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(look, null, 2)}</pre></div> }            
         </div>
     )
 };
-Style.propTypes = {
-    style: PropTypes.object.isRequired
+Look.propTypes = {
+    look: PropTypes.object.isRequired
 };
-export default Style;
+export default Look;

@@ -8,8 +8,6 @@ export const userLookService = {
 	updateUserLook,
 
 	setUserLookImage,
-
-	getCoverImage,
 };
 
 const userLookAPI = {
@@ -137,11 +135,4 @@ function setUserLookImage(lookId, file) {
 			return Promise.reject("cannot set look image");
 		}
 	})
-}
-
-function getCoverImage(look) {
-	if(look.look_images.length == 0) {
-		return null;
-	}
-	return look.look_images[0].image;
 }

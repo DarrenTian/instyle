@@ -1,5 +1,6 @@
 import React from "react";
 import { userLookService } from "../services";
+import { lookUtil } from "../services";
 import { withRouter } from 'react-router';
 
 import MediaQuery from 'react-responsive';
@@ -90,7 +91,7 @@ class Console extends React.Component {
 					</button>
 					<div className="columns is-mobile" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
-							const lookImage = userLookService.getCoverImage(look);
+							const lookImage = lookUtil.getCoverImage(look);
 							return (
 								<div className="column is-one-quarter" style={lookStyle} key={index}>
 									<a href={'/looks/'+look.id}>
@@ -108,7 +109,7 @@ class Console extends React.Component {
                 <MediaQuery query="(max-width: 769px)">
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
-							const lookImage = userLookService.getCoverImage(look);
+							const lookImage = lookUtil.getCoverImage(look);
 							return (
 								<div className="column is-half" style={lookStyle} key={index}>
 									<a href={'/looks/'+look.id}><img style={previewImageMobileStyle} src={lookImage}></img></a>

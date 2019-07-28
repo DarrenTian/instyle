@@ -4,8 +4,6 @@ export const lookUtil = {
 	getTags,
 };
 
-
-
 function getCoverLookImage(look) {
 	if(!look.look_images) {
 		return null;

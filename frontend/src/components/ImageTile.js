@@ -13,6 +13,6 @@ const ImageTile = ({ source }) => {
     );
 };
 ImageTile.propTypes = {
-    source: PropTypes.object.isRequired
+    source: PropTypes.string.isRequired
 };
 export default ImageTile;

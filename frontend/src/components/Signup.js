@@ -44,48 +44,48 @@ class Signup extends React.Component {
 	render() {
 		return (
 			<div>
-				<section class="hero is-halfheight">
-				  <div class="hero-body">
-				    <div class="container" >
-				      <div class="columns is-centered">
-				        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-				          <form class="box" onSubmit={this.handleSubmit}>
-				            <div class="field">
-				              <label class="label">Email</label>
-				              <div class="control has-icons-left">
-				                <input type="email" placeholder="Your email address" class="input" name="username" onChange={this.handleChange} required />
-				                <span class="icon is-small is-left">
-				                  <i class="fa fa-envelope"></i>
+				<section className="hero is-halfheight">
+				  <div className="hero-body">
+				    <div className="container" >
+				      <div className="columns is-centered">
+				        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
+				          <form className="box" onSubmit={this.handleSubmit}>
+				            <div className="field">
+				              <label className="label">Email</label>
+				              <div className="control has-icons-left">
+				                <input type="email" placeholder="Your email address" className="input" name="username" onChange={this.handleChange} required />
+				                <span className="icon is-small is-left">
+				                  <i className="fa fa-envelope"></i>
 				                </span>
 				              </div>
 				            </div>
-				            <div class="field">
-				              <label class="label">Username</label>
-				              <div class="control has-icons-left">
-				                <input type="text" placeholder="Pick a display name" class="input" name="displayName" onChange={this.handleChange} required />
-				                <span class="icon is-small is-left">
-				                  <i class="fa fa-user"></i>
+				            <div className="field">
+				              <label className="label">Username</label>
+				              <div className="control has-icons-left">
+				                <input type="text" placeholder="Pick a display name" className="input" name="displayName" onChange={this.handleChange} required />
+				                <span className="icon is-small is-left">
+				                  <i className="fa fa-user"></i>
 				                </span>
 				              </div>
 				            </div>
-				            <div class="field">
-				              <label class="label">Password</label>
-				              <div class="control has-icons-left">
-				                <input type="password" placeholder="*******" class="input" name="password" onChange={this.handleChange} required />
-				                <span class="icon is-small is-left">
-				                  <i class="fa fa-lock"></i>
+				            <div className="field">
+				              <label className="label">Password</label>
+				              <div className="control has-icons-left">
+				                <input type="password" placeholder="*******" className="input" name="password" onChange={this.handleChange} required />
+				                <span className="icon is-small is-left">
+				                  <i className="fa fa-lock"></i>
 				                </span>
 				              </div>
 				            </div>
-				            <div class="field">
-				            	<input type="submit" value="Sign Up" class="button is-outlined is-fullwidth" />
+				            <div className="field">
+				            	<input type="submit" value="Sign Up" className="button is-outlined is-fullwidth" />
 				            </div>
-				            <div class="field is-fullwidth">
-			            		<div class="is-flex-centered">				            		
-			            			<p class="is-size-7">By continuing, you agree Eastyler's <a href="/doc/terms">Terms of Service</a></p>
+				            <div className="field is-fullwidth">
+			            		<div className="is-flex-centered">				            		
+			            			<p className="is-size-7">By continuing, you agree Eastyler's <a href="/doc/terms">Terms of Service</a></p>
 								</div>
-			    				<div class="is-flex-centered">
-			    					<b><p class="is-size-7">Already an Eastyler? <a href="/login">Log in</a></p></b>
+			    				<div className="is-flex-centered">
+			    					<b><p className="is-size-7">Already an Eastyler? <a href="/login">Log in</a></p></b>
 			    				</div>
 				            </div>
 				          </form>
