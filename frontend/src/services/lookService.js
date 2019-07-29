@@ -15,6 +15,7 @@ function getLookHeader() {
         'Content-Type': 'application/json',
 	}
 }
+
 function retrieveLook(lookId) {
 	return fetch(
 		lookAPI.RETRIEVE.END_POINT.replace('lookId', lookId), {

@@ -29,7 +29,6 @@ class App extends React.Component {
 		this.setState({
 			isLoggedIn: true,
 		});
-		console.log(this.state);
 	}
 
 	render() {

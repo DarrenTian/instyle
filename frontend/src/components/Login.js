@@ -7,7 +7,7 @@ class Login extends React.Component {
 		super(props);
 
 		this.state = {
-			username : '',
+			email : '',
 			password : '',
 			errorMsg : '',
 		};
@@ -20,9 +20,9 @@ class Login extends React.Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		const { username, password} = this.state;
+		const { email, password} = this.state;
 	 	userService
-	 		.login(username, password)
+	 		.login(email, password)
 	        .then(data => {
 	        	// When success, loginHandler updates the whole app's state
 	        	this.props.loginHandler();
@@ -48,7 +48,7 @@ class Login extends React.Component {
 				            <div className="field">
 				              <label className="label">Email</label>
 				              <div className="control has-icons-left">
-				                <input type="text" placeholder="Your email address" className="input" name="username" defaultValue="" onChange={this.handleChange} required />
+				                <input type="email" placeholder="Your email address" className="input" name="email" defaultValue="" onChange={this.handleChange} required />
 				                <span className="icon is-small is-left">
 				                  <i className="fa fa-envelope"></i>
 				                </span>

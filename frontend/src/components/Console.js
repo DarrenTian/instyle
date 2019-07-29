@@ -38,8 +38,8 @@ class Console extends React.Component {
 	render() {
 		const consoleWrapperStyle = {
 		}
-		const consoleStyle = {
-			maxWidth: "769px",
+		const consoleDesktopStyle = {
+			width: "769px",
 			padding: "0rem 0.5rem",
 			margin: "0rem auto",
 			justifyContent: "flex-start",
@@ -83,31 +83,40 @@ class Console extends React.Component {
 			left: "10px",
 			opacity: "0.7",
 		}
+		const hintStyle = {
+			width: "100%",
+			padding: "20px",
+		}
+		const hasLooks = this.state.looks.length !=0;
 		return (
-			<div className="console" style={consoleStyle} >
+			<div className="console" >
 			    <MediaQuery query="(min-width: 769px)">
-			    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
-						Create New Look
-					</button>
-					<div className="columns is-mobile" style={looksStyle}>
-						{this.state.looks.map((look, index)=>{
-							const lookImage = lookUtil.getCoverImage(look);
-							return (
-								<div className="column is-one-quarter" style={lookStyle} key={index}>
-									<a href={'/looks/'+look.id}>
-										<img style={previewImageStyle} src={lookImage}></img>
-									</a>
-									<span style={overlayStyle} className="tag ">
-										{look.publish_status=='P' ? <span style={{fontWeight:"800"}}>Published</span> : <span>Draft</span>}
-									</span>
-									<a href={'/looks/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
-								</div>
-							)
-						})}
+				    <div style={consoleDesktopStyle}>
+				    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
+							Create New Look
+						</button>
+						<div className="columns is-mobile" style={looksStyle}>
+							{hasLooks? null : <div className="is-flex-centered is-fullwidth" style={hintStyle}>Create your first look!</div>}
+							{this.state.looks.map((look, index)=>{
+								const lookImage = lookUtil.getCoverImage(look);
+								return (
+									<div className="column is-one-quarter" style={lookStyle} key={index}>
+										<a href={'/looks/'+look.id}>
+											<img style={previewImageStyle} src={lookImage}></img>
+										</a>
+										<span style={overlayStyle} className="tag ">
+											{look.publish_status=='P' ? <span style={{fontWeight:"800"}}>Published</span> : <span>Draft</span>}
+										</span>
+										<a href={'/looks/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
+									</div>
+								)
+							})}
+						</div>
 					</div>
                 </MediaQuery>
                 <MediaQuery query="(max-width: 769px)">
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
+                		<div className="is-flex-centered" style={hintStyle}>Create your first look on our desktop site!</div>
 						{this.state.looks.map((look, index)=>{
 							const lookImage = lookUtil.getCoverImage(look);
 							return (

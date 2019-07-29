@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from user.models import User
 from user.serializers import UserSerializer, GroupSerializer
 
+# Login
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
@@ -19,7 +20,7 @@ class CustomAuthToken(ObtainAuthToken):
             'token': token.key
         })
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.GenericViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -27,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     @action(detail=False, methods=['post'])
-    def create_user(self, request):
+    def sign_up(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()

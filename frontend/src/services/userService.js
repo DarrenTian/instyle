@@ -1,9 +1,29 @@
 export const userService = {
+	login,
+	signup,
+
 	getToken,
 	isLoggedIn,
-	login,
 	logout,
 };
+
+const userAPI = {
+	'LOGIN' : {
+		'END_POINT': 'api/users/obtain_auth_token/',
+		'METHOD': 'POST',
+	},
+	'SIGNUP' : {
+		'END_POINT': '/api/users/sign_up/',
+		'METHOD': 'POST',
+	}
+}
+
+function getUserHeader() {
+	return {
+		'Accept': 'application/json',
+        'Content-Type': 'application/json',
+	}
+}
 
 function getToken() {
 	return localStorage.getItem('userAuthToken')
@@ -26,19 +46,29 @@ function handleResponse(response) {
 		});
 }
 
-function login(username, password) {
+function login(email, password) {
 	return fetch(
-		'/api/obtain_auth_token/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+		userAPI.LOGIN.END_POINT, {
+            method: userAPI.LOGIN.METHOD,
+            headers: getUserHeader(),
             body: JSON.stringify({
-                username: username,
+                username: email,
                 password: password,
             })
         }).then(handleResponse);
+}
+
+function signup(email, password, nickname) {
+	return fetch(
+		userAPI.SIGNUP.END_POINT, {
+			method: userAPI.LOGIN.METHOD,
+			headers: getUserHeader(),
+			body: JSON.stringify({
+				email: email,
+				password: password,
+				nickname: nickname,
+			})
+		}).then(handleResponse);
 }
 
 function logout() {

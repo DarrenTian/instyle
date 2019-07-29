@@ -22,12 +22,14 @@ class Invite extends React.Component {
         }
         this.state = {
             email: '',
+            invited: false,
         };
     }
 
     changeEmail = (event) => {
         this.setState({
-            email: event.target.value
+            email: event.target.value,
+            invited: false,
         });
     }
 
@@ -44,13 +46,12 @@ class Invite extends React.Component {
         })
         .then(response => {
             if (response.status == 201) {
-                document
-                    .getElementsByClassName("invite-me-button")[0]
-                    .style
-                    .backgroundColor = "gray";
-
+                this.setState({
+                    email: '',
+                    invited: true,
+                });
             } else {
-                console.log("Something went wrong");
+                console.log("Invitation is closed.");
             }
         });
     }
@@ -67,13 +68,16 @@ class Invite extends React.Component {
                     <div className="control has-icons-left">
                         <input className="input" type="email" placeholder="Your email address" 
                                value={this.state.email}
-                               onChange={this.changeEmail}></input>
+                               onChange={this.changeEmail} required></input>
                         <span className="icon is-small is-left">
                             <i className="fas fa-envelope"></i>
                         </span>
                     </div>
                     <div id="inviteMe" className="control">
-                        <button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle} onClick={this.inviteMe}>Invite me</button>
+                        {this.state.invited ?
+                        <button className="button invite-me-button" style={this.inviteMeButtonStyle} >Expect your invitation to arrive soon!</button> :
+                        <button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle} onClick={this.inviteMe}>Invite me!</button>
+                        }
                     </div>
                 </div>
               </section>
