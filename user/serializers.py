@@ -18,14 +18,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 		fields = [
 		  'email',
 		  'password',
-		  'date_joined',
-		  'last_login',
-		  # Custom attributes
 		  'nickname',
+		  'avatar_image',
 		  'biography',
-		  'location',
-		  'profile_image_url',
-		  'groups',
+		]
+
+class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = User
+		fields = [
+		  'email',
+		  'nickname',
+		  'avatar_image',
+		  'biography',
 		]
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

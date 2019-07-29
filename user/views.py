@@ -5,8 +5,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from user.models import User
-from user.serializers import UserSerializer, GroupSerializer
+from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
 
 # Login
 class CustomAuthToken(ObtainAuthToken):
@@ -17,7 +18,8 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         return Response({
-            'token': token.key
+            'token': token.key,
+            'profile': UserProfileSerializer(user).data,
         })
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -40,6 +42,25 @@ class UserViewSet(viewsets.GenericViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserProfileViewSet(viewsets.GenericViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=False, methods=['post'])
+    def get_profile(self, request):
+        user = request.user
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'profile': UserProfileSerializer(user).data,
+        }, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['post'])
+    def update_profile(self, request):
+        print request.body
+        return Response({}, status=status.HTTP_200_OK)
 
 class GroupViewSet(viewsets.ModelViewSet):
     """

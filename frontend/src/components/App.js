@@ -13,6 +13,7 @@ import Look from "./Look";
 import { userService } from "../services";
 import Welcome from "./Welcome";
 import ErrorPage from "./ErrorPage";
+import Profile from "./Profile";
 import {
   Route,
   Switch,
@@ -44,6 +45,7 @@ class App extends React.Component {
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
 			        <PrivateRoute path="/console" component={Console} />
+			        <PrivateRoute path="/profile" component={Profile} />
 			        <Route exact path="/looks/:id" component={LookPage} />
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
 			        <Route path="/error" exact component={ErrorPage} />

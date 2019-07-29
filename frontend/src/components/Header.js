@@ -57,6 +57,9 @@ class Header extends React.Component {
                   <a className="navbar-item" href="/console">
                     Console
                   </a>
+                  <a className="navbar-item" href="/profile">
+                    Profile
+                  </a>
                   <hr className="navbar-divider"/>
                   <a className="navbar-item" href="/welcome" onClick={this.logout}>
                     Log out

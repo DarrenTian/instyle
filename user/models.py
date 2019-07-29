@@ -44,11 +44,12 @@ class User(AbstractUser):
         error_messages={
             'unique': "This email address has already been registered.",
         })
+
     # Additional fields
-    nickname = models.CharField(max_length=30)
+    nickname = models.CharField(max_length=50)
+    avatar_image = models.ImageField()
+
     biography = models.TextField(max_length=500, default='')
-    location = models.CharField(max_length=30, blank=True)
-    profile_image_url = models.URLField(max_length=200, default='')
 
     USERNAME_FIELD = 'email'
     # email is already required as username_field

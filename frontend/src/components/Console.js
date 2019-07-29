@@ -116,7 +116,6 @@ class Console extends React.Component {
                 </MediaQuery>
                 <MediaQuery query="(max-width: 769px)">
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
-                		<div className="is-flex-centered" style={hintStyle}>Create your first look on our desktop site!</div>
 						{this.state.looks.map((look, index)=>{
 							const lookImage = lookUtil.getCoverImage(look);
 							return (
@@ -125,6 +124,7 @@ class Console extends React.Component {
 								</div>
 							)
 						})}
+						<div className="is-flex-centered" style={hintStyle}>Create your looks on our desktop site!</div>
 					</div>
                 </MediaQuery>
 			</div>

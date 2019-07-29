@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'user_looks', look.views.UserLookViewSet)
 router.register(r'looks', look.views.LookViewSet)
 router.register(r'users', user.views.UserViewSet)
+router.register(r'user_profile', user.views.UserProfileViewSet)
 router.register(r'invitation', invitation.views.InvitationViewSet)
 
 # Wire up our API using automatic URL routing.
