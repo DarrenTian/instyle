@@ -2,10 +2,11 @@ from rest_framework import viewsets, status
 from django.contrib.auth.models import Group
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
+from rest_framework.decorators import action, parser_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import FileUploadParser
 from user.models import User
 from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
 
@@ -61,6 +62,20 @@ class UserProfileViewSet(viewsets.GenericViewSet):
     def update_profile(self, request):
         print request.body
         return Response({}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['post'])
+    @parser_classes([FileUploadParser])
+    def set_avatar_image(self, request):
+        user = request.user
+        token, created = Token.objects.get_or_create(user=user)
+        file = request.data['file']
+        user.avatar_image.save(file.name, file)
+        user.save()
+        return Response({
+            'token': token.key,
+            'profile': UserProfileSerializer(user).data,
+        }, status=status.HTTP_200_OK)
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """

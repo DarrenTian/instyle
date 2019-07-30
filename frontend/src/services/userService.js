@@ -2,8 +2,11 @@ export const userService = {
 	login,
 	signup,
 	getUserProfile,
+	setUserAvatarImage,
 
 	getToken,
+	getProfile,
+	updateCachedProfile,
 	isLoggedIn,
 	logout,
 };
@@ -25,6 +28,10 @@ const userAPI = {
 		'END_POINT': '/api/user_profile/update_profile/',
 		'METHOD': 'POST',
 	},
+	'SET_AVATAR_IMAGE' : {
+		'END_POINT': '/api/user_profile/set_avatar_image/',
+		'METHOD': 'POST',
+	},
 }
 
 function getToken() {
@@ -35,12 +42,26 @@ function getToken() {
 	return user.token;
 }
 
+function getProfile() {
+	if (localStorage.getItem('user') == undefined) {
+		return null;
+	}
+	const user = JSON.parse(localStorage.getItem('user'));
+	return user.profile;
+}
+
 function isLoggedIn() {	
 	return getToken() != null;
 }
 
 function logout() {
 	localStorage.removeItem('user');
+}
+
+function updateCachedProfile(profile) {
+	const user = JSON.parse(localStorage.getItem('user'));
+	user.profile = profile;
+	localStorage.setItem('user', JSON.stringify(user));
 }
 
 function getUserHeader() {
@@ -55,6 +76,13 @@ function getUserProfileHeader() {
 		'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Token '+ getToken(),
+	}
+}
+
+function getUserProfileHeaderForFile() {
+	return {
+		'Accept': 'application/json',
+        'Authorization': 'Token '+ userService.getToken(),
 	}
 }
 
@@ -108,6 +136,22 @@ function getUserProfile() {
 				return Promise.reject("cannot retrieve your profile");
 			}
 		})
+}
+
+function setUserAvatarImage(file) {
+	return fetch(
+		userAPI.SET_AVATAR_IMAGE.END_POINT, {
+			method: userAPI.SET_AVATAR_IMAGE.METHOD,
+			headers: getUserProfileHeaderForFile(),
+            body: file,
+		})
+	.then(response => {
+		if (response.ok) {
+			return response.json();
+		} else {
+			return Promise.reject("cannot set profile image");
+		}
+	})
 }
 
 

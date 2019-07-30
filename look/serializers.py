@@ -22,7 +22,7 @@ class LookImageSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ['nickname']
+		fields = ['nickname', 'avatar_image']
 
 class LookSerializer(serializers.ModelSerializer):
 	#publisher = serializers.CharField(source='publisher.username')

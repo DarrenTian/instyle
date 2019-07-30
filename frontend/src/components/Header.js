@@ -24,6 +24,11 @@ class Header extends React.Component {
         const navBarStyle = {
             boxShadow:"0px 1px 1px #e6e6e6",
         };
+        const avatarStyle = {
+            objectFit: "cover",
+            width: "2rem",
+            height: "2rem",
+        }
         let navEnd;
         if (!this.props.isLoggedIn) {
             navEnd = <div className="navbar-end">
@@ -44,11 +49,12 @@ class Header extends React.Component {
               </div>
             </div>
         } else {
+            const profile = userService.getProfile();
             navEnd = <div className="navbar-end">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link header-figure is-arrowless">
-                  <img src="/static/avatar.png" />
-                  <p>addict.attitude</p>
+                  <img src={profile? profile.avatar_image : null} style={avatarStyle}/>
+                  <p>{profile? profile.nickname : null}</p>
                 </a>
                 <div className="navbar-dropdown">
                  <a className="navbar-item" href="/welcome">

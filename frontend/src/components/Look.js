@@ -11,11 +11,16 @@ const UserPreview = ({ user }) => {
         overflowX: "initial",
         alignSelf: "center",
     };
+    const avatarStyle = {
+        objectFit: "cover",
+        width: "100%",
+        height: "100%",
+    }
     return (
         <div className="media">
             <div className="media-left">
                 <figure className="image is-48x48">
-                    <img className="is-rounded" src="/static/avatar.png" alt="Placeholder image"></img>
+                    <img className="is-rounded" src={user.avatar_image} style={avatarStyle} alt="Placeholder image"></img>
                 </figure>
             </div>
             <div className="media-content" style={titleStyle}>
