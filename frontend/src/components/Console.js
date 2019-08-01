@@ -99,9 +99,10 @@ class Console extends React.Component {
 							{hasLooks? null : <div className="is-flex-centered is-fullwidth" style={hintStyle}>Create your first look!</div>}
 							{this.state.looks.map((look, index)=>{
 								const lookImage = lookUtil.getCoverImage(look);
+								const url = look.publish_status=='P' ? '/looks/'+look.id : '/looks/'+look.id+'/preview';
 								return (
 									<div className="column is-one-quarter" style={lookStyle} key={index}>
-										<a href={'/looks/'+look.id}>
+										<a href={url}>
 											<img style={previewImageStyle} src={lookImage}></img>
 										</a>
 										<span style={overlayStyle} className="tag ">
@@ -118,9 +119,10 @@ class Console extends React.Component {
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
 							const lookImage = lookUtil.getCoverImage(look);
+							const url = look.publish_status=='P' ? '/looks/'+look.id : '/looks/'+look.id+'/preview';
 							return (
 								<div className="column is-half" style={lookStyle} key={index}>
-									<a href={'/looks/'+look.id}><img style={previewImageMobileStyle} src={lookImage}></img></a>
+									<a href={url}><img style={previewImageMobileStyle} src={lookImage}></img></a>
 								</div>
 							)
 						})}

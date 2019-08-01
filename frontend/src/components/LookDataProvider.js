@@ -5,17 +5,13 @@ import { lookService } from "../services";
 import ErrorPage from "./ErrorPage";
 
 class LookDataProvider extends Component {
-  static propTypes = {
-    lookId: PropTypes.string.isRequired,
-    render: PropTypes.func.isRequired
-  };
   state = {
       look: [],
       loaded: false,
       placeholder: "Loading..."
     };
   componentDidMount() {
-    lookService.retrieveLook(this.props.lookId)
+    lookService.retrieveLook(this.props.lookId, this.props.preview)
       .then(
         look => this.setState({ look: look, loaded: true })
       )

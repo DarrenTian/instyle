@@ -1,3 +1,5 @@
+import { userService } from './userService'
+
 export const lookService = {
 	retrieveLook,
 };
@@ -16,11 +18,20 @@ function getLookHeader() {
 	}
 }
 
-function retrieveLook(lookId) {
+
+function getAuthLookHeader() {
+	return {
+		'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+ userService.getToken(),
+	}
+}
+
+function retrieveLook(lookId, selfAuth) {
 	return fetch(
 		lookAPI.RETRIEVE.END_POINT.replace('lookId', lookId), {
 			method: lookAPI.RETRIEVE.METHOD,
-			headers: getLookHeader(),
+			headers: selfAuth? getAuthLookHeader() : getLookHeader(),
 		})
       .then(response => {
       	if (response.ok) {

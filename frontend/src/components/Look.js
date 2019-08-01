@@ -156,30 +156,32 @@ const LookMobile = ({ look }) => {
     );
 }
 
-const Look = ({ look }) => {
-    const sectionStyle = {
-        padding: "1rem 1rem"
-    }
-    const lookContainerStyle = {
-        maxWidth: "960px",
-    }       
-    return (
-        <div>
-            <div className="section columns is-centered is-marginless" style={sectionStyle}>
-                <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
-                    <MediaQuery query="(min-width: 769px)">
-                        <LookDesktop look={look} />
-                    </MediaQuery>
-                    <MediaQuery query="(max-width: 769px)">
-                        <LookMobile look={look} />
-                    </MediaQuery>
+class Look extends React.Component {
+    render() {
+        const sectionStyle = {
+            padding: "1rem 1rem"
+        }
+        const lookContainerStyle = {
+            maxWidth: "960px",
+        }       
+        return (
+            <div>
+                <div className="section columns is-centered is-marginless" style={sectionStyle}>
+                    <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
+                        {/* TODO, make format better
+                        this.props.preview && <div className="section is-size-5 has-text-info">Preview</div>*/}
+                        <MediaQuery query="(min-width: 769px)">
+                            <LookDesktop look={this.props.look} />
+                        </MediaQuery>
+                        <MediaQuery query="(max-width: 769px)">
+                            <LookMobile look={this.props.look} />
+                        </MediaQuery>
+                    </div>
                 </div>
+                { process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(this.props.look, null, 2)}</pre></div> }            
             </div>
-            { process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(look, null, 2)}</pre></div> }            
-        </div>
-    )
-};
-Look.propTypes = {
-    look: PropTypes.object.isRequired
+        )
+    }
+
 };
 export default Look;

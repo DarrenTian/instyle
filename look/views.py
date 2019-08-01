@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from rest_framework import mixins, viewsets, status
 from rest_framework.decorators import action, parser_classes
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from look.models import Look, LookImage, Tag, Product
 from look.serializers import LookSerializer, LookImageSerializer, TagSerializer
@@ -36,12 +36,10 @@ class LookViewSet(mixins.RetrieveModelMixin,
 
     def retrieve(self, request, pk=None):
       look = self.get_object()
-      if not look.publish_status == 'P':
+      if (not look.publish_status == 'P') and (not look.publisher == request.user):
         return Response({}, status=status.HTTP_404_NOT_FOUND)
       else:
         return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
-
-
 
 # Look API restricted per user access.
 class UserLookViewSet(viewsets.ModelViewSet):

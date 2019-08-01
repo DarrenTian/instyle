@@ -20,6 +20,8 @@ import {
   BrowserRouter,
   Redirect
 } from "react-router-dom";
+import queryString from 'query-string';
+
 
 class App extends React.Component {
 	state = {
@@ -46,7 +48,8 @@ class App extends React.Component {
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
 			        <PrivateRoute path="/console" component={Console} />
 			        <PrivateRoute path="/profile" component={Profile} />
-			        <Route exact path="/looks/:id" component={LookPage} />
+			        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} />} />
+			        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} />} />
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
 			        <Route path="/error" exact component={ErrorPage} />
 			        <Redirect to="/error" />
@@ -58,11 +61,15 @@ class App extends React.Component {
 		)
 	}
 }
+class LookPage extends React.Component {
+	render() {
+		return (
+	  		<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
+	   		// TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
+		);
+	}
 
-const LookPage = ({ match }) => (
-  <LookDataProvider lookId={match.params.id} render={look => <Look look={look} />} />
-   // TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
-);
+}
 
 const wrapper = document.getElementById("instyle-spa");
 wrapper ? ReactDOM.render(<App />, wrapper) : null;
