@@ -37,15 +37,16 @@ class UserViewSet(viewsets.GenericViewSet):
             user = serializer.save()
             if user:
                 token = Token.objects.create(user=user)
-                response = {}
-                response['token'] = token.key
-                return Response(response, status=status.HTTP_201_CREATED)
+                return Response({
+                    'token': token.key,
+                    'profile': UserProfileSerializer(user).data,
+                }, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserProfileViewSet(viewsets.GenericViewSet):
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = UserProfileSerializer
 
     permission_classes = [IsAuthenticated]
 
@@ -60,8 +61,21 @@ class UserProfileViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['post'])
     def update_profile(self, request):
-        print request.body
-        return Response({}, status=status.HTTP_200_OK)
+        user = request.user
+        profile = request.data
+        user.nickname = profile['nickname']
+        user.biography = profile['biography']
+        token, created = Token.objects.get_or_create(user=user)
+        try:
+            user.save()
+        except Exception as e:
+            return Response({
+                'error': "Please try another one",
+            }, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'token': token.key,
+            'profile': UserProfileSerializer(user).data,
+        }, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['post'])
     @parser_classes([FileUploadParser])

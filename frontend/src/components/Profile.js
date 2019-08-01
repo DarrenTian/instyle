@@ -6,6 +6,7 @@ import { userService } from "../services";
 class Profile extends React.Component {
   state = {
   	profile: {},
+  	errMsg: '',
   };
 
   updateCachedProfile = (profile) => {
@@ -14,14 +15,20 @@ class Profile extends React.Component {
 
   handleChange = (e) => {
 	const { name, value } = e.target;
-	this.setState({ [name]: value});
+	const state = { ...this.state };
+	state.profile[name] = value;
+	this.setState(state);
   }
 
   updateProfile = () => {
+  	event.preventDefault();
   	userService.updateUserProfile(this.state.profile)
   		.then(user=>{
   			this.setState({ profile: user.profile});
   			this.updateCachedProfile(user.profile);
+  		})
+  		.catch(error=> {
+  			this.setState({'errMsg':error});
   		})
   }
 
@@ -123,7 +130,7 @@ class Profile extends React.Component {
 						  <div className="field-body">
 						    <div className="field">
 						      <div className="control">
-						        <textarea name="biography" rows="10" className="input" style={biographyStyle} onChange={this.handleChange} >{this.state.profile.nickname}</textarea>
+						        <textarea name="biography" rows="10" className="input" value={this.state.profile.biography} style={biographyStyle} onChange={this.handleChange} >{this.state.profile.nickname}</textarea>
 						      </div>
 						    </div>
 						  </div>
@@ -138,12 +145,24 @@ class Profile extends React.Component {
 					         </div>
 						  </div>
 						</div>
+
+						<div className="field is-horizontal">
+						  <div className="field-label">
+						  </div>
+						  <div className="field-body">
+							 <div className="field">
+					            <div>{this.state.errMsg}</div>
+					         </div>
+						  </div>
+						</div>
+						
 			          </form>
 			        </div>
 			      </div>
 			    </div>
 			  </div>
 			</section>
+			{ process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(this.state.profile, null, 2)}</pre></div> }
 		</div>
     )
   }

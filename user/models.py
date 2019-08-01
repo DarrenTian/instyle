@@ -46,8 +46,11 @@ class User(AbstractUser):
         })
 
     # Additional fields
-    nickname = models.CharField(max_length=50)
-    avatar_image = models.ImageField()
+    nickname = models.CharField(max_length=50, unique=True,
+        error_messages={
+            'unique': "This display name has already been registered.",
+        })
+    avatar_image = models.ImageField(default='/logo_transparent.png')
 
     biography = models.TextField(max_length=500, default='')
 

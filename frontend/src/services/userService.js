@@ -2,6 +2,7 @@ export const userService = {
 	login,
 	signup,
 	getUserProfile,
+	updateUserProfile,
 	setUserAvatarImage,
 
 	getToken,
@@ -137,6 +138,22 @@ function getUserProfile() {
 			}
 		})
 }
+
+function updateUserProfile(profile) {
+	return fetch(
+		userAPI.UPDATE_PROFILE.END_POINT, {
+			method: userAPI.UPDATE_PROFILE.METHOD,
+			headers: getUserProfileHeader(),
+			body: JSON.stringify(profile),
+		}).then(response=> {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("try another one");
+			}
+		})
+}
+
 
 function setUserAvatarImage(file) {
 	return fetch(

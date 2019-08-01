@@ -19,8 +19,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 		  'email',
 		  'password',
 		  'nickname',
-		  'avatar_image',
-		  'biography',
 		]
 
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
