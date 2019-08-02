@@ -10,7 +10,7 @@ class ProductTile extends React.Component {
             borderRadius: "5px",
             backgroundColor: "#F8F8F8",
             height: "70px",
-            marginRight: "10px",
+            marginRight: "5px",
         };
         const mediaBoxStyle = {
         	width: "100%",

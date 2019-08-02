@@ -85,6 +85,10 @@ $footer-background-color: white;
   justify-content: center;
 }
 
+.product-carousel::-webkit-scrollbar {
+  width: 0.6em;
+}
+
 .tiles-section-wrapper {
   position: relative;
 }

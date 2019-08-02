@@ -17,12 +17,16 @@ class ProductCarousel extends React.Component {
 	    };
 	    const staticCarouselStyle = {
 	    	display: "flex",
+	    	overflowX: "auto",
+	    }
+	    const productContainerStyle = {
+	    	margin: "2px",
 	    }
 		return (
-			<div style={staticCarouselStyle}>
+			<div style={staticCarouselStyle} className="product-carousel">
                  {tags && tags.map((tag, index) => {
                     return (
-                    	<div key={index}>
+                    	<div key={index} style={productContainerStyle}>
                     		<ProductTile product={tag.product} index={index} isLinked={true} />
                     	</div>
                     );

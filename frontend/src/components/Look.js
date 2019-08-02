@@ -113,7 +113,6 @@ const LookMobile = ({ look }) => {
     }
     const productCarouselStyle = {
         padding: "10px 10px 10px 10px",
-        overflow: "scroll",
     }
     const lookCardStyle = {
         borderRadius: "5px",
