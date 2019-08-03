@@ -28,6 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+USE_SQLITE = config('USE_SQLITE', default=False, cast=bool)
+
 # Production Environment
 PROD_ENV = config('PROD_ENV', default='DEV')
 
@@ -118,7 +120,7 @@ WSGI_APPLICATION = 'instyle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 DATABASES = {}
-if DEBUG:
+if USE_SQLITE:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

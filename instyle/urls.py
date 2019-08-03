@@ -20,7 +20,7 @@ from rest_framework import routers
 import user.views, look.views, frontend.views, invitation.views
 
 router = routers.SimpleRouter()
-if settings.DEBUG == "True":
+if settings.DEBUG == True:
     router = routers.DefaultRouter()
 router.register(r'user_looks', look.views.UserLookViewSet)
 router.register(r'looks', look.views.LookViewSet)
