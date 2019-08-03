@@ -50,7 +50,7 @@ class User(AbstractUser):
         error_messages={
             'unique': "This display name has already been registered.",
         })
-    avatar_image = models.ImageField(default='/logo_transparent.png')
+    avatar_image = models.ImageField(default='logo_transparent.png')
 
     biography = models.TextField(max_length=500, default='')
 
