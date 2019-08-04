@@ -7,6 +7,11 @@ $footer-background-color: white;
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+@font-face {
+  font-family: "Quando";
+  src: url("/static/Quando-Regular.ttf");
+}
+
 .main-canvas {
   display: flex;
   flex-direction: column;

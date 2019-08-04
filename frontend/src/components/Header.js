@@ -29,6 +29,11 @@ class Header extends React.Component {
             width: "2rem",
             height: "2rem",
         }
+        const titleStyle = {
+            fontFamily: "Quando",
+            fontStyle: "normal",
+            fontWeight: "normal",
+        }
         let navEnd;
         if (!this.props.isLoggedIn) {
             navEnd = <div className="navbar-end">
@@ -84,7 +89,7 @@ class Header extends React.Component {
                                 <img src="/static/logo_transparent.png"/>
                             </div>
                             <div className="vertical-line"></div>
-                            <h1 className="navbar-name">eastyler</h1>
+                            <h1 className="navbar-name" style={titleStyle}>Eastyler</h1>
                         </a>
                         <a role="button" className={`navbar-burger burger ${this.state.activeMenu ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarMenu" onClick={this.toggleMenu}>
                           <span aria-hidden="true"></span>

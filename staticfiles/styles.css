@@ -7249,6 +7249,10 @@ label.panel-block {
   background-color: white;
   padding: 1rem 1rem; }
 
+@font-face {
+  font-family: "Quando";
+  src: url("/static/Quando-Regular.ttf"); }
+
 .main-canvas {
   display: flex;
   flex-direction: column;
