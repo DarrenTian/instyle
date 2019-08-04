@@ -58,13 +58,7 @@ class Invite extends React.Component {
 
     render() {
         return (
-            <div>
-              <section className="section" >
                 <div className="container" style={this.inviteMeSectionStyle}>
-                    <h2 className="subtitle">
-                        Build your look;<br/>
-                        Share your style.
-                    </h2>
                     <div className="control has-icons-left">
                         <input className="input" type="email" placeholder="Your email address" 
                                value={this.state.email}
@@ -80,8 +74,6 @@ class Invite extends React.Component {
                         }
                     </div>
                 </div>
-              </section>
-            </div>
         )
     }
 }
