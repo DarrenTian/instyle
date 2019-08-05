@@ -18,7 +18,7 @@ class Invite extends React.Component {
             marginTop: ".5rem",
         }
         this.inviteMeSectionStyle = {
-            maxWidth: "480px",
+            maxWidth: "350px",
         }
         this.state = {
             email: '',
@@ -59,6 +59,7 @@ class Invite extends React.Component {
     render() {
         return (
                 <div className="container" style={this.inviteMeSectionStyle}>
+                    {/*
                     <div className="control has-icons-left">
                         <input className="input" type="email" placeholder="Your email address" 
                                value={this.state.email}
@@ -73,6 +74,12 @@ class Invite extends React.Component {
                         <button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle} onClick={this.inviteMe}>Invite me!</button>
                         }
                     </div>
+
+                    */}
+                    <div id="inviteMe" className="control">
+                        <a href="./signup"><button className="button has-background-grey-dark has-text-white invite-me-button" style={this.inviteMeButtonStyle}>Sign Up</button></a>
+                    </div>
+
                 </div>
         )
     }

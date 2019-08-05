@@ -22,11 +22,30 @@ const Welcome = () => {
         fontWeight: "normal",
         lineHeight: "2.5",
     }
+    const footerTitleStyle = {
+        fontFamily: "Quando",
+        fontStyle: "normal",
+        fontWeight: "normal",
+    }
+    const footerIntroStyle = {
+        color:"#A9ABAC",
+    }
     const homeContainerStyle = {
         maxWidth: "960px",
+        padding: "50px 0",
     }
     const reverseColumnStyle = {
         flexDirection: "row-reverse",
+    }
+    const featureTitleStyle = {
+        marginLeft: "20px",
+    }
+    const footerColumnHeader = {
+        textTransform: "uppercase",
+        color: "#444F60",
+        fontSize: "1rem",
+        fontWeight: "500",
+        marginBottom: "20px",
     }
     return (
         <div>
@@ -54,7 +73,8 @@ const Welcome = () => {
                     <div className="columns is-vcentered" >
                         <div className="column is-4 is-offset-1">
                             <div className="minimal-feature">
-                                <h2 className="title is-5 minimal-title">Tag</h2>
+                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_tag.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Tag</h2></div>
+                                <br/>
                                 <p className="feature-content">
                                     Upload your favorite looks and tag products. 
                                     <br/>
@@ -75,9 +95,10 @@ const Welcome = () => {
                     <div className="columns is-vcentered" style={reverseColumnStyle}>
                         <div className="column is-4 is-offset-1">
                             <div className="minimal-feature">
-                                <h2 className="title is-5 minimal-title">Share</h2>
+                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_share.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Share</h2></div>
+                                <br/>
                                 <p className="feature-content">
-                                    Embedded social plugins help you to spread your influence across major social networks.
+                                    Use embedded social plugins to spread your influence across major social networks.
                                 </p>
                             </div>
                         </div>
@@ -89,20 +110,89 @@ const Welcome = () => {
                     </div>
                 </div>
             </section>
-            <div className="tiles-section-wrapper">
-                <div className="overlay"></div>
-                <section className="section tiles-section">
-                        <div className="tiles-vertical-columns">
-                            <ImageTile source={getImageSrc('fangzheng/1.jpg')}/>
-                            <ImageTile source={getImageSrc('addict.attitude/1.jpg')}/>
-                            <ImageTile source={getImageSrc('addict.attitude/2.jpg')}/>    
-                            <ImageTile source={getImageSrc('fangzheng/2.jpg')}/>
-                            <ImageTile source={getImageSrc('addict.attitude/7.jpg')}/>
-                            <ImageTile source={getImageSrc('addict.attitude/8.jpg')}/>
+            <section className="section">
+                <div className="container" style={homeContainerStyle}>
+                    <div className="columns is-vcentered">
+                        <div className="column is-4 is-offset-1">
+                            <div className="minimal-feature">
+                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_manage.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Manage</h2></div>
+                                <br/>
+                                <p className="feature-content">
+                                    Organize your looks and your belongings in a centralized console. Get inspired for your next new look.
+                                </p>
+                            </div>
                         </div>
-                </section>
-            </div>
-
+                        <div className="column is-6 is-offset-1">
+                            <div className="minimal-feature-image">
+                                <img className="main-image" src="" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section">
+                <div className="container" style={homeContainerStyle}>
+                    <div className="columns">
+                        <div className="column is-8 is-offset-2 has-text-centered">
+                            <h1 className="title big-title text-bold is-4">
+                                Join Eastyler to create your first look!
+                            </h1>
+                             <div>
+                                <Invite />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer className="footer footer-light-medium">
+                <div className="container" style={homeContainerStyle}>
+                    <div className="columns">
+                        <div className="column is-4">
+                            <div className="mb-20">
+                            <h1 className="title big-title text-bold is-3" style={footerTitleStyle}>
+                                Eastyler
+                            </h1>
+                                <div className="footer-description pt-10" style={footerIntroStyle}>
+                                    Estyler is built by a group of tech savvy in silicon valley who believe apparel shopping experience can be made different.
+                                </div>
+                            </div>
+                        </div>
+                        <div className="column is-6 is-offset-2">
+                            <div className="columns">
+                                <div className="column">
+                                    <ul className="footer-column">
+                                        <li className="column-header" style={footerColumnHeader}>
+                                            Company
+                                        </li>
+                                        <li className="column-item"><a href="./doc/about">About Us</a></li>
+                                        <li className="column-item"><a href="./doc/press">Press</a></li>
+                                        <li className="column-item"><a href="./doc/investor">Investor Relations</a></li>
+                                    </ul>
+                                </div>
+                                <div className="column">
+                                    <ul className="footer-column">
+                                        <li className="column-header" style={footerColumnHeader}>
+                                            Resources
+                                        </li>
+                                        <li className="column-item"><a href="./doc/help">Help Center</a></li>
+                                        <li className="column-item"><a href="./doc/contact">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                                <div className="column">
+                                    <ul className="footer-column">
+                                        <li className="column-header" style={footerColumnHeader}>
+                                            Terms
+                                        </li>
+                                        <li className="column-item"><a href="./doc/terms">Terms of Service</a></li>
+                                        <li className="column-item"><a href="./doc/terms">Copyrights</a></li>
+                                        <li className="column-item"><a href="./doc/terms">Privacy Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     )
 };

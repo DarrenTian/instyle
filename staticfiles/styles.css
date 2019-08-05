@@ -7318,6 +7318,9 @@ label.panel-block {
   display: flex;
   justify-content: center; }
 
+.is-vertical-aligned {
+  align-items: center; }
+
 .product-carousel::-webkit-scrollbar {
   width: 0.6em; }
 
@@ -7334,6 +7337,10 @@ label.panel-block {
 .tiles-vertical-columns {
   column-count: 2;
   column-gap: 1em; }
+
+.footer-column a {
+  color: #A9ABAC;
+  font-size: 0.85rem; }
 
 @media only screen and (min-width: 600px) {
   .tiles-vertical-columns {
