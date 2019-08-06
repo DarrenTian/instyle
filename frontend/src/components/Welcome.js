@@ -13,8 +13,8 @@ const Welcome = () => {
       backgroundImage: "url(./static/main-section-bg.png)",
       backgroundRepeat: "round repeat",
       marginTop: "1px",
-      paddingTop: "100px",
-      paddingBottom: "150px",
+      paddingTop: "150px",
+      paddingBottom: "200px",
     }
     const titleStyle = {
         fontFamily: "Quando",
@@ -32,7 +32,7 @@ const Welcome = () => {
     }
     const homeContainerStyle = {
         maxWidth: "960px",
-        padding: "50px 0",
+        padding: "25px 0",
     }
     const reverseColumnStyle = {
         flexDirection: "row-reverse",
@@ -46,6 +46,12 @@ const Welcome = () => {
         fontSize: "1rem",
         fontWeight: "500",
         marginBottom: "20px",
+    }
+    const interSectionStyle = {
+        backgroundColor: "#fafafa",
+    }
+    const tagFeatureStyle = {
+        height: "500px",
     }
     return (
         <div>
@@ -68,7 +74,7 @@ const Welcome = () => {
                     </div>
                 </div>
             </section>
-            <section className="section">
+            <section className="section" >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered" >
                         <div className="column is-4 is-offset-1">
@@ -84,13 +90,13 @@ const Welcome = () => {
                         </div>
                         <div className="column is-6 is-offset-1">
                             <div className="minimal-feature-image">
-
+                                <img src="./static/tag_feature.gif" alt="" style={tagFeatureStyle}/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section className="section">
+            </section> 
+            <section className="section" style={interSectionStyle} >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered" style={reverseColumnStyle}>
                         <div className="column is-4 is-offset-1">
@@ -110,7 +116,7 @@ const Welcome = () => {
                     </div>
                 </div>
             </section>
-            <section className="section">
+            <section className="section" >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered">
                         <div className="column is-4 is-offset-1">
@@ -124,13 +130,13 @@ const Welcome = () => {
                         </div>
                         <div className="column is-6 is-offset-1">
                             <div className="minimal-feature-image">
-                                <img className="main-image" src="" alt="" />
+                                <img className="main-image" src="./static/manage_feature.gif" alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section className="section">
+            <section className="section" style={interSectionStyle}>
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns">
                         <div className="column is-8 is-offset-2 has-text-centered">
