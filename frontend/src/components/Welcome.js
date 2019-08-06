@@ -10,7 +10,7 @@ const getImageSrc = (imagePath) => {
 
 const Welcome = () => {
     const mainSectionStyle = {
-      backgroundImage: "url(./static/main-section-bg.png)",
+      backgroundImage: "url(./static/main-section-bg2.png)",
       backgroundRepeat: "round repeat",
       marginTop: "1px",
       paddingTop: "150px",
@@ -51,7 +51,7 @@ const Welcome = () => {
         backgroundColor: "#fafafa",
     }
     const tagFeatureStyle = {
-        height: "500px",
+        maxHeight: "500px",
     }
     return (
         <div>
