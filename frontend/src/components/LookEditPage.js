@@ -10,6 +10,7 @@ import { lookUtil } from "../services";
 class LookEditPage extends Component {
   constructor(props) {
     super(props);
+    this.tagContainer = React.createRef();
 
     this.state = {
       look: {},
@@ -61,7 +62,7 @@ class LookEditPage extends Component {
 
   selectTag = (index) => {
     const state = { ...this.state };
-    if (index < 0 ) {
+    if (index < 0 || state.view.selectedTag.index==index) {
       state.view.selectedTag.hasSelected = false;
       state.view.selectedTag.index = -1;
     } else {
@@ -147,6 +148,20 @@ class LookEditPage extends Component {
     this.props.history.push('./');
   }
 
+  drag = (e) => {
+    e.persist();
+    console.log(e);
+    const target = e.target
+  }
+
+  move = (e) => {
+    //console.log(e);
+  }
+
+  drop = (e) => {
+    //console.log(e);
+  }
+
   componentDidMount() {
     const lookId = this.props.match.params.id;
     userLookService.retrieveUserLook(lookId)
@@ -162,12 +177,17 @@ class LookEditPage extends Component {
           }
           const lookView = { ...look, ...view }
           this.setState({look: lookView})
+          // !!!Anti-pattern, this is to be able to access the rendered
+          // tag container so that we can calculate tag's offset
+          // based on percentage.
+          this.forceUpdate();
         }
       )
       .catch(e => {
         console.log("error" + e);
         //this.props.history.push('/welcome');
       });
+
   }
 
   render() {
@@ -201,6 +221,15 @@ class LookEditPage extends Component {
       alignItems: "center",
       justifyContent: "center",
     }
+    const tagContainerStyle = {
+      position: "relative",
+    }
+    const tagStyle = {
+      position: "absolute",
+      backgroundColor: "white",
+      height: "50px",
+      width: "50px",
+    }
     const image = lookUtil.getCoverImage(this.state.look);
     const tags = lookUtil.getTags(this.state.look);
     return (
@@ -210,7 +239,20 @@ class LookEditPage extends Component {
             <div className="column is-5">
                 <div className="card" style={lookCardStyle}>
                   {image ?
-                    <img className="is-block container" style={lookImageStyle} src={image}></img> :
+                    <div style={tagContainerStyle} ref={this.tagContainer}>
+                      <img className="is-block container" style={lookImageStyle} src={image}></img>
+                      {tags && tags.map((tag, index)=> {
+                        if (this.tagContainer.current) {
+                                                  tagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                        tagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                        }
+
+                        return (
+                          <div key={index} style={tagStyle} draggable="true" onDragStart={(e)=>this.drag(e)} onDrag={this.move} onDragEnd={this.drop} onClick={()=>this.selectTag(index)}></div>
+                        )
+                      })}
+                    </div>
+                     :
                     <div style={imageTemplateStyle}>
                       <div className="file has-name is-boxed">
                         <label className="file-label">

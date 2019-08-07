@@ -15,6 +15,7 @@ const UserPreview = ({ user }) => {
         objectFit: "cover",
         width: "100%",
         height: "100%",
+        boxShadow: "0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)",
     }
     return (
         <div className="media">
@@ -124,6 +125,9 @@ const LookMobile = ({ look }) => {
     const coverImage = lookUtil.getCoverImage(look);
     return (
         <React.Fragment>
+            <div className="column">
+                <UserPreview user={look.publisher}/>
+            </div>
             <div className="column is-6">
                 <div className="card is-shadowless" style={lookCardStyle}>
                     <img className="is-block container" style={imageStyle} src={coverImage}></img>
