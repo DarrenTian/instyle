@@ -43,6 +43,7 @@ class ProductTile extends React.Component {
         const islinked = this.props.isLinked ? true : false;
         const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
+        itemStyle.backgroundColor = this.props.isHighlighted ? "white" : "#F8F8F8";
 		return (
 			<div style={itemStyle} onClick={this.props.clickHandler}>
                 <a href={linkUrl}>

@@ -6,6 +6,16 @@ import Slider from "react-slick";
 import { lookUtil } from "../services";
 
 class ProductCarousel extends React.Component {
+	constructor(props) {
+        super(props);
+        this.carousel = React.createRef();
+    }
+	componentDidUpdate() {
+		// Smooth the effect
+		const index = this.props.view.selectedTag.index;
+		const left = index > -1 ? (index * 210) : 0;
+		this.carousel.current.scrollLeft = left;
+    }
 	render() {
 		// TODO: Extend this to support mutiple images.
 		const tags = lookUtil.getTags(this.props.look);
@@ -22,12 +32,13 @@ class ProductCarousel extends React.Component {
 	    const productContainerStyle = {
 	    	margin: "2px",
 	    }
+
 		return (
-			<div style={staticCarouselStyle} className="product-carousel">
+			<div style={staticCarouselStyle} className="product-carousel" ref={this.carousel}>
                  {tags && tags.map((tag, index) => {
                     return (
                     	<div key={index} style={productContainerStyle}>
-                    		<ProductTile product={tag.product} index={index} isLinked={true} />
+                    		<ProductTile product={tag.product} index={index} isLinked={true} isHighlighted={index==this.props.view.selectedTag.index} />
                     	</div>
                     );
                 })}

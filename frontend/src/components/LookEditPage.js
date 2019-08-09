@@ -17,7 +17,7 @@ class LookEditPage extends Component {
       view : {
         selectedTag : {
           index : -1,
-        }
+        },
       }
     };
   }
@@ -148,32 +148,40 @@ class LookEditPage extends Component {
     this.props.history.push('./');
   }
 
-  drag = (e) => {
-    //e.persist();
-    //const target = e.target;
-    //const bounding = this.tagContainer.current.getBoundingClientRect();
+  updateLook = (e) => {
+    this.forceUpdate();
+  }
 
-    //let shiftX = e.clientX - target.getBoundingClientRect().left;
-    //let shiftY = e.clientY - target.getBoundingClientRect().top;
-    //console.log(shiftX);
-    //console.log(shiftY);
-    //target.style.left = (shiftX - 25) +"px";
-    //target.style.top = (shiftY - 25) +"px";
+  drag = (e) => {
   }
 
   move = (e) => {
-    // e.persist();
     const target = e.target;
     target.style.display = "none";
-    // const bounding = this.tagContainer.current.getBoundingClientRect();
-    // target.style.left = (e.pageX - bounding.left -25) +"px";
-    // target.style.top = (e.pageY - bounding.top -25) +"px";
   }
 
-  drop = (e) => {
+  drop = (e, tagIndex) => {
+    // This is not smooth enough, figure out how to make it smooth
     const target = e.target;
+    const bounding = this.tagContainer.current.getBoundingClientRect();
+    const shiftX = e.pageX - bounding.left -10;
+    const shiftY = e.pageY - bounding.top -10;
+    if (shiftX > 0 && shiftX < bounding.width &&
+      shiftY > 0 && shiftY < bounding.height) {
+      target.style.left = (e.pageX - bounding.left -10) +"px";
+      target.style.top = (e.pageY - bounding.top -10) +"px";
+    }
     target.style.display = "block";
-    //console.log(e);
+    // update tag coor
+    const coor_x = shiftX / bounding.width;
+    const coor_y = shiftY / bounding.height;
+    const state = { ...this.state };
+    const tags = lookUtil.getTags(state.look);
+    tags[tagIndex].coor_x = coor_x;
+    tags[tagIndex].coor_y = coor_y;
+    state.view.isChanged = true;
+    this.setState(state);
+    this.selectTag(-1);
   }
 
   componentDidMount() {
@@ -240,10 +248,20 @@ class LookEditPage extends Component {
     }
     const tagStyle = {
       position: "absolute",
+      backgroundColor: "gray",
+      borderRadius: "50%",
+
+      height: "20px",
+      width: "20px",
+    }
+    const dotStyle = {
+      position: "absolute",
       backgroundColor: "white",
-      height: "50px",
-      width: "50px",
-      userSelect: "none",
+      borderRadius: "50%",
+      left: "5px",
+      top: "5px",
+      height: "10px",
+      width: "10px",
     }
     const image = lookUtil.getCoverImage(this.state.look);
     const tags = lookUtil.getTags(this.state.look);
@@ -255,14 +273,17 @@ class LookEditPage extends Component {
                 <div className="card" style={lookCardStyle}>
                   {image ?
                     <div style={tagContainerStyle} ref={this.tagContainer}>
-                      <img className="is-block container" style={lookImageStyle} src={image}></img>
+                      <img className="is-block container" style={lookImageStyle} src={image} onLoad={this.updateLook}></img>
                       {tags && tags.map((tag, index)=> {
+                        const singleTagStyle = {...tagStyle};
                         if (this.tagContainer.current) {
-                          tagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                          tagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                          singleTagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                          singleTagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
                         }
                         return (
-                          <div key={index} style={tagStyle} draggable="true" onDragStart={(e)=>this.drag(e)} onDrag={this.move} onDragEnd={this.drop} onClick={()=>this.selectTag(index)}></div>
+                          <div className="is-blink" key={index} style={singleTagStyle} draggable="true" onDragStart={(e)=>this.drag(e)} onDrag={this.move} onDragEnd={(e)=>this.drop(e, index)} onClick={()=>this.selectTag(index)}>
+                            <div style={dotStyle}></div>
+                          </div>
                         )
                       })}
                     </div>

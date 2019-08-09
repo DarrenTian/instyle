@@ -33,130 +33,249 @@ const UserPreview = ({ user }) => {
     )
 }
 
-const LookDesktop = ({look}) => {
-    const imageStyle = {
-        width: "100%",
-        borderRadius: "5px",
-    };
-    const timeStyle = {
-        fontWeight: "normal",
-        color: "#A9A9A9",
-        display: "flex",
-        justifyContent: "flex-end",
+class LookDesktop extends React.Component {
+    constructor(props) {
+        super(props);
+        this.tagContainer = React.createRef();
+        this.state = {
+          view : {
+            selectedTag : {
+              index : -1,
+            },
+          }
+        };
+    }
+    componentDidMount() {
+        this.forceUpdate();
+    }
+    updateLook = (e) => {
+        this.forceUpdate();
+    }
+    selectTag = (index) => {
+        console.log(index);
+        const state = { ...this.state }
+        state.view.selectedTag.index = index;
+        this.setState(state);
+    }
+    render() {
+        const imageStyle = {
+            width: "100%",
+            borderRadius: "5px",
+        };
+        const timeStyle = {
+            fontWeight: "normal",
+            color: "#A9A9A9",
+            display: "flex",
+            justifyContent: "flex-end",
 
-    };
-    const socialPluginStyle = {
-        display: "flex",
-        justifyContent: "flex-end",
-        padding: "10px 10px 10px 10px",
-    }
-    const productCarouselStyle = {
-        padding: "10px 10px 10px 10px",
-    }
-    const lookCardStyle = {
-        borderRadius: "5px",
-    }
-    const publisherCardStyle = {
-        borderRadius: "5px",
-        padding: "15px 15px 15px 15px",
-    }
-    const coverImage = lookUtil.getCoverImage(look);
-    return (
-        <React.Fragment>
-            <div className="column is-6">
-                <div className="card" style={lookCardStyle}>
-                    <img className="is-block container" style={imageStyle} src={coverImage}></img>
-                    <div style={productCarouselStyle}>
-                        <ProductCarousel look={look}/>
-                    </div>
-                    <div className="" style={socialPluginStyle}>
-                        <SocialPlugin />
-                    </div>
-                </div>
-            </div>
-            <div className="column is-4">
-                <div className="card" style={publisherCardStyle}>
-                    <div>
-                        <UserPreview user={look.publisher}/>
-                    </div>
-                    <hr></hr>
-                    <div>
-                        <div>
-                            {look.description}
+        };
+        const socialPluginStyle = {
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px 10px 10px 10px",
+        }
+        const productCarouselStyle = {
+            padding: "10px 10px 10px 10px",
+        }
+        const lookCardStyle = {
+            borderRadius: "5px",
+        }
+        const publisherCardStyle = {
+            borderRadius: "5px",
+            padding: "15px 15px 15px 15px",
+        }
+        const tagContainerStyle = {
+            position: "relative",
+        }
+        const tagStyle = {
+          position: "absolute",
+          backgroundColor: "gray",
+          borderRadius: "50%",
+
+          height: "20px",
+          width: "20px",
+        }
+        const dotStyle = {
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "50%",
+          left: "5px",
+          top: "5px",
+          height: "10px",
+          width: "10px",
+        }
+        const coverImage = lookUtil.getCoverImage(this.props.look);
+        const tags = lookUtil.getTags(this.props.look);
+        return (
+            <React.Fragment>
+                <div className="column is-6">
+                    <div className="card" style={lookCardStyle}>
+                        <div style={tagContainerStyle} ref={this.tagContainer}> 
+                            <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}>
+                            </img>
+                            {tags && tags.map((tag, index)=> {
+                                const singleTagStyle = {...tagStyle};
+                                if (this.tagContainer.current) {
+                                  singleTagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleTagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                }
+                            return (
+                              <div className="is-blink is-clickable" key={index} style={singleTagStyle} onClick={()=>this.selectTag(index)}>
+                                <div style={dotStyle}></div>
+                              </div>
+                            )
+                            })}
+                        </div>
+                        <div style={productCarouselStyle}>
+                            <ProductCarousel look={this.props.look} view={this.state.view}/>
+                        </div>
+                        <div className="" style={socialPluginStyle}>
+                            <SocialPlugin />
                         </div>
                     </div>
-                     <div style={timeStyle}>
-                        <div>{look.publish_date}</div>
+                </div>
+                <div className="column is-4">
+                    <div className="card" style={publisherCardStyle}>
+                        <div>
+                            <UserPreview user={this.props.look.publisher}/>
+                        </div>
+                        <hr></hr>
+                        <div>
+                            <div>
+                                {this.props.look.description}
+                            </div>
+                        </div>
+                         <div style={timeStyle}>
+                            <div>{this.props.look.publish_date}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </React.Fragment>
-    );
+            </React.Fragment>
+        );
+    }
 } 
 
-const LookMobile = ({ look }) => {
-    const imageStyle = {
-        width: "100%",
-        borderRadius: "5px",
-    };
-    const timeStyle = {
-        fontWeight: "normal",
-        color: "#A9A9A9",
-        display: "flex",
-        justifyContent: "flex-end",
+class LookMobile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.tagContainer = React.createRef();
+        this.state = {
+          view : {
+            selectedTag : {
+              index : -1,
+            },
+          }
+        };
+    }
 
-    };
+    updateLook = (e) => {
+        this.forceUpdate();
+    }
+    selectTag = (index) => {
+        const state = { ...this.state }
+        state.view.selectedTag.index = index;
+        this.setState(state);
+    }
 
-    const socialPluginStyle = {
-        display: "flex",
-        justifyContent: "flex-end",
-        padding: "10px 10px 10px 10px",
-    }
-    const productCarouselStyle = {
-        padding: "10px 10px 10px 10px",
-    }
-    const lookCardStyle = {
-        borderRadius: "5px",
-    }
-    const publisherCardStyle = {
-        borderRadius: "5px",
-        padding: "15px 15px 15px 15px",
-    }
-    const coverImage = lookUtil.getCoverImage(look);
-    return (
-        <React.Fragment>
-            <div className="column">
-                <UserPreview user={look.publisher}/>
-            </div>
-            <div className="column is-6">
-                <div className="card is-shadowless" style={lookCardStyle}>
-                    <img className="is-block container" style={imageStyle} src={coverImage}></img>
-                    <div style={productCarouselStyle}>
-                        <ProductCarousel look={look}/>
-                    </div>
-                    <div className="" style={socialPluginStyle}>
-                        <SocialPlugin />
-                    </div>
+    render() {
+       const imageStyle = {
+            width: "100%",
+            borderRadius: "5px",
+        };
+        const timeStyle = {
+            fontWeight: "normal",
+            color: "#A9A9A9",
+            display: "flex",
+            justifyContent: "flex-end",
+
+        };
+
+        const socialPluginStyle = {
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px 10px 10px 10px",
+        }
+        const productCarouselStyle = {
+            padding: "10px 10px 10px 10px",
+        }
+        const lookCardStyle = {
+            borderRadius: "5px",
+        }
+        const publisherCardStyle = {
+            borderRadius: "5px",
+            padding: "15px 15px 15px 15px",
+        }
+        const tagContainerStyle = {
+            position: "relative",
+        }
+        const tagStyle = {
+          position: "absolute",
+          backgroundColor: "gray",
+          borderRadius: "50%",
+
+          height: "20px",
+          width: "20px",
+        }
+        const dotStyle = {
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "50%",
+          left: "5px",
+          top: "5px",
+          height: "10px",
+          width: "10px",
+        }
+        const coverImage = lookUtil.getCoverImage(this.props.look);
+        const tags = lookUtil.getTags(this.props.look);
+        return (
+            <React.Fragment>
+                <div className="column">
+                    <UserPreview user={this.props.look.publisher}/>
                 </div>
-            </div>
-            <div className="column is-4">
-                <div className="card is-shadowless" style={publisherCardStyle}>
-                    <div className="is-hidden-mobile">
-                        <UserPreview user={look.publisher}/>
-                    </div>
-                    <hr className="is-hidden-mobile"></hr>
-                    <div>
-                        <div>
-                            {look.description}
+                <div className="column is-6">
+                    <div className="card is-shadowless" style={lookCardStyle}>
+                        <div style={tagContainerStyle} ref={this.tagContainer}>
+                            <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
+                            {tags && tags.map((tag, index)=> {
+                                const singleTagStyle = {...tagStyle};
+                                if (this.tagContainer.current) {
+                                  singleTagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleTagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                }
+                                return (
+                                  <div className="is-blink is-clickable" key={index} style={singleTagStyle} onClick={(e)=>this.selectTag(index)}>
+                                    <div style={dotStyle}></div>
+                                  </div>
+                                )
+                            })}
+                        </div>
+                        <div style={productCarouselStyle}>
+                            <ProductCarousel look={this.props.look} view={this.state.view}/>
+                        </div>
+                        <div className="" style={socialPluginStyle}>
+                            <SocialPlugin />
                         </div>
                     </div>
-                     <div style={timeStyle}>
-                        <div>{look.publish_date}</div>
+                </div>
+                <div className="column is-4">
+                    <div className="card is-shadowless" style={publisherCardStyle}>
+                        <div className="is-hidden-mobile">
+                            <UserPreview user={this.props.look.publisher}/>
+                        </div>
+                        <hr className="is-hidden-mobile"></hr>
+                        <div>
+                            <div>
+                                {this.props.look.description}
+                            </div>
+                        </div>
+                         <div style={timeStyle}>
+                            <div>{this.props.look.publish_date}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </React.Fragment>
-    );
+            </React.Fragment>
+        );
+    }
 }
 
 class Look extends React.Component {
