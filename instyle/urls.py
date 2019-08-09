@@ -18,6 +18,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework import routers
 import user.views, look.views, frontend.views, invitation.views
+from django.contrib import admin
 
 router = routers.SimpleRouter()
 if settings.DEBUG == True:
@@ -33,9 +34,11 @@ router.register(r'invitation', invitation.views.InvitationViewSet)
 urlpatterns = []    
 urlpatterns.append(url(r'^api/users/obtain_auth_token/$', user.views.CustomAuthToken.as_view()))
 urlpatterns.append(url(r'^api/', include(router.urls)))
+urlpatterns.append(url(r'^admin/', admin.site.urls))
 
 urlpatterns += (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 # Append this later, otherwise all urls will hijacked by this first before resolving to static files.
 urlpatterns.append(url(r'.*', frontend.views.spa))

@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
 from user.models import User
 from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
-
+from django.contrib import admin
 # Login
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
-
+from django.contrib import admin
 
 class UserManager(BaseUserManager):
     # Create a custom UserManager to handle create_user without user_name
@@ -60,3 +60,7 @@ class User(AbstractUser):
 
     # Assign the custom UserManager
     objects = UserManager()
+
+class UserAdmin(admin.ModelAdmin):
+    fields = ('email', 'nickname')
+admin.site.register(User, UserAdmin)
