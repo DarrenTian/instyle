@@ -27,7 +27,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Contact Us</h1>
-					<p>Please contact eastyler.com@gmail.com</p>
+					<p>Please contact contact_us@eastyler.com</p>
 				</div>
 			)
 			break;
@@ -35,7 +35,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Technical Issues</h1>
-					<p>Please contact eastyler.com@gmail.com</p>
+					<p>Please contact contact_us@eastyler.com</p>
 				</div>
 			)
 			break;
@@ -43,7 +43,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Investor Relations</h1>
-					<p>Please contact eastyler.com@gmail.com</p>
+					<p>Please contact contact_us@eastyler.com</p>
 				</div>
 			)
 			break;
