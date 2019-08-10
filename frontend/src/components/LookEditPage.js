@@ -148,7 +148,7 @@ class LookEditPage extends Component {
     this.props.history.push('./');
   }
 
-  updateLook = (e) => {
+  updateLookImage = (e) => {
     this.forceUpdate();
   }
 
@@ -273,7 +273,7 @@ class LookEditPage extends Component {
                 <div className="card" style={lookCardStyle}>
                   {image ?
                     <div style={tagContainerStyle} ref={this.tagContainer}>
-                      <img className="is-block container" style={lookImageStyle} src={image} onLoad={this.updateLook}></img>
+                      <img className="is-block container" style={lookImageStyle} src={image} onLoad={this.updateLookImage}></img>
                       {tags && tags.map((tag, index)=> {
                         const singleTagStyle = {...tagStyle};
                         if (this.tagContainer.current) {
