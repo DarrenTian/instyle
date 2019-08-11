@@ -17,6 +17,7 @@ python-decouple = "*"
 pillow = "*"
 django-storages = "*"
 boto3 = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "2.7"

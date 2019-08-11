@@ -28,12 +28,13 @@ class LookSerializer(serializers.ModelSerializer):
 	#publisher = serializers.CharField(source='publisher.username')
 	look_images = LookImageSerializer(many=True, read_only=True)
 	publisher = CustomUserSerializer(read_only=True)
-
+	
 	class Meta:
 		model = Look
 		fields = [
 			# 'url', Cause issue without request context \
 			'id',
+			'url_id',
 			'title',
 			'description',
 			'publisher',

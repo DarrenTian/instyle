@@ -99,7 +99,7 @@ class Console extends React.Component {
 							{hasLooks? null : <div className="is-flex-centered is-fullwidth" style={hintStyle}>Create your first look!</div>}
 							{this.state.looks.map((look, index)=>{
 								const lookImage = lookUtil.getCoverImage(look);
-								const url = look.publish_status=='P' ? '/looks/'+look.id : '/looks/'+look.id+'/preview';
+								const url = look.publish_status=='P' ? '/looks/'+look.url_id : '/looks/'+look.url_id+'/preview';
 								return (
 									<div className="column is-one-quarter" style={lookStyle} key={index}>
 										<a href={url}>
@@ -108,7 +108,7 @@ class Console extends React.Component {
 										<span style={overlayStyle} className="tag ">
 											{look.publish_status=='P' ? <span style={{fontWeight:"800"}}>Published</span> : <span>Draft</span>}
 										</span>
-										<a href={'/looks/'+look.id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
+										<a href={'/looks/'+look.url_id + '/edit'}><div className="button is-fullwidth" >Edit</div></a>
 									</div>
 								)
 							})}
@@ -119,7 +119,7 @@ class Console extends React.Component {
                 	<div className="columns is-mobile is-shadowless" style={looksStyle}>
 						{this.state.looks.map((look, index)=>{
 							const lookImage = lookUtil.getCoverImage(look);
-							const url = look.publish_status=='P' ? '/looks/'+look.id : '/looks/'+look.id+'/preview';
+							const url = look.publish_status=='P' ? '/looks/'+look.url_id : '/looks/'+look.url_id+'/preview';
 							return (
 								<div className="column is-half" style={lookStyle} key={index}>
 									<a href={url}><img style={previewImageMobileStyle} src={lookImage}></img></a>

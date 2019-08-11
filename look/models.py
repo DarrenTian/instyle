@@ -2,10 +2,12 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django_extensions.db.fields import RandomCharField
 
 class Look(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
+	url_id = RandomCharField(length=8, unique=True)
 	title = models.CharField(max_length=200, default='')
 	description = models.CharField(max_length=1000, default='')
 	publish_date = models.CharField(max_length=200, default='')

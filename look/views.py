@@ -33,8 +33,9 @@ class LookViewSet(mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
     queryset = Look.objects.all().order_by('id')
     serializer_class = LookSerializer
+    lookup_field = 'url_id'
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, url_id=None):
       look = self.get_object()
       if (not look.publish_status == 'P') and (not look.publisher == request.user):
         return Response({}, status=status.HTTP_404_NOT_FOUND)
@@ -48,7 +49,8 @@ class UserLookViewSet(viewsets.ModelViewSet):
     """
     queryset = Look.objects.all().order_by('id')
     serializer_class = LookSerializer
-
+    lookup_field = 'url_id'
+    
     permission_classes = [IsAuthenticated]
 
     def list(self, request):
@@ -60,17 +62,17 @@ class UserLookViewSet(viewsets.ModelViewSet):
       user = request.user
       look = Look(publisher=user)
       look.save()
-      return Response({"id":look.id}, status=status.HTTP_200_OK)
+      return Response({"id":look.url_id}, status=status.HTTP_200_OK)
 
     # TODO: this approach is not very restful, but can consoliate all update into one single API and leave frontend logic simple.
     # TODO: right now only assumes we have a single image.
-    def update(self, request, pk=None):
+    def update(self, request, url_id=None):
       look_data = json.loads(request.body)
       self._update(look_data)
       look = self.get_object()
       return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request, url_id=None):
       user = request.user
       look = self.get_object()
       if not look.publisher == user:
@@ -81,9 +83,11 @@ class UserLookViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     @parser_classes([FileUploadParser])
-    def set_image(self, request, pk=None):
+    def set_image(self, request, url_id=None):
       file = request.data['file']
       look = self.get_object()
+      look.look_images.all().delete()
+      look.save()
 
       lookImage = LookImage()
       lookImage.look = look

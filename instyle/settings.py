@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # Third Party
     'rest_framework',
     'rest_framework.authtoken',  
+    'django_extensions',
 
     # Storages
     'storages',

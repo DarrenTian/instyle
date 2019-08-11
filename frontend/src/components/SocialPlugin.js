@@ -41,7 +41,7 @@ class SocialPlugin extends React.Component {
 	}
 
 	componentDidMount () {
-		this.loadCopyScript();
+		//this.loadCopyScript();
 		this.loadPinScript();
 		this.loadFbScript();
 		this.loadTwitterScript();

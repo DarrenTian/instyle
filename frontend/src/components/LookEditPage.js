@@ -37,7 +37,7 @@ class LookEditPage extends Component {
   setImage = (e) => {
     const data = new FormData() ;
     data.append('file', e.target.files[0]);
-    userLookService.setUserLookImage(this.state.look.id, data)
+    userLookService.setUserLookImage(this.state.look.url_id, data)
       .then((updatedLook) => {
         this.updateLook(updatedLook);
       });
@@ -47,8 +47,8 @@ class LookEditPage extends Component {
     const state = { ...this.state };
     const coverLookImage = lookUtil.getCoverLookImage(state.look);
     coverLookImage.tags.push({
-      "coor_x" : 0,
-      "coor_y" : 0,
+      "coor_x" : "0.50",
+      "coor_y" : "0.50",
       "product" : {
         "url": "",
         "title": "",
@@ -104,7 +104,7 @@ class LookEditPage extends Component {
   }
 
   removeStyle = () => {
-    const lookId = this.state.look.id;
+    const lookId = this.state.look.url_id;
     userLookService.destroyUserLook(lookId)
       .then(() => {
         this.props.history.push('/console');
@@ -115,7 +115,7 @@ class LookEditPage extends Component {
   }
 
   saveStyle = () => {
-    const lookId = this.state.look.id;
+    const lookId = this.state.look.url_id;
     const state = { ...this.state };
     state.look.publish_status = 'D';
     userLookService.updateUserLook(lookId, this.state.look)
@@ -130,7 +130,7 @@ class LookEditPage extends Component {
   }
 
   publishStyle = () => {
-    const lookId = this.state.look.id;
+    const lookId = this.state.look.url_id;
     const state = { ...this.state };
     state.look.publish_status = 'P';
     userLookService.updateUserLook(lookId, state.look)
@@ -305,6 +305,23 @@ class LookEditPage extends Component {
                     </div>
                   }
                 </div>
+                {image ? 
+                  <div style={{"padding":"10px"}}>
+                    <div className="file has-name" style={{"justifyContent":"center"}}>
+                      <label className="file-label">
+                        <input className="file-input" type="file" name="resume" onChange={this.setImage} />
+                        <span className="file-cta">
+                          <span className="file-icon">
+                            <i className="fas fa-upload"></i>
+                          </span>
+                          <span className="file-label">
+                            Replace Image
+                          </span>
+                        </span>
+                      </label>
+                    </div> 
+                  </div>
+                  : null}
             </div>
             <div className="column is-7">
               <div className="has-text-weight-bold">Tag your look:</div> 
@@ -330,7 +347,7 @@ class LookEditPage extends Component {
 
               <div className="has-text-weight-bold">Describe your look:</div>
               <div style={editComponentStyle}>
-                <textarea style={inputBoxStyle} className="input" value={this.state.look.description} onChange={this.changeDescription} required />
+                <textarea style={inputBoxStyle} className="input" placeholder="What is your mood wearing the look?" value={this.state.look.description} onChange={this.changeDescription} required />
               </div>
               <div style={editComponentStyle} className="level">
                 <div className="level-left">
