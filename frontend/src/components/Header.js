@@ -34,6 +34,12 @@ class Header extends React.Component {
             fontStyle: "normal",
             fontWeight: "normal",
         }
+        const simpleHeaderStyle = {
+            display: "flex",
+            height: "2rem",
+            alignItems: "center",
+            alignContent: "center",
+        }
         let navEnd;
         if (!this.props.isLoggedIn) {
             navEnd = <div className="navbar-end">
@@ -80,7 +86,15 @@ class Header extends React.Component {
             </div>
         }
 
-        return (
+        if (this.props.isLookView) {
+            return (
+                <div style={{...navBarStyle, ...titleStyle, ...simpleHeaderStyle}}>
+                    <div style={{margin:"auto"}}><a href="/" style={{color:"#363636"}}>Eastyler</a></div>
+                </div>
+
+            )
+        } else {
+          return (
             <div style={navBarStyle}>
                 <nav className="navbar" role="navigation" aria-label="main navigation" >
                     <div className="navbar-brand">
@@ -103,7 +117,9 @@ class Header extends React.Component {
                     </div>
                 </nav>
             </div>
-        )
+        )          
+        }
+
     }
 }
 

@@ -35,9 +35,10 @@ class App extends React.Component {
 	}
 
 	render() {
+		const isLookView = window.location.pathname.includes("/looks/") && !window.location.pathname.includes("edit");
 		return (
 		  <div className="main-canvas">
-		    <Header isLoggedIn={ this.state.isLoggedIn }/>
+		    <Header isLoggedIn={ this.state.isLoggedIn } isLookView={isLookView}/>
 		    <div className="canvas-component">
 			    <BrowserRouter>
 			      <Switch>

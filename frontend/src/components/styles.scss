@@ -114,6 +114,14 @@ $footer-background-color: white;
     column-gap: 1em;
 }
 
+.is-shadowless {
+  box-shadow: none;
+}
+
+.is-thin-border {
+  border: solid 1px rgba(10, 10, 10, 0.1);
+}
+
 @keyframes up-right {
     0% {
         transform: scale(1);

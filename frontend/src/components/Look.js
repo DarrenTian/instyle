@@ -15,17 +15,16 @@ const UserPreview = ({ user }) => {
         objectFit: "cover",
         width: "100%",
         height: "100%",
-        boxShadow: "0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)",
     }
     return (
         <div className="media">
             <div className="media-left">
                 <figure className="image is-48x48">
-                    <img className="is-rounded" src={user.avatar_image} style={avatarStyle} alt="Placeholder image"></img>
+                    <img className="is-rounded is-thin-border" src={user.avatar_image} style={avatarStyle} alt="Placeholder image"></img>
                 </figure>
             </div>
             <div className="media-content" style={titleStyle}>
-                <p className="title is-5">{user.nickname}</p>
+                <p className="title is-6">{user.nickname}</p>
                 {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
             </div>
             {/*<a className="button is-pulled-right">+ Follow</a>*/}
@@ -109,7 +108,7 @@ class LookDesktop extends React.Component {
         return (
             <React.Fragment>
                 <div className="column is-6">
-                    <div className="card" style={lookCardStyle}>
+                    <div className="card is-shadowless is-thin-border" style={lookCardStyle}>
                         <div style={tagContainerStyle} ref={this.tagContainer}> 
                             <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}>
                             </img>
@@ -135,7 +134,7 @@ class LookDesktop extends React.Component {
                     </div>
                 </div>
                 <div className="column is-4">
-                    <div className="card" style={publisherCardStyle}>
+                    <div className="card is-shadowless is-thin-border" style={publisherCardStyle}>
                         <div>
                             <UserPreview user={this.props.look.publisher}/>
                         </div>
@@ -193,17 +192,16 @@ class LookMobile extends React.Component {
         const socialPluginStyle = {
             display: "flex",
             justifyContent: "flex-end",
-            padding: "10px 10px 10px 10px",
+            padding: "10px 0px 10px 0px",
         }
         const productCarouselStyle = {
-            padding: "10px 10px 10px 10px",
+            padding: "10px 0px 10px 0px",
         }
         const lookCardStyle = {
             borderRadius: "5px",
         }
         const publisherCardStyle = {
             borderRadius: "5px",
-            padding: "15px 15px 15px 15px",
         }
         const tagContainerStyle = {
             position: "relative",
@@ -229,7 +227,7 @@ class LookMobile extends React.Component {
         const tags = lookUtil.getTags(this.props.look);
         return (
             <React.Fragment>
-                <div className="column">
+                <div className="column" style={{paddingBottom:"0px"}}>
                     <UserPreview user={this.props.look.publisher}/>
                 </div>
                 <div className="column is-6">
