@@ -86,22 +86,48 @@ class LookDesktop extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
+
+        const tagWidth = 20;
+        const dotWidth = 6;
+        const selectedTagWidth = 20;
+        const selectedDotWidth = 14;
+
         const tagStyle = {
           position: "absolute",
-          backgroundColor: "gray",
+          backgroundColor: "#363636",
+          borderRadius: "50%",
+          left: -tagWidth/2,
+          top: -tagWidth/2,
+          height: tagWidth + "px",
+          width: tagWidth + "px",
+        }
+        const selectedTagStyle = {
+          position: "absolute",
+          backgroundColor: "#363636",
           borderRadius: "50%",
 
-          height: "20px",
-          width: "20px",
+          left: -selectedTagWidth/2,
+          top: -selectedTagWidth/2,
+          height: selectedTagWidth + "px",
+          width: selectedTagWidth + "px",
         }
         const dotStyle = {
           position: "absolute",
           backgroundColor: "white",
           borderRadius: "50%",
-          left: "5px",
-          top: "5px",
-          height: "10px",
-          width: "10px",
+          left: -dotWidth/2,
+          top: -dotWidth/2,
+          height: dotWidth + "px",
+          width:  dotWidth + "px",
+        }
+        const selectedDotStyle = {
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "50%",
+          left: -selectedDotWidth/2,
+          top: -selectedDotWidth/2,
+          height: selectedDotWidth + "px",
+          width: selectedDotWidth + "px",
         }
         const coverImage = lookUtil.getCoverImage(this.props.look);
         const tags = lookUtil.getTags(this.props.look);
@@ -113,16 +139,21 @@ class LookDesktop extends React.Component {
                             <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}>
                             </img>
                             {tags && tags.map((tag, index)=> {
-                                const singleTagStyle = {...tagStyle};
+                                const isSelected = index == this.state.view.selectedTag.index;
+                                const singleTagStyle = isSelected ? {...selectedTagStyle} : {...tagStyle};
+                                const singleDotStyle = isSelected ? {...selectedDotStyle} : {...dotStyle};
                                 if (this.tagContainer.current) {
-                                  singleTagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleTagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                  singleTagStyle.left = singleTagStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleTagStyle.top = singleTagStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                  singleDotStyle.left = singleDotStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleDotStyle.top = singleDotStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";     
                                 }
-                            return (
-                              <div className="is-blink is-clickable" key={index} style={singleTagStyle} onClick={()=>this.selectTag(index)}>
-                                <div style={dotStyle}></div>
-                              </div>
-                            )
+                                return (
+                                    <div key={index} className="is-clickable" onClick={(e)=>this.selectTag(index)}>
+                                        <div className={isSelected ? "is-scale-blink" : "is-blink"} style={singleTagStyle}></div>
+                                        <div className={isSelected ? "" : "is-blink"} style={singleDotStyle}></div>
+                                    </div>
+                                )
                             })}
                         </div>
                         <div style={productCarouselStyle}>
@@ -206,22 +237,47 @@ class LookMobile extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
+        const tagWidth = 20;
+        const dotWidth = 6;
+        const selectedTagWidth = 20;
+        const selectedDotWidth = 14;
+
         const tagStyle = {
           position: "absolute",
-          backgroundColor: "gray",
+          backgroundColor: "#363636",
+          borderRadius: "50%",
+          left: -tagWidth/2,
+          top: -tagWidth/2,
+          height: tagWidth + "px",
+          width: tagWidth + "px",
+        }
+        const selectedTagStyle = {
+          position: "absolute",
+          backgroundColor: "#363636",
           borderRadius: "50%",
 
-          height: "20px",
-          width: "20px",
+          left: -selectedTagWidth/2,
+          top: -selectedTagWidth/2,
+          height: selectedTagWidth + "px",
+          width: selectedTagWidth + "px",
         }
         const dotStyle = {
           position: "absolute",
           backgroundColor: "white",
           borderRadius: "50%",
-          left: "5px",
-          top: "5px",
-          height: "10px",
-          width: "10px",
+          left: -dotWidth/2,
+          top: -dotWidth/2,
+          height: dotWidth + "px",
+          width:  dotWidth + "px",
+        }
+        const selectedDotStyle = {
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "50%",
+          left: -selectedDotWidth/2,
+          top: -selectedDotWidth/2,
+          height: selectedDotWidth + "px",
+          width: selectedDotWidth + "px",
         }
         const coverImage = lookUtil.getCoverImage(this.props.look);
         const tags = lookUtil.getTags(this.props.look);
@@ -235,15 +291,20 @@ class LookMobile extends React.Component {
                         <div style={tagContainerStyle} ref={this.tagContainer}>
                             <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
                             {tags && tags.map((tag, index)=> {
-                                const singleTagStyle = {...tagStyle};
+                                const isSelected = index == this.state.view.selectedTag.index;
+                                const singleTagStyle = isSelected ? {...selectedTagStyle} : {...tagStyle};
+                                const singleDotStyle = isSelected ? {...selectedDotStyle} : {...dotStyle};
                                 if (this.tagContainer.current) {
-                                  singleTagStyle.left = tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleTagStyle.top = tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                  singleTagStyle.left = singleTagStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleTagStyle.top = singleTagStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";
+                                  singleDotStyle.left = singleDotStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
+                                  singleDotStyle.top = singleDotStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";     
                                 }
                                 return (
-                                  <div className="is-blink is-clickable" key={index} style={singleTagStyle} onClick={(e)=>this.selectTag(index)}>
-                                    <div style={dotStyle}></div>
-                                  </div>
+                                    <div key={index} className="is-clickable" onClick={(e)=>this.selectTag(index)}>
+                                        <div className={isSelected ? "is-scale-blink" : "is-blink"} style={singleTagStyle}></div>
+                                        <div className={isSelected ? null : "is-blink"} style={singleDotStyle}></div>
+                                    </div>
                                 )
                             })}
                         </div>

@@ -7341,22 +7341,64 @@ label.panel-block {
 .is-thin-border {
   border: solid 1px rgba(10, 10, 10, 0.1); }
 
-@keyframes up-right {
+@keyframes blink {
   0% {
     transform: scale(1);
     opacity: .15; }
   50% {
-    transform: scale 1, 5;
+    transform: scale(1);
     opacity: 1; }
   100% {
     transform: scale(1);
     opacity: .15; } }
 
+@keyframes scale-blink {
+  0% {
+    transform: scale(1);
+    opacity: 1.0; }
+  50% {
+    transform: scale(2.7);
+    opacity: .20; }
+  86% {
+    transform: scale(3);
+    opacity: 0; }
+  87% {
+    transform: scale(3);
+    opacity: 0;
+    display: none; }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    display: none; } }
+
+@keyframes still {
+  0% {
+    transform: scale(1);
+    opacity: 1; }
+  50% {
+    transform: scale(1);
+    opacity: 1; }
+  100% {
+    transform: scale(1);
+    opacity: 1; } }
+
+.is-still {
+  -webkit-animation: still 3s infinite;
+  -moz-animation: still 3s infinite;
+  -o-animation: still 3s infinite;
+  animation: still 3s infinite; }
+
 .is-blink {
-  -webkit-animation: up-right 3s infinite;
-  -moz-animation: up-right 3s infinite;
-  -o-animation: up-right 3s infinite;
-  animation: up-right 3s infinite; }
+  -webkit-animation: blink 3s infinite;
+  -moz-animation: blink 3s infinite;
+  -o-animation: blink 3s infinite;
+  animation: blink 3s infinite; }
+
+.is-scale-blink {
+  -webkit-animation: scale-blink 3s infinite;
+  -moz-animation: scale-blink 3s infinite;
+  -o-animation: scale-blink 3s infinite;
+  animation: scale-blink 3s infinite; }
 
 .is-clickable {
   cursor: pointer; }

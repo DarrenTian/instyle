@@ -28,6 +28,7 @@ class ProductCarousel extends React.Component {
 	    const staticCarouselStyle = {
 	    	display: "flex",
 	    	overflowX: "auto",
+	    	scrollBehavior: "smooth",
 	    }
 	    const productContainerStyle = {
 	    	margin: "2px",
