@@ -36,7 +36,7 @@ class Header extends React.Component {
         }
         const simpleHeaderStyle = {
             display: "flex",
-            height: "2rem",
+            height: "2.5rem",
             alignItems: "center",
             alignContent: "center",
         }

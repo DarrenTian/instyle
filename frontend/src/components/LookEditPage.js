@@ -145,7 +145,8 @@ class LookEditPage extends Component {
   }
 
   goToLook = () => {
-    this.props.history.push('./');
+    // Hack to reload header
+    window.location.replace('./');
   }
 
   updateLookImage = (e) => {

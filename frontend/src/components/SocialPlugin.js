@@ -2,19 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class SocialPlugin extends React.Component {
-	// TODO: Get data into the share link so the shared info become rich.
-
-	loadCopyScript = () => {
-		const script = document.createElement("script");
-	    script.src = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js";
-	    document.body.appendChild(script);
-
-	    // TODO
-	    // const inlineScript = document.createElement("script");
-	    // inlineScript.innerHTML = "var clipboard = new ClipboardJS('.btn');"
-	    // document.body.appendChild(inlineScript);
+	constructor(props) {
+		super(props);
+		this.state = {
+			isCopied:false,
+		};
 	}
-
+	// TODO: Get data into the share link so the shared info become rich.
 	loadPinScript = () => {
 		const script = document.createElement("script");
 	    script.src = "//assets.pinterest.com/js/pinit.js";
@@ -40,8 +34,31 @@ class SocialPlugin extends React.Component {
 	    document.body.appendChild(script);
 	}
 
+	copy = (text) => {
+		this.setState({isCopied:true});
+		// Copied from stackoverflow
+	    if (window.clipboardData && window.clipboardData.setData) {
+	        // IE specific code path to prevent textarea being shown while dialog is visible.
+	        return clipboardData.setData("Text", text); 
+
+	    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+	        var textarea = document.createElement("textarea");
+	        textarea.textContent = text;
+	        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+	        document.body.appendChild(textarea);
+	        textarea.select();
+	        try {
+	            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+	        } catch (ex) {
+	            console.warn("Copy to clipboard failed.", ex);
+	            return false;
+	        } finally {
+	            document.body.removeChild(textarea);
+	        }
+	    }
+	}
+
 	componentDidMount () {
-		//this.loadCopyScript();
 		this.loadPinScript();
 		this.loadFbScript();
 		this.loadTwitterScript();
@@ -59,14 +76,14 @@ class SocialPlugin extends React.Component {
 			height: "20px",
 			fontSize: "0.75rem",
 			lineHeight: "0",
-			textIndent: "10px",
+			textIndent: "5px",
+			paddingLeft:"5px",
+			paddingRight:"2px",
 		}
-
+		const url = window.location.href;
 		return (
 			<div className="is-flex" style={socialPluginStyle}>
-				{/*
-					<div style={shareStyle}><button style={linkStyle} className="btn button" data-clipboard-text="copied link"><i className="fas fa-link"></i>Share</button></div>
-				*/}
+				<div style={shareStyle}><button style={linkStyle} className="btn button" onClick={(e)=>this.copy(url)}><i className="fas fa-link"></i>{this.state.isCopied ? "Copied" : "Share"}</button></div>
 		        <div style={shareStyle}><a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a></div>
 		        <div style={shareStyle} className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
 		        <div><a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>

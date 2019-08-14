@@ -63,8 +63,8 @@ class ProductTile extends React.Component {
                         <div className="media-content" style={contentStyle}>
                             <div className="title is-6" style={titleStyle}>{product.title}</div>
                             <div style={{display:"flex"}}>
-                                <div className="subtitle is-6" style={priceStyle}>{product.price}</div>
-                                {this.props.isHighlighted ?
+                                <div className="subtitle is-6" style={priceStyle}>${product.price}</div>
+                                {this.props.isHighlighted && linkUrl ?
                                     <a href={linkUrl}><div className="button is-info is-outlined" style={{height:"25px"}}>Shop</div></a>
                                     :
                                     null

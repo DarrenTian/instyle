@@ -79,8 +79,11 @@ class ProductEditPanel extends React.Component {
                     </div>
                     <div className="field">
                       <label className="label">Price</label>
-                      <div className="control">
-                        <input type="text" placeholder="" className="input" name="price" defaultValue={this.props.product.price} onChange={this.handleChange} required />
+                      <div className="control has-icons-left">
+                        <input type="number" min="0" step="1" max="5000" placeholder="" className="input" name="price" defaultValue={this.props.product.price} onChange={this.handleChange} required />
+                            <span className="icon is-small is-left">
+                                <i className="fa fa-dollar-sign"></i>
+                            </span>
                       </div>
                     </div>
                     <div className="field">
