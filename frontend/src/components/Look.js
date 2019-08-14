@@ -86,11 +86,10 @@ class LookDesktop extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
-
-        const tagWidth = 20;
-        const dotWidth = 6;
+        const tagWidth = 25;
+        const dotWidth = 10;
         const selectedTagWidth = 20;
-        const selectedDotWidth = 14;
+        const selectedDotWidth = 15;
 
         const tagStyle = {
           position: "absolute",
@@ -157,7 +156,7 @@ class LookDesktop extends React.Component {
                             })}
                         </div>
                         <div style={productCarouselStyle}>
-                            <ProductCarousel look={this.props.look} view={this.state.view}/>
+                            <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
                             <SocialPlugin />
@@ -237,10 +236,10 @@ class LookMobile extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
-        const tagWidth = 20;
-        const dotWidth = 6;
+        const tagWidth = 25;
+        const dotWidth = 10;
         const selectedTagWidth = 20;
-        const selectedDotWidth = 14;
+        const selectedDotWidth = 15;
 
         const tagStyle = {
           position: "absolute",
@@ -309,7 +308,7 @@ class LookMobile extends React.Component {
                             })}
                         </div>
                         <div style={productCarouselStyle}>
-                            <ProductCarousel look={this.props.look} view={this.state.view}/>
+                            <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
                             <SocialPlugin />

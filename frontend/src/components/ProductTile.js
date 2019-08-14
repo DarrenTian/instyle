@@ -20,12 +20,16 @@ class ProductTile extends React.Component {
             whiteSpace: "nowrap",
             overflow: "hidden",
             width: "100%",
+            marginBottom: "0",
         }
         const priceStyle = {
         	textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             overflow: "hidden",
             width: "120px",
+            marginBottom: "0",
+            display:"flex",
+            alignItems:"center",
         }
         const imageStyle = {
         	height: "70px",
@@ -44,9 +48,12 @@ class ProductTile extends React.Component {
         const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
         itemStyle.backgroundColor = this.props.isHighlighted ? "white" : "#F8F8F8";
+        if (this.props.isHighlighted) {
+            itemStyle.marginTop = "-2px";
+            itemStyle.boxShadow = "5px 5px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)";
+        }
 		return (
 			<div style={itemStyle} onClick={this.props.clickHandler}>
-                <a href={linkUrl}>
                     <div className="media" style={mediaBoxStyle}>
                     	{// TODO: Dynamic render when we have image
                     	/*                        <div className="media-left" >
@@ -55,10 +62,16 @@ class ProductTile extends React.Component {
 
                         <div className="media-content" style={contentStyle}>
                             <div className="title is-6" style={titleStyle}>{product.title}</div>
-                            <div className="subtitle is-6" style={priceStyle}>{product.price}</div>
+                            <div style={{display:"flex"}}>
+                                <div className="subtitle is-6" style={priceStyle}>{product.price}</div>
+                                {this.props.isHighlighted ?
+                                    <a href={linkUrl}><div className="button is-info is-outlined" style={{height:"25px"}}>Shop</div></a>
+                                    :
+                                    null
+                                }
+                            </div>
                         </div>
                     </div>
-                </a>
             </div>
 		)
 	}

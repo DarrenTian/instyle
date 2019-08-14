@@ -16,6 +16,9 @@ class ProductCarousel extends React.Component {
 		const left = index > -1 ? (index * 210) : 0;
 		this.carousel.current.scrollLeft = left;
     }
+    selectTag = (index) => {
+    	this.props.selectHandler(index);
+    }
 	render() {
 		// TODO: Extend this to support mutiple images.
 		const tags = lookUtil.getTags(this.props.look);
@@ -29,6 +32,7 @@ class ProductCarousel extends React.Component {
 	    	display: "flex",
 	    	overflowX: "auto",
 	    	scrollBehavior: "smooth",
+	    	padding: "6px 0",
 	    }
 	    const productContainerStyle = {
 	    	margin: "2px",
@@ -38,7 +42,7 @@ class ProductCarousel extends React.Component {
 			<div style={staticCarouselStyle} className="product-carousel" ref={this.carousel}>
                  {tags && tags.map((tag, index) => {
                     return (
-                    	<div key={index} style={productContainerStyle}>
+                    	<div key={index} style={productContainerStyle} onClick={(e)=>{this.selectTag(index)}}>
                     		<ProductTile product={tag.product} index={index} isLinked={true} isHighlighted={index==this.props.view.selectedTag.index} />
                     	</div>
                     );
