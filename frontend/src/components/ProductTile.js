@@ -47,6 +47,7 @@ class ProductTile extends React.Component {
         const islinked = this.props.isLinked ? true : false;
         const linkUrl = islinked ? product.url : null;
         const hasImage = this.props.product.image_url == "";
+        const price = product.price > 0 ? ('$' + product.price) : null;
         itemStyle.backgroundColor = this.props.isHighlighted ? "white" : "#F8F8F8";
         if (this.props.isHighlighted) {
             itemStyle.marginTop = "-2px";
@@ -63,7 +64,7 @@ class ProductTile extends React.Component {
                         <div className="media-content" style={contentStyle}>
                             <div className="title is-6" style={titleStyle}>{product.title}</div>
                             <div style={{display:"flex"}}>
-                                <div className="subtitle is-6" style={priceStyle}>${product.price}</div>
+                                <div className="subtitle is-6" style={priceStyle}>{price}</div>
                                 {this.props.isHighlighted && linkUrl ?
                                     <a href={linkUrl}><div className="button is-info is-outlined" style={{height:"25px"}}>Shop</div></a>
                                     :

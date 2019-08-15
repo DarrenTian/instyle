@@ -9,7 +9,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
 from user.models import User
 from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
-from django.contrib import admin
+import os
+import time
+
 # Login
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -83,7 +85,9 @@ class UserProfileViewSet(viewsets.GenericViewSet):
         user = request.user
         token, created = Token.objects.get_or_create(user=user)
         file = request.data['file']
-        user.avatar_image.save(file.name, file)
+        name, extension = os.path.splitext(file.name)
+        user.avatar_image.delete()
+        user.avatar_image.save('avatar/'+user.user_id + '-' + str(int(time.time())) + extension, file)
         user.save()
         return Response({
             'token': token.key,

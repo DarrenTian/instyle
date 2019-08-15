@@ -6,6 +6,7 @@ import csv
 import os
 from django.core.files import File
 from django.contrib.auth.hashers import make_password
+import time
 
 class Command(BaseCommand):
     help = '''A command line tool to load looks from spreadsheets to database: "python manage.py loadlooks".
@@ -96,7 +97,12 @@ class Command(BaseCommand):
 
         look_image = LookImage()
         look_image.look = look
-        look_image.image.save(row[self.indicies['image_file_name']], File(open(self.look_path + row[self.indicies['image_file_name']], 'rb')))
+
+        file = File(open(self.look_path + row[self.indicies['image_file_name']], 'rb'))
+        name, extension = os.path.splitext(file.name)
+        look_image.image.delete()
+        look_image.image.save('looks/'+look.url_id+'-'+str(int(time.time())) + extension, file)
+
         look_image.save()
         print look_image
 

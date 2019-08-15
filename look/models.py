@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django_extensions.db.fields import RandomCharField
+from django.dispatch import receiver
 
 class Look(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -33,8 +34,7 @@ class LookImage(models.Model):
 class Product(models.Model):
 	url = models.URLField(max_length=200)
 	title = models.CharField(max_length=200, default='')
-	price = models.CharField(max_length=200, default='')
-
+	price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 	
 class Tag(models.Model):
 	look_image = models.ForeignKey(LookImage, related_name='tags', on_delete=models.CASCADE)
@@ -48,4 +48,7 @@ class Tag(models.Model):
 	def __str__(self):
 		return "Tag"
 
+@receiver(models.signals.pre_delete, sender=LookImage)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    instance.image.delete()
 

@@ -24,14 +24,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-
 USE_SQLITE = config('USE_SQLITE', default=False, cast=bool)
-
 # Production Environment
 PROD_ENV = config('PROD_ENV', default='DEV')
+DATABASE_URL=config('DATABASE_URL')
+USE_S3_STORAGE = config('USE_S3_STORAGE', default=False, cast=bool)
+AWS_ACCESS_KEY_ID=config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME=config('AWS_STORAGE_BUCKET_NAME')
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
@@ -131,7 +133,7 @@ if USE_SQLITE:
 else:
     DATABASES = {
        'default': dj_database_url.config(
-           default=config('DATABASE_URL')
+           default=DATABASE_URL
        )
     }
 
@@ -236,7 +238,7 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-USE_S3_STORAGE = config('USE_S3_STORAGE', default=False, cast=bool)
+
 if USE_S3_STORAGE:
     # AWS Settings
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')

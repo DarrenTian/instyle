@@ -18,6 +18,8 @@ const Doc = ({match}) => {
 					<p>Eastyler may work with affiliate networks and advertising networks for profits and share profilts with content creators.</p>
 					<h2>Copyrights</h2>
 					<p>Users have all rights for their created content on Eastyler.</p>
+					<p>By publishing on Eastyler platform, Eastyler also retains right to publish user generated content on Eastyler-owned platforms.</p>
+					<p>Eastyler works towards sharing benefits with content generaters.</p>
 					<h2>Privacy Policy</h2>
 					<p>Eastyler will store user's look data on creation and remove them as on deletion.</p>
 				</div>
@@ -27,7 +29,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Contact Us</h1>
-					<p>Please contact contact_us@eastyler.com</p>
+					<p>Please send an email to contact_us@eastyler.com</p>
 				</div>
 			)
 			break;
@@ -35,7 +37,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Technical Issues</h1>
-					<p>Please contact contact_us@eastyler.com</p>
+					<p>Please send an email to contact_us@eastyler.com</p>
 				</div>
 			)
 			break;
@@ -43,7 +45,7 @@ const Doc = ({match}) => {
 			content = (
 				<div>
 					<h1>Investor Relations</h1>
-					<p>Please contact contact_us@eastyler.com</p>
+					<p>Please send an email to contact_us@eastyler.com</p>
 				</div>
 			)
 			break;

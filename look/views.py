@@ -14,6 +14,8 @@ from user.models import User
 import pprint
 import json
 import datetime
+import time
+import os
 
 class LookImageViewSet(viewsets.ModelViewSet):
     """
@@ -83,16 +85,18 @@ class UserLookViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     @parser_classes([FileUploadParser])
-    def set_image(self, request, url_id=None):
-      file = request.data['file']
+    def set_image(self, request, url_id=None): 
       look = self.get_object()
       look.look_images.all().delete()
       look.save()
 
-      lookImage = LookImage()
-      lookImage.look = look
-      lookImage.image.save(file.name, file)
-      lookImage.save()
+      file = request.data['file']
+      name, extension = os.path.splitext(file.name)
+
+      look_image = LookImage()
+      look_image.look = look
+      look_image.image.save('looks/'+look.url_id+'-'+str(int(time.time())) + extension, file)
+      look_image.save()
 
       look.publish_status = 'D'
       look.publish_date = datetime.datetime.now().strftime("%Y-%m-%d")

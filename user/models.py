@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.contrib import admin
+from django_extensions.db.fields import RandomCharField
 
 class UserManager(BaseUserManager):
     # Create a custom UserManager to handle create_user without user_name
@@ -38,6 +39,8 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
+    user_id = RandomCharField(length=8, unique=True)
+
     # Override the inherited user fields
     username = None
     email = models.EmailField('email address', unique=True,
@@ -50,7 +53,7 @@ class User(AbstractUser):
         error_messages={
             'unique': "This display name has already been registered.",
         })
-    avatar_image = models.ImageField(default='logo_transparent.png')
+    avatar_image = models.ImageField(default='default/logo_transparent.png')
 
     biography = models.TextField(max_length=500, default='')
 

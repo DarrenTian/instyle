@@ -18,6 +18,7 @@ class LookEditPage extends Component {
         selectedTag : {
           index : -1,
         },
+        isUploading : false,
       }
     };
   }
@@ -35,11 +36,18 @@ class LookEditPage extends Component {
   }
 
   setImage = (e) => {
+    const state = { ...this.state };
+    state.view.isUploading=true;
+    this.setState(state);
+
     const data = new FormData() ;
     data.append('file', e.target.files[0]);
     userLookService.setUserLookImage(this.state.look.url_id, data)
       .then((updatedLook) => {
         this.updateLook(updatedLook);
+        const state = { ...this.state };
+        state.view.isUploading=false;
+        this.setState(state);
       });
   }
 
@@ -290,7 +298,33 @@ class LookEditPage extends Component {
                     </div>
                      :
                     <div style={imageTemplateStyle}>
-                      <div className="file has-name is-boxed">
+                      {this.state.view.isUploading ? 
+                        <div className="button is-loading" style={{width:"100px", borderColor:"white"}}></div>
+                        :
+                        <div className="file has-name is-boxed">
+                          <label className="file-label">
+                            <input className="file-input" type="file" name="resume" onChange={this.setImage} />
+                            <span className="file-cta">
+                              <span className="file-icon">
+                                <i className="fas fa-upload"></i>
+                              </span>
+                              <span className="file-label">
+                                Choose a look image file
+                              </span>
+                            </span>
+                          </label>
+                        </div>
+                      }
+ 
+                    </div>
+                  }
+                </div>
+                {image ? 
+                  <div style={{"padding":"10px"}}>
+                    <div className="file has-name" style={{"justifyContent":"center"}}>
+                      {this.state.view.isUploading ? 
+                        <div className="button is-loading" style={{width:"100px"}}></div>
+                        :
                         <label className="file-label">
                           <input className="file-input" type="file" name="resume" onChange={this.setImage} />
                           <span className="file-cta">
@@ -298,28 +332,11 @@ class LookEditPage extends Component {
                               <i className="fas fa-upload"></i>
                             </span>
                             <span className="file-label">
-                              Choose a look image file
+                              Replace Image
                             </span>
                           </span>
                         </label>
-                      </div>
-                    </div>
-                  }
-                </div>
-                {image ? 
-                  <div style={{"padding":"10px"}}>
-                    <div className="file has-name" style={{"justifyContent":"center"}}>
-                      <label className="file-label">
-                        <input className="file-input" type="file" name="resume" onChange={this.setImage} />
-                        <span className="file-cta">
-                          <span className="file-icon">
-                            <i className="fas fa-upload"></i>
-                          </span>
-                          <span className="file-label">
-                            Replace Image
-                          </span>
-                        </span>
-                      </label>
+                      }
                     </div> 
                   </div>
                   : null}
@@ -342,7 +359,11 @@ class LookEditPage extends Component {
                   )
                 })}
                 <div style={editComponentStyle}>
-                  <div className="button is-link is-outlined"  onClick={this.addTag}>Add New Tag</div>
+                 {image ?       
+                    <div className="button is-link is-outlined" onClick={this.addTag}>Add New Tag</div>     
+                    :       
+                    <div className="button is-link is-outlined" disabled onClick={this.addTag}>Add New Tag</div>
+                 }
                 </div>
               </div>
 
