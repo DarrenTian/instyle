@@ -63,7 +63,7 @@ class LookEditPage extends Component {
       "product" : {
         "url": "",
         "title": "",
-        "price": "",
+        "price": "0.00",
       }
     })
     state.view.isChanged = true;
