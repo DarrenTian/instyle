@@ -16,6 +16,7 @@ import json
 import datetime
 import time
 import os
+from django.conf import settings
 
 class LookImageViewSet(viewsets.ModelViewSet):
     """
@@ -95,7 +96,11 @@ class UserLookViewSet(viewsets.ModelViewSet):
 
       look_image = LookImage()
       look_image.look = look
-      look_image.image.save('looks/'+look.url_id+'-'+str(int(time.time())) + extension, file)
+      image_url = 'looks/'+look.url_id+'-'+str(int(time.time()))
+      print settings.PROD_ENV
+      if settings.PROD_ENV == 'DEV':
+        image_url = 'dev/' + image_url
+      look_image.image.save(image_url + extension, file)
       look_image.save()
 
       look.publish_status = 'D'
