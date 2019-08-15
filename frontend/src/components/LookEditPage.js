@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import ProductCarousel from "./ProductCarousel";
 import ProductEditPanel from "./ProductEditPanel";
 import ProductTile from "./ProductTile";
+import ActionModal from "./ActionModal";
 import { userLookService } from "../services";
 import { lookUtil } from "../services";
 
@@ -19,6 +20,8 @@ class LookEditPage extends Component {
           index : -1,
         },
         isUploading : false,
+        confirmDelete : false,
+        hintPublish : false,
       }
     };
   }
@@ -111,6 +114,30 @@ class LookEditPage extends Component {
     this.setState(state);
   }
 
+  confirmRemoveStyle = () => {
+    const state = { ...this.state };
+    state.view.confirmDelete = true;
+    this.setState(state);
+  }
+
+  cancelDelete = () => {
+    const state = { ...this.state };
+    state.view.confirmDelete = false;
+    this.setState(state);
+  }
+
+  hintPublish = () => {
+    const state = { ...this.state };
+    state.view.hintPublish = true;
+    this.setState(state);
+  }
+
+  cancelHintPublish = () => {
+    const state = { ...this.state };
+    state.view.hintPublish = false;
+    this.setState(state);
+  }
+
   removeStyle = () => {
     const lookId = this.state.look.url_id;
     userLookService.destroyUserLook(lookId)
@@ -144,6 +171,7 @@ class LookEditPage extends Component {
     userLookService.updateUserLook(lookId, state.look)
       .then((updatedLook) => {
         this.updateLook(updatedLook);
+        this.hintPublish();
       })
       .catch((e) => {
         console.log("publishing style failed" + e);
@@ -153,8 +181,8 @@ class LookEditPage extends Component {
   }
 
   goToLook = () => {
-    // Hack to reload header
-    window.location.replace('./');
+    var win = window.open("./", '_blank');
+    win.focus();
   }
 
   updateLookImage = (e) => {
@@ -373,7 +401,7 @@ class LookEditPage extends Component {
               </div>
               <div style={editComponentStyle} className="level">
                 <div className="level-left">
-                  <button className="button is-danger is-outlined" onClick={this.removeStyle}>Remove</button>
+                  <button className="button is-danger is-outlined" onClick={this.confirmRemoveStyle}>Remove</button>
                 </div>
                 <div className="level-right buttons">
                   {this.state.view.isChanged ? 
@@ -392,6 +420,16 @@ class LookEditPage extends Component {
           </div>
         </div>
         { process.env.PROD_ENV == "DEV" && <div><pre>{JSON.stringify(this.state.look, null, 2)}</pre></div> }
+        <ActionModal  isActive={this.state.view.confirmDelete} 
+                      title="Are you sure to delete the look?"
+                      action="Delete"
+                      actionHandler={this.removeStyle} 
+                      cancelHandler={this.cancelDelete}/>
+        <ActionModal  isActive={this.state.view.hintPublish} 
+                      title="Congrats on publishing your new look!"
+                      action="View Your Look"
+                      actionHandler={()=>{this.goToLook();this.cancelHintPublish();}} 
+                      cancelHandler={this.cancelHintPublish}/>  
       </div>
     )
   }
