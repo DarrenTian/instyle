@@ -13,15 +13,16 @@ const Doc = ({match}) => {
 					<p>Eastyler is an open platform where anyone can sign-up and use.</p>
 					<h2>Free Service</h2>
 					<p>Eastyler does not charge users and will remain for free.</p>
-					<h2>Affiliate links & Advertisements</h2>
+					<h2>Affiliate links</h2>
 					<p>Users have complete freedom to use any affiliate links when creating looks and have all rights for commisions.</p>
+					<h2>Ads</h2>
 					<p>Eastyler may work with affiliate networks and advertising networks for profits and share profilts with content creators.</p>
 					<h2>Copyrights</h2>
 					<p>Users have all rights for their created content on Eastyler.</p>
-					<p>By publishing on Eastyler platform, Eastyler also retains right to publish user generated content on Eastyler-owned platforms.</p>
+					<p>By publishing on Eastyler platform, Eastyler also retains rights to publish user generated content on Eastyler-owned platforms.</p>
 					<p>Eastyler works towards sharing benefits with content generaters.</p>
 					<h2>Privacy Policy</h2>
-					<p>Eastyler will store user's look data on creation and remove them as on deletion.</p>
+					<p>Eastyler will store user's look data on creation and remove them on deletion.</p>
 				</div>
 			)
 			break;
@@ -70,7 +71,7 @@ const Doc = ({match}) => {
 							<p>revolutionize the way people shop for fashion.</p> 
 						</li>
 					</ul>
-					<p>We a group of tech savvy in silicon valley who believe apparel shopping experience can be made different.</p>
+					<p>We are a group of tech savvy in silicon valley who believe apparel shopping experience can be made different.</p>
 				</div>
 			)
 	}
