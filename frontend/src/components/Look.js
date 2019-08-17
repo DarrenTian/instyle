@@ -159,7 +159,7 @@ class LookDesktop extends React.Component {
                             <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
-                            <SocialPlugin />
+                            <SocialPlugin showClip={true}/>
                         </div>
                     </div>
                 </div>
@@ -311,7 +311,7 @@ class LookMobile extends React.Component {
                             <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
-                            <SocialPlugin />
+                            <SocialPlugin showClip={false}/>
                         </div>
                     </div>
                 </div>
