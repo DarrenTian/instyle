@@ -51,7 +51,6 @@ class LookDesktop extends React.Component {
         this.forceUpdate();
     }
     selectTag = (index) => {
-        console.log(index);
         const state = { ...this.state }
         state.view.selectedTag.index = index;
         this.setState(state);

@@ -119,6 +119,18 @@ $footer-background-color: white;
   border: solid 1px rgba(10, 10, 10, 0.1);
 }
 
+@media screen and (min-width: 769px) {
+  .product-carousel::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 6px;
+  }
+  .product-carousel::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+}
+
 @keyframes blink {
     0% {
         transform: scale(1);
