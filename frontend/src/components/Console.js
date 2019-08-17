@@ -102,7 +102,7 @@ class Console extends React.Component {
 								const url = look.publish_status=='P' ? '/looks/'+look.url_id : '/looks/'+look.url_id+'/preview';
 								return (
 									<div className="column is-one-quarter" style={lookStyle} key={index}>
-										<a href={url}>
+										<a href={url} target="_blank">
 											<img style={previewImageStyle} src={lookImage}></img>
 										</a>
 										<span style={overlayStyle} className="tag ">
@@ -122,7 +122,7 @@ class Console extends React.Component {
 							const url = look.publish_status=='P' ? '/looks/'+look.url_id : '/looks/'+look.url_id+'/preview';
 							return (
 								<div className="column is-half" style={lookStyle} key={index}>
-									<a href={url}><img style={previewImageMobileStyle} src={lookImage}></img></a>
+									<a href={url} target="_blank"><img style={previewImageMobileStyle} src={lookImage}></img></a>
 								</div>
 							)
 						})}

@@ -90,7 +90,7 @@ const Welcome = () => {
                         </div>
                         <div className="column is-6 is-offset-1">
                             <div className="minimal-feature-image">
-                                <img src="./static/tag_feature.gif" alt="" style={tagFeatureStyle}/>
+                                <a href="https://www.eastyler.com/looks/YEqo2maz" target="_blank"><img src="./static/tag_feature.gif" alt="" style={tagFeatureStyle}/></a>
                             </div>
                         </div>
                     </div>

@@ -86,10 +86,10 @@ class LookDesktop extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
-        const tagWidth = 25;
+        const tagWidth = 26;
         const dotWidth = 10;
         const selectedTagWidth = 20;
-        const selectedDotWidth = 15;
+        const selectedDotWidth = 16;
 
         const tagStyle = {
           position: "absolute",
@@ -236,10 +236,10 @@ class LookMobile extends React.Component {
         const tagContainerStyle = {
             position: "relative",
         }
-        const tagWidth = 25;
+        const tagWidth = 26;
         const dotWidth = 10;
         const selectedTagWidth = 20;
-        const selectedDotWidth = 15;
+        const selectedDotWidth = 16;
 
         const tagStyle = {
           position: "absolute",

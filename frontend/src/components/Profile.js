@@ -7,6 +7,7 @@ class Profile extends React.Component {
   state = {
   	profile: {},
   	errMsg: '',
+  	saved : false,
   };
 
   updateCachedProfile = (profile) => {
@@ -17,6 +18,7 @@ class Profile extends React.Component {
 	const { name, value } = e.target;
 	const state = { ...this.state };
 	state.profile[name] = value;
+	state.saved = false;
 	this.setState(state);
   }
 
@@ -24,8 +26,9 @@ class Profile extends React.Component {
   	event.preventDefault();
   	userService.updateUserProfile(this.state.profile)
   		.then(user=>{
-  			this.setState({ profile: user.profile});
+  			this.setState({ profile: user.profile, saved: true});
   			this.updateCachedProfile(user.profile);
+
   		})
   		.catch(error=> {
   			this.setState({'errMsg':error});
@@ -77,7 +80,7 @@ class Profile extends React.Component {
 						    <div className="field">
 						      <div className="control">
 			                	<figure className="image is-96x96">
-                    				<img className="is-rounded" style={avatarStyle} src={this.state.profile.avatar_image} alt="Placeholder image"></img>
+                    				<img className="is-rounded" style={avatarStyle} src={this.state.profile.avatar_image}></img>
                 				</figure>
 						      </div>
 						      <br/>
@@ -141,7 +144,7 @@ class Profile extends React.Component {
 						  </div>
 						  <div className="field-body">
 							 <div className="field">
-					            <input type="submit" value="Save Profile" className="button is-outlined" />
+					            <input type="submit" value={this.state.saved ? "Saved" : "Save Profile"} className="button is-outlined" />
 					         </div>
 						  </div>
 						</div>

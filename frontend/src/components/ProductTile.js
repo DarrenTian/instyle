@@ -66,7 +66,7 @@ class ProductTile extends React.Component {
                             <div style={{display:"flex"}}>
                                 <div className="subtitle is-6" style={priceStyle}>{price}</div>
                                 {this.props.isHighlighted && linkUrl ?
-                                    <a href={linkUrl}><div className="button is-info is-outlined" style={{height:"25px"}}>Shop</div></a>
+                                    <a href={linkUrl} target="_blank"><div className="button is-info is-outlined" style={{height:"25px"}}>Shop</div></a>
                                     :
                                     null
                                 }
