@@ -16,6 +16,7 @@ import { userService } from "../services";
 import Welcome from "./Welcome";
 import ErrorPage from "./ErrorPage";
 import Profile from "./Profile";
+import Explore from "./Explore";
 import {
   Route,
   Switch,
@@ -46,6 +47,7 @@ class App extends React.Component {
 			      <Switch>
 			      	<Route path="/" exact component={Welcome} />
 			        <Route path="/welcome" exact component={Welcome} />
+			        <Route path="/explore" exact component={Explore} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />

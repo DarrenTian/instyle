@@ -32,7 +32,7 @@ class LookImage(models.Model):
 		return "%s" % self.id
 
 class Product(models.Model):
-	url = models.URLField(max_length=200)
+	url = models.URLField(max_length=2048)
 	title = models.CharField(max_length=200, default='')
 	price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 	
