@@ -22,7 +22,7 @@ class LookList extends React.Component {
                   <div className="tiles-vertical-columns">
                       {this.props.looks && this.props.looks.map((look,index)=>{
                         return (
-                          <div key={index} style={{paddingBottom:"10px"}}>
+                          <div key={index} >
                               <ImageTile look={look}/>
                           </div>
                         )

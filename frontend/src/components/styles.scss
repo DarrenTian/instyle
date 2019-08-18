@@ -106,11 +106,6 @@ $footer-background-color: white;
     margin: 0 auto;
 }
 
-.tiles-vertical-columns {
-    column-count: 2;
-    column-gap: 1em;
-}
-
 .is-shadowless {
   box-shadow: none;
 }
@@ -216,10 +211,16 @@ $footer-background-color: white;
   font-size: 0.85rem;
 }
 
+
+.tiles-vertical-columns {
+    column-count: 2;
+    column-gap: 0.5em;
+}
+
 @media only screen and (min-width: 600px) {
   .tiles-vertical-columns {
     column-count: 4;
-    column-gap: 1em;
+    column-gap: 0.5em;
   }
 }
 
