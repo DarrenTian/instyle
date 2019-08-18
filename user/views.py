@@ -86,7 +86,8 @@ class UserProfileViewSet(viewsets.GenericViewSet):
         token, created = Token.objects.get_or_create(user=user)
         file = request.data['file']
         name, extension = os.path.splitext(file.name)
-        user.avatar_image.delete()
+        if user.avatar_image!="default/logo_transparent.png":
+            user.avatar_image.delete()
         user.avatar_image.save('avatar/'+user.user_id + '-' + str(int(time.time())) + extension, file)
         user.save()
         return Response({
