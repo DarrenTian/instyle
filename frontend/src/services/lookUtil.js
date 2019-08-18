@@ -2,6 +2,7 @@ export const lookUtil = {
 	getCoverLookImage,
 	getCoverImage,
 	getTags,
+	getPublisher,
 };
 
 function getCoverLookImage(look) {
@@ -22,5 +23,17 @@ function getCoverImage(look) {
 function getTags(look) {
 	const lookImage = getCoverLookImage(look);
 	return lookImage ? lookImage.tags : null;
+}
+
+function getPublisher(looks) {
+	if (!looks) {
+    	return null;
+    }
+
+    if (looks.length == 0) {
+        return null;
+    }
+
+    return looks[0].publisher;
 }
 

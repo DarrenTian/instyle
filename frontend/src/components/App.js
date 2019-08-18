@@ -8,8 +8,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Signup from "./Signup";
 import LookDataProvider from "./LookDataProvider";
+import LookListDataProvider from "./LookListDataProvider";
 import LookEditPage from "./LookEditPage";
 import Look from "./Look";
+import LookList from "./LookList";
 import { userService } from "../services";
 import Welcome from "./Welcome";
 import ErrorPage from "./ErrorPage";
@@ -62,11 +64,14 @@ class App extends React.Component {
 		)
 	}
 }
+
 class LookPage extends React.Component {
 	render() {
 		return (
-	  		<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
-	   		// TODO: <StyleListDataProvider>, can reuse the same template but call different apis to retrieve data, for example, "more from", "similiar looks" ...
+			<div>
+	  			<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
+	  			<LookListDataProvider lookId={this.props.match.params.id} render={looks=><LookList looks={looks} />} />
+	  		</div>
 		);
 	}
 

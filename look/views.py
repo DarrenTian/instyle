@@ -45,6 +45,12 @@ class LookViewSet(mixins.RetrieveModelMixin,
       else:
         return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=['get'])
+    def more_looks(self, request, url_id=None): 
+      look = self.get_object()
+      looks = LookSerializer(Look.objects.all().filter(publisher=look.publisher, publish_status='P').exclude(id=look.id), many=True)
+      return Response(looks.data, status=status.HTTP_200_OK)
+
 # Look API restricted per user access.
 class UserLookViewSet(viewsets.ModelViewSet):
     """
