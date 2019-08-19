@@ -43,8 +43,8 @@ class Header extends React.Component {
         let navEnd;
         if (!this.props.isLoggedIn) {
             navEnd = <div className="navbar-end">
-              <a className="navbar-item" href="/welcome">
-                Home
+              <a className="navbar-item" href="/">
+                Explore
               </a>
               <a className="navbar-item" href="/doc/about">
                 About
@@ -68,8 +68,8 @@ class Header extends React.Component {
                   <p>{profile? profile.nickname : null}</p>
                 </a>
                 <div className="navbar-dropdown">
-                 <a className="navbar-item" href="/welcome">
-                    Home
+                 <a className="navbar-item" href="/">
+                    Explore
                   </a>
                   <a className="navbar-item" href="/console">
                     Console
@@ -78,7 +78,7 @@ class Header extends React.Component {
                     Profile
                   </a>
                   <hr className="navbar-divider"/>
-                  <a className="navbar-item" href="/welcome" onClick={this.logout}>
+                  <a className="navbar-item" href="/" onClick={this.logout}>
                     Log out
                   </a>
                 </div>
@@ -86,14 +86,7 @@ class Header extends React.Component {
             </div>
         }
 
-        if (this.props.isLookView) {
-            return (
-                <div style={{...navBarStyle, ...titleStyle, ...simpleHeaderStyle}}>
-                    <div style={{margin:"auto"}}><a href="/" style={{color:"#363636"}}>Eastyler</a></div>
-                </div>
 
-            )
-        } else {
           return (
             <div style={navBarStyle}>
                 <nav className="navbar" role="navigation" aria-label="main navigation" >
@@ -118,7 +111,6 @@ class Header extends React.Component {
                 </nav>
             </div>
         )          
-        }
 
     }
 }

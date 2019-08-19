@@ -44,8 +44,8 @@ class App extends React.Component {
 		    <div className="canvas-component">
 			    <BrowserRouter>
 			      <Switch>
-			      	<Route path="/" exact component={Welcome} />
-			        <Route path="/welcome" exact component={Welcome} />
+			      	<Route path="/" exact component={Explore} />
+			        <Route path="/creator" exact component={Welcome} />
 			        <Route path="/explore" exact component={Explore} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
@@ -71,7 +71,7 @@ class LookPage extends React.Component {
 		return (
 			<div>
 	  			<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
-	  			<LookListDataProvider lookId={this.props.match.params.id} render={looks=><LookList looks={looks} />} />
+	  			<LookListDataProvider config={{type:"LOOK", lookId:this.props.match.params.id}} render={looks=><LookList title={"MORE_LOOKS"} looks={looks} />} />
 	  		</div>
 		);
 	}

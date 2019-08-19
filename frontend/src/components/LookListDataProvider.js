@@ -11,7 +11,7 @@ class LookListDataProvider extends Component {
       placeholder: "Loading..."
     };
   componentDidMount() {
-    lookService.retrieveMoreLooksForLook(this.props.lookId, false)
+    lookService.retrieveMoreLooks(this.props.config)
       .then(
         looks => this.setState({ looks: looks, loaded: true })
       )

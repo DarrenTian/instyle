@@ -51,6 +51,12 @@ class LookViewSet(mixins.RetrieveModelMixin,
       looks = LookSerializer(Look.objects.all().filter(publisher=look.publisher, publish_status='P').exclude(id=look.id), many=True)
       return Response(looks.data, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=['get'])
+    def explore(self, request): 
+      looks = LookSerializer(Look.objects.all().filter(publish_status='P').order_by('-publish_date'), many=True)
+      return Response(looks.data, status=status.HTTP_200_OK)
+
+
 # Look API restricted per user access.
 class UserLookViewSet(viewsets.ModelViewSet):
     """
@@ -148,7 +154,8 @@ class UserLookViewSet(viewsets.ModelViewSet):
 
         product = updatable_tag.product
         product.title = tag["product"]["title"]
-        product.price = tag["product"]["price"]
+        if tag["product"]["price"]!= '':
+          product.price = tag["product"]["price"]
         product.url = tag["product"]["url"]
         product.save()
         updatable_tag.coor_x = tag["coor_x"]

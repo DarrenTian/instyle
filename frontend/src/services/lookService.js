@@ -2,7 +2,7 @@ import { userService } from './userService'
 
 export const lookService = {
 	retrieveLook,
-	retrieveMoreLooksForLook,
+	retrieveMoreLooks,
 };
 
 const lookAPI = {
@@ -12,6 +12,10 @@ const lookAPI = {
 	},
 	'RETRIEVE_MORE_LOOKS_FOR_LOOK' : {
 		'END_POINT': '/api/looks/lookId/more_looks/',
+		'METHOD': 'GET',
+	},
+	'RETRIEVE_MORE_LOOKS_EXPLORE' : {
+		'END_POINT': '/api/looks/explore/',
 		'METHOD': 'GET',
 	},
 }
@@ -62,4 +66,29 @@ function retrieveMoreLooksForLook(lookId, selfAuth) {
 			return Promise.reject(error);
       	}
      })
+}
+
+function retrieveMoreLooksForExplore() {
+	return fetch(
+		lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.END_POINT.replace('lookId', 'SxEas8Hm'), {
+			method: lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.METHOD,
+			headers: selfAuth? getAuthLookHeader() : getLookHeader(),
+		})
+      .then(response => {
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		const error = response.statusText;
+			return Promise.reject(error);
+      	}
+     })
+}
+
+function retrieveMoreLooks(config) {
+	if (config.type=='LOOK') {
+		return retrieveMoreLooksForLook(config.lookId, false);
+	}
+	if (config.type=='EXPLORE') {
+		return retrieveMoreLooksForExplore();
+	}
 }

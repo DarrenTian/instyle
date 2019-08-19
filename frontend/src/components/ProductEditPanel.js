@@ -72,6 +72,12 @@ class ProductEditPanel extends React.Component {
 			<div>
                 <div style={editPanelStyle}>
                     <div className="field">
+                      <label className="label">Product Link</label>
+                      <div className="control">
+                        <input type="text" placeholder="" className="input" name="url" defaultValue={this.props.product.url} onChange={this.handleChange} required />
+                      </div>
+                    </div>
+                    <div className="field">
                       <label className="label">Product Title</label>
                       <div className="control">
                         <input type="text" placeholder="" className="input" name="title" defaultValue={this.props.product.title} onChange={this.handleChange} required />
@@ -80,16 +86,10 @@ class ProductEditPanel extends React.Component {
                     <div className="field">
                       <label className="label">Price</label>
                       <div className="control has-icons-left">
-                        <input type="number" min="0" step="1" max="5000" placeholder="" className="input" name="price" defaultValue={this.props.product.price} onChange={this.handleChange} required />
+                        <input type="number" min="0" step="1" max="5000" placeholder="0.00" className="input" name="price" defaultValue={this.props.product.price=='0.00'?null:this.props.product.price} onChange={this.handleChange} required />
                             <span className="icon is-small is-left">
                                 <i className="fa fa-dollar-sign"></i>
                             </span>
-                      </div>
-                    </div>
-                    <div className="field">
-                      <label className="label">Product Link</label>
-                      <div className="control">
-                        <input type="text" placeholder="" className="input" name="url" defaultValue={this.props.product.url} onChange={this.handleChange} required />
                       </div>
                     </div>
                     <div className="level">

@@ -16,9 +16,11 @@ class LookList extends React.Component {
           <div>
             <div> 
               <section className="section tiles-section">
-                  <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
-                       More Looks from {publisher.nickname}
-                  </div>
+                  {this.props.title && this.props.title=="MORE_LOOKS" &&
+                    <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
+                         More Looks from {publisher.nickname}
+                    </div>
+                  }
                   <div className="tiles-vertical-columns">
                       {this.props.looks && this.props.looks.map((look,index)=>{
                         return (

@@ -10,7 +10,7 @@ const ImageTile = ({ look }) => {
     const coverLookImage = lookUtil.getCoverLookImage(look);
     return (
         <div>
-            <a href={"./"+look.url_id}>
+            <a href={"/looks/"+look.url_id}>
                 <img className="is-thin-border" style={imageStyle} src={coverLookImage.image}></img>
             </a>
         </div>

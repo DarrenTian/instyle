@@ -63,7 +63,7 @@ class LookEditPage extends Component {
       "product" : {
         "url": "",
         "title": "",
-        "price": "0.00",
+        "price": "",
       }
     })
     state.view.isChanged = true;
@@ -411,7 +411,7 @@ class LookEditPage extends Component {
                     <button className="button is-success is-outlined" onClick={this.publishStyle}>Publish</button> :
                     <button className="button is-success is-outlined" disabled>Published</button>
                   }
-                  {this.state.look.publish_status=='P' &&
+                  {(this.state.look.publish_status=='P' && !this.state.view.isChanged) &&
                     <button className="button is-success is-outlined" onClick={this.goToLook}>Go to Look</button>
                   }
                 </div>
