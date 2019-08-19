@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django_extensions.db.fields import RandomCharField
 from django.dispatch import receiver
+from django.contrib import admin
 
 class Look(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -22,7 +23,7 @@ class Look(models.Model):
 	publish_status = models.CharField(max_length=1, choices=PUBLISH_STATUS_TYPE, default='D')
 
 	def __str__(self):
-		return "Look from (publisher): %s" % self.title
+		return "UrlId: looks/%s" % self.url_id
 
 class LookImage(models.Model):
 	look = models.ForeignKey(Look, related_name='look_images', on_delete=models.CASCADE)
@@ -51,4 +52,8 @@ class Tag(models.Model):
 @receiver(models.signals.pre_delete, sender=LookImage)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     instance.image.delete()
+
+class LookAdmin(admin.ModelAdmin):
+    fields = ['publish_status']
+admin.site.register(Look, LookAdmin)
 
