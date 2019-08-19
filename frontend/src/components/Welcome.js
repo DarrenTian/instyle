@@ -63,9 +63,9 @@ const Welcome = () => {
                                 Eastyler
                             </h1>
                             <div className="subtitle light-subtitle">
-                                Create interactive shoppable looks to reach your audience.
+                                Create and Explore Interactive Shoppable Looks.
                                 <br/>
-                                Built for Bloggers, YouTuber and Influencers.
+                                Built for social influencers and everyday fashion lovers.
                             </div>
                              <div>
                                 <Invite />
@@ -84,7 +84,7 @@ const Welcome = () => {
                                 <p className="feature-content">
                                     Upload your favorite looks and tag products. 
                                     <br/>
-                                    The interactive tags allow your audience to visually explore your looks with convenience.
+                                    The interactive tags allow Eastylers to visually explore your looks with convenience.
                                 </p>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ const Welcome = () => {
                                 <div className="is-vertical-aligned is-flex"><img src="/static/icon_share.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Share</h2></div>
                                 <br/>
                                 <p className="feature-content">
-                                    Use embedded social plugins to spread your influence across major social networks.
+                                    Use embedded social plugins to share your favoritel looks to major social networks.
                                 </p>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ const Welcome = () => {
                                 <div className="is-vertical-aligned is-flex"><img src="/static/icon_manage.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Manage</h2></div>
                                 <br/>
                                 <p className="feature-content">
-                                    Organize your looks and your belongings in a centralized console. Get inspired for your next new look.
+                                    Organize your looks and closet in a centralized console. Get inspired for your next new look.
                                 </p>
                             </div>
                         </div>
