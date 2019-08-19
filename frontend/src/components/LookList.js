@@ -23,6 +23,8 @@ class LookList extends React.Component {
                   }
                   <div className="tiles-vertical-columns">
                       {this.props.looks && this.props.looks.map((look,index)=>{
+                        const image = lookUtil.getCoverImage(look);
+                        if (image==null) { return null}
                         return (
                           <div key={index} >
                               <ImageTile look={look}/>
