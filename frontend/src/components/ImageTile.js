@@ -10,14 +10,19 @@ const ImageTile = ({ look }) => {
         borderRadius: "5px"
     };
     const coverLookImage = lookUtil.getCoverLookImage(look);
+    const tileContainerStyle = {
+        paddingBottom:"10px"
+    }
     const tileStyle = {
         borderRadius: "5px",
     }
     return (
          <a href={"/looks/"+look.url_id}>      
-        <div className="is-thin-border image-tile" style={tileStyle}>
-            <img className="" style={imageStyle} src={coverLookImage.image}></img>
-                    <UserPreviewFooter user={look.publisher}/>
+        <div className="image-tile" style={tileContainerStyle}>
+            <div className="is-thin-border" style={tileStyle}>
+                <img className="" style={imageStyle} src={coverLookImage.image}></img>
+                <UserPreviewFooter user={look.publisher}/>
+            </div>
         </div>
         </a>
     );
