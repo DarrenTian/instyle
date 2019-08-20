@@ -11,7 +11,7 @@ const ImageTile = ({ look }) => {
     };
     const coverLookImage = lookUtil.getCoverLookImage(look);
     const tileContainerStyle = {
-        paddingBottom:"10px"
+        paddingBottom:"10px",
     }
     const tileStyle = {
         borderRadius: "5px",

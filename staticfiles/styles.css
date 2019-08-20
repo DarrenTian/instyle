@@ -7345,8 +7345,17 @@ label.panel-block {
   page-break-inside: avoid;
   /* Firefox */
   break-inside: avoid;
-  /* IE 10+ */
-  display: inline-block; }
+  /* IE 10+ */ }
+
+@media not all and (min-resolution: 0.001dpcm) {
+  .image-tile {
+    -webkit-column-break-inside: avoid;
+    /* Chrome, Safari, Opera */
+    page-break-inside: avoid;
+    /* Firefox */
+    break-inside: avoid;
+    /* IE 10+ */
+    display: inline-block; } }
 
 a {
   color: black; }
