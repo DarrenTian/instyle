@@ -1,9 +1,14 @@
 export const lookUtil = {
+	onImageError,
 	getCoverLookImage,
 	getCoverImage,
 	getTags,
 	getPublisher,
 };
+
+function onImageError(e) {
+	e.target.src="/static/logo_transparent.png";
+}
 
 function getCoverLookImage(look) {
 	if(!look.look_images) {

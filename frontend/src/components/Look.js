@@ -4,33 +4,8 @@ import PropTypes from "prop-types";
 import MediaQuery from 'react-responsive';
 import ProductCarousel from "./ProductCarousel"
 import SocialPlugin from "./SocialPlugin";
+import { UserPreview } from "./UserPreview";
 import { lookUtil } from "../services";
-
-const UserPreview = ({ user }) => {
-    const titleStyle = {
-        overflowX: "initial",
-        alignSelf: "center",
-    };
-    const avatarStyle = {
-        objectFit: "cover",
-        width: "100%",
-        height: "100%",
-    }
-    return (
-        <div className="media">
-            <div className="media-left">
-                <figure className="image is-48x48">
-                    <img className="is-rounded is-thin-border" src={user.avatar_image} style={avatarStyle} alt="Placeholder image"></img>
-                </figure>
-            </div>
-            <div className="media-content" style={titleStyle}>
-                <p className="title is-6">{user.nickname}</p>
-                {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
-            </div>
-            {/*<a className="button is-pulled-right">+ Follow</a>*/}
-        </div>
-    )
-}
 
 class LookDesktop extends React.Component {
     constructor(props) {

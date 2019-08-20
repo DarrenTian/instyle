@@ -26,9 +26,10 @@ class LookList extends React.Component {
                         const image = lookUtil.getCoverImage(look);
                         if (image==null) { return null}
                         return (
-                          <div key={index} >
+
+                          <React.Fragment key={index} >
                               <ImageTile look={look}/>
-                          </div>
+                          </React.Fragment>
                         )
                       })}
                   </div>
