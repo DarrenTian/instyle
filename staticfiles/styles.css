@@ -7345,7 +7345,8 @@ label.panel-block {
   page-break-inside: avoid;
   /* Firefox */
   break-inside: avoid;
-  /* IE 10+ */ }
+  /* IE 10+ */
+  display: inline-block; }
 
 a {
   color: black; }

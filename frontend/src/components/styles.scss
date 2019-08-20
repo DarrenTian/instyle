@@ -120,6 +120,7 @@ $footer-background-color: white;
   -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
           page-break-inside: avoid; /* Firefox */
                break-inside: avoid; /* IE 10+ */
+               display: inline-block;
 }
 
 a {
