@@ -11,6 +11,11 @@ from user.models import User
 from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
 import os
 import time
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import tempfile
+from django.conf import settings
 
 # Login
 class CustomAuthToken(ObtainAuthToken):
@@ -86,14 +91,32 @@ class UserProfileViewSet(viewsets.GenericViewSet):
         token, created = Token.objects.get_or_create(user=user)
         file = request.data['file']
         name, extension = os.path.splitext(file.name)
+        thumbnail_file = self._compress_image(file)
+
         if user.avatar_image!="default/logo_transparent.png":
             user.avatar_image.delete()
-        user.avatar_image.save('avatar/'+user.user_id + '-' + str(int(time.time())) + extension, file)
+
+        time_suffix = str(int(time.time()))
+        avatar_image_url = 'avatar/'+user.user_id + '-' + time_suffix
+        avatar_image_thumbnail = 'avatar/'+user.user_id + '-' + time_suffix + '-' + 'thumbnail'
+        if settings.PROD_ENV == 'DEV':
+            avatar_image_url = 'dev/' + avatar_image_url
+            avatar_image_thumbnail = 'dev/' + avatar_image_thumbnail
+        user.avatar_image.save(avatar_image_url + extension, file)
+        user.avatar_image_thumbnail.save(avatar_image_thumbnail + extension, thumbnail_file)
         user.save()
         return Response({
             'token': token.key,
             'profile': UserProfileSerializer(user).data,
         }, status=status.HTTP_200_OK)
+
+    def _compress_image(self, image):
+      imageTemproary = Image.open(image)
+      imageTemproary = imageTemproary.convert('RGB')
+      imageTemproary.thumbnail((300, 300), Image.ANTIALIAS) 
+      compressed_image = tempfile.SpooledTemporaryFile()
+      imageTemproary.save(compressed_image , format='JPEG', quality=85, progressive=True, optimize=True)
+      return compressed_image
 
 
 class GroupViewSet(viewsets.ModelViewSet):

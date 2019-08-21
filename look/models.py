@@ -28,7 +28,7 @@ class Look(models.Model):
 class LookImage(models.Model):
 	look = models.ForeignKey(Look, related_name='look_images', on_delete=models.CASCADE)
 	image = models.ImageField()
-	#image_thumbnail = models.ImageField(default='default/logo_transparent.png')
+	image_thumbnail = models.ImageField(default='default/logo_transparent.png')
 	
 	def __str__(self):
 		return "%s" % self.id
@@ -53,6 +53,7 @@ class Tag(models.Model):
 @receiver(models.signals.pre_delete, sender=LookImage)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     instance.image.delete()
+    instance.image_thumbnail.delete()
 
 class LookAdmin(admin.ModelAdmin):
     fields = ['publish_status']

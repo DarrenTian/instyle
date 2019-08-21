@@ -54,6 +54,7 @@ class User(AbstractUser):
             'unique': "This display name has already been registered.",
         })
     avatar_image = models.ImageField(default='default/logo_transparent.png')
+    avatar_image_thumbnail = models.ImageField(default='default/logo_transparent.png')
 
     biography = models.TextField(max_length=500, default='')
 

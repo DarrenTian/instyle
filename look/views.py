@@ -17,6 +17,10 @@ import datetime
 import time
 import os
 from django.conf import settings
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import tempfile
 
 class LookImageViewSet(viewsets.ModelViewSet):
     """
@@ -106,13 +110,19 @@ class UserLookViewSet(viewsets.ModelViewSet):
       file = request.data['file']
       name, extension = os.path.splitext(file.name)
 
+      thumbnail_file = self._compress_image(file)
+
       look_image = LookImage()
       look_image.look = look
-      image_url = 'looks/'+look.url_id+'-'+str(int(time.time()))
+      time_suffix = str(int(time.time()))
+      image_url = 'looks/'+look.url_id+'-'+ time_suffix
+      image_thumbnail_url = 'looks/'+look.url_id+'-'+time_suffix+'-'+'thumbnail'
       print settings.PROD_ENV
       if settings.PROD_ENV == 'DEV':
         image_url = 'dev/' + image_url
+        image_thumbnail_url = 'dev/' + image_thumbnail_url
       look_image.image.save(image_url + extension, file)
+      look_image.image_thumbnail.save(image_thumbnail_url + extension, thumbnail_file)
       look_image.save()
 
       look.publish_status = 'D'
@@ -121,11 +131,13 @@ class UserLookViewSet(viewsets.ModelViewSet):
       
       return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
 
-    # def _update_products(self, look_data):
-    #   style = StyleSerializer(instance=self.get_object()).data
-    #   pprint.pprint(json.dumps(style))
-    #   # TODO: update products by look_data
-    #   print "updating products"
+    def _compress_image(self, image):
+      imageTemproary = Image.open(image)
+      imageTemproary = imageTemproary.convert('RGB')
+      imageTemproary.thumbnail((600, 600), Image.ANTIALIAS) 
+      compressed_image = tempfile.SpooledTemporaryFile()
+      imageTemproary.save(compressed_image , format='JPEG', quality=85, progressive=True, optimize=True)
+      return compressed_image
 
     def _update_tags(self, look_data):
       if 'look_images' not in look_data or not len(look_data['look_images']) > 0:
