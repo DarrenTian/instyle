@@ -8,7 +8,7 @@ const getImageSrc = (imagePath) => {
     return imagePrefix + imagePath;
 }
 
-const Welcome = () => {
+const About = () => {
     const mainSectionStyle = {
       backgroundImage: "url(./static/main-section-bg2.png)",
       backgroundRepeat: "round repeat",
@@ -170,7 +170,7 @@ const Welcome = () => {
                                         <li className="column-header" style={footerColumnHeader}>
                                             Company
                                         </li>
-                                        <li className="column-item"><a href="./doc/about">About Us</a></li>
+                                        <li className="column-item"><a href="./About">About Us</a></li>
                                         <li className="column-item"><a href="./doc/press">Press</a></li>
                                         <li className="column-item"><a href="./doc/investor">Investor Relations</a></li>
                                     </ul>
@@ -202,6 +202,6 @@ const Welcome = () => {
         </div>
     )
 };
-Welcome.propTypes = {
+About.propTypes = {
 };
-export default Welcome;
+export default About;

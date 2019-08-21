@@ -7,7 +7,7 @@ import { UserPreviewFooter } from "./UserPreview";
 
 const ImageTile = ({ look }) => {
     const imageStyle = {
-        borderRadius: "5px"
+        borderRadius: "5px 5px 0 0",
     };
     const coverLookImage = lookUtil.getCoverLookImage(look);
     const tileContainerStyle = {

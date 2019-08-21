@@ -42,6 +42,14 @@ const Doc = ({match}) => {
 				</div>
 			)
 			break;
+		case 'press':
+			content = (
+				<div>
+					<h1>Press</h1>
+					<p>Please send an email to contact_us@eastyler.com</p>
+				</div>
+			)
+			break;
 		case 'investor':
 			content = (
 				<div>

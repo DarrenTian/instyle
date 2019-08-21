@@ -33,7 +33,7 @@ class LookDesktop extends React.Component {
     render() {
         const imageStyle = {
             width: "100%",
-            borderRadius: "5px",
+            borderRadius: "5px 5px 0 0",
         };
         const timeStyle = {
             fontWeight: "normal",
@@ -183,7 +183,7 @@ class LookMobile extends React.Component {
     render() {
        const imageStyle = {
             width: "100%",
-            borderRadius: "5px",
+            borderRadius: "5px 5px 0 0",
         };
         const timeStyle = {
             fontWeight: "normal",

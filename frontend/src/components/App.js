@@ -13,7 +13,7 @@ import LookEditPage from "./LookEditPage";
 import Look from "./Look";
 import LookList from "./LookList";
 import { userService } from "../services";
-import Welcome from "./Welcome";
+import About from "./About";
 import ErrorPage from "./ErrorPage";
 import Profile from "./Profile";
 import Explore from "./Explore";
@@ -45,7 +45,8 @@ class App extends React.Component {
 			    <BrowserRouter>
 			      <Switch>
 			      	<Route path="/" exact component={Explore} />
-			        <Route path="/creator" exact component={Welcome} />
+			      	<Route path="/about" exact component={About} />
+			        <Route path="/creator" exact component={About} />
 			        <Route path="/explore" exact component={Explore} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
