@@ -80,7 +80,7 @@ class Profile extends React.Component {
 						    <div className="field">
 						      <div className="control">
 			                	<figure className="image is-96x96">
-                    				<img className="is-rounded" style={avatarStyle} src={this.state.profile.avatar_image}></img>
+                    				<img className="is-rounded" style={avatarStyle} src={this.state.profile.avatar_image_thumbnail}></img>
                 				</figure>
 						      </div>
 						      <br/>

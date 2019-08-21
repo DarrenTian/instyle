@@ -27,7 +27,7 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
 		fields = [
 		  'email',
 		  'nickname',
-		  'avatar_image',
+		  'avatar_image_thumbnail',
 		  'biography',
 		]
 

@@ -18,7 +18,7 @@ class UserPreview extends React.Component {
             <div className="media">
                 <div className="media-left">
                     <figure className="image is-48x48">
-                        <img className="is-rounded is-thin-border" src={this.props.user.avatar_image} style={avatarStyle}></img>
+                        <img className="is-rounded is-thin-border" src={this.props.user.avatar_image_thumbnail} style={avatarStyle}></img>
                     </figure>
                 </div>
                 <div className="media-content" style={titleStyle}>
@@ -57,7 +57,7 @@ class UserPreviewFooter extends React.Component {
                 </div>
                 <div className="media-right">
                     <figure className="image">
-                        <img className="is-rounded is-thin-border" onError={(e)=>{lookUtil.onImageError(e)}} src={this.props.user.avatar_image} style={avatarStyle}></img>
+                        <img className="is-rounded is-thin-border" onError={(e)=>{lookUtil.onImageError(e)}} src={this.props.user.avatar_image_thumbnail} style={avatarStyle}></img>
                     </figure>
                 </div>
                 {/*<a className="button is-pulled-right">+ Follow</a>*/}

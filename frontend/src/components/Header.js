@@ -64,7 +64,7 @@ class Header extends React.Component {
             navEnd = <div className="navbar-end">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link header-figure is-arrowless">
-                  <img src={profile? profile.avatar_image : null} style={avatarStyle}/>
+                  <img src={profile? profile.avatar_image_thumbnail : null} style={avatarStyle}/>
                   <p>{profile? profile.nickname : null}</p>
                 </a>
                 <div className="navbar-dropdown">
