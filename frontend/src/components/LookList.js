@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import MediaQuery from 'react-responsive';
 import { lookUtil } from "../services";
-import ImageTile from "./ImageTile";
+import LookTile from "./LookTile";
 
 class LookList extends React.Component {
     render() {
@@ -27,7 +27,7 @@ class LookList extends React.Component {
                         if (image==null) { return null}
                         return (
                           <React.Fragment key={index} >
-                              <ImageTile look={look}/>
+                              <LookTile look={look}/>
                           </React.Fragment>
                         )
                       })}

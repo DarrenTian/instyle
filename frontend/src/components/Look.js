@@ -6,6 +6,7 @@ import ProductCarousel from "./ProductCarousel"
 import SocialPlugin from "./SocialPlugin";
 import { UserPreview } from "./UserPreview";
 import { lookUtil } from "../services";
+import LookImage from "./LookImage";
 
 class LookDesktop extends React.Component {
     constructor(props) {
@@ -57,80 +58,13 @@ class LookDesktop extends React.Component {
             borderRadius: "5px",
             padding: "15px 15px 15px 15px",
         }
-        const tagContainerStyle = {
-            position: "relative",
-        }
-        const tagWidth = 26;
-        const dotWidth = 10;
-        const selectedTagWidth = 20;
-        const selectedDotWidth = 16;
-
-        const tagStyle = {
-          position: "absolute",
-          backgroundColor: "#363636",
-          borderRadius: "50%",
-          left: -tagWidth/2,
-          top: -tagWidth/2,
-          height: tagWidth + "px",
-          width: tagWidth + "px",
-        }
-        const selectedTagStyle = {
-          position: "absolute",
-          backgroundColor: "#363636",
-          borderRadius: "50%",
-
-          left: -selectedTagWidth/2,
-          top: -selectedTagWidth/2,
-          height: selectedTagWidth + "px",
-          width: selectedTagWidth + "px",
-        }
-        const dotStyle = {
-          position: "absolute",
-          backgroundColor: "white",
-          borderRadius: "50%",
-          left: -dotWidth/2,
-          top: -dotWidth/2,
-          height: dotWidth + "px",
-          width:  dotWidth + "px",
-        }
-        const selectedDotStyle = {
-          position: "absolute",
-          backgroundColor: "white",
-          borderRadius: "50%",
-          left: -selectedDotWidth/2,
-          top: -selectedDotWidth/2,
-          height: selectedDotWidth + "px",
-          width: selectedDotWidth + "px",
-        }
-        const coverImage = lookUtil.getCoverImage(this.props.look);
-        const tags = lookUtil.getTags(this.props.look);
         return (
             <React.Fragment>
                 <div className="column is-6">
                     <div className="card is-shadowless is-thin-border" style={lookCardStyle}>
-                        <div style={tagContainerStyle} ref={this.tagContainer}> 
-                            <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}>
-                            </img>
-                            {tags && tags.map((tag, index)=> {
-                                const isSelected = index == this.state.view.selectedTag.index;
-                                const singleTagStyle = isSelected ? {...selectedTagStyle} : {...tagStyle};
-                                const singleDotStyle = isSelected ? {...selectedDotStyle} : {...dotStyle};
-                                if (this.tagContainer.current) {
-                                  singleTagStyle.left = singleTagStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleTagStyle.top = singleTagStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";
-                                  singleDotStyle.left = singleDotStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleDotStyle.top = singleDotStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";     
-                                }
-                                return (
-                                    <div key={index} className="is-clickable" onClick={(e)=>this.selectTag(index)}>
-                                        <div className={isSelected ? "is-scale-blink" : "is-blink"} style={singleTagStyle}></div>
-                                        <div className={isSelected ? "" : "is-blink"} style={singleDotStyle}></div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <LookImage look={this.props.look}  isInteractive={true}  showTags={true} view={this.state.view} selectTag={this.selectTag}/>
                         <div style={productCarouselStyle}>
-                            <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
+                            <ProductCarousel look={this.props.look}  view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
                         <div className="" style={socialPluginStyle}>
                             <SocialPlugin showClip={true}/>
@@ -207,53 +141,6 @@ class LookMobile extends React.Component {
         const publisherCardStyle = {
             borderRadius: "5px",
         }
-        const tagContainerStyle = {
-            position: "relative",
-        }
-        const tagWidth = 26;
-        const dotWidth = 10;
-        const selectedTagWidth = 20;
-        const selectedDotWidth = 16;
-
-        const tagStyle = {
-          position: "absolute",
-          backgroundColor: "#363636",
-          borderRadius: "50%",
-          left: -tagWidth/2,
-          top: -tagWidth/2,
-          height: tagWidth + "px",
-          width: tagWidth + "px",
-        }
-        const selectedTagStyle = {
-          position: "absolute",
-          backgroundColor: "#363636",
-          borderRadius: "50%",
-
-          left: -selectedTagWidth/2,
-          top: -selectedTagWidth/2,
-          height: selectedTagWidth + "px",
-          width: selectedTagWidth + "px",
-        }
-        const dotStyle = {
-          position: "absolute",
-          backgroundColor: "white",
-          borderRadius: "50%",
-          left: -dotWidth/2,
-          top: -dotWidth/2,
-          height: dotWidth + "px",
-          width:  dotWidth + "px",
-        }
-        const selectedDotStyle = {
-          position: "absolute",
-          backgroundColor: "white",
-          borderRadius: "50%",
-          left: -selectedDotWidth/2,
-          top: -selectedDotWidth/2,
-          height: selectedDotWidth + "px",
-          width: selectedDotWidth + "px",
-        }
-        const coverImage = lookUtil.getCoverImage(this.props.look);
-        const tags = lookUtil.getTags(this.props.look);
         return (
             <React.Fragment>
                 <div className="column" style={{paddingBottom:"0px"}}>
@@ -261,26 +148,7 @@ class LookMobile extends React.Component {
                 </div>
                 <div className="column is-6">
                     <div className="card is-shadowless" style={lookCardStyle}>
-                        <div style={tagContainerStyle} ref={this.tagContainer}>
-                            <img className="is-block container" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
-                            {tags && tags.map((tag, index)=> {
-                                const isSelected = index == this.state.view.selectedTag.index;
-                                const singleTagStyle = isSelected ? {...selectedTagStyle} : {...tagStyle};
-                                const singleDotStyle = isSelected ? {...selectedDotStyle} : {...dotStyle};
-                                if (this.tagContainer.current) {
-                                  singleTagStyle.left = singleTagStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleTagStyle.top = singleTagStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";
-                                  singleDotStyle.left = singleDotStyle.left + tag.coor_x * this.tagContainer.current.clientWidth + "px";
-                                  singleDotStyle.top = singleDotStyle.top + tag.coor_y * this.tagContainer.current.clientHeight + "px";     
-                                }
-                                return (
-                                    <div key={index} className="is-clickable" onClick={(e)=>this.selectTag(index)}>
-                                        <div className={isSelected ? "is-scale-blink" : "is-blink"} style={singleTagStyle}></div>
-                                        <div className={isSelected ? null : "is-blink"} style={singleDotStyle}></div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <LookImage look={this.props.look}  isInteractive={true} view={this.state.view} selectTag={this.selectTag} showTags={true} />
                         <div style={productCarouselStyle}>
                             <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>

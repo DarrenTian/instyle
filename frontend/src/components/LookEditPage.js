@@ -214,11 +214,22 @@ class LookEditPage extends Component {
     const coor_y = shiftY / bounding.height;
     const state = { ...this.state };
     const tags = lookUtil.getTags(state.look);
-    tags[tagIndex].coor_x = coor_x;
-    tags[tagIndex].coor_y = coor_y;
+    tags[tagIndex].coor_x = this.boundCoor(coor_x);
+    tags[tagIndex].coor_y = this.boundCoor(coor_y);
     state.view.isChanged = true;
     this.setState(state);
     this.selectTag(-1);
+  }
+
+  boundCoor = (coor) => {
+    console.log(coor);
+    if (coor < 0.05) {
+      return 0.05;
+    }
+    if (coor > 0.90) {
+      return 0.90;
+    }
+    return coor;
   }
 
   componentDidMount() {

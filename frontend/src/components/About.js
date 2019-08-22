@@ -1,4 +1,3 @@
-import ImageTile from "./ImageTile";
 import Invite from "./Invite";
 import React from "react";
 import PropTypes from "prop-types";

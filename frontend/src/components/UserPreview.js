@@ -44,23 +44,21 @@ class UserPreviewFooter extends React.Component {
         }
         const footerContainer = {
             display: "flex",
-            padding:"0px 3px 3px 3px",
+            padding:"5px",
             flexDirection:"column",
-            alignItems:"flex-end",
+            alignItems:"flex-start",
         }
         return (
             <div style={footerContainer}>
             <div className="media">
-                <div className="" style={titleStyle}>
-                    <p className="title is-7">{this.props.user.nickname}</p>
-                    {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
-                </div>
-                <div className="media-right">
+                <div className="" style={{marginRight:"5px"}}>
                     <figure className="image">
                         <img className="is-rounded is-thin-border" onError={(e)=>{lookUtil.onImageError(e)}} src={this.props.user.avatar_image_thumbnail} style={avatarStyle}></img>
                     </figure>
                 </div>
-                {/*<a className="button is-pulled-right">+ Follow</a>*/}
+                <div className="" style={titleStyle}>
+                    <p className="title is-7">{this.props.user.nickname}</p>
+                </div>
             </div>
             </div>
         )
