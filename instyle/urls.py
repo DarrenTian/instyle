@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework import routers
-import user.views, look.views, frontend.views, invitation.views
+import user.views, look.views, frontend.views, invitation.views, social.views
 from django.contrib import admin
 
 router = routers.SimpleRouter()
@@ -28,6 +28,7 @@ router.register(r'looks', look.views.LookViewSet)
 router.register(r'users', user.views.UserViewSet)
 router.register(r'user_profile', user.views.UserProfileViewSet)
 router.register(r'invitation', invitation.views.InvitationViewSet)
+router.register(r'social', social.views.SocialViewSets)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

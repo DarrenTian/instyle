@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { lookUtil } from "../services";
+import { socialService } from "../services";
 
 class UserPreview extends React.Component {
     render() {
@@ -37,6 +38,14 @@ class UserPreviewFooter extends React.Component {
     };
 
     like = ()=>{
+        socialService.like("OMkn5vfm")
+          .then(response =>{
+            console.log("success");
+        }
+          )
+          .catch(e => {
+            console.log("fail");
+          });
         this.setState({liked:!this.state.liked});
     }
     render() {
@@ -89,16 +98,16 @@ class UserPreviewFooter extends React.Component {
                         </div>
                     </div>
                 </div>
-                {
-                    /*
+            {/*
+
                 <div style={loveStyle} className="is-clickable" onClick={this.like}>
                     <i class="far fa-heart"></i>
                 </div>
                 <div style={lovedStyle} className="is-clickable" onClick={this.like}>
                     <i class="fas fa-heart"></i>
                 </div>
-                    */
-                }
+                 */}
+
             </div>
 
         )

@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'user',
     'frontend',
     'invitation',
+    'social',
 ]
 
 REST_FRAMEWORK = {
