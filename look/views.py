@@ -48,7 +48,13 @@ class LookViewSet(mixins.RetrieveModelMixin,
       if (not look.publish_status == 'P') and (not look.publisher == request.user):
         return Response({}, status=status.HTTP_404_NOT_FOUND)
       else:
-        return Response(LookSerializer(look).data, status=status.HTTP_200_OK)
+        look_data = LookSerializer(look).data
+        if request.user.is_anonymous():
+          look_data["liked"] = False
+        else:
+          has_like = Like.objects.all().filter(user=request.user, look_id=look_data["id"])
+          look_data["liked"] = has_like.exists()
+        return Response(look_data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['get'])
     def more_looks(self, request, url_id=None): 

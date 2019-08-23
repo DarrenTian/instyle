@@ -40,7 +40,7 @@ function retrieveLook(lookId, selfAuth) {
 	return fetch(
 		lookAPI.RETRIEVE.END_POINT.replace('lookId', lookId), {
 			method: lookAPI.RETRIEVE.METHOD,
-			headers: selfAuth? getAuthLookHeader() : getLookHeader(),
+			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
 		})
       .then(response => {
       	if (response.ok) {
