@@ -52,11 +52,11 @@ function retrieveLook(lookId, selfAuth) {
      })
 }
 
-function retrieveMoreLooksForLook(lookId, selfAuth) {
+function retrieveMoreLooksForLook(lookId) {
 	return fetch(
 		lookAPI.RETRIEVE_MORE_LOOKS_FOR_LOOK.END_POINT.replace('lookId', lookId), {
 			method: lookAPI.RETRIEVE_MORE_LOOKS_FOR_LOOK.METHOD,
-			headers: selfAuth? getAuthLookHeader() : getLookHeader(),
+			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
 		})
       .then(response => {
       	if (response.ok) {
@@ -70,9 +70,9 @@ function retrieveMoreLooksForLook(lookId, selfAuth) {
 
 function retrieveMoreLooksForExplore() {
 	return fetch(
-		lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.END_POINT.replace('lookId', 'SxEas8Hm'), {
+		lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.END_POINT, {
 			method: lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.METHOD,
-			headers: selfAuth? getAuthLookHeader() : getLookHeader(),
+			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
 		})
       .then(response => {
       	if (response.ok) {

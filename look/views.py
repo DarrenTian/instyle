@@ -6,11 +6,12 @@ from django.shortcuts import render, redirect
 from rest_framework import mixins, viewsets, status
 from rest_framework.decorators import action, parser_classes
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 from look.models import Look, LookImage, Tag, Product
 from look.serializers import LookSerializer, LookImageSerializer, TagSerializer
 from user.models import User
+from social.models import Like
 import pprint
 import json
 import datetime
@@ -58,6 +59,13 @@ class LookViewSet(mixins.RetrieveModelMixin,
     @action(detail=False, methods=['get'])
     def explore(self, request): 
       looks = LookSerializer(Look.objects.all().filter(publish_status='P').order_by('-publish_date'), many=True)
+      # Find a way to join better
+      for look in looks.data:
+        if request.user.is_anonymous():
+          look["liked"] = False
+        else:
+          has_like = Like.objects.all().filter(user=request.user, look_id=look["id"])
+          look["liked"] = has_like.exists()
       return Response(looks.data, status=status.HTTP_200_OK)
 
 
@@ -117,7 +125,6 @@ class UserLookViewSet(viewsets.ModelViewSet):
       time_suffix = str(int(time.time()))
       image_url = 'looks/'+look.url_id+'-'+ time_suffix
       image_thumbnail_url = 'looks/'+look.url_id+'-'+time_suffix+'-'+'thumbnail'
-      print settings.PROD_ENV
       if settings.PROD_ENV == 'DEV':
         image_url = 'dev/' + image_url
         image_thumbnail_url = 'dev/' + image_thumbnail_url

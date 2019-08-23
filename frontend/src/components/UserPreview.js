@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { lookUtil } from "../services";
-import { socialService } from "../services";
+import { userService, socialService } from "../services";
 
 class UserPreview extends React.Component {
     render() {
@@ -34,19 +34,22 @@ class UserPreview extends React.Component {
 
 class UserPreviewFooter extends React.Component {
     state = {
-        liked: false,
+        liked: this.props.liked,
     };
 
-    like = ()=>{
-        socialService.like("OMkn5vfm")
-          .then(response =>{
-            console.log("success");
+    toggleLike = ()=>{
+        if (!userService.isLoggedIn()) {
+            window.location.href = './signup';
         }
-          )
-          .catch(e => {
-            console.log("fail");
-          });
-        this.setState({liked:!this.state.liked});
+
+        const likeState = this.state.liked;
+        socialService.toggleLike(this.props.url_id, likeState)
+            .then(response =>{
+                this.setState({liked:!likeState});
+            })
+            .catch(e => {
+                this.setState({liked:likeState});
+            });
     }
     render() {
         const titleStyle = {
@@ -98,15 +101,14 @@ class UserPreviewFooter extends React.Component {
                         </div>
                     </div>
                 </div>
-            {/*
+            
 
-                <div style={loveStyle} className="is-clickable" onClick={this.like}>
-                    <i class="far fa-heart"></i>
+                <div style={loveStyle} className="is-clickable" onClick={this.toggleLike} >
+                    <i className="far fa-heart"></i>
                 </div>
-                <div style={lovedStyle} className="is-clickable" onClick={this.like}>
-                    <i class="fas fa-heart"></i>
+                <div style={lovedStyle} className="is-clickable" onClick={this.toggleLike}>
+                    <i className="fas fa-heart"></i>
                 </div>
-                 */}
 
             </div>
 

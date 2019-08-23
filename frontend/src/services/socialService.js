@@ -1,12 +1,16 @@
 import { userService } from './userService'
 
 export const socialService = {
-	like,
+	toggleLike,
 };
 
 const socialAPI = {
 	'LIKE' : {
 		'END_POINT': '/api/social/like/',
+		'METHOD': 'POST',
+	},
+	'UNLIKE' : {
+		'END_POINT': '/api/social/unlike/',
 		'METHOD': 'POST',
 	},
 }
@@ -19,12 +23,20 @@ function getAuthLookHeader() {
 	}
 }
 
-function like(lookId) {
+function toggleLike(lookId, likeState) {
+	if (likeState==true) {
+		return unlike(lookId);
+	} else {
+		return like(lookId);
+	}
+}
+
+function like(lookId){
 	return fetch(
 		socialAPI.LIKE.END_POINT, {
 			method: socialAPI.LIKE.METHOD,
 			headers: getAuthLookHeader(),
-			body: JSON.stringify({"lookId":lookId}),
+			body: JSON.stringify({"look_id":lookId}),
 		})
       .then(response => {
       	if (response.ok) {
@@ -35,3 +47,22 @@ function like(lookId) {
       	}
      })
 }
+
+
+function unlike(lookId){
+	return fetch(
+		socialAPI.UNLIKE.END_POINT, {
+			method: socialAPI.UNLIKE.METHOD,
+			headers: getAuthLookHeader(),
+			body: JSON.stringify({"look_id":lookId}),
+		})
+      .then(response => {
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		const error = response.statusText;
+			return Promise.reject(error);
+      	}
+     })
+}
+

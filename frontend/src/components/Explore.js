@@ -11,7 +11,7 @@ class Explore extends React.Component {
         const isLoggedIn =  userService.isLoggedIn();
         return (
             <div>
-            <LookListDataProvider config={{type:"EXPLORE"}} render={looks=><LookList title={"EXPLORE"}looks={looks} />} />
+            <LookListDataProvider config={{type:"EXPLORE"}} render={looks=><LookList title={"EXPLORE"} looks={looks} />} />
             {!isLoggedIn && 
                 <section className="section">
                     <div className="container">
