@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import MediaQuery from 'react-responsive';
 import ProductCarousel from "./ProductCarousel"
-import SocialPlugin from "./SocialPlugin";
+import SocialPlugin from "./social/SocialPlugin";
 import { UserPreview } from "./UserPreview";
 import { lookUtil } from "../services";
 import LookImage from "./LookImage";
@@ -43,11 +43,7 @@ class LookDesktop extends React.Component {
             justifyContent: "flex-end",
 
         };
-        const socialPluginStyle = {
-            display: "flex",
-            justifyContent: "flex-end",
-            padding: "10px 10px 10px 10px",
-        }
+
         const productCarouselStyle = {
             padding: "10px 10px 10px 10px",
         }
@@ -66,9 +62,7 @@ class LookDesktop extends React.Component {
                         <div style={productCarouselStyle}>
                             <ProductCarousel look={this.props.look}  view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
-                        <div className="" style={socialPluginStyle}>
-                            <SocialPlugin showClip={true}/>
-                        </div>
+                        <SocialPlugin showClip={true} look={this.props.look}/>
                     </div>
                 </div>
                 <div className="column is-4">
@@ -126,12 +120,6 @@ class LookMobile extends React.Component {
             justifyContent: "flex-end",
 
         };
-
-        const socialPluginStyle = {
-            display: "flex",
-            justifyContent: "flex-end",
-            padding: "10px 0px 10px 0px",
-        }
         const productCarouselStyle = {
             padding: "10px 0px 10px 0px",
         }
@@ -152,9 +140,7 @@ class LookMobile extends React.Component {
                         <div style={productCarouselStyle}>
                             <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
-                        <div className="" style={socialPluginStyle}>
-                            <SocialPlugin showClip={false}/>
-                        </div>
+                        <SocialPlugin showClip={true} look={this.props.look}/>
                     </div>
                 </div>
                 <div className="column is-4">

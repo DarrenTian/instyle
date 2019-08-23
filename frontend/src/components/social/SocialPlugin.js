@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Like from "./Like";
+
 class SocialPlugin extends React.Component {
 	constructor(props) {
 		super(props);
@@ -65,6 +67,12 @@ class SocialPlugin extends React.Component {
 	}
 
 	render() {
+		const containerStyle = {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "10px 10px 10px 10px",
+        }
 		const socialPluginStyle = {
 			height: "20px",
 			lineHeight: "0",
@@ -80,15 +88,23 @@ class SocialPlugin extends React.Component {
 			paddingLeft:"5px",
 			paddingRight:"2px",
 		}
+		const likeStyle = {
+
+		}
 		const url = window.location.href;
 		return (
-			<div className="is-flex" style={socialPluginStyle}>
-				{this.props.showClip &&
-				<div style={shareStyle}><button style={linkStyle} className="btn button" onClick={(e)=>this.copy(url)}><i className="fas fa-link"></i>{this.state.isCopied ? "Copied" : "Share"}</button></div>
-				}
-		        <div style={shareStyle}><a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a></div>
-		        <div style={shareStyle} className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
-		        <div><a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
+			<div style={containerStyle}>
+				<div className="is-flex" style={socialPluginStyle}>
+					{this.props.showClip &&
+					<div style={shareStyle}><button style={linkStyle} className="btn button" onClick={(e)=>this.copy(url)}><i className="fas fa-link"></i>{this.state.isCopied ? "Copied" : "Share"}</button></div>
+					}
+			        <div style={shareStyle}><a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a></div>
+			        <div style={shareStyle} className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
+			        <div><a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
+	            </div>
+	            <div style={likeStyle}>
+	            	<Like look={this.props.look}/>
+	            </div>
             </div>
 		)
 	}

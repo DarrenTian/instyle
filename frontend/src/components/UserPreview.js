@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { lookUtil } from "../services";
 import { userService, socialService } from "../services";
+import Like from "./social/Like";
 
 class UserPreview extends React.Component {
     render() {
@@ -33,24 +34,6 @@ class UserPreview extends React.Component {
 }
 
 class UserPreviewFooter extends React.Component {
-    state = {
-        liked: this.props.liked,
-    };
-
-    toggleLike = ()=>{
-        if (!userService.isLoggedIn()) {
-            window.location.href = './signup';
-        }
-
-        const likeState = this.state.liked;
-        socialService.toggleLike(this.props.url_id, likeState)
-            .then(response =>{
-                this.setState({liked:!likeState});
-            })
-            .catch(e => {
-                this.setState({liked:likeState});
-            });
-    }
     render() {
         const titleStyle = {
             alignSelf: "center",
@@ -69,24 +52,6 @@ class UserPreviewFooter extends React.Component {
             alignItems:"flex-start",
             justifyContent:"space-between",
         }
-        const loveStyle = {
-            fontSize: "25px",
-            marginTop: "-4px",
-            display: "block",
-        }
-        const lovedStyle = {
-            fontSize: "25px",
-            marginTop: "-4px",
-            display: "none",
-            color: "#F04857",
-        }
-        if (this.state.liked) {
-            lovedStyle.display = "block";
-            loveStyle.display = "none";
-        } else {
-            lovedStyle.display = "none";
-            loveStyle.display = "block";      
-        }
         return (
             <div style={footerContainer}>
                 <div>
@@ -101,17 +66,8 @@ class UserPreviewFooter extends React.Component {
                         </div>
                     </div>
                 </div>
-            
-
-                <div style={loveStyle} className="is-clickable" onClick={this.toggleLike} >
-                    <i className="far fa-heart"></i>
-                </div>
-                <div style={lovedStyle} className="is-clickable" onClick={this.toggleLike}>
-                    <i className="fas fa-heart"></i>
-                </div>
-
+                <Like look={this.props.look}/>
             </div>
-
         )
     }
 }

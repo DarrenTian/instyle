@@ -24,7 +24,7 @@ class LookTile extends React.Component {
                     <a href={"/looks/"+look.url_id}>     
                         <LookImage look={look} isInteractive={false} showTags={false} />
                     </a>
-                    <UserPreviewFooter user={look.publisher} url_id={look.url_id} liked={look.liked}/>
+                    <UserPreviewFooter user={look.publisher} look={this.props.look}/>
                 </div>
             </div>
         );   
