@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { lookUtil } from "../services";
-import { UserPreviewFooter } from "./UserPreview";
-import LookImage from "./LookImage";
+import { lookUtil } from "services";
+import { UserPreviewFooter } from "components/element/UserPreview";
+import LookImage from "components/element/LookImage";
 
 class LookTile extends React.Component {
     render() {

@@ -1,22 +1,5 @@
-import Console from "components/page/Console";
-import Doc from "components/page/Doc";
-import Footer from "./Footer";
-import Header from "./Header";
-import Login from "components/page/Login";
-import PrivateRoute from "./PrivateRoute";
 import React from "react";
 import ReactDOM from "react-dom";
-import Signup from "components/page/Signup";
-import LookDataProvider from "./LookDataProvider";
-import LookListDataProvider from "./LookListDataProvider";
-import LookEditPage from "components/page/LookEditPage";
-import Look from "./Look";
-import LookList from "./LookList";
-import { userService } from "../services";
-import About from "components/page/About";
-import ErrorPage from "components/page/ErrorPage";
-import Profile from "components/page/Profile";
-import Explore from "components/page/Explore";
 import {
   Route,
   Switch,
@@ -25,6 +8,21 @@ import {
 } from "react-router-dom";
 import queryString from 'query-string';
 
+import About from "components/page/About";
+import Console from "components/page/Console";
+import Doc from "components/page/Doc";
+import ErrorPage from "components/page/ErrorPage";
+import Explore from "components/page/Explore";
+import Footer from "components/element/Footer";
+import Header from "components/element/Header";
+import Login from "components/page/Login";
+import LookPage from "components/page/LookPage";
+import LookEditPage from "components/page/LookEditPage";
+import PrivateRoute from "components/module/PrivateRoute";
+import Profile from "components/page/Profile";
+import Signup from "components/page/Signup";
+import { userService } from "services";
+import "./styles.scss";
 
 class App extends React.Component {
 	state = {
@@ -65,18 +63,6 @@ class App extends React.Component {
 		  </div>
 		)
 	}
-}
-
-class LookPage extends React.Component {
-	render() {
-		return (
-			<div>
-	  			<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
-	  			<LookListDataProvider config={{type:"LOOK", lookId:this.props.match.params.id}} render={looks=><LookList title={"MORE_LOOKS"} looks={looks} />} />
-	  		</div>
-		);
-	}
-
 }
 
 const wrapper = document.getElementById("instyle-spa");

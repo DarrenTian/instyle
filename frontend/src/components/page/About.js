@@ -1,4 +1,4 @@
-import Invite from "components/Invite";
+import Invite from "components/element/Invite";
 import React from "react";
 import PropTypes from "prop-types";
 

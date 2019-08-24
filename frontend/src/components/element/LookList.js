@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import MediaQuery from 'react-responsive';
-import { lookUtil } from "../services";
-import LookTile from "./LookTile";
+import { lookUtil } from "services";
+import LookTile from "components/element/LookTile";
 
 class LookList extends React.Component {
     render() {

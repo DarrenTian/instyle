@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import MediaQuery from 'react-responsive';
-import ProductCarousel from "./ProductCarousel"
-import SocialPlugin from "./social/SocialPlugin";
-import { UserPreview } from "./UserPreview";
-import { lookUtil } from "../services";
-import LookImage from "./LookImage";
+import ProductCarousel from "components/element/ProductCarousel"
+import SocialPlugin from "components/social/SocialPlugin";
+import { UserPreview } from "components/element/UserPreview";
+import { lookUtil } from "services";
+import LookImage from "components/element/LookImage";
 
 class LookDesktop extends React.Component {
     constructor(props) {

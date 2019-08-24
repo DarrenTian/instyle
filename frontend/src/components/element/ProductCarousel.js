@@ -1,9 +1,9 @@
 import React from "react";
-import ProductTile from "./ProductTile";
+import ProductTile from "components/element/ProductTile";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 
-import { lookUtil } from "../services";
+import { lookUtil } from "services";
 
 class ProductCarousel extends React.Component {
 	constructor(props) {

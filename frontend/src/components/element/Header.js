@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { userService } from "../services";
-import "./styles.scss";
+import { userService } from "services";
 
 class Header extends React.Component {
     state = {

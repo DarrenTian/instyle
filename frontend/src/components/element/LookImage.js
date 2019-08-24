@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { lookUtil } from "../services";
+import { lookUtil } from "services";
 
 class LookImage extends React.Component {
     constructor(props) {

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ProductCarousel from "components/ProductCarousel";
-import ProductEditPanel from "components/ProductEditPanel";
-import ProductTile from "components/ProductTile";
-import ActionModal from "components/ActionModal";
+import ProductCarousel from "components/element/ProductCarousel";
+import ProductEditPanel from "components/element/ProductEditPanel";
+import ProductTile from "components/element/ProductTile";
+import ActionModal from "components/element/ActionModal";
 import { userLookService } from "services";
 import { lookUtil } from "services";
 

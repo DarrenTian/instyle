@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { lookUtil } from "../services";
-import { userService, socialService } from "../services";
-import Like from "./social/Like";
+import { lookUtil } from "services";
+import { userService, socialService } from "services";
+import Like from "components/social/Like";
 
 class UserPreview extends React.Component {
     render() {
