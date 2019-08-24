@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import LookListDataProvider from "./LookListDataProvider";
-import LookList from "./LookList";
-import Invite from "./Invite";
-import { userService } from "../services";
+import LookListDataProvider from "components/LookListDataProvider";
+import LookList from "components/LookList";
+import Invite from "components/Invite";
+import { userService } from "services";
 
 class Explore extends React.Component {
     render() {

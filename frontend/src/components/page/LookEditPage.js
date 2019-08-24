@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ProductCarousel from "./ProductCarousel";
-import ProductEditPanel from "./ProductEditPanel";
-import ProductTile from "./ProductTile";
-import ActionModal from "./ActionModal";
-import { userLookService } from "../services";
-import { lookUtil } from "../services";
+import ProductCarousel from "components/ProductCarousel";
+import ProductEditPanel from "components/ProductEditPanel";
+import ProductTile from "components/ProductTile";
+import ActionModal from "components/ActionModal";
+import { userLookService } from "services";
+import { lookUtil } from "services";
 
 class LookEditPage extends Component {
   constructor(props) {

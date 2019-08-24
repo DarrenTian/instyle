@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { lookService } from "../services";
-import ErrorPage from "./ErrorPage";
+import { lookService } from "services";
+import ErrorPage from "components/page/ErrorPage";
 
 class LookListDataProvider extends Component {
   state = {

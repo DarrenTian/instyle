@@ -1,22 +1,22 @@
-import Console from "./Console";
-import Doc from "./Doc";
+import Console from "components/page/Console";
+import Doc from "components/page/Doc";
 import Footer from "./Footer";
 import Header from "./Header";
-import Login from "./Login";
+import Login from "components/page/Login";
 import PrivateRoute from "./PrivateRoute";
 import React from "react";
 import ReactDOM from "react-dom";
-import Signup from "./Signup";
+import Signup from "components/page/Signup";
 import LookDataProvider from "./LookDataProvider";
 import LookListDataProvider from "./LookListDataProvider";
-import LookEditPage from "./LookEditPage";
+import LookEditPage from "components/page/LookEditPage";
 import Look from "./Look";
 import LookList from "./LookList";
 import { userService } from "../services";
 import About from "components/page/About";
-import ErrorPage from "./ErrorPage";
-import Profile from "./Profile";
-import Explore from "./Explore";
+import ErrorPage from "components/page/ErrorPage";
+import Profile from "components/page/Profile";
+import Explore from "components/page/Explore";
 import {
   Route,
   Switch,

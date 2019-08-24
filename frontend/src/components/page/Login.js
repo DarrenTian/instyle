@@ -1,5 +1,5 @@
 import React from "react";
-import { userService } from "../services";
+import { userService } from "services";
 import { withRouter } from 'react-router';
 
 class Login extends React.Component {

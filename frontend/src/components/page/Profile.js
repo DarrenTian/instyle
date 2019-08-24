@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { userService } from "../services";
+import { userService } from "services";
 
 class Profile extends React.Component {
   state = {

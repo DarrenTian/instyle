@@ -1,6 +1,6 @@
 import React from "react";
-import { userLookService } from "../services";
-import { lookUtil } from "../services";
+import { userLookService } from "services";
+import { lookUtil } from "services";
 import { withRouter } from 'react-router';
 
 import MediaQuery from 'react-responsive';
