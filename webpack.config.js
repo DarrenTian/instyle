@@ -1,9 +1,13 @@
 const webpack = require('webpack'); 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 module.exports = (env) => {
   console.log(env);
   return {
+    resolve: {
+     modules: [path.resolve(__dirname, 'frontend/src'), 'node_modules']
+    },
     module: {
       rules: [
         {

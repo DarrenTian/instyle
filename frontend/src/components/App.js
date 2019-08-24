@@ -13,7 +13,7 @@ import LookEditPage from "./LookEditPage";
 import Look from "./Look";
 import LookList from "./LookList";
 import { userService } from "../services";
-import About from "./About";
+import About from "components/page/About";
 import ErrorPage from "./ErrorPage";
 import Profile from "./Profile";
 import Explore from "./Explore";
