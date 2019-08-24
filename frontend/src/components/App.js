@@ -45,7 +45,7 @@ class App extends React.Component {
 			      	<Route path="/" exact component={Explore} />
 			      	<Route path="/about" exact component={About} />
 			        <Route path="/creator" exact component={About} />
-			        <Route path="/explore" exact component={Explore} />
+			        <Route path="/explore" exact component={(props)=><Explore {...props} loginHandler={this.login} />} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />

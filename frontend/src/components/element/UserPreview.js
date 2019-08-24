@@ -37,9 +37,9 @@ class UserPreviewFooter extends React.Component {
     render() {
         const titleStyle = {
             alignSelf: "center",
-            maxWidth: "80px",
             wordBreak: "unset",
             textOverflow: "ellipsis",
+            overflow: "hidden",
         };
         const avatarStyle = {
             objectFit: "cover",
