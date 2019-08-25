@@ -12,6 +12,10 @@ $footer-background-color: white;
   src: url("/static/Quando-Regular.ttf");
 }
 
+.modal-background {
+    background-color: rgba(10, 10, 10, 0.50);
+}
+
 .main-canvas {
   display: flex;
   flex-direction: column;

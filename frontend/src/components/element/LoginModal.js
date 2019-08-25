@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import LoginForm from "components/element/LoginForm";
+
 class LoginModal extends React.Component {
     cancel = () => {
         this.props.cancelHandler();
@@ -12,7 +14,7 @@ class LoginModal extends React.Component {
                 <div className="modal-background" onClick={this.cancel}>
                 </div> 
                 <div className="modal-card" style={{maxWidth: "400px"}}>
-                    login
+                    <LoginForm {...this.props} />
                 </div>
             </div>
         )

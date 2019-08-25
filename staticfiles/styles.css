@@ -7253,6 +7253,9 @@ label.panel-block {
   font-family: "Quando";
   src: url("/static/Quando-Regular.ttf"); }
 
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.5); }
+
 .main-canvas {
   display: flex;
   flex-direction: column;

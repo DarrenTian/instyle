@@ -34,39 +34,48 @@ class LoginForm extends React.Component {
             });
     }
 
+    signup = () => {
+        this.props.signup();
+    }
+    
     render() {
+        const formStyle={
+            padding:"0px 15px",
+        }
         return (
-          <form className="box" onSubmit={this.handleSubmit}>
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control has-icons-left">
-                <input type="email" placeholder="Your email address" className="input" name="email" defaultValue="" onChange={this.handleChange} required />
-                <span className="icon is-small is-left">
-                  <i className="fa fa-envelope"></i>
-                </span>
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control has-icons-left">
-                <input type="password" placeholder="*******" className="input" name="password" defaultValue="" onChange={this.handleChange} required />
-                <span className="icon is-small is-left">
-                  <i className="fa fa-lock"></i>
-                </span>
-              </div>
-            </div>
-            <div className="field">
-                <input type="submit" value="Login" className="button is-outlined is-fullwidth" />
-            </div>
-            <div className="field is-flex-centered">
-                <p className="is-size-7">{this.state.errorMsg}</p>
-            </div>
-            <div className="field is-fullwidth">
-                <div className="is-flex-centered">
-                    <p className="is-size-7">No account yet? <a href="/signup">Sign up</a></p>
+            <div style={formStyle}>
+              <form className="box" onSubmit={this.handleSubmit}>
+                <div className="field">
+                  <label className="label">Email</label>
+                  <div className="control has-icons-left">
+                    <input type="email" placeholder="Your email address" className="input" name="email" defaultValue="" onChange={this.handleChange} required />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-envelope"></i>
+                    </span>
+                  </div>
                 </div>
-            </div>
-          </form>
+                <div className="field">
+                  <label className="label">Password</label>
+                  <div className="control has-icons-left">
+                    <input type="password" placeholder="*******" className="input" name="password" defaultValue="" onChange={this.handleChange} required />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="field">
+                    <input type="submit" value="Login" className="button is-outlined is-fullwidth" />
+                </div>
+                <div className="field is-flex-centered">
+                    <p className="is-size-7">{this.state.errorMsg}</p>
+                </div>
+                <div className="field is-fullwidth">
+                    <div className="is-flex-centered">
+                        <p className="is-size-7">No account yet? <span className="is-clickable" onClick={this.signup}>Sign up</span></p>
+                    </div>
+                </div>
+              </form>
+          </div>
         )
     }
 }

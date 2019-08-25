@@ -4,6 +4,10 @@ import { withRouter } from 'react-router';
 import LoginForm from "components/element/LoginForm";
 
 class Login extends React.Component {
+	signup = ()=>{
+		this.props.history.push("/signup");
+	}
+
 	render() {
 		return (
 			<div>
@@ -12,7 +16,7 @@ class Login extends React.Component {
 				    <div className="container" >
 				      <div className="columns is-centered">
 				        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-				        	<LoginForm {...this.props} />
+				        	<LoginForm {...this.props} signup={this.signup}/>
 				        </div>
 				      </div>
 				    </div>

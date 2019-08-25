@@ -42,10 +42,9 @@ class App extends React.Component {
 		    <div className="canvas-component">
 			    <BrowserRouter>
 			      <Switch>
-			      	<Route path="/" exact component={Explore} />
+			      	<Route path="/" exact render={()=><Explore loginHandler={this.login} />} />
 			      	<Route path="/about" exact component={About} />
 			        <Route path="/creator" exact component={About} />
-			        <Route path="/explore" exact component={(props)=><Explore {...props} loginHandler={this.login} />} />
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
