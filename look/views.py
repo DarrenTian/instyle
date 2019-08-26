@@ -153,9 +153,9 @@ class UserLookViewSet(viewsets.ModelViewSet):
     def _compress_image(self, image):
       imageTemproary = Image.open(image)
       imageTemproary = imageTemproary.convert('RGB')
-      imageTemproary.thumbnail((600, 600), Image.ANTIALIAS) 
+      imageTemproary.thumbnail((600, 900), Image.ANTIALIAS) 
       compressed_image = tempfile.SpooledTemporaryFile()
-      imageTemproary.save(compressed_image , format='JPEG', quality=85, progressive=True, optimize=True)
+      imageTemproary.save(compressed_image , format='JPEG', quality=100, progressive=True, optimize=True)
       return compressed_image
 
     def _update_tags(self, look_data):
