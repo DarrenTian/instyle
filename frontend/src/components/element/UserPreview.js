@@ -68,7 +68,7 @@ class UserPreviewFooter extends React.Component {
                         </div>
                     </div>
                 </a>
-                <Like look={this.props.look}/>
+                <Like {...this.props} look={this.props.look}/>
             </div>
         )
     }

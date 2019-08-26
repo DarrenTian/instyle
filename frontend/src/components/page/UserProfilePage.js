@@ -16,7 +16,7 @@ class UserProfilePage extends React.Component {
 						</div>
 					</div>
 				</div>
-				<LookListDataProvider config={{type:"USER_LOOK", userId:userId}} render={looks=><LookList title={"MORE_LOOKS"} looks={looks} />} />
+				<LookListDataProvider config={{type:"USER_LOOK", userId:userId}} render={looks=><LookList {...this.props} title={"MORE_LOOKS"} looks={looks} />} />
 			</div>
 		)
 	}

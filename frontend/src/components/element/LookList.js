@@ -27,7 +27,7 @@ class LookList extends React.Component {
                         if (image==null) { return null}
                         return (
                           <React.Fragment key={index} >
-                              <LookTile look={look}/>
+                              <LookTile {...this.props} look={look}/>
                           </React.Fragment>
                         )
                       })}

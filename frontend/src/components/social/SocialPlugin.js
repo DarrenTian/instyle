@@ -103,7 +103,7 @@ class SocialPlugin extends React.Component {
 			        <div><a className="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
 	            </div>
 	            <div style={likeStyle}>
-	            	<Like look={this.props.look}/>
+	            	<Like {...this.props} look={this.props.look}/>
 	            </div>
             </div>
 		)

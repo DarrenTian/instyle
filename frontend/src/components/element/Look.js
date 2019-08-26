@@ -62,7 +62,7 @@ class LookDesktop extends React.Component {
                         <div style={productCarouselStyle}>
                             <ProductCarousel look={this.props.look}  view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
-                        <SocialPlugin showClip={true} look={this.props.look}/>
+                        <SocialPlugin {...this.props} showClip={true} look={this.props.look}/>
                     </div>
                 </div>
                 <div className="column is-4">
@@ -140,7 +140,7 @@ class LookMobile extends React.Component {
                         <div style={productCarouselStyle}>
                             <ProductCarousel look={this.props.look} view={this.state.view} selectHandler={this.selectTag}/>
                         </div>
-                        <SocialPlugin showClip={true} look={this.props.look}/>
+                        <SocialPlugin {...this.props} showClip={true} look={this.props.look}/>
                     </div>
                 </div>
                 <div className="column is-4">
@@ -179,10 +179,10 @@ class Look extends React.Component {
                         {/* TODO, make format better
                         this.props.preview && <div className="section is-size-5 has-text-info">Preview</div>*/}
                         <MediaQuery query="(min-width: 769px)">
-                            <LookDesktop look={this.props.look} />
+                            <LookDesktop {...this.props} look={this.props.look} />
                         </MediaQuery>
                         <MediaQuery query="(max-width: 769px)">
-                            <LookMobile look={this.props.look} />
+                            <LookMobile {...this.props} look={this.props.look} />
                         </MediaQuery>
                     </div>
                 </div>

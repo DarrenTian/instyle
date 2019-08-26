@@ -16,7 +16,7 @@ class Signup extends React.Component {
 				  <div className="hero-body">
 				    <div className="container" >
 				      <div className="columns is-centered">
-				        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
+				        <div className="column is-5-tablet is-4-desktop is-4-widescreen">
 				        	<SignupForm {...this.props} login={this.login}/>
 				        </div>
 				      </div>

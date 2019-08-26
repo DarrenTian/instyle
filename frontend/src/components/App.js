@@ -49,9 +49,9 @@ class App extends React.Component {
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
-			        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} />} />
-			        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} />} />
-			        <Route path="/users/:id" component={UserProfilePage} />
+			        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} loginHandler={this.login} />} />
+			        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} loginHandler={this.login} />} />
+			        <Route path="/users/:id" render={(props)=><UserProfilePage {...props} loginHandler={this.login} />} />
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
 			        <PrivateRoute path="/console" component={Console} />
 			        <PrivateRoute path="/profile" component={Profile} />

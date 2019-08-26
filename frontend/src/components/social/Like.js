@@ -2,14 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { userService, socialService } from "../../services";
 
+import LoginModalGroup from "components/element/LoginModalGroup";
+
 class Like extends React.Component {
 	state = {
+		login: false,
         liked: this.props.look.liked,
     };
 
+    cancel = ()=> {
+    	this.setState({login:false});
+    }
+
     toggleLike = ()=>{
         if (!userService.isLoggedIn()) {
-            window.location.href = '/signup';
+        	this.setState({login:true});
+            return;
         }
 
         const likeState = this.state.liked;
@@ -48,6 +56,9 @@ class Like extends React.Component {
 		        <div style={lovedStyle} className="is-clickable" onClick={this.toggleLike}>
 		            <i className="fas fa-heart"></i>
 		        </div>
+		        {this.state.login && 
+		        	<LoginModalGroup {...this.props} initialState={"login"} cancel={this.cancel}/>
+		        }
 	        </div>
         )
     }

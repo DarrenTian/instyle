@@ -10,8 +10,8 @@ class LookPage extends React.Component {
 	render() {
 		return (
 			<div>
-	  			<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look look={look} preview={this.props.preview} />} />
-	  			<LookListDataProvider config={{type:"LOOK", lookId:this.props.match.params.id}} render={looks=><LookList title={"MORE_LOOKS"} looks={looks} />} />
+	  			<LookDataProvider lookId={this.props.match.params.id} preview={this.props.preview} render={look => <Look {...this.props} look={look} preview={this.props.preview} />} />
+	  			<LookListDataProvider config={{type:"LOOK", lookId:this.props.match.params.id}} render={looks=><LookList {...this.props} title={"MORE_LOOKS"} looks={looks} />} />
 	  		</div>
 		);
 	}

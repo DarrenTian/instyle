@@ -16,7 +16,7 @@ export const userService = {
 
 const userAPI = {
 	'LOGIN' : {
-		'END_POINT': 'api/users/obtain_auth_token/',
+		'END_POINT': '/api/users/obtain_auth_token/',
 		'METHOD': 'POST',
 	},
 	'SIGNUP' : {

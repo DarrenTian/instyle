@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import SignupModal from "components/element/SignupModal";
-import LoginModal from "components/element/LoginModal";
+import LoginModalGroup from "components/element/LoginModalGroup";
 
 class SignupBar extends React.Component {
     state = {
@@ -15,26 +14,12 @@ class SignupBar extends React.Component {
         this.setState({login:true});
     }
 
-    cancelLogin = () => {
-        this.setState({login:false});
-    }
-
     signup = () => {
         this.setState({signup:true});
     }
 
-    cancelSignup = () => {
-        this.setState({signup:false});
-    }
-
-    switchSignup = ()=> {
-        this.cancelLogin();
-        this.signup();
-    }
-
-    switchLogin = ()=>{
-        this.cancelSignup();
-        this.login();
+    cancel =()=>{
+        this.setState({signup:false, login:false});
     }
 
     componentWillReceiveProps() { // check for the mounted props
@@ -87,14 +72,13 @@ class SignupBar extends React.Component {
                         </div>
                     </div>
                 </div>
-                <SignupModal {...this.props} 
-                            isActive={this.state.signup} 
-                            cancelHandler={this.cancelSignup}
-                            login={this.switchLogin}/>
-                <LoginModal {...this.props}
-                            isActive={this.state.login} 
-                            cancelHandler={this.cancelLogin}
-                            signup={this.switchSignup}/>
+                {this.state.signup &&
+                    <LoginModalGroup {...this.props} initialState={"signup"} cancel={this.cancel}/>
+                }
+                {this.state.login &&
+                    <LoginModalGroup {...this.props} initialState={"login"} cancel={this.cancel}/>
+                }
+                
             </div>
         )
     }
