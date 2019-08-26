@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
 from user.models import User
-from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer
+from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer, UserProfilePreviewSerializer
 import os
 import time
 from PIL import Image
@@ -16,6 +16,7 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import tempfile
 from django.conf import settings
+import json
 
 # Login
 class CustomAuthToken(ObtainAuthToken):
@@ -50,6 +51,19 @@ class UserViewSet(viewsets.GenericViewSet):
                 }, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'])
+    def get_profile_preview(self, request):
+        request_body = json.loads(request.body)
+        user_id = request_body['user_id']
+        user_result = User.objects.all().filter(nickname=user_id)
+        if user_result.exists():
+            user = user_result[:1].get()
+            return Response({'profile':UserProfilePreviewSerializer(user).data}, status=status.HTTP_200_OK)
+        else:
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        #return Response(UserProfileSerializer(user).data, status=status.HTTP_200_OK)
+
 
 class UserProfileViewSet(viewsets.GenericViewSet):
     queryset = User.objects.all().order_by('-date_joined')

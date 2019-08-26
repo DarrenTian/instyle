@@ -17,18 +17,20 @@ class UserPreview extends React.Component {
             height: "100%",
         }
         return (
-            <div className="media">
-                <div className="media-left">
-                    <figure className="image is-48x48">
-                        <img className="is-rounded is-thin-border" src={this.props.user.avatar_image_thumbnail} style={avatarStyle}></img>
-                    </figure>
+            <a href={"/users/"+this.props.user.nickname}>
+                <div className="media">
+                    <div className="media-left">
+                        <figure className="image is-48x48">
+                            <img className="is-rounded is-thin-border" src={this.props.user.avatar_image_thumbnail} style={avatarStyle}></img>
+                        </figure>
+                    </div>
+                    <div className="media-content" style={titleStyle}>
+                        <p className="title is-6">{this.props.user.nickname}</p>
+                        {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+                    </div>
+                    {/*<a className="button is-pulled-right">+ Follow</a>*/}
                 </div>
-                <div className="media-content" style={titleStyle}>
-                    <p className="title is-6">{this.props.user.nickname}</p>
-                    {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
-                </div>
-                {/*<a className="button is-pulled-right">+ Follow</a>*/}
-            </div>
+            </a>
         )
     }
 }
@@ -54,7 +56,7 @@ class UserPreviewFooter extends React.Component {
         }
         return (
             <div style={footerContainer}>
-                <div>
+                <a href={"/users/"+this.props.user.nickname}>
                     <div className="media">
                         <div className="" style={{marginRight:"5px"}}>
                             <figure className="image">
@@ -65,8 +67,48 @@ class UserPreviewFooter extends React.Component {
                             {this.props.user.nickname}
                         </div>
                     </div>
-                </div>
+                </a>
                 <Like look={this.props.look}/>
+            </div>
+        )
+    }
+}
+
+class UserProfilePreview extends React.Component {
+    state = {
+        profile: {},
+    };
+
+    componentDidMount() {
+        userService.getUserProfilePreview(this.props.userId)
+            .then(user=>{
+                this.setState({ profile: user.profile });
+            })
+    }
+
+    render() {
+        const titleStyle = {
+            overflowX: "initial",
+            alignSelf: "center",
+        };
+        const avatarStyle = {
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+        }
+        return (
+            <div className="media">
+                <div className="media-left">
+                    <figure className="image is-128x128">
+                        <img className="is-rounded is-thin-border" src={this.state.profile.avatar_image_thumbnail} style={avatarStyle}></img>
+                    </figure>
+                </div>
+                <div className="media-content" style={titleStyle}>
+                    <p className="title is-5">{this.state.profile.nickname}</p>
+                    <p className="is-5">{this.state.profile.biography}</p>
+                    {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+                </div>
+                {/*<a className="button is-pulled-right">+ Follow</a>*/}
             </div>
         )
     }
@@ -75,4 +117,5 @@ class UserPreviewFooter extends React.Component {
 export {
     UserPreview,
     UserPreviewFooter,
+    UserProfilePreview,
 }

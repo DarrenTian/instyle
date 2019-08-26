@@ -10,6 +10,8 @@ export const userService = {
 	updateCachedProfile,
 	isLoggedIn,
 	logout,
+
+	getUserProfilePreview,
 };
 
 const userAPI = {
@@ -19,6 +21,10 @@ const userAPI = {
 	},
 	'SIGNUP' : {
 		'END_POINT': '/api/users/sign_up/',
+		'METHOD': 'POST',
+	},
+	'GET_PROFILE_PREVIEW' : {
+		'END_POINT': '/api/users/get_profile_preview/',
 		'METHOD': 'POST',
 	},
 	'GET_PROFILE' : {
@@ -123,6 +129,21 @@ function signup(email, password, nickname) {
 				nickname: nickname,
 			})
 		}).then(handleResponse);
+}
+
+function getUserProfilePreview(userId) {
+	return fetch(
+		userAPI.GET_PROFILE_PREVIEW.END_POINT, {
+			method: userAPI.GET_PROFILE_PREVIEW.METHOD,
+			headers: getUserHeader(),
+			body: JSON.stringify({"user_id":userId}),
+		}).then(response=> {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("cannot retrieve your profile");
+			}
+		})
 }
 
 function getUserProfile() {

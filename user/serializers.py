@@ -31,6 +31,15 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
 		  'biography',
 		]
 
+class UserProfilePreviewSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = User
+		fields = [
+		  'nickname',
+		  'avatar_image_thumbnail',
+		  'biography',
+		]
+
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group

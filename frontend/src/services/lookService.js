@@ -18,6 +18,10 @@ const lookAPI = {
 		'END_POINT': '/api/looks/explore/',
 		'METHOD': 'GET',
 	},
+	'RETRIEVE_MORE_USER_LOOKS' : {
+		'END_POINT': '/api/looks/more_user_looks/',
+		'METHOD': "POST",
+	}
 }
 
 function getLookHeader() {
@@ -84,11 +88,31 @@ function retrieveMoreLooksForExplore() {
      })
 }
 
+function retrieveMoreLooksForUser(userId) {
+	return fetch(
+		lookAPI.RETRIEVE_MORE_USER_LOOKS.END_POINT, {
+			method: lookAPI.RETRIEVE_MORE_USER_LOOKS.METHOD,
+			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			body: JSON.stringify({"user_id":userId}),
+		})
+      .then(response => {
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		const error = response.statusText;
+			return Promise.reject(error);
+      	}
+     })
+}
+
 function retrieveMoreLooks(config) {
 	if (config.type=='LOOK') {
 		return retrieveMoreLooksForLook(config.lookId, false);
 	}
 	if (config.type=='EXPLORE') {
 		return retrieveMoreLooksForExplore();
+	}
+	if (config.type=='USER_LOOK') {
+		return retrieveMoreLooksForUser(config.userId);
 	}
 }

@@ -21,6 +21,7 @@ import LookEditPage from "components/page/LookEditPage";
 import PrivateRoute from "components/module/PrivateRoute";
 import Profile from "components/page/Profile";
 import Signup from "components/page/Signup";
+import UserProfilePage from "components/page/UserProfilePage";
 import { userService } from "services";
 import "./styles.scss";
 
@@ -48,11 +49,12 @@ class App extends React.Component {
 			        <Route path="/doc/:topic" component={Doc} />
 			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
 			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
-			        <PrivateRoute path="/console" component={Console} />
-			        <PrivateRoute path="/profile" component={Profile} />
 			        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} />} />
 			        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} />} />
+			        <Route path="/users/:id" component={UserProfilePage} />
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
+			        <PrivateRoute path="/console" component={Console} />
+			        <PrivateRoute path="/profile" component={Profile} />
 			        <Route path="/error" exact component={ErrorPage} />
 			        <Redirect to="/error" />
 			      </Switch>

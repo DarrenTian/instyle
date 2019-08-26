@@ -112,6 +112,16 @@ $footer-background-color: white;
     margin: 0 auto;
 }
 
+.main-canvas-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    max-width: 960px;
+    align-content: center;
+    margin: 0 auto;
+}
+
 .is-shadowless {
   box-shadow: none;
 }
