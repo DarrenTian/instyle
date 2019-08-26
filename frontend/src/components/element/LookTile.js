@@ -11,7 +11,6 @@ class LookTile extends React.Component {
         const imageStyle = {
             borderRadius: "5px 5px 0 0",
         };
-        const coverLookImage = lookUtil.getCoverLookImage(look);
         const tileContainerStyle = {
             paddingBottom:"10px",
         }

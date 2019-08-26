@@ -17,7 +17,7 @@ class LookImageSerializer(serializers.ModelSerializer):
 	tags = TagSerializer(many=True, read_only=True)
 	class Meta:
 		model = LookImage
-		fields = ['id', 'image', 'tags']
+		fields = ['id', 'image_thumbnail', 'tags']
 
 class CustomUserSerializer(serializers.ModelSerializer):
 	class Meta:

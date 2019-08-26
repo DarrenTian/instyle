@@ -22,7 +22,7 @@ function getCoverLookImage(look) {
 }
 
 function getCoverImage(look) {
-	return getCoverLookImage(look) ? look.look_images[0].image : null;
+	return getCoverLookImage(look) ? look.look_images[0].image_thumbnail : null;
 }
 
 function getTags(look) {
