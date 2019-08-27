@@ -22,6 +22,10 @@ const lookAPI = {
 		'END_POINT': '/api/looks/following/',
 		'METHOD': 'GET',
 	},
+	'RETRIEVE_MORE_LOOKS_TRENDING' : {
+		'END_POINT': '/api/looks/trending/',
+		'METHOD': 'GET',
+	},
 	'RETRIEVE_MORE_USER_LOOKS' : {
 		'END_POINT': '/api/looks/more_user_looks/',
 		'METHOD': "POST",
@@ -109,6 +113,23 @@ function retrieveMoreLooksForFollowing() {
      })
 }
 
+
+function retrieveMoreLooksForTrending() {
+	return fetch(
+		lookAPI.RETRIEVE_MORE_LOOKS_TRENDING.END_POINT, {
+			method: lookAPI.RETRIEVE_MORE_LOOKS_TRENDING.METHOD,
+			headers:  requestUtil.getDynamicHeader(),
+		})
+      .then(response => {
+      	if (response.ok) {
+      		return response.json();
+      	} else {
+      		const error = response.statusText;
+			return Promise.reject(error);
+      	}
+     })
+}
+
 function retrieveMoreLooks(config) {
 	if (config.type=='LOOK') {
 		return retrieveMoreLooksForLook(config.lookId, false);
@@ -121,5 +142,8 @@ function retrieveMoreLooks(config) {
 	}
 	if (config.type=='FOLLOWING') {
 		return retrieveMoreLooksForFollowing();
+	}
+	if (config.type=='TRENDING') {
+		return retrieveMoreLooksForTrending();
 	}
 }

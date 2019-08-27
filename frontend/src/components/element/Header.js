@@ -68,6 +68,9 @@ class Header extends React.Component {
                   <a className="navbar-item" href="/following">
                     Following
                   </a>
+                  <a className="navbar-item" href="/trending">
+                    Trending
+                  </a>
                   </div>
 
             navEnd = <div className="navbar-end">

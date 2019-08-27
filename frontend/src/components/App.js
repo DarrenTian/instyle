@@ -22,6 +22,7 @@ import LookEditPage from "components/page/LookEditPage";
 import PrivateRoute from "components/module/PrivateRoute";
 import Profile from "components/page/Profile";
 import Signup from "components/page/Signup";
+import Trending from "components/page/Trending";
 import UserProfilePage from "components/page/UserProfilePage";
 import { userUtil } from "services";
 import "./styles.scss";
@@ -57,6 +58,7 @@ class App extends React.Component {
 			        <PrivateRoute path="/console" component={Console} />
 			        <PrivateRoute path="/profile" component={Profile} />
 			        <PrivateRoute path="/following" component={Following} />
+			        <PrivateRoute path="/trending" component={Trending} />
 			        <Route path="/error" exact component={ErrorPage} />
 			        <Redirect to="/error" />
 			      </Switch>

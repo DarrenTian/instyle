@@ -28,6 +28,7 @@ class LookSerializer(serializers.ModelSerializer):
 	#publisher = serializers.CharField(source='publisher.username')
 	look_images = LookImageSerializer(many=True, read_only=True)
 	publisher = CustomUserSerializer(read_only=True)
+	num_likes = serializers.SerializerMethodField()
 	
 	class Meta:
 		model = Look
@@ -41,4 +42,8 @@ class LookSerializer(serializers.ModelSerializer):
 			'publish_date',
 			'publish_status',
 			'look_images',
+			'num_likes',
 		]
+
+	def get_num_likes(self, obj):
+		return obj.like_set.count()
