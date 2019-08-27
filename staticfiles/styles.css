@@ -7345,6 +7345,9 @@ label.panel-block {
   align-content: center;
   margin: 0 auto; }
 
+.is-clickable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
 .is-shadowless {
   box-shadow: none; }
 

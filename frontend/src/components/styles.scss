@@ -122,6 +122,10 @@ $footer-background-color: white;
     margin: 0 auto;
 }
 
+.is-clickable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .is-shadowless {
   box-shadow: none;
 }
