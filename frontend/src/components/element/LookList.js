@@ -4,13 +4,26 @@ import PropTypes from "prop-types";
 import MediaQuery from 'react-responsive';
 import { lookUtil } from "services";
 import LookTile from "components/element/LookTile";
+import Mansory from 'react-masonry-component';
 
 class LookList extends React.Component {
+    // state = {
+    //   loaded: false,
+    // }
+
+    // show = ()=>{
+    //   this.setState({loaded: true});
+    // }
+
     render() {
         const publisher = lookUtil.getPublisher(this.props.looks);
         if (this.props.title && this.props.title=="MORE_LOOKS" && publisher==null) {
           return null;
         }
+
+        const masonryOptions = {
+            transitionDuration: 0
+        };
 
         return (
           <div>
@@ -26,7 +39,9 @@ class LookList extends React.Component {
                          Starting following trending Eastylers!
                     </div>
                   }
-                  <div className="tiles-vertical-columns">
+                  <Mansory  disableImagesLoaded={false} 
+                            options={masonryOptions}
+                            onImagesLoaded={this.show} >
                       {this.props.looks && this.props.looks.map((look,index)=>{
                         const image = lookUtil.getCoverImage(look);
                         if (image==null) { return null}
@@ -35,8 +50,8 @@ class LookList extends React.Component {
                               <LookTile {...this.props} look={look}/>
                           </React.Fragment>
                         )
-                      })}
-                  </div>
+                      })}  
+                  </Mansory>
                 </section>
             </div>
             <div>

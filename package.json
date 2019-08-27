@@ -44,6 +44,8 @@
     "node-sass": "^4.12.0",
     "query-string": "^6.8.2",
     "react-device-detect": "^1.6.2",
+    "react-lazyload": "^2.6.2",
+    "react-masonry-component": "^6.2.1",
     "react-responsive": "^7.0.0",
     "react-slick": "^0.24.0",
     "sass-loader": "^7.1.0",

@@ -1,27 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import LazyLoad from 'react-lazyload';
+
 import { lookUtil } from "services";
 
 class LookImage extends React.Component {
     constructor(props) {
         super(props);
         this.tagContainer = React.createRef();
-        this.state = {};
+        this.state = {
+          loaded: false
+        };
     }
 
     updateLook = (e) => {
+        this.setState({loaded:true});
         this.forceUpdate();
     }
 
     render() {
         const imageStyle = {
-            width: "100%",
             borderRadius: "5px 5px 0 0",
+            display:"none",
         };
 
         const tagContainerStyle = {
             position: "relative",
+            width: "100%",
         }
 
         const tagWidth = 26;
@@ -66,12 +72,22 @@ class LookImage extends React.Component {
           height: selectedDotWidth + "px",
           width: selectedDotWidth + "px",
         }
+        // const imageContainerStyle={
+        //   position:"relative",
+        //   width:"100%",
+        //   paddingTop:"60%",
+        // }
+        // if (this.state.loaded==true) {
+        //   imageContainerStyle.paddingTop = null;      
+        // }
         const coverImage = lookUtil.getCoverImage(this.props.look);
         const tags = lookUtil.getTags(this.props.look);
 
         return (
             <div style={tagContainerStyle} ref={this.tagContainer}>
-                <img className="is-block" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
+                <div>
+                  <img className="is-block" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
+                </div>
                 {this.props.showTags==true && tags && tags.map((tag, index)=> {
                     let singleTagStyle = {...tagStyle}
                     let singleDotStyle = {...dotStyle}

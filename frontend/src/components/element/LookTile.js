@@ -12,20 +12,22 @@ class LookTile extends React.Component {
             borderRadius: "5px 5px 0 0",
         };
         const tileContainerStyle = {
-            paddingBottom:"10px",
+            padding:"0 3px 6px 3px",
+            width:"25%",
+            minHeight: "100px",
         }
         const tileStyle = {
             borderRadius: "5px",
         }
         return (
-            <div className="image-tile" style={tileContainerStyle}>
-                <div className="is-thin-border" style={tileStyle}>
-                    <a href={"/looks/"+look.url_id}>     
-                        <LookImage look={look} isInteractive={false} showTags={false} />
-                    </a>
-                    <UserPreviewFooter {...this.props} user={look.publisher} look={this.props.look}/>
+                <div className="image-tile" style={tileContainerStyle}>
+                    <div className="is-thin-border" style={tileStyle}>
+                        <a href={"/looks/"+look.url_id}>     
+                            <LookImage look={look} isInteractive={false} showTags={false} />
+                        </a>
+                        <UserPreviewFooter {...this.props} user={look.publisher} look={this.props.look}/>
+                    </div>
                 </div>
-            </div>
         );   
     }
 };
