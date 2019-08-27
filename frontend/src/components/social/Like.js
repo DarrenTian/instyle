@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { userService, socialService } from "../../services";
+import { userUtil, socialService } from "../../services";
 
 import LoginModalGroup from "components/element/LoginModalGroup";
 
@@ -15,7 +15,7 @@ class Like extends React.Component {
     }
 
     toggleLike = ()=>{
-        if (!userService.isLoggedIn()) {
+        if (!userUtil.isLoggedIn()) {
         	this.setState({login:true});
             return;
         }

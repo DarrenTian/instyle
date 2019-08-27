@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { userService } from "services";
+import { userUtil } from "services";
 
 class Header extends React.Component {
     state = {
@@ -15,7 +15,7 @@ class Header extends React.Component {
 
     logout = () => {
         event.preventDefault();
-        userService.logout();
+        userUtil.logout();
         window.location.reload();
     }
 
@@ -59,7 +59,7 @@ class Header extends React.Component {
               </div>
             </div>
         } else {
-            const profile = userService.getProfile();
+            const profile = userUtil.getProfile();
             navEnd = <div className="navbar-end">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link header-figure is-arrowless">

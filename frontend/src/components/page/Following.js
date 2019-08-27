@@ -7,7 +7,6 @@ import Look from "components/element/Look";
 import LookList from "components/element/LookList";
 import Invite from "components/element/Invite";
 import SignupBar from "components/element/SignupBar";
-import { userService } from "services";
 
 class Following extends React.Component {
     render() {

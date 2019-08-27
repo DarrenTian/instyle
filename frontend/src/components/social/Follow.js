@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { userService, socialService } from "../../services";
+import { userUtil, socialService } from "../../services";
 
 import LoginModalGroup from "components/element/LoginModalGroup";
 
@@ -19,7 +19,7 @@ class Follow extends React.Component {
     }
 
     follow = ()=> {
-        if (!userService.isLoggedIn()) {
+        if (!userUtil.isLoggedIn()) {
             this.setState({login:true});
             return;
         }
@@ -46,7 +46,7 @@ class Follow extends React.Component {
     }
 
     render() {
-        if (userService.isSelf(this.props.userId)) {
+        if (userUtil.isSelf(this.props.userId)) {
             return null;
         }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from 'react-router';
 
-import { userService } from "services";
 import SignupForm from "components/element/SignupForm"
 
 class Signup extends React.Component {

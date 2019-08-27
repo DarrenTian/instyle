@@ -1,4 +1,4 @@
-import { userService } from './userService'
+import { requestUtil } from './requestUtil'
 
 export const socialService = {
 	toggleLike,
@@ -26,14 +26,6 @@ const socialAPI = {
 	},
 }
 
-function getAuthLookHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Token '+ userService.getToken(),
-	}
-}
-
 function toggleLike(lookId, likeState) {
 	if (likeState==true) {
 		return unlike(lookId);
@@ -46,7 +38,7 @@ function like(lookId){
 	return fetch(
 		socialAPI.LIKE.END_POINT, {
 			method: socialAPI.LIKE.METHOD,
-			headers: getAuthLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 			body: JSON.stringify({"look_id":lookId}),
 		})
       .then(response => {
@@ -64,7 +56,7 @@ function unlike(lookId){
 	return fetch(
 		socialAPI.UNLIKE.END_POINT, {
 			method: socialAPI.UNLIKE.METHOD,
-			headers: getAuthLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 			body: JSON.stringify({"look_id":lookId}),
 		})
       .then(response => {
@@ -81,7 +73,7 @@ function followUser(userId) {
 	return fetch(
 		socialAPI.FOLLOW.END_POINT, {
 			method: socialAPI.FOLLOW.METHOD,
-			headers: getAuthLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 			body: JSON.stringify({"user_id":userId}),
 		}).then(response=> {
 			if (response.ok) {
@@ -96,7 +88,7 @@ function unfollowUser(userId) {
 	return fetch(
 		socialAPI.UNFOLLOW.END_POINT, {
 			method: socialAPI.UNFOLLOW.METHOD,
-			headers: getAuthLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 			body: JSON.stringify({"user_id":userId}),
 		}).then(response=> {
 			if (response.ok) {

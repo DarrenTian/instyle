@@ -23,12 +23,12 @@ import PrivateRoute from "components/module/PrivateRoute";
 import Profile from "components/page/Profile";
 import Signup from "components/page/Signup";
 import UserProfilePage from "components/page/UserProfilePage";
-import { userService } from "services";
+import { userUtil } from "services";
 import "./styles.scss";
 
 class App extends React.Component {
 	state = {
-		isLoggedIn: userService.isLoggedIn(),
+		isLoggedIn: userUtil.isLoggedIn(),
 	}
 
 	login = () => {

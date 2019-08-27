@@ -1,4 +1,4 @@
-import { userService } from './userService'
+import { requestUtil } from './requestUtil'
 
 export const lookService = {
 	retrieveLook,
@@ -28,27 +28,11 @@ const lookAPI = {
 	}
 }
 
-function getLookHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-	}
-}
-
-
-function getAuthLookHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Token '+ userService.getToken(),
-	}
-}
-
 function retrieveLook(lookId, selfAuth) {
 	return fetch(
 		lookAPI.RETRIEVE.END_POINT.replace('lookId', lookId), {
 			method: lookAPI.RETRIEVE.METHOD,
-			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			headers: requestUtil.getDynamicHeader(),
 		})
       .then(response => {
       	if (response.ok) {
@@ -64,7 +48,7 @@ function retrieveMoreLooksForLook(lookId) {
 	return fetch(
 		lookAPI.RETRIEVE_MORE_LOOKS_FOR_LOOK.END_POINT.replace('lookId', lookId), {
 			method: lookAPI.RETRIEVE_MORE_LOOKS_FOR_LOOK.METHOD,
-			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			headers:  requestUtil.getDynamicHeader(),
 		})
       .then(response => {
       	if (response.ok) {
@@ -80,7 +64,7 @@ function retrieveMoreLooksForExplore() {
 	return fetch(
 		lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.END_POINT, {
 			method: lookAPI.RETRIEVE_MORE_LOOKS_EXPLORE.METHOD,
-			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			headers:  requestUtil.getDynamicHeader(),
 		})
       .then(response => {
       	if (response.ok) {
@@ -96,7 +80,7 @@ function retrieveMoreLooksForUser(userId) {
 	return fetch(
 		lookAPI.RETRIEVE_MORE_USER_LOOKS.END_POINT, {
 			method: lookAPI.RETRIEVE_MORE_USER_LOOKS.METHOD,
-			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			headers:  requestUtil.getDynamicHeader(),
 			body: JSON.stringify({"user_id":userId}),
 		})
       .then(response => {
@@ -113,7 +97,7 @@ function retrieveMoreLooksForFollowing() {
 	return fetch(
 		lookAPI.RETRIEVE_MORE_LOOKS_FOLLOWING.END_POINT, {
 			method: lookAPI.RETRIEVE_MORE_LOOKS_FOLLOWING.METHOD,
-			headers: userService.isLoggedIn() ? getAuthLookHeader() : getLookHeader(),
+			headers:  requestUtil.getDynamicHeader(),
 		})
       .then(response => {
       	if (response.ok) {

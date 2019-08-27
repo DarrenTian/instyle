@@ -6,7 +6,7 @@ import LookListDataProvider from "components/module/LookListDataProvider";
 import LookList from "components/element/LookList";
 import Invite from "components/element/Invite";
 import SignupBar from "components/element/SignupBar";
-import { userService } from "services";
+import { userUtil } from "services";
 
 class Explore extends React.Component {
     state = {
@@ -27,7 +27,7 @@ class Explore extends React.Component {
     }
 
     render() {
-        const isLoggedIn =  userService.isLoggedIn();
+        const isLoggedIn =  userUtil.isLoggedIn();
         return (
             <div>
                 <LookListDataProvider config={{type:"EXPLORE"}} render={looks=><LookList {...this.props} title={"EXPLORE"} looks={looks} />} /> 

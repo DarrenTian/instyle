@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { userService } from "services";
+import { userService, userUtil } from "services";
 
 class Profile extends React.Component {
   state = {
@@ -11,7 +11,7 @@ class Profile extends React.Component {
   };
 
   updateCachedProfile = (profile) => {
-  	userService.updateCachedProfile(profile);
+  	userUtil.updateCachedProfile(profile);
   }
 
   handleChange = (e) => {

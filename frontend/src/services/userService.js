@@ -1,17 +1,12 @@
+import { userUtil } from './userUtil'
+import { requestUtil } from './requestUtil'
+
 export const userService = {
 	login,
 	signup,
 	getUserProfile,
 	updateUserProfile,
 	setUserAvatarImage,
-
-	getToken,
-	getProfile,
-	updateCachedProfile,
-	isLoggedIn,
-	isSelf,
-	logout,
-
 	getUserProfilePreview,
 };
 
@@ -42,63 +37,6 @@ const userAPI = {
 	},
 }
 
-function getToken() {
-	if (localStorage.getItem('user') == undefined) {
-		return null;
-	}
-	const user = JSON.parse(localStorage.getItem('user'));
-	return user.token;
-}
-
-function getProfile() {
-	if (localStorage.getItem('user') == undefined) {
-		return null;
-	}
-	const user = JSON.parse(localStorage.getItem('user'));
-	return user.profile;
-}
-
-function isLoggedIn() {	
-	return getToken() != null;
-}
-
-function logout() {
-	localStorage.removeItem('user');
-}
-
-function updateCachedProfile(profile) {
-	const user = JSON.parse(localStorage.getItem('user'));
-	user.profile = profile;
-	localStorage.setItem('user', JSON.stringify(user));
-}
-
-function isSelf(userId) {
-	if (getProfile() == null) { return false; }
-	return getProfile().nickname == userId;
-}
-
-function getUserHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-	}
-}
-
-function getUserProfileHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Token '+ getToken(),
-	}
-}
-
-function getUserProfileHeaderForFile() {
-	return {
-		'Accept': 'application/json',
-        'Authorization': 'Token '+ userService.getToken(),
-	}
-}
-
 function handleResponse(response) {
 	return response.json().then(
 		data => {
@@ -116,7 +54,7 @@ function login(email, password) {
 	return fetch(
 		userAPI.LOGIN.END_POINT, {
             method: userAPI.LOGIN.METHOD,
-            headers: getUserHeader(),
+            headers: requestUtil.getUnAuthorizedHeader(),
             body: JSON.stringify({
                 username: email,
                 password: password,
@@ -128,7 +66,7 @@ function signup(email, password, nickname) {
 	return fetch(
 		userAPI.SIGNUP.END_POINT, {
 			method: userAPI.LOGIN.METHOD,
-			headers: getUserHeader(),
+			headers: requestUtil.getUnAuthorizedHeader(),
 			body: JSON.stringify({
 				email: email,
 				password: password,
@@ -141,7 +79,7 @@ function getUserProfilePreview(userId) {
 	return fetch(
 		userAPI.GET_PROFILE_PREVIEW.END_POINT, {
 			method: userAPI.GET_PROFILE_PREVIEW.METHOD,
-			headers: userService.isLoggedIn() ? getUserProfileHeader() : getUserHeader(),
+			headers: requestUtil.getDynamicHeader(),
 			body: JSON.stringify({"user_id":userId}),
 		}).then(response=> {
 			if (response.ok) {
@@ -152,11 +90,12 @@ function getUserProfilePreview(userId) {
 		})
 }
 
+// Authorized only
 function getUserProfile() {
 	return fetch(
 		userAPI.GET_PROFILE.END_POINT, {
 			method: userAPI.GET_PROFILE.METHOD,
-			headers: getUserProfileHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 		}).then(response=> {
 			if (response.ok) {
 				return response.json();
@@ -170,7 +109,7 @@ function updateUserProfile(profile) {
 	return fetch(
 		userAPI.UPDATE_PROFILE.END_POINT, {
 			method: userAPI.UPDATE_PROFILE.METHOD,
-			headers: getUserProfileHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 			body: JSON.stringify(profile),
 		}).then(response=> {
 			if (response.ok) {
@@ -186,7 +125,7 @@ function setUserAvatarImage(file) {
 	return fetch(
 		userAPI.SET_AVATAR_IMAGE.END_POINT, {
 			method: userAPI.SET_AVATAR_IMAGE.METHOD,
-			headers: getUserProfileHeaderForFile(),
+			headers: requestUtil.getAuthorizedHeaderForFile(),
             body: file,
 		})
 	.then(response => {

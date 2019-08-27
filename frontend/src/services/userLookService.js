@@ -1,4 +1,4 @@
-import { userService } from './userService'
+import { requestUtil } from './requestUtil'
 
 export const userLookService = {
 	listUserLook,
@@ -37,26 +37,11 @@ const userLookAPI = {
 	},
 }
 
-function getUserLookHeader() {
-	return {
-		'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Token '+ userService.getToken(),
-	}
-}
-
-function getUserLookHeaderForFile() {
-	return {
-		'Accept': 'application/json',
-        'Authorization': 'Token '+ userService.getToken(),
-	}
-}
-
 function listUserLook() {
 	return fetch(
 		userLookAPI.LIST.END_POINT, {
             method: userLookAPI.LIST.METHOD,
-            headers: getUserLookHeader(),
+            headers: requestUtil.getAuthorizedHeader(),
         })
 		.then(response => {
 			return response.json();
@@ -70,7 +55,7 @@ function createUserLook() {
 	return fetch(
 		userLookAPI.CREATE.END_POINT, {
 	        method: userLookAPI.CREATE.METHOD,
-	        headers: getUserLookHeader(),
+	        headers: requestUtil.getAuthorizedHeader(),
     })
 	.then(response => {
 		return response.json();
@@ -81,7 +66,7 @@ function retrieveUserLook(lookId) {
 	return fetch(
 		userLookAPI.RETRIEVE.END_POINT.replace('lookId', lookId), {
 			method: userLookAPI.RETRIEVE.METHOD,
-			headers: getUserLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 		})
       .then(response => {
       	if (response.ok) {
@@ -96,7 +81,7 @@ function destroyUserLook(lookId) {
 	return fetch(
 		userLookAPI.DESTROY.END_POINT.replace('lookId', lookId), {
 			method: userLookAPI.DESTROY.METHOD,
-			headers: getUserLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
 		})
 		.then(response => {
 			if (response.status != 204) {
@@ -109,7 +94,7 @@ function updateUserLook(lookId, look) {
 	return fetch(
 		userLookAPI.UPDATE.END_POINT.replace('lookId', lookId), {
 			method: userLookAPI.UPDATE.METHOD,
-			headers: getUserLookHeader(),
+			headers: requestUtil.getAuthorizedHeader(),
             body: JSON.stringify(look),
         })
 		.then(response => {
@@ -125,7 +110,7 @@ function setUserLookImage(lookId, file) {
 	return fetch(
 		userLookAPI.SET_IMAGE.END_POINT.replace('lookId', lookId), {
 			method: userLookAPI.SET_IMAGE.METHOD,
-			headers: getUserLookHeaderForFile(),
+			headers: requestUtil.getAuthorizedHeaderForFile(),
             body: file,
 		})
 	.then(response => {
