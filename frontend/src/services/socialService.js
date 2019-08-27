@@ -2,6 +2,9 @@ import { userService } from './userService'
 
 export const socialService = {
 	toggleLike,
+
+	followUser,
+	unfollowUser,
 };
 
 const socialAPI = {
@@ -11,6 +14,14 @@ const socialAPI = {
 	},
 	'UNLIKE' : {
 		'END_POINT': '/api/social/unlike/',
+		'METHOD': 'POST',
+	},
+	'FOLLOW' : {
+		'END_POINT': '/api/social/follow/',
+		'METHOD': 'POST',
+	},
+	'UNFOLLOW' : {
+		'END_POINT': '/api/social/unfollow/',
 		'METHOD': 'POST',
 	},
 }
@@ -64,5 +75,35 @@ function unlike(lookId){
 			return Promise.reject(error);
       	}
      })
+}
+
+function followUser(userId) {
+	return fetch(
+		socialAPI.FOLLOW.END_POINT, {
+			method: socialAPI.FOLLOW.METHOD,
+			headers: getAuthLookHeader(),
+			body: JSON.stringify({"user_id":userId}),
+		}).then(response=> {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("cannot follow");
+			}
+		})
+}
+
+function unfollowUser(userId) {
+	return fetch(
+		socialAPI.UNFOLLOW.END_POINT, {
+			method: socialAPI.UNFOLLOW.METHOD,
+			headers: getAuthLookHeader(),
+			body: JSON.stringify({"user_id":userId}),
+		}).then(response=> {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return Promise.reject("cannot follow");
+			}
+		})
 }
 

@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
 from user.models import User
+from social.models import Follow
 from user.serializers import UserSerializer, UserProfileSerializer, GroupSerializer, UserProfilePreviewSerializer
 import os
 import time
@@ -59,7 +60,15 @@ class UserViewSet(viewsets.GenericViewSet):
         user_result = User.objects.all().filter(nickname=user_id)
         if user_result.exists():
             user = user_result[:1].get()
-            return Response({'profile':UserProfilePreviewSerializer(user).data}, status=status.HTTP_200_OK)
+            user_data = UserProfilePreviewSerializer(user).data
+
+            if request.user.is_anonymous():
+                user_data["following"] = False
+            else:
+                is_following = Follow.objects.all().filter(follower=request.user, followee=user)
+                user_data["following"] = is_following.exists()
+
+            return Response({'profile':user_data}, status=status.HTTP_200_OK)
         else:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
         #return Response(UserProfileSerializer(user).data, status=status.HTTP_200_OK)

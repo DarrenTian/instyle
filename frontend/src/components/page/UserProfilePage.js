@@ -10,11 +10,7 @@ class UserProfilePage extends React.Component {
 		return (
 			<div>
 				<div className="main-canvas-container is-centered">
-					<div className="columns section">
-						<div className="column is-8 is-offset-2">
-							<UserProfilePreview userId={userId}/>
-						</div>
-					</div>
+					<UserProfilePreview {...this.props} userId={userId}/>	
 				</div>
 				<LookListDataProvider config={{type:"USER_LOOK", userId:userId}} render={looks=><LookList {...this.props} title={"MORE_LOOKS"} looks={looks} />} />
 			</div>

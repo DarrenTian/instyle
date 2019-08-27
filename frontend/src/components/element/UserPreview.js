@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { lookUtil } from "services";
 import { userService, socialService } from "services";
 import Like from "components/social/Like";
+import Follow from "components/social/Follow";
 
 class UserPreview extends React.Component {
     render() {
@@ -97,18 +98,22 @@ class UserProfilePreview extends React.Component {
             height: "100%",
         }
         return (
-            <div className="media">
-                <div className="media-left">
+            <div className="columns section">
+                <div className="column is-2 is-offset-2 is-centered" style={{alignSelf:"center"}}>
                     <figure className="image is-128x128">
                         <img className="is-rounded is-thin-border" src={this.state.profile.avatar_image_thumbnail} style={avatarStyle}></img>
                     </figure>
                 </div>
-                <div className="media-content" style={titleStyle}>
-                    <p className="title is-5">{this.state.profile.nickname}</p>
-                    <p className="is-5">{this.state.profile.biography}</p>
-                    {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+                <div className="column is-5 " style={{alignSelf:"center"}}>
+                    <div className="media-content" style={titleStyle}>
+                        <p className="title is-5">{this.state.profile.nickname}</p>
+                        <p className="is-5">{this.state.profile.biography}</p>
+                        {/*<p className="subtitle is-6"><a href={style.credit_link}>{style.credit}</a></p>*/}
+                    </div>
                 </div>
-                {/*<a className="button is-pulled-right">+ Follow</a>*/}
+                <div className="column is-1" style={{alignSelf:"center"}}>
+                    <Follow {...this.props} {...this.state} />
+                </div>
             </div>
         )
     }

@@ -9,6 +9,7 @@ export const userService = {
 	getProfile,
 	updateCachedProfile,
 	isLoggedIn,
+	isSelf,
 	logout,
 
 	getUserProfilePreview,
@@ -69,6 +70,11 @@ function updateCachedProfile(profile) {
 	const user = JSON.parse(localStorage.getItem('user'));
 	user.profile = profile;
 	localStorage.setItem('user', JSON.stringify(user));
+}
+
+function isSelf(userId) {
+	if (getProfile() == null) { return false; }
+	return getProfile().nickname == userId;
 }
 
 function getUserHeader() {
@@ -135,7 +141,7 @@ function getUserProfilePreview(userId) {
 	return fetch(
 		userAPI.GET_PROFILE_PREVIEW.END_POINT, {
 			method: userAPI.GET_PROFILE_PREVIEW.METHOD,
-			headers: getUserHeader(),
+			headers: userService.isLoggedIn() ? getUserProfileHeader() : getUserHeader(),
 			body: JSON.stringify({"user_id":userId}),
 		}).then(response=> {
 			if (response.ok) {
@@ -191,5 +197,6 @@ function setUserAvatarImage(file) {
 		}
 	})
 }
+
 
 

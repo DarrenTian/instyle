@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 
 from rest_framework import viewsets, status
 from django.shortcuts import render
-from social.models import Like
+from social.models import Like, Follow
 from look.models import Look
+from user.models import User
 from rest_framework.decorators import action
 from rest_framework.response import Response
 import json
@@ -35,3 +36,28 @@ class SocialViewSets(viewsets.GenericViewSet):
         if like_result.exists():
             like_result.delete()
         return Response({}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['post'])
+    def follow(self, request):
+        follow_request = json.loads(request.body)
+        user_id = follow_request['user_id']
+        follow_result = Follow.objects.filter(followee=request.user, follower__nickname=user_id)
+        if follow_result.exists():
+            pass
+        else :
+            try:
+                user = User.objects.filter(nickname=user_id)[:1].get()
+                follow = Follow.objects.create(follower=request.user, followee=user)
+            except Exception as e:    
+                return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['post'])
+    def unfollow(self, request):
+        unfollow_request = json.loads(request.body)
+        user_id = unfollow_request['user_id']
+        unfollow_result = Follow.objects.filter(followee=request.user, follower__nickname=user_id)
+        if unfollow_result.exists():
+            unfollow_result.delete()
+        return Response({}, status=status.HTTP_200_OK)
+
