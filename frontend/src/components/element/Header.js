@@ -39,6 +39,7 @@ class Header extends React.Component {
             alignItems: "center",
             alignContent: "center",
         }
+        let navStart;
         let navEnd;
         if (!this.props.isLoggedIn) {
             navEnd = <div className="navbar-end">
@@ -60,6 +61,15 @@ class Header extends React.Component {
             </div>
         } else {
             const profile = userUtil.getProfile();
+            navStart =  <div className="navbar-start has-text-weight-semibold">
+                 <a className="navbar-item" href="/">
+                    Explore
+                  </a>
+                  <a className="navbar-item" href="/following">
+                    Following
+                  </a>
+                  </div>
+
             navEnd = <div className="navbar-end">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link header-figure is-arrowless">
@@ -67,12 +77,6 @@ class Header extends React.Component {
                   <p>{profile? profile.nickname : null}</p>
                 </a>
                 <div className="navbar-dropdown">
-                 <a className="navbar-item" href="/">
-                    Explore
-                  </a>
-                  <a className="navbar-item" href="/following">
-                    Following
-                  </a>
                   <a className="navbar-item" href="/console">
                     My Looks
                   </a>
@@ -108,6 +112,7 @@ class Header extends React.Component {
                     </div>
 
                     <div id="navbarMenu" className={`navbar-menu ${this.state.activeMenu ? 'is-active' : ''}`}>
+                        {navStart}
                         {navEnd}
                     </div>
                 </nav>
