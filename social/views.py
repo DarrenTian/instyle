@@ -41,7 +41,7 @@ class SocialViewSets(viewsets.GenericViewSet):
     def follow(self, request):
         follow_request = json.loads(request.body)
         user_id = follow_request['user_id']
-        follow_result = Follow.objects.filter(followee=request.user, follower__nickname=user_id)
+        follow_result = Follow.objects.filter(follower=request.user, followee__nickname=user_id)
         if follow_result.exists():
             pass
         else :
@@ -56,7 +56,7 @@ class SocialViewSets(viewsets.GenericViewSet):
     def unfollow(self, request):
         unfollow_request = json.loads(request.body)
         user_id = unfollow_request['user_id']
-        unfollow_result = Follow.objects.filter(followee=request.user, follower__nickname=user_id)
+        unfollow_result = Follow.objects.filter(follower=request.user, followee__nickname=user_id)
         if unfollow_result.exists():
             unfollow_result.delete()
         return Response({}, status=status.HTTP_200_OK)

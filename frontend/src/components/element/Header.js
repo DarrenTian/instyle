@@ -70,6 +70,9 @@ class Header extends React.Component {
                  <a className="navbar-item" href="/">
                     Explore
                   </a>
+                  <a className="navbar-item" href="/following">
+                    Following
+                  </a>
                   <a className="navbar-item" href="/console">
                     Console
                   </a>

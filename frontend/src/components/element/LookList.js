@@ -8,7 +8,7 @@ import LookTile from "components/element/LookTile";
 class LookList extends React.Component {
     render() {
         const publisher = lookUtil.getPublisher(this.props.looks);
-        if (publisher==null) {
+        if (this.props.title && this.props.title=="MORE_LOOKS" && publisher==null) {
           return null;
         }
 
@@ -19,6 +19,11 @@ class LookList extends React.Component {
                   {this.props.title && this.props.title=="MORE_LOOKS" &&
                     <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
                          More Looks from {publisher.nickname}
+                    </div>
+                  }
+                  {this.props.title && this.props.title=="FOLLOWING" && this.props.looks.length==0 &&
+                    <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
+                         Starting following trending Eastylers!
                     </div>
                   }
                   <div className="tiles-vertical-columns">

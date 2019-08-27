@@ -93,6 +93,18 @@ class LookViewSet(mixins.RetrieveModelMixin,
           look["liked"] = has_like.exists()
       return Response(looks.data, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=['get'])
+    def following(self, request): 
+      looks = LookSerializer(Look.objects.all().filter(publish_status='P', publisher__followee_list__follower=request.user).order_by('-publish_date'), many=True)
+      # Find a way to join better
+      for look in looks.data:
+        if request.user.is_anonymous():
+          look["liked"] = False
+        else:
+          has_like = Like.objects.all().filter(user=request.user, look_id=look["id"])
+          look["liked"] = has_like.exists()
+      return Response(looks.data, status=status.HTTP_200_OK)
+
 
 # Look API restricted per user access.
 class UserLookViewSet(viewsets.ModelViewSet):

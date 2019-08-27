@@ -13,6 +13,7 @@ import Console from "components/page/Console";
 import Doc from "components/page/Doc";
 import ErrorPage from "components/page/ErrorPage";
 import Explore from "components/page/Explore";
+import Following from "components/page/Following";
 import Footer from "components/element/Footer";
 import Header from "components/element/Header";
 import Login from "components/page/Login";
@@ -55,6 +56,7 @@ class App extends React.Component {
 			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
 			        <PrivateRoute path="/console" component={Console} />
 			        <PrivateRoute path="/profile" component={Profile} />
+			        <PrivateRoute path="/following" component={Following} />
 			        <Route path="/error" exact component={ErrorPage} />
 			        <Redirect to="/error" />
 			      </Switch>
