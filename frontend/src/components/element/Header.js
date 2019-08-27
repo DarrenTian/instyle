@@ -74,7 +74,7 @@ class Header extends React.Component {
                     Following
                   </a>
                   <a className="navbar-item" href="/console">
-                    Console
+                    My Looks
                   </a>
                   <a className="navbar-item" href="/profile">
                     Profile
