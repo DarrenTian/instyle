@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
                 // When success, loginHandler updates the whole app's state
                 this.props.loginHandler();
                 // And redirect to console page
-                this.props.history.push('/console');
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.setState({
@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
     signup = () => {
         this.props.signup();
     }
-    
+
     render() {
         const formStyle={
             padding:"0px 15px",

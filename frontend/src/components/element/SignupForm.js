@@ -24,7 +24,7 @@ class SignupForm extends React.Component {
             .then(data => {
                 localStorage.setItem("userAuthToken", data.token);
                 this.props.loginHandler();
-                this.props.history.push('/console');
+                this.props.history.push('/');
             })
             .catch(e => {
                 this.setState({
