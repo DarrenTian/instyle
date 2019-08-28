@@ -7,13 +7,13 @@ import LookTile from "components/element/LookTile";
 import Mansory from 'react-masonry-component';
 
 class LookList extends React.Component {
-    // state = {
-    //   loaded: false,
-    // }
+    state = {
+      loaded: false,
+    }
 
-    // show = ()=>{
-    //   this.setState({loaded: true});
-    // }
+    show = ()=>{
+      this.setState({loaded: true});
+    }
 
     render() {
         const publisher = lookUtil.getPublisher(this.props.looks);
@@ -26,8 +26,13 @@ class LookList extends React.Component {
         };
 
         return (
-          <div>
-            <div> 
+          <div >
+            <div className={this.state.loaded ? "is-hidden" : "" }>
+              <section className="section columns is-centered is-marginless">
+                Loading...
+              </section>
+            </div>
+            <div className={this.state.loaded ? "" : "is-hidden"}> 
               <section className="section tiles-section">
                   {this.props.title && this.props.title=="MORE_LOOKS" &&
                     <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
