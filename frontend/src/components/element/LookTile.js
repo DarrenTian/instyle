@@ -13,7 +13,6 @@ class LookTile extends React.Component {
         };
         const tileContainerStyle = {
             padding:"0 3px 6px 3px",
-            width:"25%",
             minHeight: "100px",
         }
         const tileStyle = {

@@ -165,6 +165,18 @@ a {
   }
 }
 
+.image-tile {
+  width:50%;
+}
+
+@media only screen and (min-width: 600px) {
+  .image-tile {
+    width:25%;
+  }
+}
+
+
+
 @keyframes blink {
     0% {
         transform: scale(1);
