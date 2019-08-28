@@ -23,7 +23,9 @@ class Explore extends React.Component {
     trackScrolling = (e)=>{
         // in the future, when we have more looks.
         //if (e.target.scrollingElement.scrollTop>100) {}
-        this.setState({showSignup:true})
+        if (!this.state.showSignup) {
+            this.setState({showSignup:true})            
+        }
     }
 
     render() {
