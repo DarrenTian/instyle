@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 class Error extends React.Component {
     render() {
         const isLoading = this.props.error == 'Loading';
-        if (isLoading) {
+        if (this.props.error=='') {
+            return null;
+        } else if (isLoading) {
             return (
                 <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             )
