@@ -43,26 +43,28 @@ class App extends React.Component {
 		  <div className="main-canvas">
 		    <Header isLoggedIn={ this.state.isLoggedIn } />
 		    <div className="canvas-component">
-			    <BrowserRouter>
-			      <Switch>
-			      	<Route path="/" exact render={()=><Explore loginHandler={this.login} />} />
-			      	<Route path="/about" exact component={About} />
-			        <Route path="/creator" exact component={About} />
-			        <Route path="/doc/:topic" component={Doc} />
-			        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
-			        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
-			        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} loginHandler={this.login} />} />
-			        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} loginHandler={this.login} />} />
-			        <Route path="/users/:id" render={(props)=><UserProfilePage {...props} loginHandler={this.login} />} />
-			        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
-			        <PrivateRoute path="/console" component={Console} />
-			        <PrivateRoute path="/profile" component={Profile} />
-			        <PrivateRoute path="/following" component={Following} />
-			        <PrivateRoute path="/trending" component={Trending} />
-			        <Route path="/error" exact component={ErrorPage} />
-			        <Redirect to="/error" />
-			      </Switch>
-			    </BrowserRouter>
+		    	<div> {/*to avoid wired layout when inheriting attribute from canvas-component*/}
+				    <BrowserRouter>
+				      <Switch>
+				      	<Route path="/" exact render={()=><Explore loginHandler={this.login} />} />
+				      	<Route path="/about" exact component={About} />
+				        <Route path="/creator" exact component={About} />
+				        <Route path="/doc/:topic" component={Doc} />
+				        <Route path="/login" render={()=><Login loginHandler={this.login} />} />
+				        <Route path="/signup" render={()=><Signup loginHandler={this.login} />} />
+				        <Route exact path="/looks/:id" render={(props)=><LookPage {...props} preview={false} loginHandler={this.login} />} />
+				        <Route exact path="/looks/:id/preview" render={(props)=><LookPage {...props} preview={true} loginHandler={this.login} />} />
+				        <Route path="/users/:id" render={(props)=><UserProfilePage {...props} loginHandler={this.login} />} />
+				        <PrivateRoute exact path="/looks/:id/edit" component={LookEditPage} />
+				        <PrivateRoute path="/console" component={Console} />
+				        <PrivateRoute path="/profile" component={Profile} />
+				        <PrivateRoute path="/following" component={Following} />
+				        <PrivateRoute path="/trending" component={Trending} />
+				        <Route path="/error" exact component={ErrorPage} />
+				        <Redirect to="/error" />
+				      </Switch>
+				    </BrowserRouter>
+			    </div>
 		    </div>
 		    <Footer />
 		  </div>

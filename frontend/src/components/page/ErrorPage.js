@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Error from "components/element/Error";
+
 const ErrorPage = ({ error }) => {
+    const errorStyle={
+    	display: "flex",
+    }
     return (
-        <div>
-            <div className="section columns is-centered is-marginless">
-                <div className="columns container is-centered is-widescreen">
-                    {error ? error : "The page your are visiting does not exist."}
-                </div>
-            </div>
-        </div>
+    	<div style={errorStyle}>
+    		<div style={{margin:"0 auto"}}>
+    			<Error error={error} />
+    		</div>
+    	</div>
     )
 };
 

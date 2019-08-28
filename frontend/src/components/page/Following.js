@@ -11,7 +11,7 @@ import SignupBar from "components/element/SignupBar";
 class Following extends React.Component {
     render() {
         return (
-            <div>
+            <div className="main-canvas-container"> 
                 <LookListDataProvider config={{type:"FOLLOWING"}} render={looks=><LookList {...this.props} title={"FOLLOWING"} looks={looks} />} /> 
                 {/*
                     <LookListDataProvider config={{type:"EXPLORE"}} render={looks=>looks.map((look, key)=><Look key={key} {...this.props} look={look} />)} />      

@@ -7253,9 +7253,6 @@ label.panel-block {
   font-family: "Quando";
   src: url("/static/Quando-Regular.ttf"); }
 
-.modal-background {
-  background-color: rgba(10, 10, 10, 0.5); }
-
 .main-canvas {
   display: flex;
   flex-direction: column;
@@ -7266,6 +7263,27 @@ label.panel-block {
   display: flex;
   flex-direction: column;
   margin-top: 55px; }
+
+.main-canvas-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  max-width: 960px;
+  align-content: center;
+  margin: 0 auto; }
+
+.tiles-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  max-width: 960px;
+  align-content: center;
+  margin: 0 auto; }
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.5); }
 
 .console {
   flex: 1; }
@@ -7327,24 +7345,6 @@ label.panel-block {
 
 .tiles-section-wrapper {
   position: relative; }
-
-.tiles-section {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 10px;
-  padding-bottom: 0px;
-  max-width: 960px;
-  align-content: center;
-  margin: 0 auto; }
-
-.main-canvas-container {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 10px;
-  padding-bottom: 0px;
-  max-width: 960px;
-  align-content: center;
-  margin: 0 auto; }
 
 .is-clickable {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
@@ -7475,3 +7475,36 @@ a {
   z-index: 1;
   cursor: pointer;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), white); }
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px; }
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #dbdbdb;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #dbdbdb transparent transparent transparent; }
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s; }
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s; }
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }

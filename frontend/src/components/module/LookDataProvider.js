@@ -8,7 +8,7 @@ class LookDataProvider extends Component {
   state = {
       look: [],
       loaded: false,
-      placeholder: "Loading..."
+      placeholder: "Loading"
     };
   componentDidMount() {
     lookService.retrieveLook(this.props.lookId, this.props.preview)

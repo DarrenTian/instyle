@@ -8,10 +8,8 @@ class UserProfilePage extends React.Component {
 	render() {
 		const userId = this.props.match.params.id;
 		return (
-			<div>
-				<div className="main-canvas-container is-centered">
-					<UserProfilePreview {...this.props} userId={userId}/>	
-				</div>
+			<div className="main-canvas-container" >
+				<UserProfilePreview {...this.props} userId={userId}/>	
 				<LookListDataProvider config={{type:"USER_LOOK", userId:userId}} render={looks=><LookList {...this.props} title={"MORE_LOOKS"} looks={looks} />} />
 			</div>
 		)

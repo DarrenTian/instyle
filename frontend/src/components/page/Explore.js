@@ -29,15 +29,17 @@ class Explore extends React.Component {
     render() {
         const isLoggedIn =  userUtil.isLoggedIn();
         return (
-            <div>
+            <React.Fragment>
+            <div className="main-canvas-container" >
                 <LookListDataProvider config={{type:"EXPLORE"}} render={looks=><LookList {...this.props} title={"EXPLORE"} looks={looks} />} /> 
-                {
+            </div>
+            {
                     !isLoggedIn &&  this.state.showSignup &&
                         <div>
                             <SignupBar {...this.props} />
                         </div>
-                }          
-            </div>
+            } 
+            </React.Fragment>
         )
     }
 }

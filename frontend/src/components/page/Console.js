@@ -89,7 +89,7 @@ class Console extends React.Component {
 		}
 		const hasLooks = this.state.looks.length !=0;
 		return (
-			<div className="console" >
+			<div className="main-canvas-container" >
 			    <MediaQuery query="(min-width: 769px)">
 				    <div style={consoleDesktopStyle}>
 				    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>

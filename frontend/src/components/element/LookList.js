@@ -5,6 +5,7 @@ import MediaQuery from 'react-responsive';
 import { lookUtil } from "services";
 import LookTile from "components/element/LookTile";
 import Mansory from 'react-masonry-component';
+import ErrorPage from "components/page/ErrorPage";
 
 class LookList extends React.Component {
     state = {
@@ -12,7 +13,10 @@ class LookList extends React.Component {
     }
 
     show = ()=>{
-      this.setState({loaded: true});
+      // Caution: without the if, Mansory keeps trigger onLayoutcomplete event, causing infinite loop.
+      if (!this.state.loaded) {
+        this.setState({loaded: true});
+      }
     }
 
     render() {
@@ -28,12 +32,10 @@ class LookList extends React.Component {
         return (
           <div >
             <div className={this.state.loaded ? "is-hidden" : "" }>
-              <section className="section columns is-centered is-marginless">
-                Loading...
-              </section>
+                <ErrorPage error={"Loading"} />
             </div>
             <div className={this.state.loaded ? "" : "is-hidden"}> 
-              <section className="section tiles-section">
+              <section className="">
                   {this.props.title && this.props.title=="MORE_LOOKS" &&
                     <div className="is-size-6 has-text-weight-semibold" style={{padding:"0px 0 10px 0px"}}>
                          More Looks from {publisher.nickname}
@@ -45,8 +47,9 @@ class LookList extends React.Component {
                     </div>
                   }
                   <Mansory  disableImagesLoaded={false} 
+                            updateOnEachImageLoad={false}
                             options={masonryOptions}
-                            onImagesLoaded={this.show} >
+                            onLayoutComplete={this.show} >
                       {this.props.looks && this.props.looks.map((look,index)=>{
                         const image = lookUtil.getCoverImage(look);
                         if (image==null) { return null}

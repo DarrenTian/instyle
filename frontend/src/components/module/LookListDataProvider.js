@@ -8,7 +8,7 @@ class LookListDataProvider extends Component {
   state = {
       looks: [],
       loaded: false,
-      placeholder: "Loading..."
+      placeholder: "Loading"
     };
   componentDidMount() {
     lookService.retrieveMoreLooks(this.props.config)
