@@ -7264,7 +7264,8 @@ label.panel-block {
 .canvas-component {
   flex: 1;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  margin-top: 55px; }
 
 .console {
   flex: 1; }

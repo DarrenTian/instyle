@@ -22,6 +22,11 @@ class Header extends React.Component {
     render() {   
         const navBarStyle = {
             boxShadow:"0px 1px 1px #e6e6e6",
+            position:"fixed",
+            top:"0",
+            width:"100%",
+            zIndex:"30",
+            background: "white",
         };
         const avatarStyle = {
             objectFit: "cover",
