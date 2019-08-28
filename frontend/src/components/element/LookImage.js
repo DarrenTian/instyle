@@ -88,7 +88,7 @@ class LookImage extends React.Component {
                 <div>
                   <img className="is-block" style={imageStyle} src={coverImage} onLoad={this.updateLook}></img>
                 </div>
-                {this.props.showTags==true && tags && tags.map((tag, index)=> {
+                {this.state.loaded && this.props.showTags==true && tags && tags.map((tag, index)=> {
                     let singleTagStyle = {...tagStyle}
                     let singleDotStyle = {...dotStyle}
                     let isSelected = false
