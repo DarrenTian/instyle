@@ -19,8 +19,8 @@ class LookTile extends React.Component {
             borderRadius: "5px",
         }
         return (
-                <div className="image-tile" style={tileContainerStyle}>
-                    <div className="is-thin-border" style={tileStyle}>
+                <div className="image-tile-container is-non-breakable" style={tileContainerStyle}>
+                    <div className="is-elevated-hover" style={tileStyle}>
                         <a href={"/looks/"+look.url_id}>     
                             <LookImage look={look} isInteractive={false} showTags={false} />
                         </a>

@@ -62,11 +62,11 @@ const About = () => {
                                 Eastyler
                             </h1>
                             <div className="subtitle light-subtitle">
-                                Create and Explore Interactive Shoppable Looks.
-                                <br/>
-                                Built for social influencers and everyday fashion lovers.
+                                A social communitiy built for everyday fashion lovers. 
+                                <br />
+                                Share and discover trending shoppable looks.
                             </div>
-                             <div>
+                            <div>
                                 <Invite />
                             </div>
                         </div>
@@ -76,18 +76,21 @@ const About = () => {
             <section className="section" >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered" >
-                        <div className="column is-4 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature">
-                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_tag.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Tag</h2></div>
+                                <div className="is-vertical-aligned is-flex">
+                                    <img src="/static/icon_tag.svg"></img>
+                                    <h2 className="title is-2 minimal-title" style={featureTitleStyle}>Tag</h2>
+                                </div>
                                 <br/>
-                                <p className="feature-content">
-                                    Upload your favorite looks and tag products. 
+                                <p className="feature-content is-size-5">
+                                    Tag products on your favorite looks. 
                                     <br/>
-                                    The interactive tags allow Eastylers to visually explore your looks with convenience.
+                                    The interactive tags allow Eastylers to visually explore your looks.
                                 </p>
                             </div>
                         </div>
-                        <div className="column is-6 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature-image">
                                 <a href="https://www.eastyler.com/looks/YEqo2maz" target="_blank"><img src="./static/tag_feature.gif" alt="" style={tagFeatureStyle}/></a>
                             </div>
@@ -95,41 +98,50 @@ const About = () => {
                     </div>
                 </div>
             </section> 
-            <section className="section" style={interSectionStyle} >
+            <section className="section" >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered" style={reverseColumnStyle}>
-                        <div className="column is-4 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature">
-                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_share.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Share</h2></div>
+                                <div className="is-vertical-aligned is-flex">
+                                    <img src="/static/icon_manage.svg"></img>
+                                    <h2 className="title is-2 minimal-title" style={featureTitleStyle}>Organize</h2>
+                                </div>
                                 <br/>
-                                <p className="feature-content">
-                                    Use embedded social plugins to share your favoritel looks to major social networks.
+                                <p className="feature-content is-size-5">
+                                    A centralized place to organize your looks with your closet belongings. 
+                                    Collect your favorite looks and get insipred for your next new look.
                                 </p>
                             </div>
                         </div>
-                        <div className="column is-6 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature-image">
-                                <img className="main-image" src="./static/share_feature.png" alt="" />
+                                <img className="main-image" src="./static/manage_feature.gif" alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section className="section" >
+            <section className="section" style={interSectionStyle} >
                 <div className="container" style={homeContainerStyle}>
                     <div className="columns is-vcentered">
-                        <div className="column is-4 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature">
-                                <div className="is-vertical-aligned is-flex"><img src="/static/icon_manage.svg"></img><h2 className="title is-2 minimal-title" style={featureTitleStyle}>Manage</h2></div>
+                                <div className="is-vertical-aligned is-flex">
+                                    <img src="/static/icon_share.svg"></img>
+                                    <h2 className="title is-2 minimal-title" style={featureTitleStyle}>Social</h2>
+                                </div>
                                 <br/>
-                                <p className="feature-content">
-                                    Organize your looks and closet in a centralized console. Get inspired for your next new look.
+                                <p className="feature-content is-size-5">
+                                    Follow your favorite Eastylers and get insipred by trending fashion looks.
+                                    <br/>
+                                    Share your likes with friends.
                                 </p>
                             </div>
                         </div>
-                        <div className="column is-6 is-offset-1">
+                        <div className="column is-5 is-offset-1">
                             <div className="minimal-feature-image">
-                                <img className="main-image" src="./static/manage_feature.gif" alt="" />
+                                <img className="main-image" src="./static/share_feature.png" alt="" />
                             </div>
                         </div>
                     </div>
@@ -140,10 +152,10 @@ const About = () => {
                     <div className="columns">
                         <div className="column is-8 is-offset-2 has-text-centered">
                             <h1 className="title big-title text-bold is-4">
-                                Join Eastyler to create your first look!
+                                Check out more looks from Eastylers
                             </h1>
-                             <div>
-                                <Invite />
+                            <div className="container" style={{maxWidth: "200px"}}>
+                                    <a href="/"><button className="button has-background-grey-dark has-text-white invite-me-button is-fullwidth">Explore</button></a>
                             </div>
                         </div>
                     </div>

@@ -7355,7 +7355,7 @@ label.panel-block {
 .is-thin-border {
   border: solid 1px rgba(10, 10, 10, 0.1); }
 
-.image-tile {
+.is-non-breakable {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari, Opera */
   page-break-inside: avoid;
@@ -7363,8 +7363,15 @@ label.panel-block {
   break-inside: avoid;
   /* IE 10+ */ }
 
+.is-elevated-hover {
+  border: solid 1px rgba(10, 10, 10, 0.1); }
+
+.is-elevated-hover:hover {
+  margin-top: -2px;
+  box-shadow: 5px 5px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1); }
+
 @media not all and (min-resolution: 0.001dpcm) {
-  .image-tile {
+  .is-non-breakable {
     -webkit-column-break-inside: avoid;
     /* Chrome, Safari, Opera */
     page-break-inside: avoid;
@@ -7385,11 +7392,11 @@ a {
     background-color: rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); } }
 
-.image-tile {
+.image-tile-container {
   width: 50%; }
 
 @media only screen and (min-width: 600px) {
-  .image-tile {
+  .image-tile-container {
     width: 25%; } }
 
 @keyframes blink {

@@ -4,6 +4,7 @@ import { lookUtil } from "services";
 import { withRouter } from 'react-router';
 
 import MediaQuery from 'react-responsive';
+import Promotion from "components/element/Promotion";
 
 class Console extends React.Component {
 	constructor(props) {
@@ -39,8 +40,7 @@ class Console extends React.Component {
 		const consoleWrapperStyle = {
 		}
 		const consoleDesktopStyle = {
-			width: "769px",
-			padding: "0rem 0.5rem",
+			maxWidth: "769px",
 			margin: "0rem auto",
 			justifyContent: "flex-start",
 		}
@@ -90,6 +90,7 @@ class Console extends React.Component {
 		const hasLooks = this.state.looks.length !=0;
 		return (
 			<div className="main-canvas-container" >
+				<Promotion />
 			    <MediaQuery query="(min-width: 769px)">
 				    <div style={consoleDesktopStyle}>
 				    	<button className="button is-hidden-mobile" style={newLookStyle} onClick={this.createLook}>
