@@ -10,7 +10,7 @@ import { userUtil } from "services";
 
 class Explore extends React.Component {
     state = {
-        showSignup:true,
+        showSignup:false,
     }
     componentDidMount() {
         document.addEventListener('scroll', this.trackScrolling);
@@ -35,12 +35,9 @@ class Explore extends React.Component {
             <div className="main-canvas-container" >
                 <LookListDataProvider config={{type:"EXPLORE"}} render={looks=><LookList {...this.props} title={"EXPLORE"} looks={looks} />} /> 
             </div>
-            {
-                    !isLoggedIn &&  this.state.showSignup &&
-                        <div>
-                            <SignupBar {...this.props} />
-                        </div>
-            } 
+            <div>
+                <SignupBar {...this.props} />
+            </div>
             </React.Fragment>
         )
     }
