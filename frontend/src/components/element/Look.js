@@ -174,8 +174,8 @@ class Look extends React.Component {
         }       
         return (
             <div>
-                <div className="section columns is-centered is-marginless" style={sectionStyle}>
-                    <div className="columns container is-centered is-widescreen" style={lookContainerStyle}>
+                <div className="section columns is-centered" style={sectionStyle}>
+                    <div className="columns container is-centered is-widescreen " style={lookContainerStyle}>
                         {/* TODO, make format better
                         this.props.preview && <div className="section is-size-5 has-text-info">Preview</div>*/}
                         <MediaQuery query="(min-width: 769px)">
