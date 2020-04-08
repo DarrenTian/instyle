@@ -40,6 +40,8 @@ urlpatterns.append(url(r'^admin/', admin.site.urls))
 urlpatterns += (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# Some temporary application I want to try out
+urlpatterns.append(url(r'^ac$', frontend.views.ac))
 
 # Append this later, otherwise all urls will hijacked by this first before resolving to static files.
 urlpatterns.append(url(r'.*', frontend.views.spa))

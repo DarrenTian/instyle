@@ -72,5 +72,20 @@ class App extends React.Component {
 	}
 }
 
+class ACApp extends React.Component {
+  render() {
+    return (
+      <div>
+      ABC
+      </div>
+    )
+  }
+}
+
 const wrapper = document.getElementById("instyle-spa");
 wrapper ? ReactDOM.render(<App />, wrapper) : null;
+
+const acWrapper = document.getElementById("ac-spa");
+acWrapper ? ReactDOM.render(<ACApp />, acWrapper) : null;
+
+
